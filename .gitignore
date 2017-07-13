@@ -1,0 +1,12 @@
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.pdf
+*.synctex.gz
+*.rel
+*Notes.bib
+*.fls
+*.fdb_latexmk
+*-diff*
