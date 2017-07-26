@@ -1,0 +1,41 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\input{spacegroup}
+\begin{document}
+\begin{tikzpicture}
+\draw (-1.5, 0)--(1.5, 0) [mir];
+\draw (-1.5, -1)--(1.5, -1) [mir];
+\draw (-1.5, 1)--(1.5, 1) [mir];
+\draw (-1.5, -1)--(-1.5, 1) [mir];
+\draw (0, -1)--(0, 1) [mir];
+\draw (1.5, -1)--(1.5, 1) [mir];
+
+\draw (0, 0) node [d2, scale=2.2, fill=blue] {};
+\draw (0, 0) node [color=white] {$a$};
+
+\draw (-1.5, 0) node [d2, scale=2.2, fill=green] {};
+\draw (-1.5, 0) node {$b$};
+\draw (1.5, 0) node [d2, scale=2.2, fill=green] {};
+\draw (1.5, 0) node {$b$};
+
+\draw (0, -1) node [d2, scale=2.2, fill=orange] {};
+\draw (0, -1) node {$c$};
+\draw (0, 1) node [d2, scale=2.2, fill=orange] {};
+\draw (0, 1) node {$c$};
+
+\draw (-1.5, -1) node [d2, scale=2.2, fill=red] {};
+\draw (-1.5, -1) node {$d$};
+\draw (1.5, -1) node [d2, scale=2.2, fill=red] {};
+\draw (1.5, -1) node {$d$};
+\draw (-1.5, 1) node [d2, scale=2.2, fill=red] {};
+\draw (-1.5, 1) node {$d$};
+\draw (1.5, 1) node [d2, scale=2.2, fill=red] {};
+\draw (1.5, 1) node {$d$};
+
+\draw (.75, .5) node {F};
+\draw (-.75, .5) node [xscale=-1] {F};
+\draw (.75, -.5) node [yscale=-1] {F};
+\draw (-.75, -.5) node [rotate=180] {F};
+
+\end{tikzpicture}
+\end{document}

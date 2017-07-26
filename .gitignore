@@ -6,6 +6,9 @@
 *.pdf
 *.synctex.gz
 *.rel
+*.nav
+*.snm
+*.toc
 *Notes.bib
 *.fls
 *.fdb_latexmk

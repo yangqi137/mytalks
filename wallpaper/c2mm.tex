@@ -1,0 +1,14 @@
+\documentclass[tikz]{standalone}
+\input{spacegroup}
+\begin{document}
+\begin{tikzpicture}
+\draw (-1, -1)--(-1, 1)--(1, 1)--(1, -1)--(-1, -1) [dashed];
+\draw (-1, -1)--(1, 1) [mir];
+\draw (1, -1)--(-1, 1) [mir];
+\draw (0, 0) node [d2, fill=blue] {};
+\draw (-1, -1) node [d2, fill=red] {};
+\draw (-1, 1) node [d2, fill=red] {};
+\draw (1, -1) node [d2, fill=red] {};
+\draw (1, 1) node [d2, fill=red] {};
+\end{tikzpicture}
+\end{document}
