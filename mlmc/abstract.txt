@@ -1,0 +1,27 @@
+Title:
+Self-learning Monte Carlo methods
+
+Abstract:
+
+Monte Carlo simulation is an unbiased numerical tool for studying classical and quantum many-body systems. Despite of a polynomial complexity in theory (when the model is sign-problem free), one of its bottlenecks is the lack of general and efficient update algorithm, especially for large size systems close to phase transition or with strong frustrations, for which local updates perform badly.
+
+Using the concept of machine learning, we develop a general-purpose update algorithm, dubbed self-learning Monte Carlo (SLMC), where an efficient update algorithm is first learned from the training data generated in trial simulations, and then used to speed up the actual simulation. The SLMC method has been applied to classical spin models, and various interacting quantum fermionic models, including spin-fermion models, determinant quantum Monte Carlo (DQMC) simulations and dynamical mean-field theory (DMFT) simulations.
+
+In particular, in a recent DQMC simulations studying the universal behavior of a phase transition with interacting boson and fermion modes, the SLMC method allows access to a system size twice as large compare to the conventional approach, enabling us to observe the novel universality class due to the contribution of the fermions.
+
+References:
+
+Self-learning Monte Carlo method.
+Junwei Liu, Yang Qi, Zi Yang Meng and Liang Fu, Phys. Rev. B 95 041101(R) (2017).
+
+Self-learning Monte Carlo method and cumulative update in fermion systems
+Junwei Liu, Huitao Shen, Yang Qi, Zi Yang Meng and Liang Fu, Phys. Rev. B 95 241104(R) (2017).
+
+Self-learning quantum Monte Carlo method in interacting fermion systems.
+Xiao Yan Xu, Yang Qi, Junwei Liu, Liang Fu and Zi Yang Meng, Phys. Rev. B 96 041119 (2017).
+
+Self-Learning Monte Carlo Method: Continuous-Time Algorithm.
+Yuki Nagai, Huitao Shen, Yang Qi, Junwei Liu and Liang Fu, arXiv:1705.06724, accepted by Phys. Rev. B
+
+Itinerant quantum critical point with frustration and non-Fermi-liquid
+Zi Hong Liu, Xiao Yan Xu, Yang Qi, Kai Sun, Zi Yang Meng, arXiv:1706.10004.
