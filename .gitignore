@@ -13,3 +13,5 @@
 *.fls
 *.fdb_latexmk
 *-diff*
+.DS_Store
+*.pgf-plot*
