@@ -9,7 +9,7 @@
 \usepackage{graphicx}
 \usepackage{tabularx}
 \usepackage{animate}
-\usepackage{mathtools}
+%\usepackage{mathtools}
 %\usepackage{ifthen}
 
 %\usepackage{xeCJK}
@@ -23,6 +23,7 @@
 	\usetikzlibrary{calc}
 	\usetikzlibrary{arrows,shapes, positioning, matrix}
 	\usetikzlibrary{decorations.markings}
+	\tikzset{>=stealth}
 	\tikzstyle arrowstyle=[scale=1]
 	\tikzstyle directed=[postaction={decorate,decoration={markings,
  	   mark=at position .15 with {\arrow[arrowstyle]{stealth}}}}]
@@ -96,7 +97,7 @@
 % does not look nice, try deleting the line with the fontenc.
 
 \title[SMLC] % (optional, use only with long paper titles)
-{Guiding Monte Carlo Simulations with Machine Learning}
+{Self-Learning Monte Carlo Methods}
 
 \author[Y Qi] % (optional, use only with lots of authors)
 {Yang~Qi}
@@ -105,9 +106,7 @@
 %   affiliation.
 
 \institute[Fudan] % (optional, but mostly needed)
-{
-  Department of Physics, Fudan University
-}
+{Department of Physics, Fudan University}
 % - Use the \inst command only if there are several affiliations.
 % - Keep it simple, no one is interested in your street address.
 
@@ -158,8 +157,8 @@
 \begin{frame}{References}
 \begin{itemize}
 %\item Works led by Liang Fu, Zi-Yang Meng, and Lei Wang.
-\item MIT: Jun-Wei Liu, Hui-Tao Shen, Yuki Nagai, Liang Fu.
-\item IOP: Xiao-Yan Xu, Zi-Yang Meng.
+\item MIT: Hui-Tao Shen, Jun-Wei Liu (HKUST), Yuki Nagai, Liang Fu.
+\item IOP: Xiao-Yan Xu (HKUST), Zi-Yang Meng.
 \item References:
 \begin{enumerate}
   \item J Liu, YQ, Z-Y Meng and L Fu, PRB 95, 041101(R) (2017).
@@ -199,7 +198,7 @@
   \begin{itemize}
     \item A widely used numerical method in statistical physics and quantum many-body physics.
     \item Unbiased: reliable statistical error bar.
-    \item Fast: error decreases as $1/\sqrt{\mathcal N}$.
+    \item Fast: polynomial complexity.
     \item Universal: applies to any model without the sign program.
   \end{itemize}
 \end{frame}
@@ -217,6 +216,7 @@
     \item Any observable can be measured from a Markov chain,
     \[\langle O\rangle = \frac{\sum O(\mathcal C)W(\mathcal C)}{\sum W(\mathcal C)} \simeq
      \frac1{\mathcal N}\sum_iO(\mathcal C_i).\]
+    \item Quantum Monte Carlo: a quantum statistical model is mapped to a classical statistical model.
   \end{itemize}
 \end{frame}
 
@@ -228,13 +228,37 @@
 		\frac{p(\mathcal C\rightarrow\mathcal D)}{p(\mathcal D\rightarrow\mathcal C)}=\frac{W(\mathcal D)}{W(\mathcal C)}.\]
     \item Detailed balance (and ergodicity) guarantees that if the MC converges, it converges to the desired distribution $W(\mathcal C)$.
     \item Metropolis-Hastings algorithm: propose -- accept/reject.
+  \end{itemize}
+\begin{columns}
+\column{.5\textwidth}
+\begin{tikzpicture}
+\node at (0, 0) (C) [draw,circle] {$\mathcal C$};
+\node<2-> at (3, 0) (D) [draw, rectangle] {$\mathcal D?$};
+\node<2-> at (3, 1.5) (D1) [draw, rectangle] {$\mathcal D_1?$};
+\node<2-> at (3, -1.5) (D2) [draw, rectangle] {$\mathcal D_2?$};
+\node<2-> at (3, -2) {$\vdots$};
+\draw<2-> [->] (C)--(D) node [midway, above] {{\small $q(\mathcal C\rightarrow\mathcal D)$}};
+\draw<2-> [->] (C)--(D1);
+\draw<2-> [->] (C)--(D2);
+\node<3-> at (6, 1) (DD) [draw, circle] {$\mathcal D$};
+\node<3-> at (6, -1) (DC) [draw, circle] {$\mathcal C$};
+\draw<3-> [->] (D)--(DD) node [midway, above] {{\small $\alpha(\mathcal C\rightarrow\mathcal D)$}};
+\draw<3-> [->] (D)--(DC);
+\end{tikzpicture}
+\column{.5\textwidth}
+\begin{block}{Steps of Metropolis-Hastings algorithm}
+\begin{enumerate}
+\item<2-> Select a new state $\mathcal D_i$.
+\item<3-> Accept or reject.
     \[p(\mathcal C\rightarrow\mathcal D) = q(\mathcal C\rightarrow\mathcal D)
     \alpha(\mathcal C\rightarrow\mathcal D).\]
     \[\alpha(\mathcal C\rightarrow\mathcal D) =
     \min\left\{1, \frac{W(\mathcal D)}{W(\mathcal C)}
     \frac{q(\mathcal D\rightarrow\mathcal C)}
     {q(\mathcal C\rightarrow\mathcal D)}\right\}.\]
-  \end{itemize}
+\end{enumerate}
+\end{block}
+\end{columns}
 \end{frame}
 
 \begin{frame}
@@ -248,12 +272,15 @@
     \[\mathcal A_O(\Delta t)=\langle O(t)O(t+\Delta t)\rangle - \langle O(t)\rangle^2\propto e^{-\Delta t/\tau}.\]
   \end{itemize}
   \begin{columns}
-    \column{.5\textwidth}
+    \column{.7\textwidth}
     \begin{block}{Complexity $\propto \tau$}
       \[\langle O\rangle = \frac1{\mathcal N}\sum_iO(\mathcal C_i).\]
       Statistical error $\delta O\sim\frac1{\sqrt{\mathcal N}}$ only if $O(i)$ are independent.
+
+A statistically independent sample is generated in every $\tau$-steps.
+\[\text{Complexity}=\text{Complexity of each step}\times\tau\times\mathcal N.\]
     \end{block}
-    \column{.5\textwidth}
+    \column{.3\textwidth}
     \centering
     \includegraphics[height=3.5cm]{auto_decay}
   \end{columns}
@@ -270,24 +297,33 @@
       \begin{center}
         \includegraphics[height=2.5cm]{tianhe}
       \end{center}
-      \item Why?
-      \[\text{Cost} \propto \text{Cost of each step} \times \text{autocorrelation time}\]
+      %\item Why?
+      %\[\text{Cost} \propto \text{Cost of each step} \times \text{autocorrelation time}\]
     \end{itemize}
+Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
 \end{frame}
 
 \begin{frame}
   \frametitle{Local Update: Metropolis algorithm}
   \begin{center}
     \begin{tikzpicture}
-      \node<1> at (0, 0) [circle, draw] {};
-      \node<2> at (0, 0) [circle, fill, draw] {};
+      \node at (0, 0) [circle, draw] {};
       \node at (1, 0) [circle, draw] {};
       \node at (0, 1) [circle, draw] {};
       \node at (-1, 0) [circle, fill, draw] {};
       \node at (0, -1) [circle, fill, draw] {};
+
+      \node at (4, 0) [circle, fill, draw] {};
+      \node at (5, 0) [circle, draw] {};
+      \node at (4, 1) [circle, draw] {};
+      \node at (3, 0) [circle, fill, draw] {};
+      \node at (4, -1) [circle, fill, draw] {};
+
+      \draw [<->, thick] (1.5, 0)--(2.5, 0);
     \end{tikzpicture}
   \end{center}
   \begin{itemize}
+    \item Consider the Ising model.
     \item Local update: randomly select a site and flip the spin.
     \item $q(\mathcal C\rightarrow\mathcal D) = q(\mathcal D\rightarrow\mathcal C) = \frac1N$.
     \item $\alpha(\mathcal C\rightarrow\mathcal D)=\min\left\{1,\frac{W(\mathcal D)}{W(\mathcal C)}\right\}.$
@@ -334,22 +370,41 @@
       \node (v23) at (2, 3) [circle, fill, draw] {};
       \node (v33) at (3, 3) [circle, draw] {};
 
-      \node<8> at (1, 1) [circle, fill, draw] {};
-      \draw<2> (v11) -- (v12) [dashed];
-      \draw<3-> (v11) -- (v12);
-      \node<8> at (1, 2) [circle, fill, draw] {};
-      \draw<4> (v12) -- (v13) [dashed];
-      \draw<5-> (v12) -- (v13);
-      \node<8> at (1, 3) [circle, fill, draw] {};
-      \draw<6> (v12) -- (v02) [dashed];
-      \draw<7-> (v11) -- (v10);
-      \node<8> at (1, 0) [circle, fill, draw] {};
-      \draw<7-> (v11) -- (v21);
-      \node<8> at (2, 1) [circle, fill, draw] {};
-    \end{tikzpicture}
+      \draw (v11) -- (v12);
+      \draw (v12) -- (v13);
+      \draw (v11) -- (v10);
+      \draw (v11) -- (v21);
+
+      \node (u00) at (6, 0) [circle, draw] {};
+      \node (u10) at (7, 0) [circle, fill, draw] {};
+      \node (u20) at (8, 0) [circle, draw] {};
+      \node (u30) at (9, 0) [circle, fill, draw] {};
+
+      \node (u01) at (6, 1) [circle, fill, draw] {};
+      \node (u11) at (7, 1) [circle, fill, draw] {};
+      \node (u21) at (8, 1) [circle, fill, draw] {};
+      \node (u31) at (9, 1) [circle, fill, draw] {};
+
+      \node (u02) at (6, 2) [circle, draw] {};
+      \node (u12) at (7, 2) [circle, fill, draw] {};
+      \node (u22) at (8, 2) [circle, fill, draw] {};
+      \node (u32) at (9, 2) [circle, draw] {};
+
+      \node (u03) at (6, 3) [circle, draw] {};
+      \node (u13) at (7, 3) [circle, fill, draw] {};
+      \node (u23) at (8, 3) [circle, fill, draw] {};
+      \node (u33) at (9, 3) [circle, draw] {};
+
+      \draw (u11) -- (u12);
+      \draw (u12) -- (u13);
+      \draw (u11) -- (u10);
+      \draw (u11) -- (u21);
+
+      \draw (3.5, 1.5)--(5.5, 1.5) [<->, thick];
+   \end{tikzpicture}
     \begin{itemize}
-      \item A cluster is built one bond at a time.
-      \item Probability of activating a bond is cleverly designed, such that
+      \item A cluster is built stochastically.
+      \item Probability of selecting a cluster is cleverly designed, such that
       \[\frac{q(\mathcal C\rightarrow\mathcal D)}{q(\mathcal D\rightarrow\mathcal C)}=\frac{W(\mathcal D)}{W(\mathcal C)}.\]
       \item Thus we have the ideal acceptance ratio $\alpha=1$.
       \item Very efficient update: $\tau\sim L^{0.35}$.
@@ -424,7 +479,7 @@
 \end{frame}
 
 
-\section{Example: Ising Model and Cluster Update}
+\section{Example: Bosonic Model and Self-Learned Cluster Update}
 
 \begin{frame}
   \frametitle{Example:}
@@ -469,7 +524,7 @@
   System size $40\times40$.
 \end{frame}
 
-\section{Example: Bosonic Model and Cumulative Update}
+\section{Example: Fermionic Model and Self-Learned Cumulative Update}
 
 \begin{frame}{Determinant Monte Carlo: computational cost}
 \begin{itemize}
@@ -482,7 +537,7 @@
   \item Weight of each configuration $W(\mathcal C)$: integrate out the fermions.
   \item Computational cost: $\beta N^3$:\\
   \emph{\small Computing the determinant of the product of $\beta$ $N\times N$ matrices.}
-  \item Fast update: $\beta N^3$ for $\beta N$ steps of local updates.
+  %\item Fast update: $\beta N^3$ for $\beta N$ steps of local updates.
   \item Generating two independent configurations: $\beta N^3\tau_L$.
   \item Critical slow-down:\\ when $\sigma_i$ goes through a critical point, $\tau_L\gg1$, very slow.
 \end{itemize}
@@ -491,7 +546,7 @@
 \begin{frame}{Cumulative update}
   \begin{itemize}
     \item Idea: replace $W(\mathcal C)$ by $W_{\text{eff}}(\mathcal C)$, which is much faster to evaluate.
-    \item Local updates guided by $W_{\text{eff}}(\mathcal C)$:
+    \item Global update = $M\times$Local updates guided by $W_{\text{eff}}(\mathcal C)$, $M\geq\tau_L$:
     \[\mathcal C\Rightarrow\mathcal D:
     \mathcal C\rightarrow\mathcal C_1\cdots\rightarrow\mathcal C_{i-1}\rightarrow\mathcal C_i\rightarrow\mathcal C_{i+1}\rightarrow\cdots\rightarrow\mathcal C_M\rightarrow\mathcal D.\]
     \[\frac{p(\mathcal C_i\rightarrow\mathcal C_{i+1})}{p(\mathcal C_{i+1}\rightarrow\mathcal C_i)}=\frac{W_{\text{eff}}(\mathcal C_{i+1})}{W_{\text{eff}}(\mathcal C_i)}\]
@@ -521,7 +576,7 @@
     =\frac{W_{\text{eff}}(\mathcal D)}{W_{\text{eff}}(\mathcal C)},\quad
     \alpha(\mathcal C\rightarrow \mathcal D)=\min\left\{1, \frac{W(\mathcal D)}{W(\mathcal C)}
     \frac{W_{\text{eff}}(\mathcal C)}{W_{\text{eff}}(\mathcal D)}\right\}\simeq1.\]
-		\item Choose good $W^\prime$ and $M\geq\tau_L$: $\tau_{CU}\sim1$.
+		\item Choose good $W_{\text{eff}}$ and $M\geq\tau_L$: $\tau_{CU}\sim1$.
     \item Computational cost: $\beta N^3\tau\rightarrow \beta N^3$.
   \end{itemize}
 \end{frame}
