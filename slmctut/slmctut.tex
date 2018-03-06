@@ -157,7 +157,7 @@
 \begin{frame}{References}
 \begin{itemize}
 %\item Works led by Liang Fu, Zi-Yang Meng, and Lei Wang.
-\item MIT: Hui-Tao Shen, Jun-Wei Liu (HKUST), Yuki Nagai, Liang Fu.
+\item MIT: Hui-Tao Shen, Jun-Wei Liu (HKUST), Yuki Nagai (CCSE, JAEA), Liang Fu.
 \item IOP: Xiao-Yan Xu (HKUST), Zi-Yang Meng.
 \item References:
 \begin{enumerate}
@@ -178,7 +178,7 @@
 \begin{enumerate}
   \item Li Huang, Lei Wang, PRB 95, 035105(R) (2017).
   \item Li Huang, Yi-Feng Yang, Lei Wang, PRE 95, 031301(R)(2017).
-  \item Lei Wang, arXiv:1702.08586 [cond-mat.str-el].
+  \item Lei Wang, Phys. Rev. E 96, 051301 (2017).
 \end{enumerate}
 \end{itemize}
 \end{frame}
@@ -288,18 +288,23 @@ A statistically independent sample is generated in every $\tau$-steps.
 
 \begin{frame}
   \frametitle{Performence of the algorithm}
-    \begin{itemize}
-      \item Theory
+    \begin{columns}
+			\column{.5\textwidth}
       \begin{center}
-        \includegraphics[height=2.5cm]{laptop_coffee}
+				Theory\\
+				\vspace{.5cm}
+        \includegraphics[height=4cm]{laptop_coffee}
       \end{center}
-      \item Reality
+			\column{.5\textwidth}
       \begin{center}
-        \includegraphics[height=2.5cm]{tianhe}
+				Reality\\
+				\vspace{.5cm}
+        \includegraphics[height=4cm]{tianhe}
       \end{center}
       %\item Why?
       %\[\text{Cost} \propto \text{Cost of each step} \times \text{autocorrelation time}\]
-    \end{itemize}
+    \end{columns}
+\vspace{.5cm}
 Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
 \end{frame}
 
@@ -446,8 +451,7 @@ Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
 \begin{frame}{Update using an effective model}
 \begin{itemize}
 \item An effective model $W_{\text{eff}}(\mathcal C)\simeq W(\mathcal C)$.
-\item Parameterized: $W_{\text{eff}}=W_{\text{eff}}\{p_1,p_2,\ldots,p_n\}$.
-\item $W_{\text{eff}}$ can be globally updated:
+\item $W_{\text{eff}}$ can be globally updated: use $W_{\text{eff}}$ to select a new configuration $\mathcal D$.
 \[\frac{q(\mathcal C\rightarrow\mathcal D)}{q(\mathcal D\rightarrow\mathcal C)}
 =\frac{W_{\text{eff}}(\mathcal D)}{W_{\text{eff}}(\mathcal C)}.\]
 \item Choose the acceptance ratio
@@ -457,6 +461,7 @@ Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
 \right\}\simeq1.\]
 \item The approximation $W_{\text{eff}}(\mathcal C)\simeq W(\mathcal C)$ does not introduce error in the MC simulation.
 \item The approximation $W_{\text{eff}}(\mathcal C)\simeq W(\mathcal C)$ affects the efficiency of the simulation.
+\item Parameterized: $W_{\text{eff}}=W_{\text{eff}}\{p_1,p_2,\ldots,p_n\}$. Learn $p_i$ from samples.
 \end{itemize}
 \end{frame}
 
@@ -468,12 +473,14 @@ Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
 \end{frame}
 
 \begin{frame}
-  \frametitle{Unsupervised machine learning}
+  \frametitle{Machine learning}
   \begin{itemize}
-    \item The linear regression we just did can be viewed as an unsupervised machine learning.
-    \item Unsupervised ML: learning the underlying distribution from a sample of configurations.
+    \item Learning the effective model from the samples can be viewed as an supervised machine learning.
+    %\item Unsupervised ML: learning the underlying distribution from a sample of configurations.
+		\item Learn the function: $\mathcal C\mapsto W_{\text{eff}}(\mathcal C)=\exp(-\beta H_{\text{eff}}(\mathcal C))$.
     \item We pretend that we didn't know $H$, and learn a simpler model $H_{\text{eff}}$.
     \item The learned model describes the low-energy effective theory, where the high-energy fluctuations are treated as noise in the sample.
+		\item The forms of $H_{\text{eff}}$ is fixed by physical arguments: locality + symmetry. Coefficients learned from linear regressions.
     \item Can incorporate more advanced ML models and algorithms.
   \end{itemize}
 \end{frame}
@@ -486,11 +493,11 @@ Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
   \begin{itemize}
     \item The model:
     \[H= - J_1 \sum_{\langle ij\rangle} s_i s_j - J_2 \sum_{ijkl \in \qedsymbol } s_i s_j s_k s_l.\]
-    \item The effective model:
-    \[H_{\text{eff}} = -J_1^{\text{eff}}\sum_{\langle ij\rangle} s_i s_j.\]
     \item We consider $J_1=1$, $J_2=0.2$.
     \item An Ising transition at $T_c=2.493$.\\
     {\small Ising model without $J_2$ has $T_c=2.269$.}
+		\item The effective model:
+    \[H_{\text{eff}} = -J_1^{\text{eff}}\sum_{\langle ij\rangle} s_i s_j.\]
   \end{itemize}
 \end{frame}
 
@@ -546,10 +553,14 @@ Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
 \begin{frame}{Cumulative update}
   \begin{itemize}
     \item Idea: replace $W(\mathcal C)$ by $W_{\text{eff}}(\mathcal C)$, which is much faster to evaluate.
-    \item Global update = $M\times$Local updates guided by $W_{\text{eff}}(\mathcal C)$, $M\geq\tau_L$:
+    \item Cumulative update = $M\times$Local updates guided by $W_{\text{eff}}(\mathcal C)$, $M\geq\tau_L$:
     \[\mathcal C\Rightarrow\mathcal D:
     \mathcal C\rightarrow\mathcal C_1\cdots\rightarrow\mathcal C_{i-1}\rightarrow\mathcal C_i\rightarrow\mathcal C_{i+1}\rightarrow\cdots\rightarrow\mathcal C_M\rightarrow\mathcal D.\]
-    \[\frac{p(\mathcal C_i\rightarrow\mathcal C_{i+1})}{p(\mathcal C_{i+1}\rightarrow\mathcal C_i)}=\frac{W_{\text{eff}}(\mathcal C_{i+1})}{W_{\text{eff}}(\mathcal C_i)}\]
+    \[\frac{p(\mathcal C_i\rightarrow\mathcal C_{i+1})}{p(\mathcal C_{i+1}\rightarrow\mathcal C_i)}=\frac{W_{\text{eff}}(\mathcal C_{i+1})}{W_{\text{eff}}(\mathcal C_i)}
+		\quad\Rightarrow\quad
+		\frac{p(\mathcal C\rightarrow D)}
+    {p(\mathcal D\rightarrow\mathcal C)}=\frac{W_{\text{eff}}(\mathcal D)}{W_{\text{eff}}(\mathcal C)}
+		\]
     %\item For each path:
     %\[\frac{p(\mathcal C\rightarrow\mathcal C_1)\cdots
     %p(\mathcal C_i\rightarrow\mathcal C_{i+1})
@@ -576,6 +587,7 @@ Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
     =\frac{W_{\text{eff}}(\mathcal D)}{W_{\text{eff}}(\mathcal C)},\quad
     \alpha(\mathcal C\rightarrow \mathcal D)=\min\left\{1, \frac{W(\mathcal D)}{W(\mathcal C)}
     \frac{W_{\text{eff}}(\mathcal C)}{W_{\text{eff}}(\mathcal D)}\right\}\simeq1.\]
+		\item Cost of $M\times$ $W_{\text{eff}}$-update $\ll$ Cost of computing $W=\beta N^3$.
 		\item Choose good $W_{\text{eff}}$ and $M\geq\tau_L$: $\tau_{CU}\sim1$.
     \item Computational cost: $\beta N^3\tau\rightarrow \beta N^3$.
   \end{itemize}
@@ -583,13 +595,13 @@ Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
 
 \begin{frame}{Constructing effective weights}
 \begin{enumerate}
-  \item Physical intuition: bosonic effective model of $W_{\text{eff}}[\sigma]$
-  + Linear Regression.\\
+  \item Physical intuition: locality + symmetry.
   \emph{Works best for gapped fermions.}
   \[H=-\sum_{ij}t_{ij}c_{i\alpha}^\dagger c_{j\alpha}
   +\sum_i\sigma_ic_{i\alpha}^\dagger\sigma^z_{\alpha\beta} c_{i\beta}
   +H[\sigma]\]
   \[W_{\text{eff}}[\sigma]=\sum_{ij}J_{ij}\sigma_i\sigma_j.\]
+	\item Learn $J_ij$ through linear regression.
   \item Machine Learning models: Restricted Boltzmann Machine, Neural Networks, etc.
 \end{enumerate}
 \end{frame}
@@ -598,7 +610,7 @@ Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
 
 \begin{frame}{SLMC in action: large scale DQMC}
 \begin{itemize}
-  \item Zi-Hong Liu, Xiao-Yan Xu, Yang Qi, Kai Sun and Zi-Yang Meng, arXiv:1706.10004.
+  \item Zi-Hong Liu, Xiao-Yan Xu, Yang Qi, Kai Sun and Zi-Yang Meng, arXiv:1706.10004 [R44.00007].
   \item Fermion + boson model, new critical universality. Simulated at the critical point.
   \item SLMC: $L=24\rightarrow30$.
 \end{itemize}
@@ -623,7 +635,7 @@ Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
 
 \begin{frame}{SLMC in action: the Holstein Model}
 	\begin{itemize}
-		\item Chuang Chen, Xiao Yan Xu, Junwei Liu, George Batrouni, Richard Scalettar and Zi Yang Meng, arXiv:1802.06177.
+		\item Chuang Chen, Xiao Yan Xu, Junwei Liu, George Batrouni, Richard Scalettar and Zi Yang Meng, arXiv:1802.06177 [Y44.00010].
 		\item Electron-Phonon coupling:
 		\[H=H_{\text{el}}+H_{\text{ph}}+H_{\text{el-ph}}
 		=-t\sum_{\langle ij\rangle\sigma}c_{i\sigma}^\dagger c_{j\sigma}
@@ -638,7 +650,7 @@ Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
 
 \begin{frame}{SLMC with Deep Neural Networks}
 \begin{itemize}
-	\item Huitao Shen, Junwei Liu and Liang Fu, arXiv:1801.01127.
+	\item Huitao Shen, Junwei Liu and Liang Fu, arXiv:1801.01127 [R34.00008].
 	\item 1D single-impurity Andensen Model.
 	\item $W_{\text{eff}}$: given by a Deep Neural Network.
 \end{itemize}
