@@ -35,6 +35,13 @@
 \tikzstyle dw=[thick,postaction={decorate,decoration={markings,
     mark=at position 1 with {\arrow[arrowstyle]{stealth}}}}]
 \tikzstyle group=[mbg]
+\newcommand*{\halfway}{0.5*\pgfdecoratedpathlength+.5*8pt}\tikzstyle arrowstyle=[scale=1]
+\newcommand*{\halfwayb}{0.5*\pgfdecoratedpathlength}
+\tikzstyle arrowstyle=[scale=1]
+\tikzstyle fermion=[thick,postaction={decorate},decoration={markings,
+    mark=at position \halfway with {\arrow[arrowstyle]{latex}}}]
+\tikzstyle fermion2=[thick,postaction={decorate},decoration={markings,
+        mark=at position \halfwayb with {\arrow[arrowstyle]{latex}}}]
 
 \usepackage{pgffor}
 \newcommand{\mb}[1]{\mathbf{#1}}
@@ -45,6 +52,9 @@
 \newcommand{\cohosubsub}[1]{\scalebox{0.6}{\textswab{#1}}}
 \newcommand{\coho}[1]{\textswab{#1}}
 
+\DeclareMathOperator{\tr}{Tr}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\re}{Re}
 
 \mode<presentation>
 {
@@ -96,8 +106,8 @@
 % Or whatever. Note that the encoding and the font should match. If T1
 % does not look nice, try deleting the line with the fontenc.
 
-\title[SMLC] % (optional, use only with long paper titles)
-{Self-Learning Monte Carlo Methods}
+\title[Fermi Arcs] % (optional, use only with long paper titles)
+{Fermi Arcs in Anderson Lattice Models w/ d-wave Hybridization}
 
 \author[Y Qi] % (optional, use only with lots of authors)
 {Yang~Qi}
@@ -182,11 +192,170 @@
 \frametitle{Two-Lifetime models}
 \begin{itemize}
 \item Consider a two-band model,
-\[H=\]
+\[H_0=\sum_k\begin{pmatrix}f_{k\alpha}^\dagger&c_{k\alpha}^\dagger\end{pmatrix}
+\begin{pmatrix}\epsilon_{fk} & V_k\\ V_k & \epsilon_{ck}\end{pmatrix}
+\begin{pmatrix}f_{k\alpha}\\c_{k\alpha}\end{pmatrix}.\]
+\item With two lifetimes,
+\[G^{-1}(k,\omega)=\omega-H_0(k)-\Sigma_k,\quad
+\Sigma_k=-i\begin{pmatrix}\Gamma_f & 0\\0 & \Gamma_c\end{pmatrix}.\]
+\item Non-Hermition effective Hamiltonian,
+\[H = H_0+\Sigma = \begin{pmatrix}
+\epsilon_{fk} - i\Gamma_f & V_k\\ V_k & \epsilon_{ck} - i\Gamma_c
+\end{pmatrix}, \quad G=(\omega-H)^{-1}.\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exceptional points and Fermi arcs}
+\begin{itemize}
+\item The non-Hermitian effective Hamiltonian $H = H_0+\Sigma = \begin{pmatrix}
+\epsilon_{fk} - i\Gamma_f & V_k\\ V_k & \epsilon_{ck} - i\Gamma_c
+\end{pmatrix}$ has {\color{blue}exceptional points} @ $\epsilon_{ck}=\epsilon_{fk}$ \&
+$|V_k|=|\Gamma_f-\Gamma_c|$.
+\item Electron spectrum density
+\[A(k, \omega)=-\frac1\pi\tr\im G(k, \omega)
+=-\frac2\pi\im\left(
+\frac1{\omega-E_1}+\frac1{\omega-E_2}\right)
+=\frac2\pi\sum_{a=1,2}\frac{\im E_a}{(\omega-\re E_a)^2+\im E_a^2}.\]
+\begin{enumerate}
+\item $|V_k|>|\Gamma_f-\Gamma_c|$: $\re E_1\neq\re E_2$, two peaks, gap open.
+\item $|V_k|<|\Gamma_f-\Gamma_c|$: $\re E_1=\re E_2$, one peak, gap close.
+\end{enumerate}
+\item With $k$-dependence in $V_k$ or $Gamma$ (or both), gap is open/close on part of the Fermi surface: {\color{blue}Fermi arcs}.
+\item Two ingradients: $V_k\neq0$ and $\Gamma_c\neq\Gamma_f$.
 \end{itemize}
 \end{frame}
 
 \section{Two Lifetimes from 2nd Order Perturbation Theory}
+
+\begin{frame}
+\frametitle{Anderson-Lattice Model}
+\[H=\sum_k\begin{pmatrix}f_{k\alpha}^\dagger&c_{k\alpha}^\dagger\end{pmatrix}
+\begin{pmatrix}\epsilon_{fk} & V_k\\ V_k & \epsilon_{ck}\end{pmatrix}
+\begin{pmatrix}f_{k\alpha}\\c_{k\alpha}\end{pmatrix}
++U\sum_in_f(n_f-1).\]
+\begin{itemize}
+\item $f/c$-electron: $\epsilon_{f,c}=-2t_{f,c}(\cos k_x+\cos k_y)$, $t_f\ll t_c$.
+\item $d$-wave hybridization: $V_k=v_0(\cos k_x-\cos k_y)$.
+\item $u$ interaction: only for the $f$-electron.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Two lifetimes due to inelastic scatterings}
+\begin{itemize}
+\item Consider a series expansion in $u$:
+\[
+\Sigma = \begin{tikzpicture}[scale=.5]
+  %\draw [white] (0, -.1)--(0, 2.2);
+  \draw [fermion] (-2, 0) -- (0, 0)
+    node [midway, below] {$k$};
+  \draw [fermion] (0, 0) -- (2, 0)
+    node [midway, below] {$k$};
+  \draw [fermion2] (0, 0) to [out = 150, in = 180] (0,2)
+    to [out = 0, in = 30] (0, 0);
+  \node at (0, 2) [above] {$p$};
+  \node at (0, 0) [circle, fill, inner sep=2pt] {};
+\end{tikzpicture}
++
+\begin{tikzpicture}[scale=.5]
+  %\draw [white] (0, -.1)--(0, 2.2);
+  \draw [fermion] (-2, 0) -- (0, 0)
+    node [midway, below] {$k$};
+  \draw [fermion] (0, 0) -- (2, 0)
+    node [midway, below] {$k+q$};
+  \draw [fermion] (2, 0) -- (4, 0)
+    node [midway, below] {$k$};
+  \draw [fermion] (0, 0) to [out = 90, in = 180] (1, 1)
+    to [out = 0, in = 90] (2, 0);
+  \node at (1, 1) [above] {$p$};
+  \draw [fermion] (2, 0) to [out = -90, in = 0] (1, -1)
+    to [out = 180, in = -90] (0, 0);
+  \node at (1, -1) [below] {$p+q$};
+  \node at (0, 0) [circle, fill, inner sep=2pt] {};
+  \node at (2, 0) [circle, fill, inner sep=2pt] {};
+\end{tikzpicture}
++\begin{tikzpicture}[scale=.5]
+  %\draw [white] (0, -.1)--(0, 2.2);
+  \draw [fermion] (-1, 0) -- (0, 0);
+  \draw [fermion] (0, 0) to [out=90, in=180] (1, 1);
+  \draw [fermion] (1, 0) -- (0, 0);
+  \draw [fermion] (0, 0) to [out=-90, in=180] (1, -1);
+  \fill [draw, thick, fill=black!30] (1, 1.2) rectangle (2, -1.2);
+  \draw [fermion] (2, 1) to [out=0, in=90] (3, 0);
+  \draw [fermion] (3, 0) -- (2, 0);
+  \draw [fermion] (2, -1) to [out=0, in=-90] (3, 0);
+  \node at (0, 0) [circle, fill, inner sep=2pt] {};
+  \node at (3, 0) [circle, fill, inner sep=2pt] {};
+  \draw [fermion] (3, 0) -- (4, 0);
+\end{tikzpicture}
+\]
+\item $\Sigma=\begin{pmatrix}\Sigma_f & 0\\ 0 & 0\end{pmatrix}$ to {\color{blue}all orders} of perturbations.
+\item Two lifetimes: $\Gamma_f\neq \Gamma_c=0$.
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{2nd-order Perturbation Theory}
+\[
+\begin{tikzpicture}[scale=.5]
+  %\draw [white] (0, -.1)--(0, 2.2);
+  \draw [fermion] (-2, 0) -- (0, 0)
+    node [midway, below] {$k$};
+  \draw [fermion] (0, 0) -- (2, 0)
+    node [midway, below] {$k+q$};
+  \draw [fermion] (2, 0) -- (4, 0)
+    node [midway, below] {$k$};
+  \draw [fermion] (0, 0) to [out = 90, in = 180] (1, 1)
+    to [out = 0, in = 90] (2, 0);
+  \node at (1, 1) [above] {$p$};
+  \draw [fermion] (2, 0) to [out = -90, in = 0] (1, -1)
+    to [out = 180, in = -90] (0, 0);
+  \node at (1, -1) [below] {$p+q$};
+  \node at (0, 0) [circle, fill, inner sep=2pt] {};
+  \node at (2, 0) [circle, fill, inner sep=2pt] {};
+\end{tikzpicture}
+\]
+\begin{align*}\Gamma_f(k,\omega)&=u^2\int d\omega_{1,2,3}d^2k_{1,2,3}\delta(k-k_1-k_2-k_3)\delta(\omega-\omega_1-\omega_2-\omega_3)\\
+&\rho_f(k_1,\omega_1)\rho_f(k_2,\omega_2)\rho_f(k_3,\omega_3)
+[n_F(\omega_1)n_F(\omega_2)n_F(-\omega_3)+
+n_F(-\omega_1)n_F(-\omega_2)n_F(\omega_3)]
+.\end{align*}
+\begin{itemize}
+\item $T\gg v_0\gg t_f$: $\rho_f$ is $k$-independent $\Rightarrow$ $\Gamma_f$ is also $k$-independent.
+\item $\omega$-dependence don't have qualitative effects.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Results of the 2nd-Order Perturbation Theory}
+\begin{itemize}
+\item The $k$-dependence is very weak:
+\item Ignoring the $k$-dependence: use the local density of state.
+\item Expansion near small $\omega$:
+\[\Sigma(\omega) = -ia_0-a_1\omega-ia_2\omega^2,\quad
+a_{1,2,3}>0.\]
+\item $A(\omega)$ still has one/two peak(s): no qualitative change.
+\end{itemize}
+\begin{center}
+\includegraphics[height=3.5cm]{gammak_v1}
+\includegraphics[height=3.5cm]{rho_dwave0}
+\includegraphics[height=3.5cm]{ims_dwave}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Summary}
+\begin{itemize}
+\item<1-4> We computed electron self energy using second-order perturbation theory.
+\item<2-6> $\Sigma_f\neq\Sigma_c=0$.
+\item<3-5> At $T\geq v_0$, $\Sigma_f$ can be treated as a constant.
+\item<4-7> $\Sigma_f\neq\Sigma_c$ and a $k$-dependent $V_k$ results in Fermi arcs:
+\begin{enumerate}
+\item $\Sigma_f>V_k$: one peak = Fermi arc.
+\item $\Sigma_f<V_k$: two peaks = gapped.
+\end{enumerate}
+\end{itemize}
+\end{frame}
 
 \section{Fermi Arcs}
 
