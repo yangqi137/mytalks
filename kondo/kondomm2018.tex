@@ -172,6 +172,7 @@
 \begin{center}
 	\includegraphics[height=3cm]{../people/vlad}
 	\includegraphics[height=3cm]{../people/yuki}
+	\includegraphics[height=3cm]{../people/hiroki}
 	\includegraphics[height=3cm]{../people/liangfu}
 \end{center}
 \item Working in progress.
@@ -186,7 +187,7 @@
   % You might wish to add the option [pausesections]
 \end{frame}
 
-\section{Introduction: two-lifetime models and Fermi Arcs}
+\section{Introduction: Two-Lifetime Models and Fermi Arcs}
 
 \begin{frame}
 \frametitle{Two-Lifetime models}
@@ -203,6 +204,7 @@
 \epsilon_{fk} - i\Gamma_f & V_k\\ V_k & \epsilon_{ck} - i\Gamma_c
 \end{pmatrix}, \quad G=(\omega-H)^{-1}.\]
 \end{itemize}
+Vlad Kozii and Liang Fu, arXiv:1708.05841.
 \end{frame}
 
 \begin{frame}
@@ -217,16 +219,26 @@ $|V_k|=|\Gamma_f-\Gamma_c|$.
 =-\frac2\pi\im\left(
 \frac1{\omega-E_1}+\frac1{\omega-E_2}\right)
 =\frac2\pi\sum_{a=1,2}\frac{\im E_a}{(\omega-\re E_a)^2+\im E_a^2}.\]
-\begin{enumerate}
+\end{itemize}
+
+\begin{columns}
+\column{.65\textwidth}
+\begin{itemize}
+\item Along $\epsilon_{ck}=\epsilon_{fk}=\mu$:
 \item $|V_k|>|\Gamma_f-\Gamma_c|$: $\re E_1\neq\re E_2$, two peaks, gap open.
 \item $|V_k|<|\Gamma_f-\Gamma_c|$: $\re E_1=\re E_2$, one peak, gap close.
-\end{enumerate}
-\item With $k$-dependence in $V_k$ or $Gamma$ (or both), gap is open/close on part of the Fermi surface: {\color{blue}Fermi arcs}.
-\item Two ingradients: $V_k\neq0$ and $\Gamma_c\neq\Gamma_f$.
+\item With $k$-dependence in $V_k$ or $Gamma$ (or both), gap is open/close on part of the Fermi surface: \\{\color{blue}Fermi arcs}.
+\item Two ingredients: $V_k\neq0$ and $\Gamma_c\neq\Gamma_f$.
 \end{itemize}
+\column{.5\textwidth}
+%\begin{center}
+	\includegraphics[height=2.5cm]{arc1}
+	\includegraphics[height=2.5cm]{arc2}
+%\end{center}
+\end{columns}
 \end{frame}
 
-\section{Two Lifetimes from 2nd Order Perturbation Theory}
+\section{Two Lifetimes and Fermi Arcs in an Anderson-Lattice Model}
 
 \begin{frame}
 \frametitle{Anderson-Lattice Model}
@@ -346,19 +358,25 @@ a_{1,2,3}>0.\]
 \begin{frame}
 \frametitle{Summary}
 \begin{itemize}
-\item<1-4> We computed electron self energy using second-order perturbation theory.
-\item<2-6> $\Sigma_f\neq\Sigma_c=0$.
-\item<3-5> At $T\geq v_0$, $\Sigma_f$ can be treated as a constant.
-\item<4-7> $\Sigma_f\neq\Sigma_c$ and a $k$-dependent $V_k$ results in Fermi arcs:
+\item<1-7> An Anderson-Lattice model w/ d-wave hybridization.
+\item<2-5> We computed electron self energy using second-order perturbation theory.
+\item<3-8> $\Gamma_f\neq\Gamma_c=0$.
+\item<4-6> At $T\geq v_0$, $\Sigma_f$ can be treated as a constant.
+\item<5-9> $\Gamma_f\neq\Gamma_c$ and a $k$-dependent $V_k$ results in Fermi arcs:
 \begin{enumerate}
-\item $\Sigma_f>V_k$: one peak = Fermi arc.
-\item $\Sigma_f<V_k$: two peaks = gapped.
+\item $V_k<\Gamma_f$: one peak = Fermi arc. Like a small Fermi surface.
+\item $V_k>\Gamma_f$: two peaks = gapped. Like a Kondo insulator.
+\item A dichotomy on the Fermi surface.
 \end{enumerate}
 \end{itemize}
+\begin{center}
+	\includegraphics[height=3cm]{arc1}~~~~
+	\includegraphics[height=3cm]{arc2}
+\end{center}
 \end{frame}
 
-\section{Fermi Arcs}
+%\section{Fermi Arcs}
 
-\section{Conclusion}
+%\section{Conclusion}
 
 \end{document}
