@@ -112,7 +112,7 @@ Department of Physics, Fudan University.
 
 %\date{2016 Annual Meeting of Fudan CFTPP} % (optional, should be abbreviation of conference name)
 %{Fudan University, Oct 13 2015}
-\date{USTC, Jan. 12$^{\text{th}}$, 2018}
+\date{Annual Conference of CFTPP Fudan, 2018}
 % - Either use conference name or its abbreviation.
 % - Not really informative to the audience, more for people (including
 %   yourself) who are reading the slides online
@@ -241,9 +241,9 @@ Department of Physics, Fudan University.
     \item \alert{$O(N^3)$} complexity is expensive.
   \end{itemize}
   \begin{center}
-    \includegraphics[height=4cm]{laptop_coffee}
+    \includegraphics[height=3.5cm]{laptop_coffee}
     ~~~~~~~~~~~
-    \includegraphics[height=4cm]{tianhe}
+    \includegraphics[height=3.5cm]{tianhe}
   \end{center}
 \end{frame}
 
@@ -277,7 +277,8 @@ Department of Physics, Fudan University.
     $H_{fb} = $
     & $\lambda\sum_ic_{ia}^\dagger M_{ab}c_{ib}\phi_i$
     & $\lambda\sum_{kk^\prime}c_{ka}^\dagger M_{ab}c_{k^\prime b}
-    \alert<3>{\phi_{k-k^\prime}}$
+    \alert<3>{\phi_{k-k^\prime}}$\\
+		$H_b=$ & $\sum_{ij}J_{ij}\phi_i\phi_h$ & ---
   \end{tabularx}
   \end{table}
   \begin{itemize}
@@ -440,6 +441,19 @@ Department of Physics, Fudan University.
   \item Same scaling behaviors, quantitatively different results.
   \item Acceleration: $N/N_f=6^2=36$, $\frac1{12}(N/N_f)^3 \sim 10^4$.
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Same scaling behaviors, quantitatively different results}
+  \begin{center}
+    \includegraphics[width=\textwidth]{combine2}
+  \end{center}
+  \begin{itemize}
+    \item EQMC is simulating a \alert{different} model, which exhibits the same universal behaviors.
+		\item Useful for studying universal behaviors / IR limits.
+		\item Useless for model-specific details / UV details.
+		\item The original lattice model is usually a ``designer model'' anyway... They do not describe any real material either.
+  \end{itemize}
 \end{frame}
 
 \section{Conclusion}
