@@ -164,6 +164,7 @@
 \item Zhi-Da Song: Institute of Physics, Beijing $\Rightarrow$ Princeton.
 \item Chen Fang: Institute of Physics, Beijing.
 \begin{center}
+	\includegraphics[height=3cm]{../people/zhidasong}
 	\includegraphics[height=3cm]{../people/chenfang}
 \end{center}
 \item Working in progress.
@@ -188,9 +189,10 @@
     \item Classification is given by group cohomology
     \[H^{d+1}[G, \uone_T].\]
 		\item Symmetric cocycles:
-		\[\omega(gg_0,\ldots gg_{d+1})=\rho_T(g)\omega(g_0,\ldots g_{d+1}).\]
+		\[\omega(gg_0,\ldots gg_{d+1})=\rho_T(g)\omega(g_0,\ldots g_{d+1}),\quad
+		\omega\in C^{d+1}[G, \uone_T].\]
 		\item Bulk-boundary correspondence:
-		\[d\omega = \nu,\quad d:H^d[G, \uone_T]\rightarrow H^{d+1}[G, \uone_T]\]
+		\[d\omega = \nu,\quad d:C^d[G, \uone_T]\rightarrow C^{d+1}[G, \uone_T]\]
 		\[d\omega(g_0,\ldots,g_{d+1})
 		=\sum_i(-1)^i\omega(g_0,\ldots,\hat g_i,\ldots,g_{d+1}).\]
 \begin{center}
@@ -342,15 +344,22 @@
 \column{.6\textwidth}
 \begin{itemize}
 \item A coboundary: $\hat\omega\simeq0$.
-\item A generator: attaching the same cochain to  $\partial \sigma$.
-\item A more trivial generator:
-\[d\hat\omega(\sigma)\simeq0\]
+\item A generator: attaching the same SPT state to  $\partial \sigma$.
+\item A more general generator:
+\[\hat\omega(\sigma)=d\mu,\quad
+\hat\omega(\tau\in\partial\sigma) = \mu.\]
+\item Using the previously defined notations, we write this as
+\[\hat\omega = (d+\partial)\hat\mu.\]
 \end{itemize}
 \column{.4\textwidth}
 \begin{animateinline}{5}
-        \multiframe{20}{Ra=0+.1}{
+        \multiframe{12}{Ra=.8+.1}{
 \begin{tikzpicture}
-\draw [blue,thick] (-\Ra,-\Ra)--(\Ra,\Ra);
+	\draw (-2,-2)--(-2,2)--(2,2)--(2,-2)--(-2,-2);
+	\fill [green!30] (-\Ra,-\Ra)--(-\Ra,\Ra)--(\Ra,\Ra)--(\Ra,-\Ra)--(-\Ra,-\Ra);
+\draw [blue,thick] (-\Ra,-\Ra)--(-\Ra,\Ra)--(\Ra,\Ra)--(\Ra,-\Ra)--(-\Ra,-\Ra);
+\node at (0, 0) {$d\nu$};
+\node at (\Ra, 0) [left] {$\nu$};
 \end{tikzpicture}
 }
 \end{animateinline}
@@ -360,7 +369,7 @@
 \begin{frame}
 \frametitle{Summary: a cohomology-group calculation}
 \begin{itemize}
-\item Building blocks: $p$-cell + $p$-dimensional SPT. 
+\item Building blocks: $p$-cell + $p$-dimensional SPT.
 \[\hat\omega\in[p+p].\]
 \item Cocycle condition:
 \[(d-\partial)\hat\omega=0\]
@@ -545,10 +554,22 @@ Consider $G=SG\times\mathbb Z_2$, $SG=P4_22_12$ (\#49 space group).
 \includegraphics[height=4cm]{blocks}
 \end{center}
 Each colored 2-cell is decorated with a Levin-Gu or CZX state protected by the onsite $\mathbb Z_2$.
+
+\emph{\small Adapted from Z Song, Y Huang, YQ, C Fang and M Hermele, to appear.}
 \end{frame}
 
 \begin{frame}
 \frametitle{An example of 2nd order computation}
+\emph{\small Adapted from Xu Yang, Shenghan Jiang, Ashvin Vishwanath and Ying Ran, arXiv:1705.09298.}
+\begin{itemize}
+	\item Consider a magnetic translation symmetry $T_xT_yT_x^{-1}T_y^{-1} = X$, and $G_0=\mathbb Z_2^X\times\mathbb Z_2^T$.
+	\item $H^3[G_0,\uone_T]=\mathbb Z_2\oplus\mathbb Z_2$: the one protected by both $\mathbb Z_2^X$ and $\mathbb Z_2^T$ is \alert{not compatible} with the magnetic translation symmetry.
+	\item Try to decorate $\omega\in H^3[G_0,\uone_T]$ to all 2-cells: the 1-cells can be gapped out, but the 0-cells \alert{cannot}.
+	\item There must be a $T^2=-1$ Kramers doublet at each 0-cell.
+\end{itemize}
+\begin{center}
+
+\end{center}
 \end{frame}
 
 %\section{Mathematical details}
@@ -566,6 +587,10 @@ H^{p+q}_G[X,\uone_{PT}].\]
 See Brown's book, Chapter VII.
 \item The topological space we used is the dual of $X$.
 \end{itemize}
+\begin{center}
+	\includegraphics[height=2cm]{brown_book}
+	\includegraphics[height=2cm]{brown_ss}
+\end{center}
 \end{frame}
 
 \begin{frame}
