@@ -176,7 +176,8 @@
 \begin{frame}
   \frametitle{Symmetry-Protected Topological (SPT) states}
 \begin{itemize}
-\item SPTs: cannot be smoothly connected to a trivial state without closing gap or breaking symmetry.
+\item SPT: gapped topological phases beyond Landau paradiam.
+\item Cannot be smoothly connected to a trivial state without closing gap or breaking symmetry.
 \item Free-fermion states: topological insulators, topological superconductors.
 \item Bosonic SPTs: Haldane chain, CZX/Levin-Gu state, etc.
 \item Interacting fermionic SPTs.
@@ -217,10 +218,36 @@
 \item We consider $G\supset SG$.
 \item Thorngren and Else (2018): the classification is also given by group cohomology
 \[H^{d+1}[G, \uone_{PT}].\]
-\item Dimensional reduction: Liang Fu, Michael Hermele et al.
-\item Patch construction: Zhida Song, Shengjie Huang, Yang Qi, Chen Fang and Michael Hermele.
-\item A more general construction for all possible $G$.
+\item Dimensional reduction: Liang Fu, Michael Hermele et al.\\
+\emph{Examples: mirror SPT, weak SPT (translation symmetry).}
+\item Patch construction: Zhida Song, Shengjie Huang, Yang Qi, Chen Fang and Michael Hermele, to appear.
+\item A more general construction for bosonic SPTs w/ all possible $G$.
 \end{itemize}
+\begin{center}
+\begin{tikzpicture}
+\fill [blue!20] (0,0)--(1,1)--(1,3)--(0,2)--(0,0);
+\draw (0,0)--(0,2)--(1,3);
+\draw (-1.5,0)--(1.5,0)--(1.5,2)--(-1.5,2)--(-1.5,0);
+\draw (1.5,0)--(2.5,1)--(2.5,3)--(1.5,2);
+\draw (2.5,3)--(-.5,3)--(-1.5,2);
+\end{tikzpicture}
+\hspace{2em}
+\begin{tikzpicture}
+\fill [blue!40,opacity=.5] (0,0)--(1,1)--(1,3)--(0,2)--(0,0);
+\draw (0,0)--(0,2)--(1,3);
+\fill [blue!40,opacity=.5] (.5,0)--(1.5,1)--(1.5,3)--(0.5,2)--(0.5,0);
+\draw (.5,0)--(.5,2)--(1.5,3);
+\fill [blue!40,opacity=.5] (1,0)--(2,1)--(2,3)--(1,2)--(1,0);
+\draw (1,0)--(1,2)--(2,3);
+\fill [blue!40,opacity=.5] (-.5,0)--(.5,1)--(.5,3)--(-0.5,2)--(-0.5,0);
+\draw (-.5,0)--(-.5,2)--(.5,3);
+\fill [blue!40,opacity=.5] (-1,0)--(0,1)--(0,3)--(-1,2)--(-1,0);
+\draw (-1,0)--(-1,2)--(0,3);
+\draw (-1.5,0)--(1.5,0)--(1.5,2)--(-1.5,2)--(-1.5,0);
+\draw (1.5,0)--(2.5,1)--(2.5,3)--(1.5,2);
+\draw (2.5,3)--(-.5,3)--(-1.5,2);
+\end{tikzpicture}
+\end{center}
 \end{frame}
 
 \section{Building an SPT from building blocks}
@@ -343,9 +370,9 @@
 \begin{columns}
 \column{.6\textwidth}
 \begin{itemize}
-\item A coboundary: $\hat\omega\simeq0$.
-\item A generator: attaching the same SPT state to  $\partial \sigma$.
-\item A more general generator:
+\item Coboundaries: $\hat\omega\simeq0$.
+\item A coboundary: attaching the same SPT state to  $\partial \sigma$.
+\item A more general coboundary:
 \[\hat\omega(\sigma)=d\mu,\quad
 \hat\omega(\tau\in\partial\sigma) = \mu.\]
 \item Using the previously defined notations, we write this as
@@ -387,11 +414,12 @@
 \frametitle{How to compute: a ``perturbative'' approach}
 We can classify building blocks according to the leading dimension:
 \begin{align*}
-\hat\omega_{3+}&= \hat\omega_3+ \hat\omega_2+ \hat\omega_1+ \hat\omega_0;\\
+\hat\omega_{3+}&= \hat\omega_3 + \hat\omega_2+ \hat\omega_1+ \hat\omega_0;\\
 \hat\omega_{2+}&= \hat\omega_2+ \hat\omega_1+ \hat\omega_0;\\
 \hat\omega_{1+}&= \hat\omega_1+ \hat\omega_0;\\
 \hat\omega_{0+}&= \hat\omega_0;
 \end{align*}
+We only choose a special solution for subleading terms.
 
 \begin{center}
 \begin{tikzpicture}[scale=1.5]
@@ -568,7 +596,23 @@ Each colored 2-cell is decorated with a Levin-Gu or CZX state protected by the o
 	\item There must be a $T^2=-1$ Kramers doublet at each 0-cell.
 \end{itemize}
 \begin{center}
-
+\begin{tikzpicture}
+\draw (-1.2,0)--(1.2,0);
+\draw (-1.2,1)--(1.2,1);
+\draw (-1.2,-1)--(1.2,-1);
+\draw (-1,-1.2)--(-1,1.2);
+\draw (0,-1.2)--(0,1.2);
+\draw (1,-1.2)--(1,1.2);
+\fill [red] (-1,-1) circle (2pt);
+\fill [red] (-1,0) circle (2pt);
+\fill [red] (-1,1) circle (2pt);
+\fill [red] (0,-1) circle (2pt);
+\fill [red] (0,0) circle (2pt);
+\fill [red] (0,1) circle (2pt);
+\fill [red] (1,-1) circle (2pt);
+\fill [red] (1,0) circle (2pt);
+\fill [red] (1,1) circle (2pt);
+\end{tikzpicture}
 \end{center}
 \end{frame}
 
