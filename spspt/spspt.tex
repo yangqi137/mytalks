@@ -19,6 +19,7 @@
 \newcolumntype{x}{>{\centering\arraybackslash}X}
 \renewcommand{\arraystretch}{1.5}
 \newcommand{\uone}{\mathrm U(1)}
+\DeclareMathOperator{\img}{img}
 
 \usepackage{tikz}
 	\usetikzlibrary{calc}
@@ -173,6 +174,12 @@
 
 \begin{frame}
   \frametitle{Symmetry-Protected Topological (SPT) states}
+\begin{itemize}
+\item SPTs: cannot be smoothly connected to a trivial state without closing gap or breaking symmetry.
+\item Free-fermion states: topological insulators, topological superconductors.
+\item Bosonic SPTs: Haldane chain, CZX/Levin-Gu state, etc.
+\item Interacting fermionic SPTs.
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -197,9 +204,23 @@
 	\draw (5, 1)--(5, 2) [black!40];
 	\end{tikzpicture}
 \end{center}
+  \item A cohomology group:
+\[H^{d+1}[G,\uone_T]=\{d\omega=0\}/\{\omega\simeq\omega+d\mu\}=\frac{\ker d}{\img d}.\]
   \end{itemize}
 \end{frame}
-\section{Space-group SPTs: dimensional reduction}
+
+\begin{frame}
+\frametitle{Space-group SPT}
+\begin{itemize}
+\item We consider $G\supset SG$.
+\item Thorngren and Else (2018): the classification is also given by group cohomology
+\[H^{d+1}[G, \uone_{PT}].\]
+\item Dimensional reduction: Liang Fu, Michael Hermele et al.
+\item Patch construction: Zhida Song, Shengjie Huang, Yang Qi, Chen Fang and Michael Hermele.
+\item A more general construction for all possible $G$.
+\end{itemize}
+\end{frame}
+
 \section{Building an SPT from building blocks}
 \begin{frame}
 	\frametitle{Space-group SPTs are made of building blocks}
@@ -316,10 +337,252 @@
 \end{frame}
 
 \begin{frame}
-	\frame{Coboundary equivalence}
+	\frametitle{Coboundary equivalence}
+\begin{columns}
+\column{.6\textwidth}
+\begin{itemize}
+\item A coboundary: $\hat\omega\simeq0$.
+\item A generator: attaching the same cochain to  $\partial \sigma$.
+\item A more trivial generator:
+\[d\hat\omega(\sigma)\simeq0\]
+\end{itemize}
+\column{.4\textwidth}
+\begin{animateinline}{5}
+        \multiframe{20}{Ra=0+.1}{
+\begin{tikzpicture}
+\draw [blue,thick] (-\Ra,-\Ra)--(\Ra,\Ra);
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{columns}
 \end{frame}
-\section{Mathematical details}
+
+\begin{frame}
+\frametitle{Summary: a cohomology-group calculation}
+\begin{itemize}
+\item Building blocks: $p$-cell + $p$-dimensional SPT. 
+\[\hat\omega\in[p+p].\]
+\item Cocycle condition:
+\[(d-\partial)\hat\omega=0\]
+\item Coboundary equivalence:
+\[\hat\omega\simeq\hat\omega+(d+\partial)\hat\mu.\]
+\item A cohomology group:
+\[[p+(p-1)]\rightarrow[p+p]\rightarrow[p+(p+1)],\]
+\[\text{SPTs}=\frac{\ker(d-\partial)}{\img(d+\partial).}\]
+\end{itemize}
+\end{frame}
+
+\section{A perturbative approach}
+
+\begin{frame}
+\frametitle{How to compute: a ``perturbative'' approach}
+We can classify building blocks according to the leading dimension:
+\begin{align*}
+\hat\omega_{3+}&= \hat\omega_3+ \hat\omega_2+ \hat\omega_1+ \hat\omega_0;\\
+\hat\omega_{2+}&= \hat\omega_2+ \hat\omega_1+ \hat\omega_0;\\
+\hat\omega_{1+}&= \hat\omega_1+ \hat\omega_0;\\
+\hat\omega_{0+}&= \hat\omega_0;
+\end{align*}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+\fill [blue!50] (0.1,0.1)--(1,0.1)--(1.4,.5)--(1.4,1.4)--(0.5,1.4)--(.1,1)--(0.1,0.1);
+\draw (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
+\draw (1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
+\draw (1.5,1.5)--(0.5,1.5)--(0,1);
+\end{tikzpicture}~~~~
+\begin{tikzpicture} [scale=1.5]
+\fill [blue!50] (0,0)--(1,0)--(1.5,.5)--(1.5,1.5)--(0.5,1.5)--(0,1)--(0,0);
+\draw (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
+\draw (1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
+\draw (1.5,1.5)--(0.5,1.5)--(0,1);
+\draw (0,0)--(.5,.5)--(.5,1.5);
+\draw (.5,.5)--(1.5,.5);
+\end{tikzpicture}~~~~
+\begin{tikzpicture} [scale=1.5]
+\draw [thick,blue] (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
+\draw [thick,blue](1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
+\draw [thick,blue](1.5,1.5)--(0.5,1.5)--(0,1);
+\draw [thick,blue](0,0)--(.5,.5)--(.5,1.5);
+\draw [thick,blue](.5,.5)--(1.5,.5);
+\end{tikzpicture}~~~~
+\begin{tikzpicture} [scale=1.5]
+\draw (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
+\draw (1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
+\draw (1.5,1.5)--(0.5,1.5)--(0,1);
+\draw (0,0)--(.5,.5)--(.5,1.5);
+\draw (.5,.5)--(1.5,.5);
+\filldraw [blue] (0,0) circle (2pt);
+\filldraw [blue] (1,0) circle (2pt);
+\filldraw [blue] (0,1) circle (2pt);
+\filldraw [blue] (1,1) circle (2pt);
+\filldraw [blue] (0.5,0.5) circle (2pt);
+\filldraw [blue] (0.5,1.5) circle (2pt);
+\filldraw [blue] (1.5,0.5) circle (2pt);
+\filldraw [blue] (1.5,1.5) circle (2pt);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: a 2D building block}
+\begin{columns}
+\column{.6\textwidth}
+\begin{itemize}
+\item Consider $\hat\omega_{2+}=\hat\omega_2+\hat\omega_1+\hat\omega_0$.
+\item Cocycle condition: $(d+\partial)\hat\omega=0$:
+\begin{align*}
+d\hat\omega_2&=0;\\
+d\hat\omega_1&=\partial\hat\omega_2;\\
+d\hat\omega_0&=\partial\hat\omega_1.
+\end{align*}
+\end{itemize}
+\begin{enumerate}
+\item Choose a cocycle for each 2-cell $\sigma$.
+\item Check $\partial\hat\omega_2(\tau)\simeq0$ for each 1-cell $\tau$.
+\item Choose a cochain $\hat\omega_1$ for each $\tau$.
+\item Check $\partial\hat\omega_1(\lambda)=0$ for each 0-cell $\lambda$.
+\item Choose a cochain $\hat\omega_1$ for each $\lambda$.
+\end{enumerate}
+\column{.4\textwidth}
+\begin{center}
+\begin{tikzpicture} [scale=1.5]
+\fill [blue!50] (0,0)--(1,0)--(1.5,.5)--(1.5,1.5)--(0.5,1.5)--(0,1)--(0,0);
+\draw [thick,white] (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
+\draw [thick,white] (1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
+\draw [thick,white] (1.5,1.5)--(0.5,1.5)--(0,1);
+\draw [thick,white] (0,0)--(.5,.5)--(.5,1.5);
+\draw [thick,white](.5,.5)--(1.5,.5);
+\fill [white] (0,0) circle (2pt);
+\fill [white] (1,0) circle (2pt);
+\fill [white] (0,1) circle (2pt);
+\fill [white] (1,1) circle (2pt);
+\fill [white] (0.5,0.5) circle (2pt);
+\fill [white] (1.5,0.5) circle (2pt);
+\fill [white] (0.5,1.5) circle (2pt);
+\fill [white] (1.5,1.5) circle (2pt);
+\end{tikzpicture}\\
+\begin{tikzpicture} [scale=1.5]
+\fill [blue!50] (0,0)--(1,0)--(1.5,.5)--(1.5,1.5)--(0.5,1.5)--(0,1)--(0,0);
+\draw [thick,black!50!green] (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
+\draw [thick,thick,black!50!green] (1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
+\draw [thick,thick,black!50!green] (1.5,1.5)--(0.5,1.5)--(0,1);
+\draw [thick,thick,black!50!green] (0,0)--(.5,.5)--(.5,1.5);
+\draw [thick,thick,black!50!green](.5,.5)--(1.5,.5);
+\fill [white] (0,0) circle (2pt);
+\fill [white] (1,0) circle (2pt);
+\fill [white] (0,1) circle (2pt);
+\fill [white] (1,1) circle (2pt);
+\fill [white] (0.5,0.5) circle (2pt);
+\fill [white] (1.5,0.5) circle (2pt);
+\fill [white] (0.5,1.5) circle (2pt);
+\fill [white] (1.5,1.5) circle (2pt);
+\end{tikzpicture}\\
+\begin{tikzpicture} [scale=1.5]
+\fill [blue!50] (0,0)--(1,0)--(1.5,.5)--(1.5,1.5)--(0.5,1.5)--(0,1)--(0,0);
+\draw [thick,black!50!green] (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
+\draw [thick,thick,black!50!green] (1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
+\draw [thick,thick,black!50!green] (1.5,1.5)--(0.5,1.5)--(0,1);
+\draw [thick,thick,black!50!green] (0,0)--(.5,.5)--(.5,1.5);
+\draw [thick,thick,black!50!green](.5,.5)--(1.5,.5);
+\fill [red] (0,0) circle (2pt);
+\fill [red] (1,0) circle (2pt);
+\fill [red] (0,1) circle (2pt);
+\fill [red] (1,1) circle (2pt);
+\fill [red] (0.5,0.5) circle (2pt);
+\fill [red] (1.5,0.5) circle (2pt);
+\fill [red] (0.5,1.5) circle (2pt);
+\fill [red] (1.5,1.5) circle (2pt);
+\end{tikzpicture}
+\end{center}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Coboundary equivalence}
+\begin{itemize}
+\item There is a similar algorithm for the coboundary equivalence.
+\item Assign 2d SPT states ($d\hat\mu_3=0$) to 3-cells: $\partial\hat\mu_3\simeq0$ trivializes $\hat\omega_2$ building blocks.
+\item If $\partial\hat\mu_3\simeq0$, choose $d\hat\mu_2=\partial\hat\mu_3$, then $\partial\hat\mu_2$ trivializes $\hat\omega_1$ building blocks.
+\item ......
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Final step: the group extension problem}
+\begin{itemize}
+\item Assume we have computed the classification $\Omega_{p+}=\{\hat\omega_{p+}\}$.
+\item The classification may not be simply $\Omega_{3+}\oplus\Omega_{2+}\oplus \Omega_{1+} \oplus \Omega_{0+} $.
+\item Example: consider two $2+$ blocks
+\begin{align*}
+\hat\omega_{2+}=\hat\omega_2+\hat\omega_1+\hat\omega_0;\\
+\hat\omega_{2+}'=\hat\omega_2'+\hat\omega_1'+\hat\omega_0'.
+\end{align*}
+\item If the sum is trivial in $\Omega_{2+}$: $\hat\omega_2+\hat\omega_2^\prime\simeq0$.
+\item The subleading term may be nontrivial: $\hat\omega_1+\hat\omega_1'$. So this is a nontrivial term in $\Omega_{1+}$.
+\item Need to compute the group-extension problem: can be done if we know all $\hat\omega_i$ explicitly.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Some simplifications}
+\begin{itemize}
+\item If $G = SG\times G_0$.
+\item If we ignore $\Omega_0$: not treating the atomic insulators as nontrivial SPTs.
+\item Only need to check things to the first order:
+\begin{enumerate}
+\item $\Omega_{2+}$: assign 2d SPTs to 2-cells, and check-anomaly vanishing on 1-cells. Coboundaries are assigning 2d SPTs to 3-cells.
+\item $\Omega_{1+}$: assign 1d SPTs to 1-cells, and check-anomaly vanishing on 0-cells. Coboundaries are assigning 1d SPTs to 2-cells.
+\end{enumerate}
+\item Trivial group extension: $\Omega_{2+}\oplus\Omega_{1+}$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{An example of a nontrivial building block}
+Consider $G=SG\times\mathbb Z_2$, $SG=P4_22_12$ (\#49 space group).
+\begin{center}
+\includegraphics[height=4cm]{blocks}
+\end{center}
+Each colored 2-cell is decorated with a Levin-Gu or CZX state protected by the onsite $\mathbb Z_2$.
+\end{frame}
+
+\begin{frame}
+\frametitle{An example of 2nd order computation}
+\end{frame}
+
+%\section{Mathematical details}
 \section{Conclusion}
 
+\begin{frame}
+\frametitle{Some mathematical claims}
+\begin{itemize}
+\item Equivariant group cohomology:
+\[H^{d+1}[G, \uone_{PT}]]=H^{d+1}_G[X, \uone_{PT}].\]
+Here $X$ is a (non-free) $G$-complex. See Thorngren and Else (2018).
+\item There is a spectral sequence:
+\[E_1^{pq}=\bigoplus_{\sigma\in X_p/G}H^q[G_\sigma,\uone_T]\Rightarrow
+H^{p+q}_G[X,\uone_{PT}].\]
+See Brown's book, Chapter VII.
+\item The topological space we used is the dual of $X$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Summary}
+\begin{itemize}
+\item We develop a way to sysmetically construct space-group SPTs.
+\item Check cocycle conditions and coboundary equivalences order-by-order.
+\item For $G=SG\times G_0$, first order is enought.
+\item Examples beyond simple layered construction.
+\item Examples where first-order calculation is not enough.
+\item Outlook: cut-and-glue other things:
+\begin{enumerate}
+\item Bosonic SPTs beyond group cohomology (E8 decorations).
+\item Fermionic space-group SPTs.
+\item 2D space-group SETs.
+\end{enumerate}
+\end{itemize}
+\end{frame}
 
 \end{document}
