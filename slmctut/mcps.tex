@@ -154,17 +154,22 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{References}
+\begin{frame}{Collaborators}
 \begin{itemize}
 %\item Works led by Liang Fu, Zi-Yang Meng, and Lei Wang.
-\item MIT: Hui-Tao Shen, Jun-Wei Liu (HKUST), Yuki Nagai (CCSE, JAEA), Liang Fu.
-\item IOP: Xiao-Yan Xu (HKUST), Zi-Yang Meng.
-\item References:
+\item MIT: Hui-Tao Shen, Liang Fu.
+\item IOP: Zi-Hong Liu, Zi-Yang Meng.
+\item HKUST: Xiao-Yan Xu, Jun-Wei Liu.
+\item University of Michigan: Kai Sun.
+\end{itemize}
+{\small
 \begin{enumerate}
   \item J Liu, YQ, Z-Y Meng and L Fu, PRB 95, 041101(R) (2017).
   \item J Liu, H Shen, YQ, Z-Y Meng and L Fu, PRB 95, 241104(R) (2017).
   \item X-Y Xu, YQ, J Liu, L Fu and Z-Y Meng, PRB 96, 041119(R) (2017).
-\end{enumerate}
+	\item Z-H Liu, X-Y Xu, YQ, K Sun and Z-Y Meng, PRB 98, 045116 (2018).
+	\item Z-H Liu, X-Y Xu, YQ, K Sun and Z-Y Meng, arXiv:1801.00127.
+\end{enumerate}}
 \begin{center}
 	\includegraphics[height=2cm]{../people/huitaoshen}
 	\includegraphics[height=2cm]{../people/junweiliu}
@@ -174,7 +179,6 @@
 	\includegraphics[height=2cm]{../people/ziyangmeng}
 	\includegraphics[height=2cm]{../people/kaisun}
 \end{center}
-\end{itemize}
 \end{frame}
 
 \begin{frame}{Outline}
@@ -187,10 +191,449 @@
 
 \section{Introduction: Simulating universal behaviors with Monte Carlo}
 
+\begin{frame}
+  \frametitle{Critical Points and Universal Behaviors}
+  \begin{itemize}
+  \item Universality class: critical points in different systems exhibit the same universal behavior.
+  \item Example: 3D liquid-gas critical point and 2D transverse-field Ising model.
+  \[H = -\sum_{\langle ij\rangle}\sigma_i^z\sigma_j^z+h_x\sum_i\sigma_i^x
+  +h_z\sum_i\sigma_i^z.\]
+\end{itemize}
+  \begin{table}
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \rowcolors{2}{black!20}{}
+    \begin{tabularx}{\columnwidth}{cxx}
+      \rowcolor{mbg}&\textcolor{white}{Liquid-gas}&\textcolor{white}{TFIM}\\
+      Phase diagram & \includegraphics[width=2cm]{../eqmc/liquidgas} &\includegraphics[width=2cm]{../eqmc/tfim}\\
+      Order parameter & $\rho_l-\rho_g$ & $\sigma^z$\\
+      Tuning field & $\alpha T+\beta P$ & $h_x$\\
+      SB field & $\beta P-\alpha T$ & $h_z$
+    \end{tabularx}
+  \end{table}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Critical theory: field theory vs lattice regularization}
+	\begin{itemize}
+		\item A critical theory is usually expressed as an effective field theory, because the correlation length $\rightarrow\infty$.
+		\[S=\int^\Lambda \left[(\nabla\phi)^2+r\phi^2+u\phi^4\right].\]
+		\item This effective field theory can be realized by a lattice model, when tuned close to a critical point.
+		\[S=-J\sum_{\langle ij\rangle}\sigma_i\sigma_j.\]
+		\begin{center}
+			\includegraphics[height=1.5cm]{../dimer/weak3d_2d_blue}
+		\end{center}
+		\item The second theory can be viewed as a lattice regularization of the first theory.
+		We usually prefer to simulate the second theory, and its universal behavior can help us understand the first theory.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Introduction to MCMC}
+  \begin{itemize}
+    \item Consider a statistical mechanics model:
+    \[Z=\sum_{\mathcal C}e^{-\beta H[\mathcal C]} = \sum_{\mathcal C}W(\mathcal C).\]
+    \item The Markov-chain Monte Carlo (MCMC) is a way to do importance sampling.
+    \item A Markov chain is constructed,
+    \[\cdots\rightarrow\mathcal C_{i-1}\rightarrow\mathcal C_i\rightarrow\mathcal C_{i+1}\rightarrow\cdots\]
+    \item Markov chain: $p(\mathcal C_i\rightarrow\mathcal C_j)$ only depends on $\mathcal C_i$ (no memory).
+    \item Goal: distribution of $\mathcal C$ converges to the Boltzmann distribution $W(\mathcal C)$.
+    \item Any observable can be measured from a Markov chain,
+    \[\langle O\rangle = \frac{\sum O(\mathcal C)W(\mathcal C)}{\sum W(\mathcal C)} \simeq
+     \frac1{\mathcal N}\sum_iO(\mathcal C_i).\]
+    \item Quantum Monte Carlo: a quantum statistical model is mapped to a classical statistical model.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Detailed balance}
+  \begin{itemize}
+    \item Detailed balance:
+    \[\mathcal C\leftrightarrow\mathcal D,\quad
+		\frac{p(\mathcal C\rightarrow\mathcal D)}{p(\mathcal D\rightarrow\mathcal C)}=\frac{W(\mathcal D)}{W(\mathcal C)}.\]
+    \item Detailed balance (and ergodicity) guarantees that if the MC converges, it converges to the desired distribution $W(\mathcal C)$.
+    \item Metropolis-Hastings algorithm: propose -- accept/reject.
+  \end{itemize}
+\begin{columns}
+\column{.4\textwidth}
+\begin{tikzpicture}[scale=.6]
+\node at (0, 0) (C) [draw,circle] {$\mathcal C$};
+\node<2-> at (3, 0) (D) [draw, rectangle] {$\mathcal D?$};
+\node<2-> at (3, 2) (D1) [draw, rectangle] {$\mathcal D_1?$};
+\node<2-> at (3, -2) (D2) [draw, rectangle] {$\mathcal D_2?$};
+\node<2-> at (3, -3) {$\vdots$};
+\draw<2-> [->] (C)--(D) node [midway, above] {{\small $q_{\mathcal C\rightarrow\mathcal D}$}};
+\draw<2-> [->] (C)--(D1);
+\draw<2-> [->] (C)--(D2);
+\node<3-> at (6, 1.5) (DD) [draw, circle] {$\mathcal D$};
+\node<3-> at (6, -1.5) (DC) [draw, circle] {$\mathcal C$};
+\draw<3-> [->] (D)--(DD) node [midway, above] {{\small $\alpha_{\mathcal C\rightarrow\mathcal D}$}};
+\draw<3-> [->] (D)--(DC);
+\end{tikzpicture}
+\column{.6\textwidth}
+{\small
+\begin{block}{Steps of Metropolis-Hastings algorithm}
+\begin{enumerate}
+\item<2-> Select a new state $\mathcal D_i$.
+\item<3-> Accept or reject.
+    \[p(\mathcal C\rightarrow\mathcal D) = q(\mathcal C\rightarrow\mathcal D)
+    \alpha(\mathcal C\rightarrow\mathcal D).\]
+    \[\alpha(\mathcal C\rightarrow\mathcal D) =
+    \min\left\{1, \frac{W(\mathcal D)}{W(\mathcal C)}
+    \frac{q(\mathcal D\rightarrow\mathcal C)}
+    {q(\mathcal C\rightarrow\mathcal D)}\right\}.\]
+\end{enumerate}
+\end{block}}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Local Update: Metropolis algorithm}
+  \begin{center}
+    \begin{tikzpicture}
+      \node at (0, 0) [circle, draw] {};
+      \node at (1, 0) [circle, draw] {};
+      \node at (0, 1) [circle, draw] {};
+      \node at (-1, 0) [circle, fill, draw] {};
+      \node at (0, -1) [circle, fill, draw] {};
+
+      \node at (4, 0) [circle, fill, draw] {};
+      \node at (5, 0) [circle, draw] {};
+      \node at (4, 1) [circle, draw] {};
+      \node at (3, 0) [circle, fill, draw] {};
+      \node at (4, -1) [circle, fill, draw] {};
+
+      \draw [<->, thick] (1.5, 0)--(2.5, 0);
+    \end{tikzpicture}
+  \end{center}
+  \begin{itemize}
+    \item Consider the Ising model.
+    \item Local update: randomly select a site and flip the spin.
+    \item $q(\mathcal C\rightarrow\mathcal D) = q(\mathcal D\rightarrow\mathcal C) = \frac1N$.
+    \item $\alpha(\mathcal C\rightarrow\mathcal D)=\min\left\{1,\frac{W(\mathcal D)}{W(\mathcal C)}\right\}.$
+    \item $N$ trials are counted as one MC step.
+    \item Very general: applies to any model.
+    \item N Metropolis, A W Rosenbluth, M N Rosenbluth, A H Teller, and E Teller, J Chem Phys \textbf{21}, 1087 (1953).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fermion QCPs}
+  \begin{center}
+    \includegraphics[width=\textwidth]{../eqmc/combine2}
+  \end{center}
+  \begin{itemize}
+    \item Spin + fermion models.
+    \item Spin ordering leads to spin density wave (SDW) instability on the Fermi Surface (FS).
+    \item Different universality class: fermions on the FS are gapless excitations.
+    \item Studying universal behaviors needs large lattice sizes, which is hard because the complexity of DQMC is $O(N^3)$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Determinant QMC}
+  \begin{itemize}
+    \item In general, DQMC simulations study the following fermion-boson models,
+    \[H = H_f + H_{fb} + H_b\]
+    \[H_f=-\sum_{ija}t_{ij}\left(c_{ia}^\dagger c_{ja}+\text{H.c.}\right)\]
+    \[H_{fb}=\lambda\sum_ic_{ia}^\dagger M_{ab}c_{ib}\phi_i\]
+    \item We sample bosonic field configurations $\{\phi\}$ with weights determined by integrating out the fermions:
+    \[W[\phi] = W_b[\phi]\det(\mathbf I + \mathbf B(\beta,0;\phi))\]
+    \item Hence the name ``determinant''.
+    \item Complexity is \alert{$O(N^3)$}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Autocorrelation time}
+  \begin{itemize}
+    \item Autocorrelation time measures the efficiency of the update algorithm.
+    \item ``time'' sequence:
+    \[\cdots\rightarrow O(t-1)\rightarrow O(t)\rightarrow O(t+1)\rightarrow\cdots,
+  \quad O(t) = O[\mathcal C(t)].\]
+    \item Autocorrelation function
+    \[\mathcal A_O(\Delta t)=\langle O(t)O(t+\Delta t)\rangle - \langle O(t)\rangle^2\propto e^{-\Delta t/\tau}.\]
+  \end{itemize}
+  \begin{columns}
+    \column{.5\textwidth}
+    \begin{block}{Complexity $\propto \tau$}
+      \[\langle O\rangle = \frac1{\mathcal N}\sum_iO(\mathcal C_i).\]
+      Statistical error $\delta O\sim\frac1{\sqrt{\mathcal N}}$ only if $O(i)$ are independent.
+
+%A statistically independent sample is generated in every $\tau$-steps.
+\begin{gather*}\text{Complexity}=\\\text{Complexity of each step}\times\tau\times\mathcal N.\end{gather*}
+    \end{block}
+    \column{.5\textwidth}
+    \centering
+    \includegraphics[height=3.5cm]{auto_decay}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Critical slowing down}
+  \begin{itemize}
+    \item The real dynamical relaxation time diverges at the critical point: a critical system is slow to equilibrate.
+    \item The local update mimics the real relaxation process: also exhibits the critical slowing down phenomena.
+    \item $\tau\propto L^z$, $z=2.125$ for the 2D Ising model.
+  \end{itemize}
+  \begin{center}
+    \includegraphics[width=8cm]{slowdown}
+  \end{center}
+  %There's a way around this: MCMC simulation does not have to mimic the real dynamics...
+\end{frame}
+
+\begin{frame}
+  \frametitle{Seeing universal behaviors is hard}
+  \begin{itemize}
+    \item Observing the universal behavior requires large system size: $L=30$ means $N=L^2=900$.
+    \item \alert{$O(N^3)$} complexity is expensive.\\
+		\emph{EMUS-QMC algorithm.}
+		\item Critial slowdown near the critical point.\\
+		\emph{Self-Learning MC algorithm.}
+  \end{itemize}
+  \begin{center}
+    \includegraphics[height=3.5cm]{laptop_coffee}
+    ~~~~~~~~~~~
+    \includegraphics[height=3.5cm]{tianhe}
+  \end{center}
+	Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
+\end{frame}
+
 \section{Self-learning Monte Carlo}
+
+\begin{frame}
+  \frametitle{Design}
+  \begin{center}
+    \includegraphics[width=\textwidth]{../eqmc/slmc-design}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Update guided by an effective model}
+  \begin{itemize}
+    \item Detailed balance:
+    \[\frac{p(\mathcal C\rightarrow\mathcal D)}{p(\mathcal D\rightarrow\mathcal C)}=\frac{W(\mathcal D)}{W(\mathcal C)}.\]
+    %\item Detailed balance (and ergodicity) guarantees that if the MC converges, it converges to the desired distribution $W(\mathcal C)$.
+    \item Metropolis-Hastings algorithm: propose -- accept/reject.
+    \[p(\mathcal C\rightarrow\mathcal D) = q(\mathcal C\rightarrow\mathcal D)
+    \alpha(\mathcal C\rightarrow\mathcal D).\]
+    \[\alpha(\mathcal C\rightarrow\mathcal D) =
+    \min\left\{1, \frac{W(\mathcal D)}{W(\mathcal C)}
+    \frac{q(\mathcal D\rightarrow\mathcal C)}
+    {q(\mathcal C\rightarrow\mathcal D)}\right\}.\]
+    \item Guided by an effective model:
+    \[\frac{q(\mathcal C\rightarrow\mathcal D)}
+    {q(\mathcal D\rightarrow\mathcal C)}
+    =\frac{W^\prime[\mathcal D]}{W^\prime[\mathcal C]}\]
+    \[\alpha(\mathcal C\rightarrow \mathcal D)=\min\left\{1, \frac{W(\mathcal D)}{W(\mathcal C)}
+    \frac{W^\prime(\mathcal C)}{W^\prime(\mathcal D)}\right\}\simeq1.\]
+    \item Choice of $W^\prime$: $W_b$ or learned from SLMC.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Cumulative update}
+  \begin{itemize}
+    \item Idea: replace $W(\mathcal C)$ by $W^\prime(\mathcal C)$, which is much faster to evaluate.
+    \item Local updates guided by $W^\prime(\mathcal C)$:
+    \[\mathcal C\Rightarrow\mathcal D:
+    \mathcal C\rightarrow\mathcal C_1\cdots\rightarrow\mathcal C_{i-1}\rightarrow\mathcal C_i\rightarrow\mathcal C_{i+1}\rightarrow\cdots\rightarrow\mathcal C_M\rightarrow\mathcal D.\]
+    \item Detailed balance:
+    \[\frac{p(\mathcal C_i\rightarrow\mathcal C_{i+1})}{p(\mathcal C_{i+1}\rightarrow\mathcal C_i)}=\frac{W^\prime(\mathcal C_{i+1})}{W^\prime(\mathcal C_i)}\]
+    \item Selection rate:
+    \[\frac{q(\mathcal C\rightarrow D)}
+    {q(\mathcal D\rightarrow\mathcal C)}
+    =\frac{W^\prime(\mathcal D)}{W^\prime(\mathcal C)}.\]
+  \end{itemize}
+	\begin{center}
+		\includegraphics[width=6cm]{cum-update}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Cumulative update}
+  \begin{itemize}
+    \item Approximated weight:
+    \[W^\prime(\mathcal C)\simeq W(\mathcal C).\]
+    \item Update scheme:
+    \[\frac{q(\mathcal C\rightarrow D)}
+    {q(\mathcal D\rightarrow\mathcal C)}
+    =\frac{W^\prime(\mathcal D)}{W^\prime(\mathcal C)}
+    \simeq\frac{W(\mathcal D)}{W(\mathcal C)}.\]
+    \item Acceptance ratio:
+    \[\alpha(\mathcal C\rightarrow \mathcal D)=\min\left\{1, \frac{W(\mathcal D)}{W(\mathcal C)}
+    \frac{W^\prime(\mathcal C)}{W^\prime(\mathcal D)}\right\}\simeq1.\]
+    \item Choose good $W^\prime$ and $M\geq\tau_L$: $\tau_{CU}\sim1$.
+    \item Computational cost: $\beta N^3\tau\rightarrow \beta N^3$.
+    \item Again, $W^\prime(\mathcal C)\neq W(\mathcal C)$ does not introduce approximation.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Constructing effective weights}
+\begin{enumerate}
+  \item Physical intuition: bosonic effective model of $W_{\text{eff}}[\sigma]$
+  + Linear Regression.\\
+  \emph{Works best for gapped fermions.}
+  \[H=-\sum_{ij}t_{ij}c_{i\alpha}^\dagger c_{j\alpha}
+  +\sum_i\sigma_ic_{i\alpha}^\dagger\sigma^z_{\alpha\beta} c_{i\beta}
+  +H[\sigma]\]
+  \[W_{\text{eff}}[\sigma]=\sum_{ij}J_{ij}\sigma_i\sigma_j.\]
+  \item Machine Learning models: todo in the future.
+  \begin{itemize}
+    \item Restricted Boltzmann Machine.
+    \item Neural Networks.
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{References}
+\begin{itemize}
+%\item Works led by Liang Fu, Zi-Yang Meng, and Lei Wang.
+\item MIT: Jun-Wei Liu (HKUST), Hui-Tao Shen, Yuri Nagai, Liang Fu.
+\item IOP: Xiao-Yan Xu (HKUST), Zi-Yang Meng.
+\item References:
+\begin{enumerate}
+  \item J Liu, YQ, Z-Y Meng and L Fu, PRB 95, 041101(R) (2017).
+  \item J Liu, H Shen, YQ, Z-Y Meng and L Fu, PRB 95, 241104(R) (2017).
+  \item \alert{X-Y Xu, YQ, J Liu, L Fu and Z-Y Meng, PRB 96, 041119(R) (2017).}
+  \item Y Nagai, H Shen, YQ and L Fu, PRB 96, 161102(R) (2017).
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Benchmarking result}
+	\begin{center}
+		\includegraphics[height=3cm]{fslmc-autocorr}
+	\end{center}
+	\begin{itemize}
+		\item Autocorrelation time reduced by $10^2$-$10^3$.
+		\item 100-1000x speedup.
+		\item Can simulate 2-5x larger system.
+	\end{itemize}
+\end{frame}
 
 \section{Elective-Momentum Ultra-Size Monte Carlo}
 
-\section{Conclusion}
+\begin{frame}
+  \frametitle{Elective momentum selection}
+  \begin{center}
+    \includegraphics[width=.8\textwidth]{../eqmc/kmeshtri}
+  \end{center}
+\begin{itemize}
+  \item Only $k$-modes near the ``hot spots'' contributes to the universal behaviors.
+  \item In a lattice model, most modes are ``wasted'' as they only provide a UV completion.
+  \item EQMC: only simulating $k$ modes inside patches.
+  $O(N^3)\rightarrow O(N_f^3)$.
+  \item Acceleration: $(N/N_f)^3$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Working in the momentum space}
+  \begin{table}
+    \renewcommand{\arraystretch}{2.5}
+    \rowcolors{2}{black!20}{}
+  \begin{tabularx}{\columnwidth}{cxx}
+    \rowcolor{mbg}
+    & \textcolor{white}{Real space}
+    & \textcolor{white}{Momentum space}\\
+    $H_f = $ & $-\sum_{ija}t_{ij}(c_{ia}^\dagger c_{ja}+\text{H.c.})$
+    & $\sum_k[\epsilon(k)-\mu]c_{ka}^\dagger c_{ka}$\\
+    $H_{fb} = $
+    & $\lambda\sum_ic_{ia}^\dagger M_{ab}c_{ib}\phi_i$
+    & $\lambda\sum_{kk^\prime}c_{ka}^\dagger M_{ab}c_{k^\prime b}
+    \alert<3>{\phi_{k-k^\prime}}$\\
+		$H_b=$ & $\sum_{ij}J_{ij}\phi_i\phi_h$ & ---
+  \end{tabularx}
+  \end{table}
+  \begin{itemize}
+    \item We work in the momentum space.
+    \item Only keep $k$ points within the patches.
+  \end{itemize}
+  Steps computing $W[\phi]$:
+  \begin{enumerate}
+    \item<2-4> Compute $W_b[\phi]$. Complexity $O(N)$
+    \item<3-4> Fast Fourier Transform (FFT): $\phi_i\rightarrow\phi_k$. Complexity $O(N\log N)$.
+    \item<4-5> Compute the fermion determinant. Complexity $O(N_f^3)$.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{How to simulate: update algorithms?}
+  \begin{block}{Local update for lattice models}
+    \begin{itemize}
+      \item In lattice models, bosons and fermions couple locally $\lambda\sum_ic_{ia}^\dagger M_{ab}c_{ib}\phi_i$.
+      \item Flipping one spin $\phi_i$ changes only one column and one row of the fermion matrix
+      \item The fast-update algorithm can compute the determinant with (average) complexity $O(N^2)$. Scanning through the whole system: $NO(N^2)=O(N^3)$.
+    \end{itemize}
+  \end{block}
+  \begin{itemize}
+    \item Local update is not applicable: interaction is nonlocal in momentum space.
+    \[\lambda\sum_{kk^\prime}c_{ka}^\dagger M_{ab}c_{k^\prime b}\phi_{k-k^\prime}\]
+    \item We have to use global-update algorithms.
+    \item We can use Self-Learning Monte Carlo (SLMC) algorithms.\\
+    \emph{\small X-Y Xu, YQ, J Liu, L Fu and Z-Y Meng, PRB 96, 041119(R) (2017).}
+    \item Complexity is $O(N_f^3)$.
+  \end{itemize}
+\end{frame}
+
+\section{Application: fermion QCP}
+
+\begin{frame}
+  \frametitle{Hertz-Millis Theory}
+  Scaling behavior:
+\[\chi(T,h,\mathbf{q},\omega_n)=
+\frac{1}{(\alert<3>{c_{t}T}+\alert<2>{c_{t}' T^{2}})
++c_{h}|h-h_c|^{\gamma}+c_q|\mathbf{q}|^2
++ (\alert<3>{c_{\omega}\omega}+\alert<2>{c'_{\omega}\omega^{2}})}\]
+\begin{itemize}
+  \item<2-> Bosonic QCP: $T^2\sim\omega^2\sim \bm q^2$.
+  \item<3-> Fermionic QCP: $T\sim\omega\sim \bm q^2$.
+  \item<4-> Crossover behavior:
+  \begin{align*}
+    \chi^{-1}(T\rightarrow0,h_c,0,\omega)-\chi^{-1}(T\rightarrow0,h_c,0,0))
+    &\sim c_\omega\omega + c_\omega^\prime\omega^2.\\
+    \chi^{-1}(T\rightarrow0,h_c,\bm q,0)-\chi^{-1}(T\rightarrow0,h_c,0,0))
+    &\sim c_q|\bm q|^2.
+  \end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Benchmarking against a previous work}
+  \begin{center}
+    \includegraphics[width=\textwidth]{../eqmc/chiwqanalysis.pdf}
+  \end{center}
+\begin{itemize}
+	\item SLMC: Does not affect the results.
+	\item EMUS: Same scaling behaviors, quantitatively different results.
+  \item EMUS Acceleration: $N/N_f=6^2=36$, $\frac1{12}(N/N_f)^3 \sim 10^4$.
+	\item DQMC $L=24$ $\Rightarrow$ SLDQMC $L=30$ $\Rightarrow$ EMUS $L=48(60)$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Same scaling behaviors, quantitatively different results}
+  \begin{center}
+    \includegraphics[width=\textwidth]{../eqmc/combine2}
+  \end{center}
+  \begin{itemize}
+    \item EQMC is simulating a \alert{different} model, which exhibits the same universal behaviors.
+		\item Useful for studying universal behaviors / IR limits.
+		\item Useless for model-specific details / UV details.
+		\item The original lattice model is usually a ``designer model'' anyway... They do not describe any real material either.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Conclusions and Outlook}
+	\begin{itemize}
+		\item Monte Carlo simulation is a useful tool to study critical theories.
+		\item Needs better tools to study the fermion-QCP and other new types of critical points.
+		\item SLMC: Reduces the critical slowdown problem.
+		\item EMUS: Reduces the $O(N^3)$ problem.
+		\item Combining SLMC and EMUS: We checked the Hertz-Millis Theory using unbiased numerical simulations.
+		\item We plan to use these methods to study more fermion-QCPs.
+	\end{itemize}
+\end{frame}
 
 \end{document}
