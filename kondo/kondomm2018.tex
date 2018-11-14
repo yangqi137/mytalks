@@ -189,22 +189,54 @@
 
 \section{Introduction: Two-Lifetime Models and Fermi Arcs}
 
+
 \begin{frame}
 \frametitle{Two-Lifetime models}
 \begin{itemize}
 \item Consider a two-band model,
 \[H_0=\sum_k\begin{pmatrix}f_{k\alpha}^\dagger&c_{k\alpha}^\dagger\end{pmatrix}
-\begin{pmatrix}\epsilon_{fk} & V_k\\ V_k & \epsilon_{ck}\end{pmatrix}
+\begin{pmatrix}\epsilon_{fk} & V\\ V & \epsilon_{ck}\end{pmatrix}
 \begin{pmatrix}f_{k\alpha}\\c_{k\alpha}\end{pmatrix}.\]
 \item With two lifetimes,
 \[G^{-1}(k,\omega)=\omega-H_0(k)-\Sigma_k,\quad
 \Sigma_k=-i\begin{pmatrix}\Gamma_f & 0\\0 & \Gamma_c\end{pmatrix}.\]
 \item Non-Hermition effective Hamiltonian,
 \[H = H_0+\Sigma = \begin{pmatrix}
-\epsilon_{fk} - i\Gamma_f & V_k\\ V_k & \epsilon_{ck} - i\Gamma_c
+\epsilon_{fk} - i\Gamma_f & V\\ V & \epsilon_{ck} - i\Gamma_c
 \end{pmatrix}, \quad G=(\omega-H)^{-1}.\]
 \end{itemize}
 Vlad Kozii and Liang Fu, arXiv:1708.05841.
+\end{frame}
+
+\begin{frame}
+\frametitle{Kondo physics from non-Hermitian Hamiltonian}
+\begin{itemize}
+\item The non-Hermitian quasiparticle Hamiltonian $H = H_0+\Sigma = \begin{pmatrix}
+\epsilon_{fk} - i\Gamma_f & V\\ V & \epsilon_{ck}
+\end{pmatrix}$.
+\item Electron spectrum density
+\[A(k, \omega)=-\frac1\pi\tr\im (\omega - H)^{-1}
+=-\frac2\pi\im\left(
+\frac1{\omega-E_1}+\frac1{\omega-E_2}\right)
+=\frac2\pi\sum_{a=1,2}\frac{\im E_a}{(\omega-\re E_a)^2+\im E_a^2}.\]
+\item Exceptional point: $|V|=\Gamma_f$, where $E_1=E_2$.
+\end{itemize}
+
+\begin{columns}
+\column{.65\textwidth}
+\begin{itemize}
+\item Along $\epsilon_{ck}=\epsilon_{fk}=\mu$:
+\item $|V|>\Gamma_f$: $\re E_1\neq\re E_2$, two peaks, gap open.\\
+Low $T$: FS = $c+f$, Kondo insulator.
+\item $|V|<\Gamma_f$: $\re E_1=\re E_2$, one peak, gap close.\\
+High $T$: FS = $c$, Metal.
+\end{itemize}
+\column{.4\textwidth}
+%\begin{center}
+	%\includegraphics[height=2.5cm]{arc1}
+	\includegraphics[height=4cm]{arc2}
+%\end{center}
+\end{columns}
 \end{frame}
 
 \begin{frame}
@@ -349,12 +381,18 @@ a_{1,2,3}>0.\]
 \item $A(\omega)$ still has one/two peak(s): no qualitative change.
 \end{itemize}
 \begin{center}
-\includegraphics[height=3.5cm]{gammak_v1}
-\includegraphics[height=3.5cm]{rho_dwave0}
-\includegraphics[height=3.5cm]{ims_dwave}
+\includegraphics[height=3cm]{gammak_v1}
+\includegraphics[height=3cm]{rho_dwave0}
+\includegraphics[height=3cm]{ims_dwave}
 \end{center}
 \end{frame}
 
+\begin{frame}
+	\frametitle{Results of DMFT simulations}
+	\begin{center}
+		\includegraphics[height=7cm]{Fig2}
+	\end{center}
+\end{frame}
 \begin{frame}
 \frametitle{Summary}
 \begin{itemize}
