@@ -95,7 +95,7 @@
 % does not look nice, try deleting the line with the fontenc.
 
 \title[U1SL] % (optional, use only with long paper titles)
-{Monte Carlo Study of Compact Quantum Electrodynamics with Fermionic Matter}
+{Monte Carlo Study of Compact Quantum QED with Fermionic Matter [2+1D U(1)-Dirac Spin Liquid]}
 
 \author[Y Qi] % (optional, use only with lots of authors)
 {Yang~Qi}
@@ -187,45 +187,62 @@ Department of Physics, Fudan University.
 \begin{frame}
   \frametitle{U(1) Quantum Spin Liquid: History and Outlooks}
 \begin{itemize}
-  \item Spin liquid with fractionalized spinons: mean field theory and gauge fields.
-  \item Does the mean-field picture stand: Is the gauge field deconfined?
+	\item U(1)-Dirac spin liquid: Dirac-fermion spinons + U(1) gauge field.
+	\[\mathcal L = \bar\psi_\alpha \gamma^\mu(\partial_\mu-iA_\mu)\psi +  F_{\mu\nu}^2,\quad
+	\vec S_i = \psi^\dagger_{i\alpha}\vec\sigma_{\alpha\beta}\psi_{i\beta}.\]
+	\item $\pi$-flux phase in high-$T_c$ cuprates:\\
+	\emph{\small I. Affleck and J. B. Marston, Phys. Rev. B 37, 3774 (1988).}
+	\item Spin liquid in frustrated magnets: kagome-lattice Heisenberg model?\\
+	\emph{\small Y. Ran, M. Hermele, P. A. Lee, and X.-G. Wen, Phys. Rev. Lett. 98, 117205 (2007).}
+
+  \item Does the mean-field picture stand: Is the U(1) gauge field deconfined?
 \end{itemize}
 \end{frame}
 
+%\begin{frame}
+%  \frametitle{Compact U(1): Monopoles}
+%  \begin{itemize}
+%    \item Gauge theory in the continuum:
+%    \[S=\int d^3x (\epsilon_{abc}A_c)^2.\]
+%    \item Gauge theory on a lattice:
+%    \[S=\sum_{\square}e^{iA_{ij}}e^{iA_{jk}}e^{iA_{kl}}e^{iA_{li}}.\]
+%    \item Compact U(1) gauge connection: $A_{ij}\simeq A_{ij}+2\pi$.
+%    \item Monopole: non-smooth space-time configurations of $A_{ij}$.
+%    \item Even without matter field, compact U(1) is not free Maxwell theory: confinement in the IR.
+%  \end{itemize}
+%\end{frame}
+
 \begin{frame}
-  \frametitle{Compact U(1): Monopoles}
-  \begin{itemize}
-    \item Gauge theory in the continuum:
-    \[S=\int d^3x (\epsilon_{abc}A_c)^2.\]
-    \item Gauge theory on a lattice:
-    \[S=\sum_{\square}e^{iA_{ij}}e^{iA_{jk}}e^{iA_{kl}}e^{iA_{li}}.\]
-    \item Compact U(1) gauge connection: $A_{ij}\simeq A_{ij}+2\pi$.
-    \item Monopole: non-smooth space-time configurations of $A_{ij}$.
-    \item Even without matter field, compact U(1) is not free Maxwell theory: confinement in the IR.
-  \end{itemize}
+	\frametitle{Does U(1) spin liquid exist in 2+1D?}
+	\[\mathcal L = \bar\psi_\alpha \gamma^\mu(\partial_\mu-iA_\mu)\psi + F_{\mu\nu}^2.\]
+	\begin{itemize}
+		\item U(1) monopole: confinement. Compact U(1) is \alert{not free}.
+		\item Gapless fermions suppress monopole.
+	\end{itemize}
+	\begin{tabular}{p{.3\textwidth}p{.3\textwidth}p{.3\textwidth}}
+		\includegraphics[scale=.45]{balance1}
+		&
+		\includegraphics[scale=.45]{balance2}
+		&
+		\includegraphics[scale=.45]{balance3}\\
+		Pure compact U(1). & Spinon FS. & A critical $N_f$?\\
+		A. M. Polyakov, Gauge fields and strings. & Sung-Sik Lee, PRB 78 085129 (2008). & Under heavy debate: large-$N_f$ expansion / CFT argument / numerical simulations.
+	\end{tabular}
 \end{frame}
 
-
 \begin{frame}
-  \frametitle{Does U(1) spin liquid exist in 2+1D?}
-  \begin{itemize}
-    \item Without fermionic spinons: confined.\\
-    \emph{Deconfined quantum critical point, square-lattice Rokhsar-Kivelson Hamiltonian, etc.}
-    \item With spinon Fermi surface: deconfined.
-    \item With Dirac spinons:
-    \begin{itemize}
-      \item Large $N_f$: deconfined.
-      \item Finite $N_f$? What is the critical $N_f$?
-      \item Most important case $N_f=2$?
-    \end{itemize}
-    \item Our strategy:
-    \begin{itemize}
-      \item Use a model Hamiltonian to study the QED$_3$ theory in the IR.
-      \item Not worrying which realistic spin Hamiltonian can realize it.
-      \item Similar to previous studies on $\mathbb Z_2$ Dirac spin liquids:
-      \emph{F. F. Assaad and Tarun Grover, PRX 2016; Snir Gazit, Mohit Randeria, and Ashvin Vishwanath, Nat Phys 2017.}
-    \end{itemize}
-  \end{itemize}
+	\frametitle{Our Approach}
+	\[H = \sum_{ij}\vec S_i\cdot\vec S_j+\cdots
+	\quad\Rightarrow\quad
+	\mathcal L = \bar\psi_\alpha \gamma^\mu(\partial_\mu-iA_\mu)\psi
+	+ F_{\mu\nu}^2.
+	\quad\Rightarrow\quad\text{Confinement??}\]
+	\begin{itemize}
+		\item Use a model Hamiltonian to study the QED$_3$ theory in the IR.
+		\item Not worrying which realistic spin Hamiltonian can realize it.
+		\item Similar to previous studies on $\mathbb Z_2$ Dirac spin liquids:
+		\emph{F. F. Assaad and Tarun Grover, PRX 2016; Snir Gazit, Mohit Randeria, and Ashvin Vishwanath, Nat Phys 2017.}
+	\end{itemize}
 \end{frame}
 
 \section{Model and Method}
@@ -237,32 +254,35 @@ Department of Physics, Fudan University.
   +\ \frac{1}{2}K\ N_f\sum_{\square}\cos \left( \text{curl} \hat{\theta} \right).
 \]
 \begin{columns}
-  \column{.7\textwidth}
+  \column{.8\textwidth}
   \begin{itemize}
     \item $c$: spinon.
-    \item $\theta_{ij}$: compact gauge field.
-    \item $[L_{ij}, e^{i\theta_{ij}}]=e^{i\theta_{ij}}$ is the canonical momentum / electric field.
+    \item $\theta_{ij}$: quantum rotors $\Rightarrow$ compact gauge field.
+    \item $[L_{ij}, e^{i\theta_{ij}}]=e^{i\theta_{ij}}$ is the angular momentum / electric field.
     \item Gauge symmetry:
-    \[\hat{Q}_{i} = -\sum_{j}\hat{L}_{ij} + \sum_{\alpha} \left( \hat{c}^{\dagger}_{i\alpha}\hat{c}^{\phantom\dagger}_{i\alpha} - 1/2 \right);[H, Q_i] = 0.\]
-    \item Dynamically generated constraint.
-    \item Deconfined limit: $\hat\theta_{ij}\rightarrow \theta_{ij}$, $\pi$-flux state.
+    \[\hat{Q}_{i} = -\sum_{j}\hat{L}_{ij} + \sum_{\alpha} \left( \hat{c}^{\dagger}_{i\alpha}\hat{c}^{\phantom\dagger}_{i\alpha} - 1/2 \right);[H, \hat Q_i] = 0.\]
+    \item Dynamically generated constraint:
+		$\hat Q_i \simeq 0$ implies gauge symmetry.
+    \item $K>0$ favors a $\pi$-flux state.
+		\item $N_f=1$: two Dirac cones (two valley). $N_f=2,4,6,\ldots$ do not have sign problem.
   \end{itemize}
 
-  \column{.3\textwidth}
+  \column{.2\textwidth}
   \begin{center}
     \includegraphics[width=3cm]{model}
   \end{center}
 \end{columns}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Dynamically generated constraint}
-  \[C_{Q} = \frac{1}{L^2} \sum_{ij} \langle \hat{Q}_i \hat{Q}_j\rangle.\]
-  $C_Q\rightarrow0$ as $\beta\propto L\rightarrow0$.
-  \begin{center}
-    \includegraphics[width=.8\textwidth]{n2QQ00}
-  \end{center}
-\end{frame}
+%\begin{frame}
+%  \frametitle{Dynamically generated constraint}
+%  \[C_{Q} = \frac{1}{L^2} \sum_{ij} \langle \hat{Q}_i \hat{Q}_j\rangle,\quad C_Q\rightarrow0\text{ as }\beta\propto L\rightarrow0\].
+%  \begin{center}
+%    \includegraphics[width=.5\textwidth]{n2QQ00}
+%
+%		$Q\rightarrow 0$: emergent gauge symmetry.
+%  \end{center}
+%\end{frame}
 
 \begin{frame}
   \frametitle{The Determinant Quantum Monte Carlo Method}
@@ -312,84 +332,139 @@ Department of Physics, Fudan University.
 
 \begin{frame}
   \frametitle{$N_f=2$: phase boundary}
-  \begin{center}
-    \includegraphics[width=.8\textwidth]{n2rafm}
-  \end{center}
-  Phase transition b/w U1D and AFM: $J_c=1.6(2)$.
+  \begin{columns}
+		\column{.7\textwidth}
+    \includegraphics[width=\textwidth]{n2rafm}
+		\column{.3\textwidth}
+		\begin{itemize}
+			\item Correlation ratio: $r = 1-\frac{\chi(\bm Q+\delta\bm q)}{\chi(\bm Q)}.$
+			\item Crossing indicates the position of phase transition.
+			\item Phase transition b/w U1D and AFM: $J_c=1.6(2)$.
+		\end{itemize}
+  \end{columns}
 \end{frame}
 
 \begin{frame}
   \frametitle{Deconfined U(1) gauge field}
-  \begin{center}
-    \includegraphics[width=.8\textwidth]{photonmass}
-  \end{center}
+  \begin{columns}
+		\column{.6\textwidth}
+    \includegraphics[width=\textwidth]{photonmass}
+		\column{.4\textwidth}
+		\begin{itemize}
+			\item Measure photon mass $m$ from decaying of gauge-flux correlation functions.
+			\item $m > 0$: confinement phase.
+		\end{itemize}
+  \end{columns}
 \end{frame}
 
 \begin{frame}
   \frametitle{$N_f=2$: U1D phase}
-  \begin{center}
-    \includegraphics[width=.5\textwidth]{n2decay}
-  \end{center}
-  Algebraic spin liquid: $\Delta_S = \Delta_D$.
-  (Free fermion has $\Delta_S=\Delta_D = 4$.)
+  \begin{columns}
+		\column{.5\textwidth}
+    \includegraphics[width=\textwidth]{n2decay}
+		\column{.5\textwidth}
+		\begin{itemize}
+			\item Spin and dimer OPs are fermion bilinears:
+			\[\vec S = \psi^\dagger_{i\alpha}\vec\sigma_{\alpha\beta}\psi_{i\beta},\]
+			\[D_{x,y} = \psi^\dagger_{i\alpha}\psi_{i+x,y,\beta}.\]
+			\item Algebraic spin liquid: $\Delta_S = \Delta_D$.
+		  \item (Free fermion has $\Delta_S=\Delta_D = 4$.)
+		\end{itemize}
+  \end{columns}
 \end{frame}
 
 \begin{frame}
   \frametitle{$N_f=4$: phase boundary}
-  \begin{center}
-    \includegraphics[width=.8\textwidth]{n4rvbs}
-  \end{center}
-  Phase transition b/w U1D and VBS: $J_c=1.2(3)$.
+  \begin{columns}
+		\column{.7\textwidth}
+    \includegraphics[width=\textwidth]{n4rvbs}
+		\column{.3\textwidth}
+		\begin{itemize}
+			\item Phase transition b/w U1D and VBS: $J_c=1.2(3)$.
+		\end{itemize}
+  \end{columns}
 \end{frame}
 
 \begin{frame}
   \frametitle{$N_f=4$: U1D phase}
-  \begin{center}
-    \includegraphics[width=.5\textwidth]{n4decay}
-  \end{center}
-  Algebraic spin liquid: $\Delta_S = \Delta_D$.
-  (Free fermion has $\Delta_S=\Delta_D = 4$.)
+  \begin{columns}
+		\column{.5\textwidth}
+    \includegraphics[width=\textwidth]{n4decay}
+		\column{.5\textwidth}
+		\begin{itemize}
+			\item Spin and dimer OPs are fermion bilinears:
+			\[\vec S = \psi^\dagger_{i\alpha}\vec\sigma_{\alpha\beta}\psi_{i\beta},\]
+			\[D_{x,y} = \psi^\dagger_{i\alpha}\psi_{i+x,y,\beta}.\]
+			\item Algebraic spin liquid: $\Delta_S = \Delta_D$.
+		  \item (Free fermion has $\Delta_S=\Delta_D = 4$.)
+		\end{itemize}
+  \end{columns}
 \end{frame}
 
 \begin{frame}
   \frametitle{$N_f=6$: phase boundary}
-  \begin{center}
-    \includegraphics[width=.8\textwidth]{n6rvbs}
-  \end{center}
-  Phase transition b/w U1D and VBS: $J_c=1.9(3)$.
+  \begin{columns}
+		\column{.7\textwidth}
+    \includegraphics[width=\textwidth]{n6rvbs}
+		\column{.3\textwidth}
+		\begin{itemize}
+			\item Phase transition b/w U1D and VBS: $J_c=1.9(3)$.
+		\end{itemize}
+  \end{columns}
 \end{frame}
 
 \begin{frame}
   \frametitle{$N_f=6$: U1D phase}
-  \begin{center}
-    \includegraphics[width=.5\textwidth]{n6decay}
-  \end{center}
-  Algebraic spin liquid: $\Delta_S = \Delta_D$.
-  (Free fermion has $\Delta_S=\Delta_D = 4$.)
+  \begin{columns}
+		\column{.5\textwidth}
+    \includegraphics[width=\textwidth]{n6decay}
+		\column{.5\textwidth}
+		\begin{itemize}
+			\item Spin and dimer OPs are fermion bilinears:
+			\[\vec S = \psi^\dagger_{i\alpha}\vec\sigma_{\alpha\beta}\psi_{i\beta},\]
+			\[D_{x,y} = \psi^\dagger_{i\alpha}\psi_{i+x,y,\beta}.\]
+			\item Algebraic spin liquid: $\Delta_S = \Delta_D$.
+		  \item (Free fermion has $\Delta_S=\Delta_D = 4$.)
+		\end{itemize}
+  \end{columns}
 \end{frame}
+
 \begin{frame}
   \frametitle{$N_f=8$: phase boundary}
-  \begin{center}
-    \includegraphics[width=.8\textwidth]{n8rvbs}
-  \end{center}
-  Phase transition b/w U1D and VBS: $J_c=2.5(1)$.
+  \begin{columns}
+		\column{.7\textwidth}
+    \includegraphics[width=\textwidth]{n8rvbs}
+		\column{.3\textwidth}
+		\begin{itemize}
+			\item Phase transition b/w U1D and VBS: $J_c=2.5(1)$.
+		\end{itemize}
+  \end{columns}
 \end{frame}
 
 \begin{frame}
   \frametitle{$N_f=8$: U1D phase}
-  \begin{center}
-    \includegraphics[width=.5\textwidth]{n8decay}
-  \end{center}
-  Algebraic spin liquid: $\Delta_S = \Delta_D$.
-  (Free fermion has $\Delta_S=\Delta_D = 4$.)
+  \begin{columns}
+		\column{.5\textwidth}
+    \includegraphics[width=\textwidth]{n8decay}
+		\column{.5\textwidth}
+		\begin{itemize}
+			\item Spin and dimer OPs are fermion bilinears:
+			\[\vec S = \psi^\dagger_{i\alpha}\vec\sigma_{\alpha\beta}\psi_{i\beta},\]
+			\[D_{x,y} = \psi^\dagger_{i\alpha}\psi_{i+x,y,\beta}.\]
+			\item Algebraic spin liquid: $\Delta_S = \Delta_D$.
+		  \item (Free fermion has $\Delta_S=\Delta_D = 4$.)
+		\end{itemize}
+  \end{columns}
 \end{frame}
 
 \begin{frame}
   \frametitle{Summary}
-  \begin{center}
-    \includegraphics[width=.8\textwidth]{eta}
-  \end{center}
-  $\Delta_S=\Delta_D$ consistent with large-$N_f$ results.
+  \begin{columns}
+		\column{.7\textwidth}
+    \includegraphics[width=\textwidth]{eta}
+		\column{.3\textwidth}
+		$\Delta_S=\Delta_D$ consistent with large-$N_f$-expansion results.
+  \end{columns}
 \end{frame}
 
 \section{Conclusion}
@@ -397,6 +472,8 @@ Department of Physics, Fudan University.
 \begin{frame}{Conclusion and outlooks}
   \begin{center}
     \includegraphics[width=5cm]{phase-diagram}
+
+		{\small arXiv:1807.07574}
   \end{center}
   \begin{itemize}
     \item Deconfined U1D ASL phase observed for $N_f=2,4,6,8$.
