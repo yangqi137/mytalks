@@ -217,14 +217,137 @@ Department of Physics, Fudan University.
 
 \end{frame}
 
+\begin{frame}
+\frametitle{Designer Hamiltonians}
+\end{frame}
+
 \section{Model}
 
 \begin{frame}
 	\frametitle{The Model}
-	\begin{align}
+\begin{itemize}
+\item Hamiltonian:
+	\begin{align*}
 	H_f &= -t\sum_{\langle i,j \rangle} (f^{\dagger}_{i,\alpha} \sigma^{z}_{b_{\langle i,j \rangle}}f_{j,\alpha} + h.c.) -\mu\sum_{i}f^{\dagger}_{i,\alpha}f_{i,\alpha}, \nonumber\\
 	H_{z} &= -J \sum_{\langle i,j \rangle} S^{z}_{i} \sigma^{z}_{b_{\langle i,j \rangle}} S^{z}_{j} - h \sum_{i} S^{x}_{i}, \nonumber\\
 	H_{g} &= -K \sum_{\square}\prod_{b\in\square} \sigma^{z}_{b} - g\sum_{b} \sigma^{x}_{b}.
-\end{align}
+\end{align*}
+\item Physical fermion $c_{i\alpha} = f_{i\alpha}S_i^z$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Symmetries -- I}
+\begin{align*}
+	H= &-t\sum_{\langle i,j \rangle} (f^{\dagger}_{i,\alpha} \sigma^{z}_{b_{\langle i,j \rangle}}f_{j,\alpha} + h.c.)
+	-J \sum_{\langle i,j \rangle} S^{z}_{i} \sigma^{z}_{b_{\langle i,j \rangle}} S^{z}_{j} - h \sum_{i} S^{x}_{i}\\
+&-K \sum_{\square}\prod_{b\in\square} \sigma^{z}_{b} - g\sum_{b} \sigma^{x}_{b}.
+\end{align*}
+\begin{enumerate}
+\item $\mathbb Z_2$ gauge symmetry:
+\[f_{i\alpha}\rightarrow\eta_if_{i\alpha},
+\quad S_i^z\rightarrow\eta_iS_i^z,
+\quad \sigma_{ij}\rightarrow
+\eta_i\sigma_{ij}\eta_j.\]
+\end{enumerate}
+\begin{block}{Gauge constraint}
+\begin{itemize}
+\item Local projector $Q_i = (-)^{n_{i,f}}S^{x}_{i}\prod_{b\in +_i}\sigma^{x}_{b}$, w/ $n_{i,f}=\sum_{\alpha}f^{\dagger}_{i,\alpha}f_{i,\alpha}$.
+\item $\hat Q_i=1$: Gauss Law.
+\item $\hat Q_i\simeq1$ at low temperature: dynamically generated gauge-constraint.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Symmetries -- II}
+\begin{align*}
+	H= &-t\sum_{\langle i,j \rangle} (f^{\dagger}_{i,\alpha} \sigma^{z}_{b_{\langle i,j \rangle}}f_{j,\alpha} + h.c.)
+	-J \sum_{\langle i,j \rangle} S^{z}_{i} \sigma^{z}_{b_{\langle i,j \rangle}} S^{z}_{j} - h \sum_{i} S^{x}_{i}\\
+&-K \sum_{\square}\prod_{b\in\square} \sigma^{z}_{b} - g\sum_{b} \sigma^{x}_{b}.
+\end{align*}
+\begin{enumerate}
+\item $\mathbb Z_2$ \alert{global} symmetry:
+$S_i^z\rightarrow -S_i^z$.
+\item U(1) symmetry:
+$f_{i\alpha}\rightarrow f_{i\alpha}e^{i\theta}$, $c_{i\alpha}\rightarrow c_{i\alpha}e^{i\theta}$.
+$\Rightarrow$ Luttinger Theorem.
+\end{enumerate}
+\begin{block}{Ising symmetry is not really a global symmetry}
+\begin{itemize}
+\item Ising symmetry + fermion-parity symmetry $\in$ gauge symmetry:\\
+$S_i^z\rightarrow-S_i^z,f_{i\alpha}\rightarrow-f_{i\alpha}$.
+\item $\langle S_i^z\rangle\neq0$ is a \alert{Higgs} transition:
+no\ bosonic local order parameter.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Gauge symmetry and string operators}
+\begin{itemize}
+\item Gauge symmetry can never be broken.
+\item Path integral / Monte Carlo sums over all gauge-equivalent configurations.
+\item If $\hat O$ is not gauge invariant,
+$\langle\hat O\rangle = 0$.
+\item $\langle S_i^zS_j^z\rangle = 0$.
+Need to use String operator $\langle S_i^z\sigma^z_{ii_1}\cdots\sigma^z_{i_nj}S_j^z\rangle$.
+\item $\langle f_{i\alpha}f_{j\alpha}^\dagger\rangle=0$, $\langle c_{i\alpha}c_{j\alpha}^\dagger\rangle$ is Ok.
+\end{itemize}
+\end{frame}
+
+\section{Results}
+
+\begin{frame}
+\frametitle{Normal metal phase}
+\begin{itemize}
+\item $h^z < h_c^z$: ``FM'' phase, ``$\langle S_i^z\rangle\neq0$''.
+\item Higgs phase: $\mathbb Z_2$ gauge field is ``Higgs-ed''.
+\item $c_{i\alpha} = S_i^zf_{i\alpha}\sim f_{i\alpha}$ forms a Fermi surface.
+\item Susceptibility
+$\chi_{ij}=\langle \vec s_i\cdot\vec s_j\rangle$,
+$\vec s_i=c_{i\alpha}^\dagger\vec\sigma_{\alpha\beta}c_{i\beta}$ has a peak @ $(\pi,\pi)$.
+\item A Landau Fermi liquid.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Orthogonal metal phase}
+\begin{itemize}
+\item $h^z > h_c^z$: ``PM'' phase, ``$\langle S_i^z\rangle=0$''.
+\item $\mathbb Z_2$ gauge field is deconfined.
+\item Cannot find a $c$-fermion Fermi surface.
+\item Susceptibility still has a peak @ $(\pi,\pi)$: $\vec s_i= c_{i\alpha}^\dagger\vec\sigma_{\alpha\beta}c_{i\beta} 
+= f_{i\alpha}^\dagger\vec\sigma_{\alpha\beta}f_{i\beta}$.
+\item A hidden $f$-fermion Fermi surface.
+\item A non-Fermi liquid: $\nu_e = A_f$ instead of $A_c$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Phase diagram}
+\begin{itemize}
+\item $c$-FS disappears.
+\item Susceptibility peak remains $\Rightarrow$ a hidden $f$-FS.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Away from half-filling}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Higgs transition}
+\end{frame}
+
+\section{Conclusion}
+\begin{frame}{Conclusion and Outlook}
+\begin{itemize}
+\item Metals' awkwark cousin is found.
+\item Demonstrated an OM phase using MC simulation.
+\item Higgs transition: appears to be continuous.
+\item Spin liquid w/ spinon FS: U(1) spin liquid?
+\item Nature of the phase transition?
+\end{itemize}
 \end{frame}
 \end{document}
