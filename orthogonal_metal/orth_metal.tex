@@ -186,12 +186,45 @@ Department of Physics, Fudan University.
   Noninteracting FS $\rightarrow$ Interacting FS.
   \item Volumn of the FS is conserved: Luttinger Thm.
 \end{itemize}
+\begin{center}
+	\includegraphics{../resources/SrRuO_FS}
+
+	{\small A. Damascelli et al, PRL \textbf{85} 5194 (2000).}
+\end{center}
 \end{frame}
 
 \begin{frame}
   \frametitle{Hiding an FS with Fractionalization}
   \begin{itemize}
-    \item 
+    \item Spin-charge separation: $c_{i\alpha} = f_{i\alpha} h_i^\dagger$.
+		\item $h$ forms a Mott insulator.
+		\item No $c$-FS: no spectral weights.
+		\item Generalized Luttinger Thm:
+		$\nu_e = A_c + A_f$.
+		\item Orthogonal metal: $\left<c^\dagger f\right>\rightarrow 0$.
   \end{itemize}
+	\begin{center}
+		\includegraphics[width=.8\textwidth]{hide_fs}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Questions to address}
+	\begin{itemize}
+		\item Realizing OM in a Monte Carlo simulation.
+		\item Phase transition b/w NM/OM?
+	\end{itemize}
+
+\end{frame}
+
+\section{Model}
+
+\begin{frame}
+	\frametitle{The Model}
+	\begin{align}
+	H_f &= -t\sum_{\langle i,j \rangle} (f^{\dagger}_{i,\alpha} \sigma^{z}_{b_{\langle i,j \rangle}}f_{j,\alpha} + h.c.) -\mu\sum_{i}f^{\dagger}_{i,\alpha}f_{i,\alpha}, \nonumber\\
+	H_{z} &= -J \sum_{\langle i,j \rangle} S^{z}_{i} \sigma^{z}_{b_{\langle i,j \rangle}} S^{z}_{j} - h \sum_{i} S^{x}_{i}, \nonumber\\
+	H_{g} &= -K \sum_{\square}\prod_{b\in\square} \sigma^{z}_{b} - g\sum_{b} \sigma^{x}_{b}.
+\end{align}
 \end{frame}
 \end{document}
