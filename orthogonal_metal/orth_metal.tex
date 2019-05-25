@@ -9,6 +9,7 @@
 \usepackage{graphicx}
 \usepackage{tabularx}
 \usepackage{animate}
+\usepackage{pifont}
 %\usepackage{ifthen}
 
 %\usepackage{xeCJK}
@@ -160,6 +161,7 @@ Department of Physics, Fudan University.
 \item Xiao Yan Xu, Hong Kong University of Science and Technology.
 \item Zi Yang Meng, Hong Kong University.
 \begin{center}
+  \includegraphics[height=2cm]{../people/chuangchen}
   \includegraphics[height=2cm]{../people/xiaoyanxu}
   \includegraphics[height=2cm]{../people/ziyangmeng}
 \end{center}
@@ -211,14 +213,51 @@ Department of Physics, Fudan University.
 \begin{frame}
 	\frametitle{Questions to address}
 	\begin{itemize}
-		\item Realizing OM in a Monte Carlo simulation.
-		\item Phase transition b/w NM/OM?
+		\item[\ding{51}] Realizing OM in a Monte Carlo simulation.
+		\item[\ding{51}] Phase transition b/w NM/OM?
+		\item[\ding{55}] Which realistic model realizes an OM?
+		\item[\ding{55}] Which material realizes an OM?
 	\end{itemize}
 
 \end{frame}
 
 \begin{frame}
 \frametitle{Designer Hamiltonians}
+\begin{columns}
+	\column{.6\textwidth}
+	\begin{center}
+		\includegraphics[width=\columnwidth]{berg2012}
+	\end{center}
+	\column{.4\textwidth}
+	\begin{itemize}
+		\item E Berg, M Metlitski and S Sachdev,\\ Science 2012.
+		\item Use a two-band model to simulate SDW instability in cuprates.
+		\item Two-band model removes sign problem.
+	\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Simulating effective models of spin liquids}
+	\begin{columns}
+		\column{.5\textwidth}
+		\begin{center}
+			\includegraphics[width=4cm]{z2dsl}
+		\end{center}
+		\begin{itemize}
+			\item F Assaad and T Grover, PRX 2016
+			\item S Gazit, M Randeria and A Vishwanath, Nat Phys 2017
+			\item Simulated $\mathbb Z_2$-Dirac spin liquid
+		\end{itemize}
+		\column{.5\textwidth}
+		\begin{center}
+			\includegraphics[width=4cm]{u1dsl}
+		\end{center}
+		\begin{itemize}
+			\item Xiao Yan Xu, Yang Qi, Long Zhang, F Assaad, Cenke Xu, and Zi Yang Meng, PRX 2019
+			\item Simulated U(1)-Dirac spin liquid.
+		\end{itemize}
+	\end{columns}
 \end{frame}
 
 \section{Model}
@@ -234,6 +273,9 @@ Department of Physics, Fudan University.
 \end{align*}
 \item Physical fermion $c_{i\alpha} = f_{i\alpha}S_i^z$
 \end{itemize}
+\begin{center}
+	\includegraphics[width=4cm]{model_l}
+\end{center}
 \end{frame}
 
 \begin{frame}
@@ -267,6 +309,7 @@ Department of Physics, Fudan University.
 &-K \sum_{\square}\prod_{b\in\square} \sigma^{z}_{b} - g\sum_{b} \sigma^{x}_{b}.
 \end{align*}
 \begin{enumerate}
+	\addtocounter{enumi}{1}
 \item $\mathbb Z_2$ \alert{global} symmetry:
 $S_i^z\rightarrow -S_i^z$.
 \item U(1) symmetry:
@@ -294,12 +337,39 @@ $\langle\hat O\rangle = 0$.
 Need to use String operator $\langle S_i^z\sigma^z_{ii_1}\cdots\sigma^z_{i_nj}S_j^z\rangle$.
 \item $\langle f_{i\alpha}f_{j\alpha}^\dagger\rangle=0$, $\langle c_{i\alpha}c_{j\alpha}^\dagger\rangle$ is Ok.
 \end{itemize}
+
+\begin{center}
+	\begin{tikzpicture}
+		\draw (0, 0)--(4, 0);
+		\draw (0, 1)--(4, 1);
+		\draw (0, 2)--(4, 2);
+		\draw<1,3> (0, 3)--(4, 3);
+		\draw (0, 4)--(4, 4);
+		\draw (0, 0)--(0, 4);
+		\draw (1, 0)--(1, 4);
+		\draw (2, 0)--(2, 4);
+		\draw<1,3> (3, 0)--(3, 4);
+		\draw (4, 0)--(4, 4);
+		\draw [thick,->,color=mbg] (0.9, 0.7)--(1.1, 1.3);
+		\draw<1,3> [thick,->,color=mbg] (2.9, 2.7)--(3.1, 3.3);
+		\draw<2> [thick,->,color=mbg] (3.1, 3.3)--(2.9, 2.7);
+		\draw<2> [dashed] (2, 3)--(4, 3);
+		\draw<2> (0, 3)--(2, 3);
+		\draw<2> [dashed] (3, 2)--(3, 4);
+		\draw<2> (3, 0)--(3, 2);
+		\draw<3> [line width=2,blue] (1, 1)--(2, 1)--(2, 3)--(3, 3);
+	\end{tikzpicture}
+	\end{center}
 \end{frame}
 
 \section{Results}
 
 \begin{frame}
 \frametitle{Normal metal phase}
+\begin{columns}
+\column{.4\textwidth}
+\includegraphics[width=\columnwidth]{nm}
+\column{.6\textwidth}
 \begin{itemize}
 \item $h^z < h_c^z$: ``FM'' phase, ``$\langle S_i^z\rangle\neq0$''.
 \item Higgs phase: $\mathbb Z_2$ gauge field is ``Higgs-ed''.
@@ -309,19 +379,25 @@ $\chi_{ij}=\langle \vec s_i\cdot\vec s_j\rangle$,
 $\vec s_i=c_{i\alpha}^\dagger\vec\sigma_{\alpha\beta}c_{i\beta}$ has a peak @ $(\pi,\pi)$.
 \item A Landau Fermi liquid.
 \end{itemize}
+\end{columns}
 \end{frame}
 
 \begin{frame}
 \frametitle{Orthogonal metal phase}
-\begin{itemize}
-\item $h^z > h_c^z$: ``PM'' phase, ``$\langle S_i^z\rangle=0$''.
-\item $\mathbb Z_2$ gauge field is deconfined.
-\item Cannot find a $c$-fermion Fermi surface.
-\item Susceptibility still has a peak @ $(\pi,\pi)$: $\vec s_i= c_{i\alpha}^\dagger\vec\sigma_{\alpha\beta}c_{i\beta} 
-= f_{i\alpha}^\dagger\vec\sigma_{\alpha\beta}f_{i\beta}$.
-\item A hidden $f$-fermion Fermi surface.
-\item A non-Fermi liquid: $\nu_e = A_f$ instead of $A_c$.
-\end{itemize}
+\begin{columns}
+	\column{.4\textwidth}
+	\includegraphics[width=.9\columnwidth]{om}
+	\column{.6\textwidth}
+	\begin{itemize}
+	\item $h^z > h_c^z$: ``PM'' phase, ``$\langle S_i^z\rangle=0$''.
+	\item $\mathbb Z_2$ gauge field is deconfined.
+	\item Cannot find a $c$-fermion Fermi surface.
+	\item Susceptibility still has a peak @ $(\pi,\pi)$: $\vec s_i= c_{i\alpha}^\dagger\vec\sigma_{\alpha\beta}c_{i\beta}
+	= f_{i\alpha}^\dagger\vec\sigma_{\alpha\beta}f_{i\beta}$.
+	\item A hidden $f$-fermion Fermi surface.
+	\item A non-Fermi liquid: $\nu_e = A_f$ instead of $A_c$.
+	\end{itemize}
+\end{columns}
 \end{frame}
 
 \begin{frame}
@@ -330,18 +406,48 @@ $\vec s_i=c_{i\alpha}^\dagger\vec\sigma_{\alpha\beta}c_{i\beta}$ has a peak @ $(
 \item $c$-FS disappears.
 \item Susceptibility peak remains $\Rightarrow$ a hidden $f$-FS.
 \end{itemize}
+\begin{center}
+	\includegraphics[width=\textwidth]{fig2}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Phase diagram}
+\begin{itemize}
+\item $c$-FS disappears.
+\item Susceptibility peak remains $\Rightarrow$ a hidden $f$-FS.
+\end{itemize}
+\begin{center}
+	\includegraphics[width=.8\textwidth]{fig4}
+\end{center}
 \end{frame}
 
 \begin{frame}
 \frametitle{Away from half-filling}
+\begin{center}
+	\includegraphics[width=\textwidth]{figS1}
+\end{center}
 \end{frame}
 
 \begin{frame}
 \frametitle{The Higgs transition}
+\begin{center}
+	\includegraphics[height=5cm]{fig3}
+\end{center}
+\begin{itemize}
+	\item Appears to be continuous.
+	\item Hidden order: $\langle S_i^z\sigma^z\cdots\sigma^zS_j^z\rangle$.
+	\item Not 3D Ising:
+	$\mathcal L = (\partial_\mu\phi)^2-r\phi^2+u\phi^4+\phi^2\psi^\dagger\sigma^z\psi+\cdots$.
+	\item Weak first-order? Sachdev and Morinari [PRB, 66, 235117 (2017)].
+\end{itemize}
 \end{frame}
 
 \section{Conclusion}
 \begin{frame}{Conclusion and Outlook}
+\begin{center}
+	\includegraphics[width=.6\textwidth]{fig2}
+\end{center}
 \begin{itemize}
 \item Metals' awkwark cousin is found.
 \item Demonstrated an OM phase using MC simulation.
