@@ -312,6 +312,59 @@ Only translation, glide plane and skew axes.
 \end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{Decomposition of real space}
+\begin{itemize}
+\item Consider a 3D lattice with 3-cells, 2-cells, 1-cells and 0-cells.
+\[X = X_3\cup X_2\cup X_1\cup X_0.\]
+\item $\mathbb R^3$ as a CW-complex.
+\item Orientation for each cell: $\pm\sigma$.
+\item Boundary map $\partial$: $\partial^2=0$.
+\item Examples:
+\[\partial_\sigma = \tau_1-\tau_2+\tau_3-\tau_4+\tau_5-\tau_6,\quad\quad
+\partial\tau = \mu_2-\mu_2+\mu_3-\mu_4.\]
+\end{itemize}
+\begin{center}
+	\includegraphics[width=.8\textwidth]{cells}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Real-space construction}
+\begin{itemize}
+\item Attach a Chern insulator to each 2-cell.
+\item An assembly is a 2-chain in $C_2(X)$.
+\item Example: $\hat\omega = 2\tau_1 + 3\tau_2-2\tau_4:$
+$\hat\omega(\tau_1)=2,\hat\omega(\tau_2)=3,\hat\omega(\tau_4)=-2$.
+\item $C_2(X)$ is a $\mathbb Z$-module.
+\end{itemize}
+\begin{center}
+	\includegraphics[width=4cm]{decor}
+\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Symmetric conditions}
+	\begin{columns}
+		\column{.4\textwidth}
+		\begin{tikzpicture}
+			\draw (0, 0)--(2, 0)--(2, 2)--(0, 2)--(0, 0);
+			\draw (2, 4)--(4, 4)--(4, 6)--(2, 6)--(2, 4);
+			\draw [thick,->] (1, 1) node [below] {$\hat\omega(\sigma$)} --
+			(3, 5) node [above] {$\hat\omega(\sigma^\prime)$};
+			\node at (2, 3) [right] {$g$};
+		\end{tikzpicture}
+		\column{.6\textwidth}
+		\begin{itemize}
+			\item $X$ is a $G$-complex: the decomposition $X$ has a compatible group action.\\
+			\emph{G maps each cell to another cell.}
+			\item If $g:\sigma\rightarrow\sigma^\prime$, then the Chern-insulator decoration should be identical.
+			\item 
+			\[\hat\omega(\sigma') = \hat\omega(\sigma).\]
+		\end{itemize}
+	\end{columns}
+\end{frame}
+
 \section{Simplified version: 1st and 2nd pages.}
 \begin{frame}
 	\frametitle{Topological crystalline states are made of building blocks}
