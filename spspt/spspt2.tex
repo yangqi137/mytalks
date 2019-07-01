@@ -235,34 +235,6 @@
 
 
 \begin{frame}
-  \frametitle{SPT states of onsite symmetry}
-  \begin{itemize}
-    \item Classification is given by group cohomology
-    \[\Phi^d(G) = H^{d+1}[G, \uone_T].\]
-		\item Wave functions are symmetric cochains:
-		\[\omega(gg_0,\ldots gg_{d+1})=\rho_T(g)\omega(g_0,\ldots g_{d+1}),\quad
-		\omega\in\Psi^d(G) = C^{d+1}[G, \uone_T].\]
-		\item Bulk-boundary correspondence:
-		\[d\omega = \nu,\quad d:C^d[G, \uone_T]\rightarrow C^{d+1}[G, \uone_T]\]
-		\[d\omega(g_0,\ldots,g_{d+1})
-		=\sum_i(-1)^i\omega(g_0,\ldots,\hat g_i,\ldots,g_{d+1}).\]
-\begin{center}
-	\begin{tikzpicture}
-	\fill (.5, .5)--(4.5, 0.5)--(5, 1)--(5, 2)--(1, 2)--(0.5, 1.5)--(0.5, 0.5) [mbg!15];
-	\node at (2.75, 1.5) {$\nu$};
-	\fill (0.5, 0.5)--(4.5, 0.5)--(5, 1)--(1, 1)--(0.5, 0.5) [mbg];
-	\node  [text=white] at (2.75, 0.75) {$\omega$};
-	\draw (1, 1)--(1, 2) [black!40];
-	\draw (0.5, 0.5)--(0.5, 1.5) [black!40];
-	\draw (5, 1)--(5, 2) [black!40];
-	\end{tikzpicture}
-\end{center}
-  \item A cohomology group:
-\[H^{d+1}[G,\uone_T]=\{d\omega=0\}/\{\omega\simeq\omega+d\mu\}=\frac{\ker d}{\img d}.\]
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
 \frametitle{Space-group SPT}
 \begin{itemize}
 \item We consider $G\supset SG$.
@@ -300,7 +272,7 @@
 \end{center}
 \end{frame}
 
-\section{Homology group and TCI}
+\section{Free fermion: Homology group and TCI}
 
 \begin{frame}
 \frametitle{Free-fermion A class}
@@ -361,11 +333,161 @@ $\hat\omega(\tau_1)=2,\hat\omega(\tau_2)=3,\hat\omega(\tau_4)=-2$.
 			\item If $g:\sigma\rightarrow\sigma^\prime$, then the Chern-insulator decoration should be identical.
 			\item 
 			\[\hat\omega(\sigma') = \hat\omega(\sigma).\]
+			\item $\hat\omega$ can be viewed as a decoration on the quotient space $X'=X/G$:
+$\hat\omega\in C_2(X/G)$.
 		\end{itemize}
 	\end{columns}
 \end{frame}
 
-\section{Simplified version: 1st and 2nd pages.}
+\begin{frame}
+	\frametitle{No-Open-Edge Conditions}
+	\begin{columns}
+		\column{.58\textwidth}
+		\begin{itemize}
+			\item<1-> Chern insulators have chiral edge states.
+			\item<2-> Boundary anomaly must cancel on 1-cells.
+			\item<3-> Edge anomaly on $\tau$.
+      \item<4-> Anomaly = boundary.
+      \[c = \partial a.\]
+		\end{itemize}
+		\column{.42\textwidth}
+		\begin{tikzpicture}
+			\draw (0, 1)--(-1, 1)--(-2, 0)--(2, 0)--(3, 1)--(1, 1);
+			\draw [thick] (0, 0)--(1, 1);
+			\draw<1-2> [string] (.2, .1)--(1, .9);
+			\draw<1> [string] (1, .9)--(2.8, .9);
+			\draw<1> [string] (2.8, .9)--(2, .1);
+			\draw<1> [string] (2, .1)--(.2, .1);
+			\draw<2> [string] (.1, .2)--(.9, 1);
+			\draw<3-> [->] (1.3, .5)--(.6, .5);
+			\draw<3-> [->] (.5, 1.3)--(.5, .6);
+			\draw<3-> [->] (.5, -.3)--(.5, .4);
+			\draw<3-> [->] (-.3, .5)--(.4, .5);
+			\node<1-2> at (.5, .5) [above] {$\tau$};
+			\node<3-> at (.7, .7) [above] {$\tau$};
+			\draw (1, 1)--(1, 3)--(0, 2)--(0, -2)--(0, -2)--(1, -1)--(1, 0);
+			\node at (.5, 1.5) {$\sigma_1$};
+			\node at (1.5, .5) {$\sigma_2$};
+			\node at (.5, -0.5) {$\sigma_3$};
+			\node at (-0.5, .5) {$\sigma_4$};
+		\end{tikzpicture}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Bubbling Equivalence}
+\begin{columns}
+\column{.6\textwidth}
+\begin{itemize}
+\item A trivial decoration created by a bubble.
+\item Bubbling process:
+\[a = \partial b \simeq0.\]
+\end{itemize}
+\column{.4\textwidth}
+\begin{animateinline}{5}
+        \multiframe{12}{Ra=.8+.1}{
+\begin{tikzpicture}
+	\draw (-2,-2)--(-2,2)--(2,2)--(2,-2)--(-2,-2);
+	%\fill [green!30] (-\Ra,-\Ra)--(-\Ra,\Ra)--(\Ra,\Ra)--(\Ra,-\Ra)--(-\Ra,-\Ra);
+\draw [blue,thick] (-\Ra,-\Ra)--(-\Ra,\Ra)--(\Ra,\Ra)--(\Ra,-\Ra)--(-\Ra,-\Ra);
+%\node at (0, 0) {$d\nu$};
+\node at (\Ra, 0) [left] {$\nu$};
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Homology group}
+\begin{itemize}
+  \item No-open-edge condition: chains must close
+  \[\partial \hat\omega=0.\]
+  \item Bubbling equivalence: boundary chains are trivial
+  \[\partial\hat\mu \simeq 0.\]
+  \item A chain complex:
+  \[C_3(X/G)\xrightarrow{\partial_3}C_2(X/G)\xrightarrow{\partial_2}C_1(X/G)
+  \xrightarrow{\partial_1}C_0(X/G).\]
+  \note{This is not a long exact sequence.}
+  \item Homology group:
+  \[H_2(X/G) = \frac{\ker\partial_2}{\img\partial_3}.\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: Torus}
+\begin{itemize}
+\item $G=\mathbb Z^3$, $X'=T^3=\mathbb R^3/G$.
+\item Three cycles: $\tau_1=\tau_2$, $\tau_3=\tau_4$, $\tau_5=\tau_6$.
+\[\partial\tau_1=\mu_1-\mu_2+\mu_3-\mu_4=0.\]
+\item No nontrivial boundary:
+$\partial\sigma=\tau_1-\tau_2+\tau_3-\tau_4+\tau_5-\tau_6=0$.
+\item $H_2(T^3)=3\mathbb Z$. (Some write it as $\mathbb Z^3$.)
+\item Three root states: stacking Chern insulators in $x$, $y$ and $z$ directions.
+\end{itemize}
+\begin{center}
+\includegraphics[width=.55\textwidth]{cells}
+\hspace{2em}
+\begin{tikzpicture}[scale=.85]
+\fill [blue!40,opacity=.5] (0,0)--(1,1)--(1,3)--(0,2)--(0,0);
+\draw (0,0)--(0,2)--(1,3);
+\fill [blue!40,opacity=.5] (.5,0)--(1.5,1)--(1.5,3)--(0.5,2)--(0.5,0);
+\draw (.5,0)--(.5,2)--(1.5,3);
+\fill [blue!40,opacity=.5] (1,0)--(2,1)--(2,3)--(1,2)--(1,0);
+\draw (1,0)--(1,2)--(2,3);
+\fill [blue!40,opacity=.5] (-.5,0)--(.5,1)--(.5,3)--(-0.5,2)--(-0.5,0);
+\draw (-.5,0)--(-.5,2)--(.5,3);
+\fill [blue!40,opacity=.5] (-1,0)--(0,1)--(0,3)--(-1,2)--(-1,0);
+\draw (-1,0)--(-1,2)--(0,3);
+\draw (-1.5,0)--(1.5,0)--(1.5,2)--(-1.5,2)--(-1.5,0);
+\draw (1.5,0)--(2.5,1)--(2.5,3)--(1.5,2);
+\draw (2.5,3)--(-.5,3)--(-1.5,2);
+\end{tikzpicture}
+
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Summary}
+\begin{itemize}
+\item Topological crystalline states are given by homology groups:
+\begin{itemize}
+\item No-open-edge condition
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Bosonic SPT: 1st and 2nd pages.}
+
+\begin{frame}
+  \frametitle{Building blocks: bSPT states of onsite symmetry}
+  \begin{itemize}
+    \item Classification is given by group cohomology
+    \[\Phi^d(G) = H^{d+1}[G, \uone_T].\]
+		\item Wave functions are symmetric cochains:
+		\[\omega(gg_0,\ldots gg_{d+1})=\rho_T(g)\omega(g_0,\ldots g_{d+1}),\quad
+		\omega\in\Psi^d(G) = C^{d+1}[G, \uone_T].\]
+		\item Bulk-boundary correspondence:
+		\[d\omega = \nu,\quad d:C^d[G, \uone_T]\rightarrow C^{d+1}[G, \uone_T]\]
+		\[d\omega(g_0,\ldots,g_{d+1})
+		=\sum_i(-1)^i\omega(g_0,\ldots,\hat g_i,\ldots,g_{d+1}).\]
+\begin{center}
+	\begin{tikzpicture}
+	\fill (.5, .5)--(4.5, 0.5)--(5, 1)--(5, 2)--(1, 2)--(0.5, 1.5)--(0.5, 0.5) [mbg!15];
+	\node at (2.75, 1.5) {$\nu$};
+	\fill (0.5, 0.5)--(4.5, 0.5)--(5, 1)--(1, 1)--(0.5, 0.5) [mbg];
+	\node  [text=white] at (2.75, 0.75) {$\omega$};
+	\draw (1, 1)--(1, 2) [black!40];
+	\draw (0.5, 0.5)--(0.5, 1.5) [black!40];
+	\draw (5, 1)--(5, 2) [black!40];
+	\end{tikzpicture}
+\end{center}
+  \item A cohomology group:
+\[H^{d+1}[G,\uone_T]=\{d\omega=0\}/\{\omega\simeq\omega+d\mu\}=\frac{\ker d}{\img d}.\]
+  \end{itemize}
+\end{frame}
+
+
 \begin{frame}
 	\frametitle{Topological crystalline states are made of building blocks}
 	\begin{columns}
@@ -574,9 +696,23 @@ $\hat\omega(\tau_1)=2,\hat\omega(\tau_2)=3,\hat\omega(\tau_4)=-2$.
 %	\end{columns}
 %\end{frame}
 
+\begin{frame}
+\frametitle{Some simplifications}
+\begin{itemize}
+\item If $G = SG\times G_0$.
+\item If we ignore $\Omega_0$: not treating the atomic insulators as nontrivial SPTs.
+\item Only need to compute the second page:
+\begin{enumerate}
+\item $E^2_{2,2}$: assign 2d SPTs to 2-cells, and check-anomaly vanishing on 1-cells. Coboundaries are assigning 2d SPTs to 3-cells.
+\item $E^1_{1,2}$: assign 1d SPTs to 1-cells, and check-anomaly vanishing on 0-cells. Coboundaries are assigning 1d SPTs to 2-cells.
+\end{enumerate}
+\item Trivial group extension: $E^2_{2,2}\oplus E^1_{1,2}$.
+\end{itemize}
+\end{frame}
 
 
-\section{Full version: higher pages}
+
+\section{Bosonic SPT: higher pages}
 
 \begin{frame}
 \frametitle{General construction: a ``perturbative'' approach}
@@ -978,20 +1114,6 @@ We compute in the following sequence:
 \end{frame}
 
 \begin{frame}
-\frametitle{Some simplifications}
-\begin{itemize}
-\item If $G = SG\times G_0$.
-\item If we ignore $\Omega_0$: not treating the atomic insulators as nontrivial SPTs.
-\item Only need to check things to the first order:
-\begin{enumerate}
-\item $\Omega_{2+}$: assign 2d SPTs to 2-cells, and check-anomaly vanishing on 1-cells. Coboundaries are assigning 2d SPTs to 3-cells.
-\item $\Omega_{1+}$: assign 1d SPTs to 1-cells, and check-anomaly vanishing on 0-cells. Coboundaries are assigning 1d SPTs to 2-cells.
-\end{enumerate}
-\item Trivial group extension: $\Omega_{2+}\oplus\Omega_{1+}$.
-\end{itemize}
-\end{frame}
-
-\begin{frame}
 \frametitle{An example of a nontrivial building block}
 Consider $G=SG\times\mathbb Z_2$, $SG=P4_22_12$ (\#94 space group).
 \begin{center}
@@ -1031,6 +1153,8 @@ Each colored 2-cell is decorated with a Levin-Gu or CZX state protected by the o
 \end{tikzpicture}
 \end{center}
 \end{frame}
+
+\section{Application: SPT-enforcing LSM Theorems}
 
 %\section{Mathematical details}
 \section{Conclusion}
