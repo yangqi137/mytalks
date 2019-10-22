@@ -126,7 +126,8 @@
 %{Fudan University, Oct 13 2015}
 %\date{Hong Kong Forum of Physics, HKU, Jan 7-9, 2019.}
 %\date{QuIST V, Kunming, Aug. 2nd, 2019.}
-\date{Perimeter Institute, Sept. 3rd, 2019.}
+%\date{Perimeter Institute, Sept. 3rd, 2019.}
+\date{Beihang University, Oct. 22nd, 2019.}
 % - Either use conference name or its abbreviation.
 % - Not really informative to the audience, more for people (including
 %   yourself) who are reading the slides online
@@ -324,11 +325,55 @@
 			\item On a $p$-cell $\sigma$, the SPT state is protected only by $G_\sigma$.
 			\[\hat\omega(\sigma)\in \Phi^p(G_\sigma) = H^{p+1}[G_\sigma,\uone_T].\]
 			\item $G_\sigma$ acts as onsite symmetries.
-			\item Decorate 3d SPT on 3-cells; 2d SPT on 2-cells; 1d SPT on 1-cells; 0d SPT on 0-cells;
-			\item $p$-block states: $E^p_{p,\infty}$.
-			\[\text{TCSs} = ``\bigoplus_p\text{''} E^p_{p,\infty}.\]
 		\end{itemize}
 	\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Building blocks in different dimensions}
+\begin{itemize}
+\item Decorate 3d SPT on 3-cells; 2d SPT on 2-cells; 1d SPT on 1-cells; 0d SPT on 0-cells;
+			\item $p$-block states: $E^p_{p,\infty}$.
+			\[\text{TCSs} = ``\bigoplus_p\text{''} E^p_{p,\infty}.\]
+    \end{itemize}
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+\fill [blue!50] (0.1,0.1)--(1,0.1)--(1.4,.5)--(1.4,1.4)--(0.5,1.4)--(.1,1)--(0.1,0.1);
+\draw (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
+\draw (1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
+\draw (1.5,1.5)--(0.5,1.5)--(0,1);
+\end{tikzpicture}~~~~
+\begin{tikzpicture} [scale=1.5]
+\fill [blue!50] (0,0)--(1,0)--(1.5,.5)--(1.5,1.5)--(0.5,1.5)--(0,1)--(0,0);
+\draw (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
+\draw (1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
+\draw (1.5,1.5)--(0.5,1.5)--(0,1);
+\draw (0,0)--(.5,.5)--(.5,1.5);
+\draw (.5,.5)--(1.5,.5);
+\end{tikzpicture}~~~~
+\begin{tikzpicture} [scale=1.5]
+\draw [thick,blue] (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
+\draw [thick,blue](1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
+\draw [thick,blue](1.5,1.5)--(0.5,1.5)--(0,1);
+\draw [thick,blue](0,0)--(.5,.5)--(.5,1.5);
+\draw [thick,blue](.5,.5)--(1.5,.5);
+\end{tikzpicture}~~~~
+\begin{tikzpicture} [scale=1.5]
+\draw (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
+\draw (1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
+\draw (1.5,1.5)--(0.5,1.5)--(0,1);
+\draw (0,0)--(.5,.5)--(.5,1.5);
+\draw (.5,.5)--(1.5,.5);
+\filldraw [blue] (0,0) circle (2pt);
+\filldraw [blue] (1,0) circle (2pt);
+\filldraw [blue] (0,1) circle (2pt);
+\filldraw [blue] (1,1) circle (2pt);
+\filldraw [blue] (0.5,0.5) circle (2pt);
+\filldraw [blue] (0.5,1.5) circle (2pt);
+\filldraw [blue] (1.5,0.5) circle (2pt);
+\filldraw [blue] (1.5,1.5) circle (2pt);
+\end{tikzpicture}
+\end{center}
 \end{frame}
 
 \begin{frame}
