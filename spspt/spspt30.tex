@@ -125,7 +125,9 @@
 %\date{2016 Annual Meeting of Fudan CFTPP} % (optional, should be abbreviation of conference name)
 %{Fudan University, Oct 13 2015}
 %\date{Hong Kong Forum of Physics, HKU, Jan 7-9, 2019.}
-\date{QuIST V, Kunming, Aug. 2nd, 2019.}
+%\date{QuIST V, Kunming, Aug. 2nd, 2019.}
+%\date{Perimeter Institute, Sept. 3rd, 2019.}
+\date{Beihang University, Oct. 22nd, 2019.}
 % - Either use conference name or its abbreviation.
 % - Not really informative to the audience, more for people (including
 %   yourself) who are reading the slides online
@@ -245,7 +247,7 @@
 \frametitle{Space-group SPT}
 \begin{itemize}
 \item We consider $G/G_0 = SG$.
-\item Thorngren and Else (2018): the classification is also given by group cohomology
+\item Thorngren and Else (2018): the crystalline equivalence principle
 \[H^{d+1}[G, \uone_{PT}].\]
 \item Dimensional reduction: Liang Fu, Michael Hermele et al.\\
 \emph{Examples: mirror SPT, weak SPT (translation symmetry).}
@@ -288,7 +290,7 @@
 		\item A cell $\sigma$ is maped to one single cell $\sigma^\prime$ under $SG$-action.
 		\item $G_\sigma=\{g\in G|g:\sigma\rightarrow\sigma\}$ acts on $\sigma$ as onsite symmetry.
 	\end{enumerate}
-	A $G$-complex $Y\simeq \mathbb R^d$.
+	A $G$-complex $Y\simeq \mathbb R^d$. Each cell hosts only onsite-symmetry SPTs.
 	\begin{columns}
 		\column{.5\textwidth}
 		\begin{center}
@@ -323,11 +325,55 @@
 			\item On a $p$-cell $\sigma$, the SPT state is protected only by $G_\sigma$.
 			\[\hat\omega(\sigma)\in \Phi^p(G_\sigma) = H^{p+1}[G_\sigma,\uone_T].\]
 			\item $G_\sigma$ acts as onsite symmetries.
-			\item Decorate 3d SPT on 3-cells; 2d SPT on 2-cells; 1d SPT on 1-cells; 0d SPT on 0-cells;
-			\item $p$-block states: $E^p_{p,\infty}$.
-			\[\text{TCSs} = ``\bigoplus_p\text{''} E^p_{p,\infty}.\]
 		\end{itemize}
 	\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Building blocks in different dimensions}
+\begin{itemize}
+\item Decorate 3d SPT on 3-cells; 2d SPT on 2-cells; 1d SPT on 1-cells; 0d SPT on 0-cells;
+			\item $p$-block states: $E^p_{p,\infty}$.
+			\[\text{TCSs} = ``\bigoplus_p\text{''} E^p_{p,\infty}.\]
+    \end{itemize}
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+\fill [blue!50] (0.1,0.1)--(1,0.1)--(1.4,.5)--(1.4,1.4)--(0.5,1.4)--(.1,1)--(0.1,0.1);
+\draw (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
+\draw (1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
+\draw (1.5,1.5)--(0.5,1.5)--(0,1);
+\end{tikzpicture}~~~~
+\begin{tikzpicture} [scale=1.5]
+\fill [blue!50] (0,0)--(1,0)--(1.5,.5)--(1.5,1.5)--(0.5,1.5)--(0,1)--(0,0);
+\draw (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
+\draw (1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
+\draw (1.5,1.5)--(0.5,1.5)--(0,1);
+\draw (0,0)--(.5,.5)--(.5,1.5);
+\draw (.5,.5)--(1.5,.5);
+\end{tikzpicture}~~~~
+\begin{tikzpicture} [scale=1.5]
+\draw [thick,blue] (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
+\draw [thick,blue](1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
+\draw [thick,blue](1.5,1.5)--(0.5,1.5)--(0,1);
+\draw [thick,blue](0,0)--(.5,.5)--(.5,1.5);
+\draw [thick,blue](.5,.5)--(1.5,.5);
+\end{tikzpicture}~~~~
+\begin{tikzpicture} [scale=1.5]
+\draw (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
+\draw (1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
+\draw (1.5,1.5)--(0.5,1.5)--(0,1);
+\draw (0,0)--(.5,.5)--(.5,1.5);
+\draw (.5,.5)--(1.5,.5);
+\filldraw [blue] (0,0) circle (2pt);
+\filldraw [blue] (1,0) circle (2pt);
+\filldraw [blue] (0,1) circle (2pt);
+\filldraw [blue] (1,1) circle (2pt);
+\filldraw [blue] (0.5,0.5) circle (2pt);
+\filldraw [blue] (0.5,1.5) circle (2pt);
+\filldraw [blue] (1.5,0.5) circle (2pt);
+\filldraw [blue] (1.5,1.5) circle (2pt);
+\end{tikzpicture}
+\end{center}
 \end{frame}
 
 \begin{frame}
@@ -461,17 +507,31 @@
 \[d_1\hat\mu = \partial\hat\mu.\]
 \item The first-page bubbling equivalence:
 \[d_1\hat\mu\simeq0.\]
-\item $E^{p+1}_{p,r}$: Bubbling patterns.
+\item $E^{p-1}_{p,r}$: Bubbling patterns.
 \end{itemize}
 \column{.4\textwidth}
 \begin{animateinline}{5}
-        \multiframe{12}{Ra=.8+.1}{
-\begin{tikzpicture}
-	\draw (-2,-2)--(-2,2)--(2,2)--(2,-2)--(-2,-2);
+        \multiframe{12}{Ra=.3+.05}{
+\begin{tikzpicture}[scale=1.5]
+	\draw (0, 0)--(2, 0)--(2, 2)--(0, 2)--(0, 0);
+	\draw [dashed] (1, 2)--(1, 1)--(2, 1);
+	\draw (2, 1)--(3, 1)--(3, 3)--(1, 3)--(1, 2);
+	\draw [dashed] (0, 0)--(1, 1);
+	\draw (2, 0)--(3, 1);
+	\draw (0, 2)--(1, 3);
+	\draw (2, 2)--(3, 3);
+	\fill [blue!30,opacity=.5] (1.5-1.5*\Ra, 1.5-1.5*\Ra)--(1.5+0.5*\Ra, 1.5-1.5*\Ra)
+	--(1.5+1.5*\Ra, 1.5-0.5*\Ra)--(1.5+1.5*\Ra, 1.5+1.5*\Ra)
+	--(1.5-0.5*\Ra, 1.5+1.5*\Ra)--(1.5-1.5*\Ra, 1.5+0.5*\Ra)
+	--(1.5-1.5*\Ra, 1.5-1.5*\Ra);
+	\draw [blue,dashed] (1.5-1.5*\Ra, 1.5+0.5*\Ra)--(1.5+0.5*\Ra, 1.5+0.5*\Ra)--(1.5+1.5*\Ra,1.5+1.5*\Ra);
+	\draw [blue,dashed] (1.5+0.5*\Ra, 1.5-1.5*\Ra)--(1.5+0.5*\Ra, 1.5+0.5*\Ra);
+	\draw [->,thick] (1.5-0.5*\Ra, 1.5-0.5*\Ra)--(1.3-0.5*\Ra, 1.3-0.5*\Ra);
+	\draw [->,thick] (1.5, 1.5+\Ra)--(1.5, 1.78+\Ra);
+	\draw [->,thick] (1.5+\Ra, 1.5)--(1.78+\Ra, 1.5);
 	%\fill [green!30] (-\Ra,-\Ra)--(-\Ra,\Ra)--(\Ra,\Ra)--(\Ra,-\Ra)--(-\Ra,-\Ra);
-\draw [blue,thick] (-\Ra,-\Ra)--(-\Ra,\Ra)--(\Ra,\Ra)--(\Ra,-\Ra)--(-\Ra,-\Ra);
+%\draw [blue,thick] (-\Ra,-\Ra)--(-\Ra,\Ra)--(\Ra,\Ra)--(\Ra,-\Ra)--(-\Ra,-\Ra);
 %\node at (0, 0) {$d\nu$};
-\node at (\Ra, 0) [left] {$\nu$};
 \end{tikzpicture}
 }
 \end{animateinline}
@@ -489,6 +549,31 @@
 \[E^p_{p+1,1}\xrightarrow{d_1}E^p_{p,1}\xrightarrow{d_1}E^p_{p-1,1},\]
 \[E^p_{p,2}=\frac{\ker d^p_{p+1,1}}{\img d^p_{p,1}}.\]
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{An example of a nontrivial building block}
+Consider $G=SG\times\mathbb Z_2$, $SG=P4_22_12$ (\#94 space group).
+\begin{center}
+\includegraphics[height=4cm]{blocks}
+\end{center}
+Each colored 2-cell is decorated with a Levin-Gu or CZX state protected by the onsite $\mathbb Z_2$.
+
+\emph{\small Adapted from Z Song, Y Huang, YQ, C Fang and M Hermele, arXiv:1810.02330.}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Results for all 230 space groups}
+	\begin{columns}
+		\column{.6\textwidth}
+		\includegraphics[height=8cm]{bigtable}
+		\column{.4\textwidth}
+		\begin{itemize}
+			\item Classifications computed for all 230 space groups, paired with selected $G_0$.
+			\item Results computed by a fully automated python code.
+			\item $E^p_{p,\infty}$ listed separately.
+		\end{itemize}
+	\end{columns}
 \end{frame}
 
 
@@ -517,7 +602,7 @@
 
 \section{Full Version: Higher Pages}
 
-\begin{frame}
+\begin{frame}<0>[noframenumbering]
 \frametitle{General construction: a ``perturbative'' approach}
 We can classify building blocks according to the leading dimension:
 \begin{align*}
@@ -571,7 +656,7 @@ E^0_{0,\infty}:\hat\omega_{0+}&= \alert{\hat\omega_0};
 \end{center}
 \end{frame}
 
-\begin{frame}
+\begin{frame}<0>[noframenumbering]
   \frametitle{Bulk-Boundary Relations}
   \begin{itemize}
     \item Knowing the classification $\Phi^d(G)$ is not enough.
@@ -596,7 +681,7 @@ E^0_{0,\infty}:\hat\omega_{0+}&= \alert{\hat\omega_0};
 \end{frame}
 
 \begin{frame}
-\frametitle{No-Open-Edge Conditions}
+\frametitle{High-Order No-Open-Edge Conditions}
 \begin{columns}
 \column{.6\textwidth}
 \begin{itemize}
@@ -653,7 +738,7 @@ Check $\partial\hat\omega_1(\lambda)\simeq0$ for each 0-cell $\lambda$.\\
 
 
 \begin{frame}
-\frametitle{Bubbling Equivalences}
+\frametitle{High-Order Bubbling Equivalences}
 \begin{itemize}
 \item There is a similar algorithm for the bubbling equivalence.
 \item Assign 1d SPT states ($d\hat\mu_1=0$) to 3-cells: $\partial\hat\mu_2$ trivializes $\hat\omega_1$ building blocks.
@@ -718,6 +803,136 @@ We compute in the following sequence:
 \[E^p_{p,1}\supseteq E^p_{p,2}\supseteq E^p_{p,3}\supseteq\cdots=E^p_{p,\infty}.\]
 \end{frame}
 
+\begin{frame}
+\frametitle{First Page}
+\begin{center}
+\begin{tikzpicture}
+\draw (0,0)--(4,0)--(4,2)--(0,2)--(0,0);
+\node at (2,1) {$\hat\omega(\sigma)$};
+\end{tikzpicture}
+\end{center}
+\begin{itemize}
+\item The first page concerns only the building blocks.
+\item $d\hat\omega(\sigma)=0$.
+\item $d\hat\mu(\sigma)\sim0$.
+\item Define $d_0=d$.
+\end{itemize}
+\[E^p_{p,1}=\frac{\ker d_0}{\img d_0}
+=\bigoplus_{\sigma\in Y_p/G}H^p(G_\sigma, U(1)_T).\]
+\end{frame}
+
+\begin{frame}
+\frametitle{Second Page}
+\begin{center}
+		\begin{tikzpicture}[scale=.6]
+			\draw (0, 1)--(-1, 1)--(-2, 0)--(2, 0)--(3, 1)--(1, 1);
+			\draw [thick] (0, 0)--(1, 1);
+			\node at (.5, .5) [above] {$\tau$};
+			\draw (1, 1)--(1, 3)--(0, 2)--(0, -2)--(0, -2)--(1, -1)--(1, 0);
+			\node at (.5, 1.5) {$\sigma_1$};
+			\node at (1.5, .5) {$\sigma_2$};
+			\node at (.5, -0.5) {$\sigma_3$};
+			\node at (-0.5, .5) {$\sigma_4$};
+		\end{tikzpicture}
+~~~~
+\begin{animateinline}{5}
+        \multiframe{12}{Ra=.4+.05}{
+\begin{tikzpicture}[scale=.6]
+	\draw (-2,-2)--(-2,2)--(2,2)--(2,-2)--(-2,-2);
+   \draw (-2,0)--(2,0);
+   \draw (0,-2)--(0,2);
+	%\fill [green!30] (-\Ra,-\Ra)--(-\Ra,\Ra)--(\Ra,\Ra)--(\Ra,-\Ra)--(-\Ra,-\Ra);
+\draw [blue,thick] (-\Ra+1,-\Ra+1)--(-\Ra+1,\Ra+1)--(\Ra+1,\Ra+1)--(\Ra+1,-\Ra+1)--(-\Ra+1,-\Ra+1);
+\draw [blue,thick] (-\Ra+1,-\Ra-1)--(-\Ra+1,\Ra-1)--(\Ra+1,\Ra-1)--(\Ra+1,-\Ra-1)--(-\Ra+1,-\Ra-1);
+\draw [blue,thick] (-\Ra-1,-\Ra+1)--(-\Ra-1,\Ra+1)--(\Ra-1,\Ra+1)--(\Ra-1,-\Ra+1)--(-\Ra-1,-\Ra+1);
+\draw [blue,thick] (-\Ra-1,-\Ra-1)--(-\Ra-1,\Ra-1)--(\Ra-1,\Ra-1)--(\Ra-1,-\Ra-1)--(-\Ra-1,-\Ra-1);
+%\node at (0, 0) {$d\nu$};
+%\node at (\Ra, 0) [left] {$\nu$};
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{center}
+\begin{itemize}
+\item No-open-edge condition: $\partial\hat\omega_2\sim0$.
+\item Bubbling equivalence: $\hat\omega_2\rightarrow\hat\omega_2+\partial\hat\mu_3$.
+\item Define $d_1=\partial:E^q_{p,1}\rightarrow E^q_{p-1,1}$.
+\end{itemize}
+\[E^p_{p,2}=\frac{\ker d_1}{\img d_1}.\]
+\end{frame}
+
+\begin{frame}
+\frametitle{Third Page}
+\begin{center}
+\begin{tikzpicture} [scale=1.5]
+\fill [blue!50] (0,0)--(1,0)--(1.5,.5)--(1.5,1.5)--(0.5,1.5)--(0,1)--(0,0);
+\draw [thick,black!50!green] (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
+\draw [thick,thick,black!50!green] (1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
+\draw [thick,thick,black!50!green] (1.5,1.5)--(0.5,1.5)--(0,1);
+\draw [thick,thick,black!50!green] (0,0)--(.5,.5)--(.5,1.5);
+\draw [thick,thick,black!50!green](.5,.5)--(1.5,.5);
+\fill [red] (0,0) circle (2pt);
+\fill [red] (1,0) circle (2pt);
+\fill [red] (0,1) circle (2pt);
+\fill [red] (1,1) circle (2pt);
+\fill [red] (0.5,0.5) circle (2pt);
+\fill [red] (1.5,0.5) circle (2pt);
+\fill [red] (0.5,1.5) circle (2pt);
+\fill [red] (1.5,1.5) circle (2pt);
+\end{tikzpicture}
+~~~~
+\begin{animateinline}{5}
+        \multiframe{12}{Ra=.4+.05}{
+\begin{tikzpicture}[scale=.6]
+	\draw (-2,-2)--(-2,2)--(2,2)--(2,-2)--(-2,-2);
+   \draw (-2,0)--(2,0);
+   \draw (0,-2)--(0,2);
+	%\fill [green!30] (-\Ra,-\Ra)--(-\Ra,\Ra)--(\Ra,\Ra)--(\Ra,-\Ra)--(-\Ra,-\Ra);
+\draw [blue,thick] (-\Ra+1,-\Ra+1)--(-\Ra+1,\Ra+1)--(\Ra+1,\Ra+1)--(\Ra+1,-\Ra+1)--(-\Ra+1,-\Ra+1);
+\draw [blue,thick] (-\Ra+1,-\Ra-1)--(-\Ra+1,\Ra-1)--(\Ra+1,\Ra-1)--(\Ra+1,-\Ra-1)--(-\Ra+1,-\Ra-1);
+\draw [blue,thick] (-\Ra-1,-\Ra+1)--(-\Ra-1,\Ra+1)--(\Ra-1,\Ra+1)--(\Ra-1,-\Ra+1)--(-\Ra-1,-\Ra+1);
+\draw [blue,thick] (-\Ra-1,-\Ra-1)--(-\Ra-1,\Ra-1)--(\Ra-1,\Ra-1)--(\Ra-1,-\Ra-1)--(-\Ra-1,-\Ra-1);
+%\node at (0, 0) {$d\nu$};
+%\node at (\Ra, 0) [left] {$\nu$};
+\end{tikzpicture}
+}
+\end{animateinline}
+~~~~
+\begin{animateinline}{5}
+        \multiframe{8}{Ra=.8+-.1}{
+\begin{tikzpicture}[scale=.6]
+\draw (-2,0)--(2,0);
+\draw (0, -2)--(0, 2);
+\draw [blue,thick,double] (-\Ra, 0)--(\Ra,0);
+\draw [blue,thick,double] (2-\Ra,0)--(2,0);
+\draw [blue,thick,double] (-2+\Ra,0)--(-2,0);
+\draw [blue,thick,double] (0, -\Ra)--(0, \Ra);
+\draw [blue,thick,double] (0, 2-\Ra)--(0, 2);
+\draw [blue,thick,double] (0, -2+\Ra)--(0, -2);
+\fill [red] (-\Ra,0) circle (2pt);
+\fill [red] (\Ra,0) circle (2pt);
+\fill [red] (0,-\Ra) circle (2pt);
+\fill [red] (0,\Ra) circle (2pt);
+\fill [red] (2-\Ra,0) circle (2pt);
+\fill [red] (-2+\Ra,0) circle (2pt);
+\fill [red] (0,2-\Ra) circle (2pt);
+\fill [red] (0,-2+\Ra) circle (2pt);
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{center}
+\begin{itemize}
+\item Define $d_2:E^q_{p,2}\rightarrow E^{q-1}_{p-2,2}$:
+\begin{enumerate}
+\item Start from $\hat\omega_p$.
+\item Find the connectors $\hat\omega_{p-1}$, s.t. $d\hat\omega_{p-1}=\partial\hat\omega_p$.
+\item Compute $d_2\hat\omega_p=\partial\hat\omega_{p-1}$.
+\end{enumerate}
+\item No-open-edge condition: $d_2\hat\omega_p\sim0$.
+\item Bubbling equivalence: $\hat\omega_p\rightarrow\hat\omega_p+d_2\hat\omega_{p+2}$.
+\end{itemize}
+\[E^p_{p,3}=\frac{\ker d_2}{\img d_2}.\]
+\end{frame}
+
 
 \begin{frame}
 \frametitle{Final step: the group extension problem}
@@ -747,31 +962,6 @@ We compute in the following sequence:
 \end{enumerate}
 \item Trivial group extension: $E^2_{2,2} \oplus E^1_{1,2}$.
 \end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{An example of a nontrivial building block}
-Consider $G=SG\times\mathbb Z_2$, $SG=P4_22_12$ (\#94 space group).
-\begin{center}
-\includegraphics[height=4cm]{blocks}
-\end{center}
-Each colored 2-cell is decorated with a Levin-Gu or CZX state protected by the onsite $\mathbb Z_2$.
-
-\emph{\small Adapted from Z Song, Y Huang, YQ, C Fang and M Hermele, arXiv:1810.02330.}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Results for all 230 space groups}
-	\begin{columns}
-		\column{.6\textwidth}
-		\includegraphics[height=8cm]{bigtable}
-		\column{.4\textwidth}
-		\begin{itemize}
-			\item Classifications computed for all 230 space groups, paired with selected $G_0$.
-			\item Results computed by a fully automated python code.
-			\item $E^p_{p,\infty}$ listed separately.
-		\end{itemize}
-	\end{columns}
 \end{frame}
 
 \begin{frame}
