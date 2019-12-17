@@ -1,4 +1,4 @@
-\documentclass[xcolor=table, 12pt, aspectratio=43,ignorenonframetext]{beamer}
+\documentclass[xcolor=table, aspectratio=43,ignorenonframetext]{beamer}
 
 %\documentclass{article}
 %\usepackage{beamerarticle}
@@ -21,6 +21,7 @@
 \newcolumntype{x}{>{\centering\arraybackslash}X}
 \renewcommand{\arraystretch}{1.5}
 \DeclareMathOperator{\img}{img}
+\DeclareMathOperator{\hhom}{Hom}
 \newcommand{\uone}{\text U(1)}
 
 \usepackage{tikz}
@@ -208,7 +209,7 @@ Department of Physics, Fudan University.
 \begin{itemize}
 \item Consider an onsite symmetry group $G$, $|G|<\infty$.
 \item A space-time $\Delta$-lattice: $d+1$-simplexes (triangles, tetrahedra, etc).
-\item Branching structure: an ordering $1>2>\cdots>N$; an orientation $i\rightarrow j$ if $i<j$. 
+\item Branching structure: an ordering $1>2>\cdots>N$; an orientation $i\rightarrow j$ if $i<j$.
 \item Hilbert space: $\otimes_i |g_i\rangle$, $g_i\in G$.
 \item Symmetry transformation:
 $g|g_i\rangle = |gg_i\rangle$.
@@ -220,7 +221,7 @@ $g|g_i\rangle = |gg_i\rangle$.
 
 \begin{frame}
 \frametitle{Partition function}
-\[Z = \sum_{\{g_i\}}e^{iS},\quad 
+\[Z = \sum_{\{g_i\}}e^{iS},\quad
 S = \sum_{\Delta ijk}2\pi s_{ijk}\omega(g_i,g_j,g_k).\]
 
 \begin{center}
@@ -235,15 +236,15 @@ Function $\omega:G\times G\times\cdots\times G\rightarrow \mathbb R/\mathbb Z$.
 
 \begin{itemize}
 \item $G$ action:
-$\omega(g_1, \ldots, g_{d+1})\rightarrow \omega(gg_1, \ldots, gg_{d+1})$.
-\item If $g$ is unitary: $S$ should be invariant. $\omega(g_1, \ldots, g_{d+1})= \omega(gg_1, \ldots, gg_{d+1})$.
+$\omega(g_0, \ldots, g_{d+1})\rightarrow \omega(gg_1, \ldots, gg_{d+1})$.
+\item If $g$ is unitary: $S$ should be invariant. $\omega(g_0, \ldots, g_{d+1})= \omega(gg_0, \ldots, gg_{d+1})$.
 
-\item $g$ is antiunitary: $S\rightarrow -S$. $\omega(g_1, \ldots, g_{d+1})= -\omega(gg_1, \ldots, gg_{d+1})$.
+\item $g$ is antiunitary: $S\rightarrow -S$. $\omega(g_0, \ldots, g_{d+1})= -\omega(gg_0, \ldots, gg_{d+1})$.
 \item $s(g)=\pm1$ if g is unitary/antiunitary.
 \item $G$-action on $\mathbb R/\mathbb Z$:
 $g\cdot x=s(g)x$.
 \item Homogeneous condition:
-\[g\cdot\omega(g_1, \ldots, g_{d+1})= \omega(gg_1, \ldots, gg_{d+1})\]
+\[g\cdot\omega(g_0, \ldots, g_{d+1})= \omega(gg_0, \ldots, gg_{d+1})\]
 \end{itemize}
 
 \begin{center}
@@ -259,18 +260,69 @@ $g\cdot x=s(g)x$.
 \item Invariant under scale transformation.
 \item Discrete version of scale transformation: re-triangularization.
 \end{itemize}
+
+\begin{center}
+	\includegraphics[height=4cm]{RGflow}
+	\hspace{1cm}
+	\includegraphics[height=4cm]{retri1}
+\end{center}
 \end{frame}
 
 \begin{frame}
 \frametitle{Cocycle conditions}
+\begin{itemize}
+	\item 3-1 move:
+	$\omega(g_0,g_1,g_2) = \omega(g_0,g_1,g_3)
+	-\omega(g_0,g_2,g_3) + \omega(g_1,g_2,g_3)$.
+	\item 2-2 move:
+	$\omega(g_0,g_1,g_2)-\omega(g_1, g_2,g_3)
+	=\omega(g_0, g_1, g_3) - \omega(g_0, g_2, g_3)$.
+	\item Cocycle equation:
+	$d\omega(g_0,g_1,g_2,g_3)=\omega(g_1,g_2,g_3)
+	-\omega(g_0,g_2,g_3)+\omega(g_0,g_1,g_3)-\omega(g_0,g_1,g_2)=0$.
+\end{itemize}
+\begin{center}
+	\includegraphics[height=4cm]{moves}
+\end{center}
 \end{frame}
 
 \begin{frame}
 \frametitle{Gauge transformation: coboundary equivalence}
+\begin{itemize}
+	\item A coboundary $\omega(012)=d\mu(012)=\mu(12)-\mu(02)+\mu(01)$.
+	\item On a \alert{closed} manifold:
+	\item $\omega$ and $\omega + d\mu$ gives the same partition function.
+	\item $\omega\sim\omega + d\mu$.
+\end{itemize}
+\begin{center}
+\includegraphics[height=4cm]{tri-orient}
+\end{center}
 \end{frame}
 
 \begin{frame}
 \frametitle{Formal definition: group cohomology}
+\begin{itemize}
+	\item $n$-cochain $\omega: G^{\times n+1}\rightarrow \text{U}(1)$, satisfying homogeneous condition
+	\[g\cdot\omega(g_0,\ldots,g_n) = \omega(gg_0,\ldots,gg_n).\]
+	We denote the space of $n$-cochains by $C^n[G,\text U(1)]$.
+	\item Define a coboundary operation $d^n:C^n[G,\text U(1)]\rightarrow C^{n+1}[G,\text U(1)]$
+	\[d\omega(g_0,\ldots,g_{n+1})=\sum_{i=0}^n(-1)^n\omega(g_0,\ldots,\hat g_i,\ldots,g_n).\]
+	\item This forms a cochain complex:
+	\[C^0\xrightarrow{d^0}C^1\rightarrow\cdots\rightarrow C^{n-1}\xrightarrow{d^{n-1}}C^n\xrightarrow{d^n}C^{n+1}\rightarrow\cdots\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Formal definition: group cohomology}
+	\begin{itemize}
+		\item The cochain complex:
+		\[C^0\xrightarrow{d^0}C^1\rightarrow\cdots\rightarrow C^{n-1}\xrightarrow{d^{n-1}}C^n\xrightarrow{d^n}C^{n+1}\rightarrow\cdots\]
+		satisfying $d^2=0$ ($d^n\circ d^{n-1}=0$)
+		\item We can define cohomology groups:
+		\[H^n[G,\text U(1)] = \frac{Z^n}{B^n} = \frac{\ker d^n}{\img d^{n-1}}.\]
+		\item $(d+1)$-dimensional fixed-point partition functions are given by
+		\[H^{d+1}[G,\text U(1)].\]
+	\end{itemize}
 \end{frame}
 
 \section{Detecting an SPT state}
@@ -288,34 +340,87 @@ $g\cdot x=s(g)x$.
 	\end{center}
 \end{frame}
 
-\section{Partition function and Group cohomology}
-
 \begin{frame}
 	\frametitle{Partition function of SPT state}
 	\begin{itemize}
 		\item Considier a finite, unitary symmetry group $G$.
-		\item Use a cohomology class
-		\[\alpha \in H^{d+1}[G, \uone].\]
-		\item For a $(d+1)$-dimensional space-time manifold $M$,
+		\item Take a $(d+1)$-dimensional space-time manifold $M$,
 		\item And $\gamma:\pi_1(M)\rightarrow G$,
-		\[S_{\text{top}} = \langle \gamma^\ast\alpha,[M]\rangle.\]
+		\item An SPT phase: a partition function $Z(M,\gamma)$.\\
+		\emph{$M$ and $\gamma$ forms a $G$-bundle}.
+	\end{itemize}
+	\begin{center}
+		\includegraphics[height=3cm]{manifold}
+	\end{center}
+	{\small Dijkgraaf and Witten, Comm. Math. Phys. \textbf{129} 393 (1990).}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Universal bundle}
+	\begin{itemize}
+		\item Universal bundle: $p: EG \rightarrow BG$.
+		\item Classifying space: $BG$ satisfying\\
+		$\pi_1(BG) = G$, $\pi_2(BG)=0$, $\pi_3(BG)=0$, ...
+		\item $\gamma:\pi_1(M)\rightarrow G=\pi_1(BG)$ can be extended to $\gamma:M\rightarrow BG$.
 	\end{itemize}
 \end{frame}
 
-\section{Standard resolution}
+\begin{frame}
+	\frametitle{Cohomology groups of $BG$}
+	\begin{itemize}
+		\item Realize $BG$ as a CW-complex.
+		\item A chain complex
+		\[C_n(BG)\xrightarrow{\partial_n}
+		C_{n-1}(BG)\rightarrow\cdots\rightarrow
+		C_1(BG)\xrightarrow{\partial_1}
+		C_0(BG)\xrightarrow{\epsilon}\mathbb Z\rightarrow0.\]
+		\item $\partial^2=0$
+		\item Define cochain space $C^n=\hhom[C_n,\text U(1)]$, $d = \partial^\ast$.
+		\item A cochain complex
+		\[C^0\xrightarrow{d^0}C^1\rightarrow\cdots\rightarrow C^{n-1}\xrightarrow{d^{n-1}}C^n\xrightarrow{d^n}C^{n+1}\rightarrow\cdots\]
+		satisfying $d^2=0$ ($d^n\circ d^{n-1}=0$)
+		\item We can define cohomology groups:
+		\[H^n[BG,\text U(1)] = \frac{Z^n}{B^n} = \frac{\ker d^n}{\img d^{n-1}}.\]
+	\end{itemize}
+\end{frame}
 
 \begin{frame}
-	\frametitle{Homogeneous cocycle}
+	\frametitle{Partition function on a $G$-bundle}
 	\begin{itemize}
-		\item A homogeneous $k$-cocycle:
-		\[\omega(g_0,\ldots,g_k)\in \uone.\]
-		\item Coboundary:
-		\[d\omega(g_0,\ldots,g_{k+1}) = \sum_{i=0}^{k+1}(-1)^i
-		\omega(g_0,\ldots,\hat g_i,\ldots,g_{k+1}).\]
-		\item Symmetry condition:
-		\[\omega(gg_0,\ldots,gg_k)=\omega(g_0,\ldots,g_k)\]
-		\item Lattice models on a $\Delta$-complex.
+		\item Given space-time orientable manifold $M$ and $\gamma:M\rightarrow BG$.
+		\item Take a cochain $\alpha$
+		\item Pullback map: $\gamma^\ast\alpha$ is a cochain on $M$.
+		\[\langle \gamma^\ast\alpha, x\rangle = \langle \alpha,\gamma(x)\rangle.\]
+		\item We can construct $Z$:
+		\[Z = \langle\gamma^\ast\alpha, [M]\rangle.\]
+		$[M]$ is the fundamental class of $M$.
 	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Comparing construction and detection}
+	\begin{itemize}
+		\item Claim:
+		\[H^n[G, \uone] = H^n[BG, \uone] = H^n_G[EG, \uone].\]
+		\item Homotopy type of $BG$ is determined by $G$. $H^n[G, \uone]$ are invariants of $G$.
+		\item $d$-dimensional bosonic SPT phases are classified by
+		$H^{d+1}[G, \uone]$.
+		\item Lie-group symmetries?
+		\item Beyond-group-cohomology phases?
+	\end{itemize}
+\end{frame}
+
+\section{Example: computing group cohomology}
+
+\begin{frame}[fragile]
+	\frametitle{GAP software and HAP package}
+	\begin{itemize}
+		\item Cohomology groups of discrete groups can be computed using the GAP software \url{www.gap-system.org}.
+	\end{itemize}
+	\begin{verbatim}
+gap> LoadPackage("HAP");
+gap> G := CyclicGroup(4);
+	\end{verbatim}
 \end{frame}
 
 \end{document}
