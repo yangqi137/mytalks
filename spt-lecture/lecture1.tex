@@ -341,6 +341,20 @@ $g\cdot x=s(g)x$.
 \end{frame}
 
 \begin{frame}
+	\frametitle{Laughlin's argument}
+	\begin{itemize}
+		\item Threading a $2\pi$ flux ($\Phi_0 = hc/e$) through the hole of a cylinder.
+		\item $\Phi(t)\Rightarrow E_y\Rightarrow I_x$.
+		\item $ne$-charge is transported across the system.
+	\end{itemize}
+	\includegraphics{laughlin}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Symmetry twist: a global static gauge flux}
+\end{frame}
+
+\begin{frame}
 	\frametitle{Partition function of SPT state}
 	\begin{itemize}
 		\item Considier a finite, unitary symmetry group $G$.
@@ -420,6 +434,10 @@ $g\cdot x=s(g)x$.
 	\begin{verbatim}
 gap> LoadPackage("HAP");
 gap> G := CyclicGroup(4);
+gap> GroupCohomology(G, 3);
+[  ]
+gap> GroupCohomology(G, 4);
+[ 4 ]
 	\end{verbatim}
 \end{frame}
 
