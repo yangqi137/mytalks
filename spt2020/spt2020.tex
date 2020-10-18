@@ -1,4 +1,4 @@
-\documentclass[xcolor=table, aspectratio=43,ignorenonframetext]{beamer}
+\documentclass[xcolor=table, aspectratio=169,ignorenonframetext]{beamer}
 
 %\documentclass{article}
 %\usepackage{beamerarticle}
@@ -14,6 +14,7 @@
 \usepackage{animate}
 \usepackage{listings}
 %\usepackage{ifthen}
+\usepackage{pifont}
 
 %\usepackage{xeCJK}
 %\usepackage{fontspec}
@@ -176,7 +177,7 @@ Department of Physics, Fudan University.
   % You might wish to add the option [pausesections]
 \end{frame}
 
-\section{Introduction: What are SPT states}
+\section{Introduction to SPT states}
 
 \begin{frame}{Landau's paradigm: symmetry breaking}
   Traditional phases are organized in Landau's paradigm.
@@ -209,15 +210,20 @@ Department of Physics, Fudan University.
 \end{frame}
 
 \begin{frame}
-	\frametitle{Laughlin's argument}
-	\begin{itemize}
-		\item How to detect an SPT state? Bulk is trivial locally, and edge is too complicated.
-		\item Threading a magnetic flux ($\Phi_0 = hc/e$) through the hole of a cylinder.
-		\item $\Phi(t)\Rightarrow E_y\Rightarrow I_x$.
-		\item $ne$-charge is transported across the system.
-		\item Hall conductance $\sigma_H$ is quantized.
-	\end{itemize}
-	\includegraphics[scale=.8]{../spt-lecture/laughlin}
+  \frametitle{Laughlin's argument}
+  \begin{block}{How to detect an SPT state?}
+    Bulk is trivial locally, and edge is too complicated.
+  \end{block}
+  Laughlin's argument on integer quantum hall / Chern insulators.
+  \begin{itemize}
+  \item Threading a magnetic flux ($\Phi_0 = hc/e$) through the hole of a cylinder.
+  \item $\Phi(t)\Rightarrow E_y\Rightarrow I_x$.
+  \item $ne$-charge is transported across the system.
+  \item Hall conductance $\sigma_H$ is quantized.    
+  \end{itemize}
+  \begin{center}
+    \includegraphics[scale=.5]{../spt-lecture/laughlin}    
+  \end{center}
 \end{frame}
 
 \begin{frame}
@@ -284,7 +290,9 @@ Department of Physics, Fudan University.
 		\item Free-fermion SPT phases: K theory.
 		\item (Interacting) bosonic SPT phases: $H^{d+1}[G, \uone_T]$.
 		\item Interacting-fermion SPT phases: spin cobordism, etc.
-		$H^*[BG_b, ??]$.
+                  $H^*[BG_b, ??]$.\\
+                  Formula for the most general cases is still unknown:
+                  \[1\rightarrow\mathbb Z_2^f\rightarrow G_f\rightarrow G_b\rightarrow1.\]
 	\end{itemize}
 \end{frame}
 
@@ -347,7 +355,7 @@ Department of Physics, Fudan University.
 	\begin{enumerate}
 		\item A cell $\sigma$ is maped to one single cell $\sigma^\prime$ under $SG$-action.
 		\item $G_\sigma=\{g\in G|g:\sigma\rightarrow\sigma\}$ acts on $\sigma$ as onsite symmetry.
-		\item A $G$-complex $Y\simeq \mathbb R^d$.
+		\item A proper $G$-complex $Y\simeq \mathbb R^d$.
 	\end{enumerate}
 	\begin{columns}
 		\column{.5\textwidth}
@@ -626,61 +634,6 @@ Check $\partial\hat\omega_1(\lambda)\simeq0$ for each 0-cell $\lambda$.\\
 %	\end{columns}
 %\end{frame}
 
-
-\begin{frame}
-\frametitle{An example of a nontrivial building block}
-Consider $G=SG\times\mathbb Z_2$, $SG=P4_22_12$ (\#94 space group).
-\begin{center}
-\includegraphics[height=4cm]{../spspt/blocks}
-\end{center}
-Each colored 2-cell is decorated with a Levin-Gu or CZX state protected by the onsite $\mathbb Z_2$.
-
-\emph{\small Adapted from Z Song, Y Huang, YQ, C Fang and M Hermele, arXiv:1810.02330.}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Results for all 230 space groups}
-	\begin{columns}
-		\column{.7\textwidth}
-		\includegraphics[height=8cm]{../spspt/bigtable}
-		\column{.3\textwidth}
-		\begin{itemize}
-			\item Classifications computed for all 230 space groups, paired with selected $G_0$.
-			\item Results computed by a fully automated python code.
-		\end{itemize}
-	\end{columns}
-\end{frame}
-
-\begin{frame}
-\frametitle{An example of 2nd order computation}
-\emph{\small Adapted from Xu Yang, Shenghan Jiang, Ashvin Vishwanath and Ying Ran, arXiv:1705.09298.}
-\begin{itemize}
-	\item Consider a magnetic translation symmetry $T_xT_yT_x^{-1}T_y^{-1} = X$, and $G_0=\mathbb Z_2^X\times\mathbb Z_2^T$.
-	\item $H^3[G_0,\uone_T]=\mathbb Z_2\oplus\mathbb Z_2$: the one protected by both $\mathbb Z_2^X$ and $\mathbb Z_2^T$ is \alert{not compatible} with the magnetic translation symmetry.
-	\item Try to decorate $\omega\in H^3[G_0,\uone_T]$ to all 2-cells: the 1-cells can be gapped out, but the 0-cells \alert{cannot}.
-	\item There must be a $T^2=-1$ Kramers doublet at each 0-cell.
-\end{itemize}
-\begin{center}
-\begin{tikzpicture}
-\draw (-1.2,0)--(1.2,0);
-\draw (-1.2,1)--(1.2,1);
-\draw (-1.2,-1)--(1.2,-1);
-\draw (-1,-1.2)--(-1,1.2);
-\draw (0,-1.2)--(0,1.2);
-\draw (1,-1.2)--(1,1.2);
-\fill [red] (-1,-1) circle (2pt);
-\fill [red] (-1,0) circle (2pt);
-\fill [red] (-1,1) circle (2pt);
-\fill [red] (0,-1) circle (2pt);
-\fill [red] (0,0) circle (2pt);
-\fill [red] (0,1) circle (2pt);
-\fill [red] (1,-1) circle (2pt);
-\fill [red] (1,0) circle (2pt);
-\fill [red] (1,1) circle (2pt);
-\end{tikzpicture}
-\end{center}
-\end{frame}
-
 \begin{frame}
 \frametitle{A spectral sequence}
 We compute in the following sequence:
@@ -714,19 +667,74 @@ See Kenneth S. Brown's book, Chapter VII.
 \end{center}
 \end{frame}
 
-\section{Computing SPT classification using homology algebra}
+\begin{frame}
+\frametitle{An example of a nontrivial building block}
+Consider $G=SG\times\mathbb Z_2$, $SG=P4_22_12$ (\#94 space group).
+\begin{center}
+\includegraphics[height=4cm]{../spspt/blocks}
+\end{center}
+Each colored 2-cell is decorated with a Levin-Gu or CZX state protected by the onsite $\mathbb Z_2$.
+
+\emph{\small Adapted from Z Song, Y Huang, YQ, C Fang and M Hermele, Sci Adv 2019.}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Results for all 230 space groups}
+	\begin{columns}
+		\column{.6\textwidth}
+		\includegraphics[height=8cm]{../spspt/bigtable}
+		\column{.4\textwidth}
+		\begin{itemize}
+			\item Classifications computed for all 230 space groups, paired with selected $G_0$.
+			\item Results computed by a fully automated python code.
+		\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{An example of 2nd order computation}
+\emph{\small Adapted from Xu Yang, Shenghan Jiang, Ashvin Vishwanath and Ying Ran, Ann Phys \textbf{413}, 168060 (2019)..}
+\begin{itemize}
+	\item Consider a magnetic translation symmetry $T_xT_yT_x^{-1}T_y^{-1} = X$, and $G_0=\mathbb Z_2^X\times\mathbb Z_2^T$.
+	\item $H^3[G_0,\uone_T]=\mathbb Z_2\oplus\mathbb Z_2$: the one protected by both $\mathbb Z_2^X$ and $\mathbb Z_2^T$ is \alert{not compatible} with the magnetic translation symmetry.
+	\item Try to decorate $\omega\in H^3[G_0,\uone_T]$ to all 2-cells: the 1-cells can be gapped out, but the 0-cells \alert{cannot}.
+	\item There must be a $T^2=-1$ Kramers doublet at each 0-cell.
+\end{itemize}
+\begin{center}
+\begin{tikzpicture}
+\draw (-1.2,0)--(1.2,0);
+\draw (-1.2,1)--(1.2,1);
+\draw (-1.2,-1)--(1.2,-1);
+\draw (-1,-1.2)--(-1,1.2);
+\draw (0,-1.2)--(0,1.2);
+\draw (1,-1.2)--(1,1.2);
+\fill [red] (-1,-1) circle (2pt);
+\fill [red] (-1,0) circle (2pt);
+\fill [red] (-1,1) circle (2pt);
+\fill [red] (0,-1) circle (2pt);
+\fill [red] (0,0) circle (2pt);
+\fill [red] (0,1) circle (2pt);
+\fill [red] (1,-1) circle (2pt);
+\fill [red] (1,0) circle (2pt);
+\fill [red] (1,1) circle (2pt);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\section{Computing interacting-fermion SPT classification}
 
 \begin{frame}
 	\frametitle{Fermionic SPT: a generalized cohomology theory}
 	\begin{itemize}
-		\item An Atiyah–Hirzebruch Spectral Sequence: an fSPT state is specified by several layers.
-		\[E^{pq}_2=H^p[G_b, \text{iTO}^q]\Rightarrow H^{p+q}(G_b, ??).\]
-		\item Example: 2D fSPT,
-		\begin{enumerate}
-			\item $n_1\in H^1[G, \mathbb Z_2]$: Majorana-chain decoration.
-			\item $n_2\in C^2[G, \mathbb Z_2]$: Complex-fermion decoration.
-			\item $\nu_3\in C^3[G, \uone]$: Bosonic phase factor.
-		\end{enumerate}
+        \item An Atiyah–Hirzebruch Spectral Sequence: an fSPT state is specified by several layers.
+          \[E^{pq}_2=H^p[G_b, H^q(\text{pt}, ??)]]\Rightarrow H^{p+q}(BG_b, ??).\]
+        \item Example: 2D fSPT,
+          \begin{enumerate}
+          \item $n_1\in H^1[G, \mathbb Z_2]$: Majorana-chain decoration.
+          \item $n_2\in C^2[G, \mathbb Z_2]$: Complex-fermion decoration.
+          \item $\nu_3\in C^3[G, \uone]$: Bosonic phase factor.
+          \item A real-space construction: Q-R Wang and Z-C Gu, PRX 2020.
+          \end{enumerate}
 	\end{itemize}
 \end{frame}
 
@@ -852,15 +860,15 @@ See Kenneth S. Brown's book, Chapter VII.
 	\begin{itemize}
 		\item We do not need that much of geometric information of $BG$.
 		\item Chain complex (augmented) of $EG$ ($EG/G=BG$)
-		\[\cdots\rightarrow C_k(EG)\xrightarrow{\partial_k}
+                {\small\[\cdots\rightarrow C_k(EG)\xrightarrow{\partial_k}
 		C_{k-1}(EG)\rightarrow\cdots\rightarrow
 		C_1(EG)\xrightarrow{\partial_1}
-		C_0(EG)\xrightarrow{\epsilon}\mathbb Z\rightarrow0.\]
+		C_0(EG)\xrightarrow{\epsilon}\mathbb Z\rightarrow0.\]}
 		\item Free resolution:
-		\[\cdots\rightarrow F_k\xrightarrow{\partial_k}
+		{\small\[\cdots\rightarrow F_k\xrightarrow{\partial_k}
 		F_{k-1}\rightarrow\cdots\rightarrow
 		F_1\xrightarrow{\partial_1}
-		F_0\xrightarrow{\epsilon}\mathbb Z\rightarrow0.\]
+		F_0\xrightarrow{\epsilon}\mathbb Z\rightarrow0.\]}
 		\item Forms a long exact sequence of free $\mathbb ZG$-modules.
 		\item Cochain: $C^k=\hhom_G[F_k, \uone]$
 		\item Coboundary: $d^n:C^n\rightarrow C^{n+1}$, $d^n\alpha(x) = \alpha(\partial x)$.
@@ -890,7 +898,7 @@ See Kenneth S. Brown's book, Chapter VII.
 	\begin{itemize}
 		\item Consider two resolutions: simplified resolution $F$ and bar resolution $F'$.
 		\item We can construct chain maps $f:F\rightarrow F'$ and $g:F'\rightarrow F$, such that
-		\[\begin{tikzcd}
+		{\small\[\begin{tikzcd}
 		\cdots\arrow[r,"\partial_{k+1}"]&
 		F_k\arrow[r,"\partial_k"]\arrow[d,"f_k"]&
 		F_{k-1}\arrow[r,"\partial_{k-1}"]\arrow[d,"f_{k-1}"]&
@@ -909,7 +917,7 @@ See Kenneth S. Brown's book, Chapter VII.
 		commutes.
 		\item $f^\ast$ and $g^\ast$ maps between two types of cocycles:
 		\[f^\ast:C^{n\prime} = \hhom_G[F^\prime_n,\uone]\rightarrow C^n=\hhom_G[F_n,\uone]:
-		f^\ast\alpha(x)=\alpha(f(x)).\]
+		f^\ast\alpha(x)=\alpha(f(x)).\]}
 	\end{itemize}
 \end{frame}
 
@@ -1067,8 +1075,6 @@ See Kenneth S. Brown's book, Chapter VII.
 	\end{itemize}
 \end{frame}
 
-\section{Application: a GAP package.}
-
 \begin{frame}[fragile]
 	\frametitle{GAP, HAP and group cohomology}
 	\begin{itemize}
@@ -1154,6 +1160,31 @@ Example: compute fSPT for 2D wallpaper groups.
 		\item We also have a program written in python: faster but much harder to use.
 		\item Will add more functions (fSPT with nontrivial group extension, group structure, ...), tweak the performence, and publish.
 	\end{itemize}
+\end{frame}
+
+\section{Outlooks}
+
+\begin{frame}
+  \frametitle{Summary: the status of the field now}
+  \begin{itemize}
+  \item[\ding{51}] Bosonic SPT states: both onsite and space-group symmetries.
+  \item[\ding{51}] Free-fermion SPT states: onsite symmetries. (10-fold way).
+  \item[?] Free-fermion SPT states: crystalline symmetries.
+  \item[?] Interacting-fermion SPT states: onsite symmetries and crystalline symmetries.
+  \item[\ding{55}] Realization in materials.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Future directions}
+  \begin{itemize}
+  \item Interacting-fermion SPT classification: the most general formula and fast computation.
+  \item Crystalline-SPT states: real-space construction (fermionic cases) and high-order corner states.
+  \item Measuring bulk SPT invariants: measuring partition functions with nontrivial space-time topology and symmetry fluxes; high-order correlation functions; ...\\
+    \emph{\small}
+  \item Phase transitions between SPT phases.\\
+    \emph{\small L Tsui, H-C Jiang, Y-M Lu and D-H Lee, Nuclear Phys B 2015}
+  \end{itemize}
 \end{frame}
 
 \end{document}
