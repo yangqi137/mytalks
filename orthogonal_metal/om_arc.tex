@@ -197,4 +197,75 @@ Department of Physics, Fudan University.
 \end{center}
 \end{frame}
 
+\begin{frame}
+	\frametitle{Fermi arcs in high-Tc cuprates}
+	\begin{columns}
+		\column{.3\textwidth}
+		\includegraphics{arc_arpes}
+		\column{.7\textwidth}
+		\begin{itemize}
+			\item Fermi arcs in underdoped cuprates: at $T_c<T<T^*$.
+			\vspace{3em}
+			\item A possible mechanism:
+			$c_{i\sigma} = h_i^\dagger f_{i\sigma}$
+			\item No satisfying theory.
+		\end{itemize}
+	\end{columns}
+\end{frame}
+
+\section{Model}
+
+\begin{frame}
+	\frametitle{The Model}
+\begin{itemize}
+\item Hamiltonian:
+	\begin{align*}
+	H_f &= -t\sum_{\langle i,j \rangle} (f^{\dagger}_{i,\alpha} \sigma^{z}_{b_{\langle i,j \rangle}}f_{j,\alpha} + h.c.) -\mu\sum_{i}f^{\dagger}_{i,\alpha}f_{i,\alpha}, \nonumber\\
+	H_{z} &= -J \sum_{\langle i,j \rangle} S^{z}_{i} \sigma^{z}_{b_{\langle i,j \rangle}} S^{z}_{j} - h \sum_{i} S^{x}_{i}, \nonumber\\
+	H_{g} &= -K \sum_{\square}\prod_{b\in\square} \sigma^{z}_{b} - g\sum_{b} \sigma^{x}_{b}.\\
+	H_{c} &= -t \sum_{\langle i,j\rangle} f^{\dagger}_{i,\alpha}S^{z}_{i}f_{j,\alpha}S^{z}_{j} + h.c.
+\end{align*}
+\item Physical fermion $c_{i\alpha} = f_{i\alpha}S_i^z$
+\end{itemize}
+\begin{center}
+	\includegraphics[width=4cm]{model_l}
+\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{The phase diagram}
+	\begin{itemize}
+		\item ``Fermi arc''
+		\begin{itemize}
+			\item[Ground state] Doped orthoginal metal.\\
+			$f$-fermion fermi surface + gapped $S^z$ excitations.
+			\item[Finite T] Fermi arcs.
+		\end{itemize}
+		\item Deconfined FL: $c$-fermion fermi surface + $\mathbb Z_2$ topological order.
+		\item Confined FL: $c$-fermion fermi surface.
+	\end{itemize}
+	\includegraphics[width=\textwidth]{doped_pd}
+\end{frame}
+
+\section{DQMC simulation}
+
+\begin{frame}
+	\frametitle{Fermi arc}
+	\begin{itemize}
+		\item[(a)] Arc at finite $T$.
+		\item[(b)] Spin susceptibility reveals hidden $f$-FS.
+	\end{itemize}
+	\begin{center}
+		\includegraphics[height=3.5cm]{fermi_arc}\\
+		\includegraphics[height=3cm]{arc_T}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Mean-field calculation}
+	\begin{center}
+		\includegraphics[height=4cm]{arc_mf}
+	\end{center}
+\end{frame}
+
 \end{document}
