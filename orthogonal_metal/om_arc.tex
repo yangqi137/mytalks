@@ -14,8 +14,9 @@
 
 \usepackage{xeCJK}
 \usepackage{fontspec}
-\newfontfamily\cjkfont{PingFang SC}
-\setCJKmainfont{PingFang SC}
+%\newfontfamily\cjkfont{wqy-zenhei}
+\newfontfamily\cjkfont{WenQuanYi Zen Hei}
+\setCJKmainfont{WenQuanYi Zen Hei}
 \newcolumntype{x}{>{\centering\arraybackslash}X}
 \renewcommand{\arraystretch}{1.5}
 
@@ -262,10 +263,28 @@ Department of Physics, Fudan University.
 \end{frame}
 
 \begin{frame}
-	\frametitle{Mean-field calculation}
-	\begin{center}
-		\includegraphics[height=4cm]{arc_mf}
-	\end{center}
+  \frametitle{Mean-field calculation}
+  A finite-temperature convolution of $f$ and $S^z$ excitations reproduces the Fermi arcs.
+  \begin{itemize}
+  \item[$f$] Hidden orthogonal Fermi surface.
+  \item[$S^z$] Gapped excitations.
+  \end{itemize}
+  \begin{center}
+    \includegraphics{fs_conv_feynman}\\
+    \includegraphics[height=4cm]{arc_mf}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Conclusion}
+  \begin{itemize}
+  \item Fermi arc appears at finite $T$ in orthogonal metal phase.
+  \item Orthogonal Fermi surface $\leftarrow$ $\mathbb Z_2$ gauge field $\rightarrow$ gapped bosons.
+  \item Reproduced in mean-field calculation.
+  \end{itemize}
+  \begin{center}
+    \includegraphics[height=4cm]{fermi_arc}
+  \end{center}
 \end{frame}
 
 \end{document}

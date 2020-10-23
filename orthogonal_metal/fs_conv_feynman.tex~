@@ -1,0 +1,9 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz-feynman}
+
+\begin{document}
+\begin{tikz-picture}
+  \draw (0, 0)--(1,1);
+\end{tikz-picture}
+\end{document}
+
