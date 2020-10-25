@@ -1,4 +1,4 @@
-\documentclass[xcolor=table, 10pt, aspectratio=43]{beamer}
+\documentclass[xcolor=table, 10pt, aspectratio=1610]{beamer}
 % !TEX engine = xelatex
 %\usepackage{arev}
 \usepackage{amsmath,amssymb,amscd}
@@ -97,7 +97,7 @@
 % does not look nice, try deleting the line with the fontenc.
 
 \title[EQMC] % (optional, use only with long paper titles)
-{Metals' awkward cousin is found}
+{Fermi arcs observed in QMC simulation of a toy model}
 
 \author[Y Qi] % (optional, use only with lots of authors)
 {Yang~Qi}
@@ -114,7 +114,7 @@ Department of Physics, Fudan University.
 
 %\date{2016 Annual Meeting of Fudan CFTPP} % (optional, should be abbreviation of conference name)
 %{Fudan University, Oct 13 2015}
-\date{Hefei, Oct 24, 2020.}
+\date{7th Heavy Fermian Forum, Hefei, Oct 24, 2020.}
 % - Either use conference name or its abbreviation.
 % - Not really informative to the audience, more for people (including
 %   yourself) who are reading the slides online
@@ -160,13 +160,11 @@ Department of Physics, Fudan University.
 \begin{itemize}
 \item Chuang Chen (陈闯), Institute of Physics, CAS.
 \item Tian Yuan (袁天), Fudan University.
-\item Xiao Yan Xu (许霄琰), UC San Diego.
 \item Zi Yang Meng (孟子杨), Hong Kong University.
 \begin{center}
-  \includegraphics[height=2cm]{../people/chuangchen}
-  \includegraphics[height=2cm]{../people/tianyuan}
-  \includegraphics[height=2cm]{../people/xiaoyanxu}
-  \includegraphics[height=2cm]{../people/ziyangmeng}
+  \includegraphics[height=3cm]{../people/chuangchen}
+  \includegraphics[height=3cm]{../people/tianyuan}
+  \includegraphics[height=3cm]{../people/ziyangmeng}
 \end{center}
 \end{itemize}
 \begin{center}
@@ -219,7 +217,9 @@ Department of Physics, Fudan University.
 \section{Model}
 
 \begin{frame}
-	\frametitle{The Model}
+  \frametitle{The Model}
+  \begin{columns}
+    \column{.6\textwidth}
 \begin{itemize}
 \item Hamiltonian:
 	\begin{align*}
@@ -230,9 +230,11 @@ Department of Physics, Fudan University.
 \end{align*}
 \item Physical fermion $c_{i\alpha} = f_{i\alpha}S_i^z$
 \end{itemize}
+\column{.4\textwidth}
 \begin{center}
 	\includegraphics[width=4cm]{model_l}
-\end{center}
+      \end{center}
+      \end{columns}
 \end{frame}
 
 \begin{frame}
