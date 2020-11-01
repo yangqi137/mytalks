@@ -1,0 +1,3 @@
+Emergent U(1) symmetry and Kosterlitz-Thouless transition in a triangular-lattice quantum Ising material TmMgGaO4
+
+The low-energy physics of TmMgGaO4 is described by a triangular-lattice transverse-field antiferromagnetic Ising model. This model has an emergent U(1) symmetry and two Kosterlitz-Thouless transitions at finite temperatures.x
