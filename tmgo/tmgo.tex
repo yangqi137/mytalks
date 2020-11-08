@@ -1,4 +1,4 @@
-\documentclass[xcolor=table, aspectratio=169,ignorenonframetext]{beamer}
+\documentclass[xcolor=table, aspectratio=1610,ignorenonframetext]{beamer}
 
 %\usepackage{arev}
 \usepackage{amsmath,amssymb,amscd}
@@ -251,24 +251,36 @@ Nature Communications \textbf{11}, 1111 (2020)
 \section{Material: From TmMgGaO${}_4$ to transverse-field Ising model}
 
 \begin{frame}
-	\frametitle{Effective DOF: Dipole-multipole doublet of Tm${}^{3+}$ ion}
-	\begin{columns}
-		\column{.6\textwidth}
-		\begin{center}
-			\includegraphics[width=\textwidth]{tm3+}
+  \frametitle{Effective DOF: Dipole-multipole doublet of Tm${}^{3+}$ ion}
+  \begin{columns}
+    \column{.6\textwidth}
+    \begin{center}
+      % \includegraphics[width=\textwidth]{tm3+}
+      
+      {\small Changle Liu, Chun-Jiong Huang, and Gang Chen\\
+        Phys. Rev. Research \textbf{2}, 043013 (2020).}
+    \end{center}
+    \column{.4\textwidth}
+    \begin{itemize}
+    \item Tm${}^{3+}$: $S=1$; no Kramers degeneracy.
+    \item The two lowest levels of Tm${}^{3+}$ ion form an effective spin-$\frac12$.
+    \item Dipole-multipole:
+      \begin{align*}TS^{x,y}T^{-1}&=S^{x,y};\\
+        TS^zT^{-1}&=-S^z.\end{align*}
+    \item Splitting between two lowest levels: $H=-hS^x$.
+    \end{itemize}
+  \end{columns}
+\end{frame}
 
-			{\small Changle Liu, Chun-Jiong Huang, and Gang Chen\\
-			Phys. Rev. Research \textbf{2}, 043013 (2020).}
-		\end{center}
-		\column{.4\textwidth}
-		\begin{itemize}
-			\item Tm${}^{3+}$: $S=1$; no Kramers degeneracy.
-			\item The two lowest levels of Tm${}^{3+}$ ion form an effective spin-$\frac12$.
-			\item Dipole-multipole:
-			\begin{align*}TS^{x,y}T^{-1}&=S^{x,y};\\
-				TS^zT^{-1}&=-S^z.\end{align*}
-		\end{itemize}
-	\end{columns}
+\begin{frame}
+  \frametitle{Effective model}
+  \begin{itemize}
+  \item Transverse-field Ising Model on a triangular lattice.
+  \item Antiferromagnetic interaction: fully frustrated.
+  \item $h$ is the CFE splitting between two levels, not the actual magnetif field.
+  \item $h^z$ couples to $S_i^z$.
+  \end{itemize}
+  \[H = J\sum_{\langle ij\rangle}S_i^zS_j^z - \sum_i\left(hS_i^x + h^zS_i^z\right). \]
 \end{frame}
 
 \end{document}
