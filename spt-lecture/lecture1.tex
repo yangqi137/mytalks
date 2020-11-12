@@ -1,4 +1,4 @@
-\documentclass[xcolor=table, aspectratio=43,ignorenonframetext]{beamer}
+\documentclass[xcolor=table, aspectratio=169,ignorenonframetext]{beamer}
 
 %\documentclass{article}
 %\usepackage{beamerarticle}
@@ -422,6 +422,75 @@ $g\cdot x=s(g)x$.
 		\item We can construct $Z$:
 		\[Z = \langle\gamma^\ast\alpha, [M]\rangle.\]
 		$[M]$ is the fundamental class of $M$.
+	\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{Classifying space, cocycles and bSPT-state partition functions}
+	\begin{itemize}
+		\item In algebraic topology:
+		$H^D[G, \uone] = H^D[BG, \uone]$.
+		\item BG: a topological space satisfying $\pi_1(BG)=G$, $\pi_n(BG)=0$ for $n\geq 2$.
+		\item Intuitive picture: $BG$ is like an altas.
+		\item Cochain: $\alpha\in \hhom[X_n(BG), \uone]$, $\alpha; \alpha(g_1);\alpha(g_1,g_2);\alpha(g_1,g_2,g_3);\cdots$.
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=10cm]{../chainmap/bg-std}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Classifying space, cocycles and bSPT-state partition functions}
+	\begin{itemize}
+		\item
+		$\alpha$ = a partition function $Z_\alpha$ of an SPT phase.
+		\item Evaluating $Z_\alpha$ on a $G$-bundle:
+		\begin{enumerate}
+			\item Make a triangulation of the $G$-bundle;\\
+			\emph{Coverting $G$ with cells in $BG$}
+			\item Assign to each simplex (\emph{cell}) a phase
+			$\alpha(g_1,g_2,\ldots,g_{d+1})$;
+			 \emph{This can always be done because $BG$ is the (base space of the) universal $G$-bundle.}
+			\item Add all phases together,
+			\[Z_\alpha(M) = \exp\{2\pi \sum_{\Delta}s_\Delta\alpha(g_{i_1},g_{i_2})\}.\]
+		\end{enumerate}
+	\end{itemize}
+	\begin{center}
+		\includegraphics[height=3cm]{../spt-lecture/tri-orient}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{A standard and a simplified construction of $BG$}
+	\begin{enumerate}
+		\item Standard construction: $BG$ as a simplicial complex.
+		\begin{itemize}
+			\item All cells are simplices, $[g_1|g_2|\cdots|g_n]$.
+			\item Uniform boundary operations:
+			$\partial[g_1|g_2]=g_1[g_2]-[g_1g_2]+[g_1]$, ...
+			\item Requires many cells.
+		\end{itemize}
+		\item Simplified construction: $BG$ as a CW-complex.
+		\begin{itemize}
+			\item Cells have arbitrary shapes.
+			\item Arbitrary boundary operations.
+			\item Can have very few cells.
+		\end{itemize}
+	\end{enumerate}
+	\begin{center}
+		\includegraphics[width=10cm]{../chainmap/bg-std}~~~~
+		\includegraphics[height=3cm]{../chainmap/z6-1}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Computing the group cohomology using $BG$}
+	\begin{itemize}
+		\item $H^D[G, \uone] = H^D[BG, \uone]$: need to compute the cohomology group of $BG$.
+		\item The coboundary operator $d^n$ is a matrix of size $|X_n(BG)|\times |X_{n+1}(BG)|$.
+		\item Complexity: $|X_n(BG)|^3$.
+		\item It is much easier to compute for the simplified $BG$.
+		\item $BG$ is actually simple when $G$ is infinite but torsion-free:
+		$B\mathbb Z=S^1$, $B\mathbb Z^2=T^2$, etc.
 	\end{itemize}
 \end{frame}
 
