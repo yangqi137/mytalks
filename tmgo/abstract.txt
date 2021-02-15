@@ -1,3 +1,5 @@
 Emergent U(1) symmetry and Berezinskii-Kosterlitz-Thouless transition in a triangular-lattice quantum Ising material TmMgGaO4
 
 The low-energy physics of TmMgGaO4 is described by a triangular-lattice transverse-field antiferromagnetic Ising model. We determine a low-energy effective model for the material by comparing quantum many-body numerical simulations and experimental results. This model has an emergent U(1) symmetry and two Berezinskii-Kosterlitz-Thouless (BKT) transitions at finite temperatures, which bounds a BKT phase with quasi-long-range spin-spin correlations. Inspired by studies of BKT transitions in 2D superfluids, we study spin-lattice relaxation times in nuclear magnetic resonance (NMR) experiments, and observed a plateau in 1/T1, which can be attributed to the low-energy excitations in the BKT phase. The experimental findings can be explained by quantum Monte Carlo simulations applied on our effective model. These results provide a concrete example for the BKT phase and offer an ideal platform for future investigations on the BKT physics in magnetic materials.
+
+Phase diagram of a triangular-lattice quantum Ising material TmMgGaO4
