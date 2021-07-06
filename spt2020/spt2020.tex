@@ -92,7 +92,7 @@
 % does not look nice, try deleting the line with the fontenc.
 
 \title % (optional, use only with long paper titles)
-{Computing the classification of symmetry-protected topological phases with homological algebra}
+{Towards a classification of fermionic crystalline SPT states}
 \author[Y Qi] % (optional, use only with lots of authors)
 {Yang~Qi}
 % - Give the names in the same order as the appear in the paper.
@@ -108,7 +108,7 @@ Department of Physics, Fudan University.
 
 %\date{2016 Annual Meeting of Fudan CFTPP} % (optional, should be abbreviation of conference name)
 %{Fudan University, Oct 13 2015}
-\date{Oct. 17th, 2020}
+\date{May 2021}
 % - Either use conference name or its abbreviation.
 % - Not really informative to the audience, more for people (including
 %   yourself) who are reading the slides online
@@ -219,10 +219,10 @@ Department of Physics, Fudan University.
   \item Threading a magnetic flux ($\Phi_0 = hc/e$) through the hole of a cylinder.
   \item $\Phi(t)\Rightarrow E_y\Rightarrow I_x$.
   \item $ne$-charge is transported across the system.
-  \item Hall conductance $\sigma_H$ is quantized.    
+  \item Hall conductance $\sigma_H$ is quantized.
   \end{itemize}
   \begin{center}
-    \includegraphics[scale=.5]{../spt-lecture/laughlin}    
+    \includegraphics[scale=.5]{../spt-lecture/laughlin}
   \end{center}
 \end{frame}
 
@@ -284,6 +284,37 @@ Department of Physics, Fudan University.
 \end{frame}
 
 \begin{frame}
+\frametitle{Bosonic SPT: Group Cohomology Theory}
+\begin{itemize}
+	\item \emph{Inhomogeneous} $n$-cochain $\omega: G^{\times n}\rightarrow \uone$\\
+	We denote the space of $n$-cochains by $C^n[G,\uone]$.
+	\item Define a coboundary operation $d^n:C^n[G,\uone]\rightarrow C^{n+1}[G,\uone]$
+	\begin{align*}
+		d\omega &(g_1,\ldots,g_{n+1})=g_1\cdot \omega(g_2,\ldots,g_n)
+		-\omega(g_1g_2,\ldots,g_{n+1})
+		+\omega(g_1,g_2g_3,\ldots,g_{n+1})\\
+		&+\cdots+(-1)^i\omega(g_1,\ldots,g_ig_{i+1},\ldots,g_{n+1})
+		+\cdots + (-1)^{n+1}\omega(g_1,\ldots,g_n).
+	\end{align*}
+	\item This forms a cochain complex:
+	\[C^0\xrightarrow{d^0}C^1\rightarrow\cdots\rightarrow C^{n-1}\xrightarrow{d^{n-1}}C^n\xrightarrow{d^n}C^{n+1}\rightarrow\cdots\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Bosonic SPT: Group Cohomology Theory}
+	\begin{itemize}
+		\item The cochain complex:
+		\[C^0\xrightarrow{d^0}C^1\rightarrow\cdots\rightarrow C^{n-1}\xrightarrow{d^{n-1}}C^n\xrightarrow{d^n}C^{n+1}\rightarrow\cdots\]
+		satisfying $d^2=0$ ($d^n\circ d^{n-1}=0$)
+		\item We can define cohomology groups:
+		\[H^n[G,\uone] = \frac{Z^n}{B^n} = \frac{\ker d^n}{\img d^{n-1}}.\]
+		\item $(d+1)$-dimensional fixed-point partition functions are given by
+		\[H^{d+1}[G,\uone].\]
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
 	\frametitle{SPT phases are classified by generalized cohomology theories}
 	\begin{itemize}
 		\item D Gaiotto \& T Johnson-Freyd, JHEP \textbf{2019}, 7 (2019).
@@ -308,19 +339,17 @@ Department of Physics, Fudan University.
 %		\item Beyond-group-cohomology phases?
 %	\end{itemize}
 %\end{frame}
-
-\section{Spectral sequence and real-space construction}
-
 \begin{frame}
 \frametitle{Space-group SPT}
 \begin{itemize}
-\item We consider $G/G_0 = SG$.
-\item Thorngren and Else (2018): the classification is also given by group cohomology
-\[H^{d+1}[G, \uone_{PT}].\]
-\item Dimensional reduction: Liang Fu, Michael Hermele et al.\\
-\emph{Examples: mirror SPT, weak SPT (translation symmetry).}
-\item Patch construction: Zhida Song, Shengjie Huang, Yang Qi, Chen Fang and Michael Hermele, Sci. Adv. 2019.
-\item A more general construction for bosonic SPTs.
+\item Two approaches:
+  \begin{enumerate}
+  \item Thorngren and Else (2018): the crystalline equivalence principle.
+  \item Real-space construction (dimensional reduction: Liang Fu, Michael Hermele et al.)\\
+    \emph{Examples: mirror SPT, weak SPT (translation symmetry).}
+    %\emph{Patch construction: Zhida Song, Shengjie Huang, YQ, Chen Fang and Michael Hermele, Sci. Adv. 5, eaax2007 (2019).}
+  \end{enumerate}
+%\item A more general construction for bosonic/fermionic SPTs w/ all possible $G$?
 \end{itemize}
 \begin{center}
 \begin{tikzpicture}[scale=.9]
@@ -349,379 +378,38 @@ Department of Physics, Fudan University.
 \end{center}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Decomposition of the space}
-	We divide the space into finer cells such that
-	\begin{enumerate}
-		\item A cell $\sigma$ is maped to one single cell $\sigma^\prime$ under $SG$-action.
-		\item $G_\sigma=\{g\in G|g:\sigma\rightarrow\sigma\}$ acts on $\sigma$ as onsite symmetry.
-		\item A proper $G$-complex $Y\simeq \mathbb R^d$.
-	\end{enumerate}
-	\begin{columns}
-		\column{.5\textwidth}
-		\begin{center}
-			\includegraphics[width=.5\textwidth]{../spspt/blocks}
-		\end{center}
-		\column{.5\textwidth}
-		\begin{center}
-			\begin{tikzpicture}
-				\draw (-2, -2)--(-2, 2)--(2, 2)--(2, -2)--(-2, -2);
-				\draw<2> [thick] (0, -2)--(0, 2);
-				\draw [->] (.7, 0) arc (0:180:0.7);
-				\filldraw (0, 0) circle (1pt) node [right] {$C_2$};
-				\node<2> at (0, -1) [right] {$\tau_1$};
-				\node<2> at (0, 1) [left] {$\tau_2$};
-				\node<2> at (-1, 0) {$\sigma_1$};
-				\node<2> at (1, 0) {$\sigma_2$};
-			\end{tikzpicture}
-		\end{center}
-	\end{columns}
-\end{frame}
+\section{Approach I: Crystalline equivalence principle}
 
 \begin{frame}
-	\frametitle{Topological crystalline states are made of building blocks}
-	\begin{columns}
-		\column{.4\textwidth}
-		\begin{center}
-			\includegraphics[width=\textwidth]{../spspt/blocks}
-		\end{center}
-		\column{.6\textwidth}
-		\begin{itemize}
-			\item We divide the space into cells compatible with the space-group symmetry.
-			\item On a $p$-cell $\sigma$, the SPT state is protected only by $G_\sigma$.
-			\[\hat\omega(\sigma)\in \Phi^p(G_\sigma) = H^{p+1}[G_\sigma,\uone_T].\]
-			\item $G_\sigma$ acts as onsite symmetries.
-			\item Decorate 3d SPT on 3-cells; 2d SPT on 2-cells; 1d SPT on 1-cells; 0d SPT on 0-cells;
-			\item $p$-block states: $E^p_{p,\infty}$.
-			\[\text{TCSs} = ``\bigoplus_p\text{''} E^p_{p,\infty}.\]
-		\end{itemize}
-	\end{columns}
-\end{frame}
+  \frametitle{Crystalline equivalence principle}
+  \begin{itemize}
+  \item SPT classification remains the same, if:
+    \begin{enumerate}
+    \item Crystalline symmetry group $\Rightarrow$ onsite symmetry group.\\
+      \emph{Example: $C_2$-SPT = $\mathbb Z_2$-SPT.}
+    \item Symmetries reversing space orientation $\Rightarrow$ antiunitary symmetries.\\
+      \emph{Example: mirror reflection, glide phane, ...}
+    \item For fermions: spinless/spin-$\frac12$ $\Rightarrow$ spin-$\frac12$/spinless.\\
+      \emph{Example: $C_2^2=\pm1 \Rightarrow g^2=\mp1$.}
+    \end{enumerate}
+  \item We can compute crystalline-SPT as onsite-SPTs.
+  \item Large symmetry groups (space groups are infinite): need an efficient algorithm.
+  \end{itemize}
+  \begin{center}
+    \begin{tikzpicture}
+      \draw (-6, -1.5)--(-6, 1.5)--(-3, 1.5)--(-3, -1.5)--(-6, -1.5);
+    \draw [->] (-5, .3)--(-5, .7);
+    \draw [->] (-4, .3)--(-4, .7);
+    \draw [->] (-5, -.3)--(-5, -.7);
+    \draw [->] (-4, -.7)--(-4, -.3);
+    \node at (-2.25, 0) {=};
 
-\begin{frame}
-	\frametitle{Symmetric conditions}
-	\begin{columns}
-		\column{.3\textwidth}
-		\begin{tikzpicture}
-			\draw (0, 0)--(2, 0)--(2, 2)--(0, 2)--(0, 0);
-			\draw (2, 4)--(4, 4)--(4, 6)--(2, 6)--(2, 4);
-			\draw [thick,->] (1, 1) node [below] {$\hat\omega(\sigma$)} --
-			(3, 5) node [above] {$\hat\omega(\sigma^\prime)$};
-			\node at (2, 3) [right] {$g$};
-		\end{tikzpicture}
-		\column{.7\textwidth}
-		\begin{itemize}
-			\item If $g:\sigma\rightarrow\sigma^\prime$, then the cochains attached must be ``identical''.
-			\item $G_\sigma\neq G_{\sigma'}$, but they are isomorphic:
-			\[G_{\sigma'}=gG_\sigma g^{-1}\simeq G_\sigma.\]
-			\item This induces another isomorphism:
-			\[H^{p+1}[G_{\sigma'},\uone_T]\simeq H^{p+1}[G_\sigma,\uone_T]\]
-			\item $\hat\omega(\sigma)$ and $\hat\omega(\sigma')$ are related by this isomorphism
-			\[\hat\omega(\sigma') = g\cdot \hat\omega(\sigma).\]
-			\item Only decorations on symmetry-unrelated cells are independent: finite \# of them.
-		\end{itemize}
-	\end{columns}
-\end{frame}
-
-\begin{frame}
-	\frametitle{The 1st page}
-
-	\begin{columns}
-		\column{.4\textwidth}
-		\begin{center}
-			\includegraphics[width=\textwidth]{../spspt/blocks}
-		\end{center}
-		\column{.6\textwidth}
-		\begin{itemize}
-			\item 1st page = a collection of SPTs:
-			\[E^p_{p,1} = \bigoplus_{\sigma\in Y_p/G} \Phi^p(G_\sigma),\]
-			\[\Phi^p(G_\sigma) = H^{p+1}(G_\sigma, \uone_T).\]
-			\item We can generalize this to
-			\[E^q_{p,1} = \bigoplus_{\sigma\in Y_p/G} \Phi^q(G_\sigma).\]
-		\end{itemize}
-	\end{columns}
-\end{frame}
-
-\begin{frame}
-	\frametitle{No-Open-Edge Conditions}
-	\begin{columns}
-		\column{.58\textwidth}
-		\begin{itemize}
-			\item<1-> SPT blocks have nontrivial boundary states.
-			\item<2-> Boundary anomaly must cancel on $(p-1)$-cells.
-			\item<3-> A subtlety: $\tau$ has more symmetry operations than $\sigma$: $G_\tau \supseteq G_\sigma$
-			\item<3-> $\hat\omega(\sigma_1)
-			+\hat\omega(\sigma_2)+\hat\omega(\sigma_3)+\hat\omega(\sigma_4)\in \Phi^p(G_\tau)$.
-			\item<3-> A transfer map: $\Phi^p(G_\sigma)\rightarrow \Phi^p(G_\tau)$.
-		\end{itemize}
-		\column{.42\textwidth}
-		\begin{tikzpicture}
-			\draw (0, 1)--(-1, 1)--(-2, 0)--(2, 0)--(3, 1)--(1, 1);
-			\draw [thick] (0, 0)--(1, 1);
-			\draw<1-2> [string] (.2, .1)--(1, .9);
-			\draw<1> [string] (1, .9)--(2.8, .9);
-			\draw<1> [string] (2.8, .9)--(2, .1);
-			\draw<1> [string] (2, .1)--(.2, .1);
-			\draw<2> [string] (.1, .2)--(.9, 1);
-			\draw<3-> [->] (1.3, .5)--(.6, .5);
-			\draw<3-> [->] (.5, 1.3)--(.5, .6);
-			\draw<3-> [->] (.5, -.3)--(.5, .4);
-			\draw<3-> [->] (-.3, .5)--(.4, .5);
-			\node<1-2> at (.5, .5) [above] {$\tau$};
-			\node<3-> at (.7, .7) [above] {$\tau$};
-			\draw (1, 1)--(1, 3)--(0, 2)--(0, -2)--(0, -2)--(1, -1)--(1, 0);
-			\node at (.5, 1.5) {$\sigma_1$};
-			\node at (1.5, .5) {$\sigma_2$};
-			\node at (.5, -0.5) {$\sigma_3$};
-			\node at (-0.5, .5) {$\sigma_4$};
-		\end{tikzpicture}
-	\end{columns}
-\end{frame}
-
-\begin{frame}
-	\frametitle{No-Open-Edge Conditions}
-	\begin{columns}
-		\column{.58\textwidth}
-		\begin{itemize}
-			\item We can define a boundary-transfer operation $\partial\omega$:
-			\[(\partial\hat\omega)(\tau)=\hat\omega(\sigma_1)
-			+\hat\omega(\sigma_2)+\hat\omega(\sigma_3)+\hat\omega(\sigma_4).\]
-			\item Cocycle equation: $\partial\omega\simeq0.$
-			\item Define $d_1: E^p_{p,1}\rightarrow E^p_{p-1,1}$:
-			\[d_1\hat\omega = \partial\hat\omega.\]
-			\item First-page no-open-edge condition:
-			\[d_1\hat\omega \simeq 0.\]
-			\item $E^{p+1}_{p,r}$: anomaly pattern.
-		\end{itemize}
-		\column{.42\textwidth}
-		\begin{tikzpicture}
-			\draw (0, 1)--(-1, 1)--(-2, 0)--(2, 0)--(3, 1)--(1, 1);
-			\draw [thick] (0, 0)--(1, 1);
-			\node at (.7, .7) [above] {$\tau$};
-			\draw (1, 1)--(1, 3)--(0, 2)--(0, -2)--(0, -2)--(1, -1)--(1, 0);
-			\draw [->] (1.3, .5)--(.6, .5);
-			\draw [->](.5, 1.3)--(.5, .6);
-			\draw [->](.5, -.3)--(.5, .4);
-			\draw [->](-.3, .5)--(.4, .5);
-			\node at (.5, 1.5) {$\sigma_1$};
-			\node at (1.5, .5) {$\sigma_2$};
-			\node at (.5, -0.5) {$\sigma_3$};
-			\node at (-0.5, .5) {$\sigma_4$};
-		\end{tikzpicture}
-	\end{columns}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Bubbling Equivalence}
-\begin{columns}
-\column{.7\textwidth}
-\begin{itemize}
-\item Coboundaries: $\hat\omega\simeq0$.
-\item A coboundary: attaching the same SPT state to  $\partial \sigma$.
-\item The bubbling process can also expressed by $\partial$:
-\[\hat\omega = \partial\hat\mu\simeq0.\]
-\item We define $d_1:E^p_{p+1, 1}\rightarrow E^p_{p,1}$:
-\[d_1\hat\mu = \partial\hat\mu.\]
-\item The first-page bubbling equivalence:
-\[d_1\hat\mu\simeq0.\]
-\item $E^{p-1}_{p,r}$: Bubbling patterns.
-\end{itemize}
-\column{.3\textwidth}
-\begin{animateinline}{5}
-        \multiframe{12}{Ra=.3+.05}{
-\begin{tikzpicture}[scale=1]
-	\draw (0, 0)--(2, 0)--(2, 2)--(0, 2)--(0, 0);
-	\draw [dashed] (1, 2)--(1, 1)--(2, 1);
-	\draw (2, 1)--(3, 1)--(3, 3)--(1, 3)--(1, 2);
-	\draw [dashed] (0, 0)--(1, 1);
-	\draw (2, 0)--(3, 1);
-	\draw (0, 2)--(1, 3);
-	\draw (2, 2)--(3, 3);
-	\fill [blue!30,opacity=.5] (1.5-1.5*\Ra, 1.5-1.5*\Ra)--(1.5+0.5*\Ra, 1.5-1.5*\Ra)
-	--(1.5+1.5*\Ra, 1.5-0.5*\Ra)--(1.5+1.5*\Ra, 1.5+1.5*\Ra)
-	--(1.5-0.5*\Ra, 1.5+1.5*\Ra)--(1.5-1.5*\Ra, 1.5+0.5*\Ra)
-	--(1.5-1.5*\Ra, 1.5-1.5*\Ra);
-	\draw [blue,dashed] (1.5-1.5*\Ra, 1.5+0.5*\Ra)--(1.5+0.5*\Ra, 1.5+0.5*\Ra)--(1.5+1.5*\Ra,1.5+1.5*\Ra);
-	\draw [blue,dashed] (1.5+0.5*\Ra, 1.5-1.5*\Ra)--(1.5+0.5*\Ra, 1.5+0.5*\Ra);
-	\draw [->,thick] (1.5-0.5*\Ra, 1.5-0.5*\Ra)--(1.3-0.5*\Ra, 1.3-0.5*\Ra);
-	\draw [->,thick] (1.5, 1.5+\Ra)--(1.5, 1.78+\Ra);
-	\draw [->,thick] (1.5+\Ra, 1.5)--(1.78+\Ra, 1.5);
-	%\fill [green!30] (-\Ra,-\Ra)--(-\Ra,\Ra)--(\Ra,\Ra)--(\Ra,-\Ra)--(-\Ra,-\Ra);
-%\draw [blue,thick] (-\Ra,-\Ra)--(-\Ra,\Ra)--(\Ra,\Ra)--(\Ra,-\Ra)--(-\Ra,-\Ra);
-%\node at (0, 0) {$d\nu$};
+    \draw (-1.5, -1.5)--(-1.5, 1.5)--(1.5, 1.5)--(1.5, -1.5)--(-1.5, -1.5);
+    \draw [->] (.7, 0) arc (0:180:0.7);
+    \filldraw (0, 0) circle (1pt) node [right] {$C_2$};
 \end{tikzpicture}
-}
-\end{animateinline}
-\end{columns}
+  \end{center}
 \end{frame}
-
-\begin{frame}
-\frametitle{2nd page: a homology-group calculation}
-\begin{itemize}
-\item No-open-edge conditions:
-\[d_1\hat\omega\simeq 0, \hat\omega\in E^p_{p,1}.\]
-\item Bubbling equivalence:
-\[d_1\hat\mu\simeq 0, \hat\mu\in E^p_{p+1,1}.\]
-\item A homology-group calculation:
-\[E^p_{p+1,1}\xrightarrow{d_1}E^p_{p,1}\xrightarrow{d_1}E^p_{p-1,1},\]
-\[E^p_{p,2}=\frac{\ker d^p_{p+1,1}}{\img d^p_{p,1}}.\]
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{High-Order No-Open-Edge Conditions}
-\begin{columns}
-\column{.6\textwidth}
-\begin{enumerate}
-\item<1-> Choose a cocycle for each 2-cell $\sigma$.\\ Check $\partial\hat\omega_2(\tau)\simeq0$ for each 1-cell $\tau$.\\
-\emph{1st-page no-open-edge condition.}
-\item<2-> Choose a cochain $\hat\omega_1$ for each $\tau$.\\
-Check $\partial\hat\omega_1(\lambda)\simeq0$ for each 0-cell $\lambda$.\\
-\emph{2nd-page no-open-edge condition.}
-\item<3> Choose a cochain $\hat\omega_0$ for each $\lambda$.
-\end{enumerate}
-\column{.4\textwidth}
-\begin{center}
-\begin{tikzpicture} [scale=3]
-\fill [blue!50] (0,0)--(1,0)--(1.5,.5)--(1.5,1.5)--(0.5,1.5)--(0,1)--(0,0);
-\draw<1> [thick,white] (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
-\draw<1> [thick,white] (1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
-\draw<1> [thick,white] (1.5,1.5)--(0.5,1.5)--(0,1);
-\draw<1> [thick,white] (0,0)--(.5,.5)--(.5,1.5);
-\draw<1> [thick,white](.5,.5)--(1.5,.5);
-\draw<2-> [thick,red] (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
-\draw<2-> [thick,red] (1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
-\draw<2-> [thick,red] (1.5,1.5)--(0.5,1.5)--(0,1);
-\draw<2-> [thick,red] (0,0)--(.5,.5)--(.5,1.5);
-\draw<2-> [thick,red](.5,.5)--(1.5,.5);
-\fill<1-2> [white] (0,0) circle (2pt);
-\fill<1-2> [white] (1,0) circle (2pt);
-\fill<1-2> [white] (0,1) circle (2pt);
-\fill<1-2> [white] (1,1) circle (2pt);
-\fill<1-2> [white] (0.5,0.5) circle (2pt);
-\fill<1-2> [white] (1.5,0.5) circle (2pt);
-\fill<1-2> [white] (0.5,1.5) circle (2pt);
-\fill<1-2> [white] (1.5,1.5) circle (2pt);
-\fill<3> [red] (0,0) circle (2pt);
-\fill<3> [red] (1,0) circle (2pt);
-\fill<3> [red] (0,1) circle (2pt);
-\fill<3> [red] (1,1) circle (2pt);
-\fill<3> [red] (0.5,0.5) circle (2pt);
-\fill<3> [red] (1.5,0.5) circle (2pt);
-\fill<3> [red] (0.5,1.5) circle (2pt);
-\fill<3> [red] (1.5,1.5) circle (2pt);
-\end{tikzpicture}
-\end{center}
-\end{columns}
-\end{frame}
-
-%\begin{frame}
-%	\frametitle{A building block}
-%	\begin{columns}
-%		\column{.4\textwidth}
-%		\begin{center}
-%			\includegraphics[width=\textwidth]{blocks}
-%		\end{center}
-%		\column{.6\textwidth}
-%		\begin{itemize}
-%			\item A building block $\hat\omega$ is a collection of cochains:
-%			\[\hat\omega(\sigma) \in C^{p+1}[G_\sigma, \uone_T].\]
-%			\item $\hat\omega$ needs to be symmetric under $SG$.
-%			\item $\hat\omega$ needs to satisfy the bulk-boundary relation:
-%			\[d\hat\omega(\tau) = \sum_{\sigma:\tau\in\partial\sigma}\hat\omega(\sigma).\]
-%			\item Need to find when two blocks can be deformed to each other: $\hat\omega\simeq\hat\omega^\prime$.
-%		\end{itemize}
-%	\end{columns}
-%\end{frame}
-
-\begin{frame}
-\frametitle{A spectral sequence}
-We compute in the following sequence:
-\begin{enumerate}
-\item 0st-page no-open-edge condition + 0st-page bubbling equivalence.
-\[E^p_{p,1}=\frac{\ker d_0}{\img d_0}.\]
-\item 1st-page no-open-edge condition + 1st-page bubbling equivalence.
-\[E^p_{p,2}=\frac{\ker d_1}{\img d_1}.\]
-\item 2nd-page no-open-edge condition + 2st-page bubbling equivalence.
-\[E^p_{p,3}=\frac{\ker d_2}{\img d_2}.\]
-\end{enumerate}
-
-\[E^p_{p,1}\supseteq E^p_{p,2}\supseteq E^p_{p,3}\supseteq\cdots=E^p_{p,\infty}.\]
-\end{frame}
-
-\begin{frame}
-\frametitle{Mathematical Proof: Real-Space Construction is Complete}
-\begin{itemize}
-\item Equivariant group cohomology:
-\[H^{d+1}[G, \uone_{PT}]]\simeq H^{d+1}_G[X, \uone_{PT}].\]
-Here $X\sim\text{pt}$ is a (non-free) $G$-complex. See Thorngren and Else, PRX (2018).
-\item There is a spectral sequence:
-\[E_1^{pq}=\bigoplus_{\sigma\in X_p/G}H^q[G_\sigma,\uone_T]\Rightarrow
- H^{p+q}[G, \uone_{PT}]].\]
-See Kenneth S. Brown's book, Chapter VII.
-\item The topological space $Y$ we used is the Poincar\'e dual of $X$: $E^{pq}_r\simeq E^{q-1}_{d-p,r}$
-\end{itemize}
-\begin{center}
-	\includegraphics[height=2cm]{../spspt/brown_book}
-	\includegraphics[height=2cm]{../spspt/brown_ss}
-\end{center}
-\end{frame}
-
-\begin{frame}
-\frametitle{An example of a nontrivial building block}
-Consider $G=SG\times\mathbb Z_2$, $SG=P4_22_12$ (\#94 space group).
-\begin{center}
-\includegraphics[height=4cm]{../spspt/blocks}
-\end{center}
-Each colored 2-cell is decorated with a Levin-Gu or CZX state protected by the onsite $\mathbb Z_2$.
-
-\emph{\small Adapted from Z Song, Y Huang, YQ, C Fang and M Hermele, Sci Adv 2019.}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Results for all 230 space groups}
-	\begin{columns}
-		\column{.6\textwidth}
-		\includegraphics[height=8cm]{../spspt/bigtable}
-		\column{.4\textwidth}
-		\begin{itemize}
-			\item Classifications computed for all 230 space groups, paired with selected $G_0$.
-			\item Results computed by a fully automated python code.
-		\end{itemize}
-	\end{columns}
-\end{frame}
-
-\begin{frame}
-\frametitle{An example of 2nd order computation}
-\emph{\small Adapted from Xu Yang, Shenghan Jiang, Ashvin Vishwanath and Ying Ran, Ann Phys \textbf{413}, 168060 (2019)..}
-\begin{itemize}
-	\item Consider a magnetic translation symmetry $T_xT_yT_x^{-1}T_y^{-1} = X$, and $G_0=\mathbb Z_2^X\times\mathbb Z_2^T$.
-	\item $H^3[G_0,\uone_T]=\mathbb Z_2\oplus\mathbb Z_2$: the one protected by both $\mathbb Z_2^X$ and $\mathbb Z_2^T$ is \alert{not compatible} with the magnetic translation symmetry.
-	\item Try to decorate $\omega\in H^3[G_0,\uone_T]$ to all 2-cells: the 1-cells can be gapped out, but the 0-cells \alert{cannot}.
-	\item There must be a $T^2=-1$ Kramers doublet at each 0-cell.
-\end{itemize}
-\begin{center}
-\begin{tikzpicture}
-\draw (-1.2,0)--(1.2,0);
-\draw (-1.2,1)--(1.2,1);
-\draw (-1.2,-1)--(1.2,-1);
-\draw (-1,-1.2)--(-1,1.2);
-\draw (0,-1.2)--(0,1.2);
-\draw (1,-1.2)--(1,1.2);
-\fill [red] (-1,-1) circle (2pt);
-\fill [red] (-1,0) circle (2pt);
-\fill [red] (-1,1) circle (2pt);
-\fill [red] (0,-1) circle (2pt);
-\fill [red] (0,0) circle (2pt);
-\fill [red] (0,1) circle (2pt);
-\fill [red] (1,-1) circle (2pt);
-\fill [red] (1,0) circle (2pt);
-\fill [red] (1,1) circle (2pt);
-\end{tikzpicture}
-\end{center}
-\end{frame}
-
-\section{Computing interacting-fermion SPT classification}
 
 \begin{frame}
 	\frametitle{Fermionic SPT: a generalized cohomology theory}
@@ -1160,6 +848,483 @@ Example: compute fSPT for 2D wallpaper groups.
 		\item We also have a program written in python: faster but much harder to use.
 		\item Will add more functions (fSPT with nontrivial group extension, group structure, ...), tweak the performence, and publish.
 	\end{itemize}
+\end{frame}
+
+\section{Approach II: Spectral sequence and real-space construction}
+
+\begin{frame}
+\frametitle{Space-group SPT}
+\begin{itemize}
+\item We consider $G/G_0 = SG$.
+\item Thorngren and Else (2018): the classification is also given by group cohomology
+\[H^{d+1}[G, \uone_{PT}].\]
+\item Dimensional reduction: Liang Fu, Michael Hermele et al.\\
+\emph{Examples: mirror SPT, weak SPT (translation symmetry).}
+\item Patch construction: Zhida Song, Shengjie Huang, Yang Qi, Chen Fang and Michael Hermele, Sci. Adv. 2019.
+\item A more general construction for bosonic SPTs.
+\end{itemize}
+\begin{center}
+\begin{tikzpicture}[scale=.9]
+\fill [blue!20] (0,0)--(1,1)--(1,3)--(0,2)--(0,0);
+\draw (0,0)--(0,2)--(1,3);
+\draw (-1.5,0)--(1.5,0)--(1.5,2)--(-1.5,2)--(-1.5,0);
+\draw (1.5,0)--(2.5,1)--(2.5,3)--(1.5,2);
+\draw (2.5,3)--(-.5,3)--(-1.5,2);
+\end{tikzpicture}
+\hspace{2em}
+\begin{tikzpicture}[scale=.9]
+\fill [blue!40,opacity=.5] (0,0)--(1,1)--(1,3)--(0,2)--(0,0);
+\draw (0,0)--(0,2)--(1,3);
+\fill [blue!40,opacity=.5] (.5,0)--(1.5,1)--(1.5,3)--(0.5,2)--(0.5,0);
+\draw (.5,0)--(.5,2)--(1.5,3);
+\fill [blue!40,opacity=.5] (1,0)--(2,1)--(2,3)--(1,2)--(1,0);
+\draw (1,0)--(1,2)--(2,3);
+\fill [blue!40,opacity=.5] (-.5,0)--(.5,1)--(.5,3)--(-0.5,2)--(-0.5,0);
+\draw (-.5,0)--(-.5,2)--(.5,3);
+\fill [blue!40,opacity=.5] (-1,0)--(0,1)--(0,3)--(-1,2)--(-1,0);
+\draw (-1,0)--(-1,2)--(0,3);
+\draw (-1.5,0)--(1.5,0)--(1.5,2)--(-1.5,2)--(-1.5,0);
+\draw (1.5,0)--(2.5,1)--(2.5,3)--(1.5,2);
+\draw (2.5,3)--(-.5,3)--(-1.5,2);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Decomposition of the space}
+	We divide the space into finer cells such that
+	\begin{enumerate}
+		\item A cell $\sigma$ is maped to one single cell $\sigma^\prime$ under $SG$-action.
+		\item $G_\sigma=\{g\in G|g:\sigma\rightarrow\sigma\}$ acts on $\sigma$ as onsite symmetry.
+		\item A proper $G$-complex $Y\simeq \mathbb R^d$.
+	\end{enumerate}
+	\begin{columns}
+		\column{.5\textwidth}
+		\begin{center}
+			\includegraphics[width=.5\textwidth]{../spspt/blocks}
+		\end{center}
+		\column{.5\textwidth}
+		\begin{center}
+			\begin{tikzpicture}
+				\draw (-2, -2)--(-2, 2)--(2, 2)--(2, -2)--(-2, -2);
+				\draw<2> [thick] (0, -2)--(0, 2);
+				\draw [->] (.7, 0) arc (0:180:0.7);
+				\filldraw (0, 0) circle (1pt) node [right] {$C_2$};
+				\node<2> at (0, -1) [right] {$\tau_1$};
+				\node<2> at (0, 1) [left] {$\tau_2$};
+				\node<2> at (-1, 0) {$\sigma_1$};
+				\node<2> at (1, 0) {$\sigma_2$};
+			\end{tikzpicture}
+		\end{center}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Topological crystalline states are made of building blocks}
+	\begin{columns}
+		\column{.4\textwidth}
+		\begin{center}
+			\includegraphics[width=\textwidth]{../spspt/blocks}
+		\end{center}
+		\column{.6\textwidth}
+		\begin{itemize}
+			\item We divide the space into cells compatible with the space-group symmetry.
+			\item On a $p$-cell $\sigma$, the SPT state is protected only by $G_\sigma$.
+			\[\hat\omega(\sigma)\in \Phi^p(G_\sigma) = H^{p+1}[G_\sigma,\uone_T].\]
+			\item $G_\sigma$ acts as onsite symmetries.
+			\item Decorate 3d SPT on 3-cells; 2d SPT on 2-cells; 1d SPT on 1-cells; 0d SPT on 0-cells;
+			\item $p$-block states: $E^p_{p,\infty}$.
+			\[\text{TCSs} = ``\bigoplus_p\text{''} E^p_{p,\infty}.\]
+		\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Symmetric conditions}
+	\begin{columns}
+		\column{.3\textwidth}
+		\begin{tikzpicture}
+			\draw (0, 0)--(2, 0)--(2, 2)--(0, 2)--(0, 0);
+			\draw (2, 4)--(4, 4)--(4, 6)--(2, 6)--(2, 4);
+			\draw [thick,->] (1, 1) node [below] {$\hat\omega(\sigma$)} --
+			(3, 5) node [above] {$\hat\omega(\sigma^\prime)$};
+			\node at (2, 3) [right] {$g$};
+		\end{tikzpicture}
+		\column{.7\textwidth}
+		\begin{itemize}
+			\item If $g:\sigma\rightarrow\sigma^\prime$, then the cochains attached must be ``identical''.
+			\item $G_\sigma\neq G_{\sigma'}$, but they are isomorphic:
+			\[G_{\sigma'}=gG_\sigma g^{-1}\simeq G_\sigma.\]
+			\item This induces another isomorphism:
+			\[H^{p+1}[G_{\sigma'},\uone_T]\simeq H^{p+1}[G_\sigma,\uone_T]\]
+			\item $\hat\omega(\sigma)$ and $\hat\omega(\sigma')$ are related by this isomorphism
+			\[\hat\omega(\sigma') = g\cdot \hat\omega(\sigma).\]
+			\item Only decorations on symmetry-unrelated cells are independent: finite \# of them.
+		\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{The 1st page}
+
+	\begin{columns}
+		\column{.4\textwidth}
+		\begin{center}
+			\includegraphics[width=\textwidth]{../spspt/blocks}
+		\end{center}
+		\column{.6\textwidth}
+		\begin{itemize}
+			\item 1st page = a collection of SPTs:
+			\[E^p_{p,1} = \bigoplus_{\sigma\in Y_p/G} \Phi^p(G_\sigma),\]
+			\[\Phi^p(G_\sigma) = H^{p+1}(G_\sigma, \uone_T).\]
+			\item We can generalize this to
+			\[E^q_{p,1} = \bigoplus_{\sigma\in Y_p/G} \Phi^q(G_\sigma).\]
+		\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{No-Open-Edge Conditions}
+	\begin{columns}
+		\column{.58\textwidth}
+		\begin{itemize}
+			\item<1-> SPT blocks have nontrivial boundary states.
+			\item<2-> Boundary anomaly must cancel on $(p-1)$-cells.
+			\item<3-> A subtlety: $\tau$ has more symmetry operations than $\sigma$: $G_\tau \supseteq G_\sigma$
+			\item<3-> $\hat\omega(\sigma_1)
+			+\hat\omega(\sigma_2)+\hat\omega(\sigma_3)+\hat\omega(\sigma_4)\in \Phi^p(G_\tau)$.
+			\item<3-> A transfer map: $\Phi^p(G_\sigma)\rightarrow \Phi^p(G_\tau)$.
+		\end{itemize}
+		\column{.42\textwidth}
+		\begin{tikzpicture}
+			\draw (0, 1)--(-1, 1)--(-2, 0)--(2, 0)--(3, 1)--(1, 1);
+			\draw [thick] (0, 0)--(1, 1);
+			\draw<1-2> [string] (.2, .1)--(1, .9);
+			\draw<1> [string] (1, .9)--(2.8, .9);
+			\draw<1> [string] (2.8, .9)--(2, .1);
+			\draw<1> [string] (2, .1)--(.2, .1);
+			\draw<2> [string] (.1, .2)--(.9, 1);
+			\draw<3-> [->] (1.3, .5)--(.6, .5);
+			\draw<3-> [->] (.5, 1.3)--(.5, .6);
+			\draw<3-> [->] (.5, -.3)--(.5, .4);
+			\draw<3-> [->] (-.3, .5)--(.4, .5);
+			\node<1-2> at (.5, .5) [above] {$\tau$};
+			\node<3-> at (.7, .7) [above] {$\tau$};
+			\draw (1, 1)--(1, 3)--(0, 2)--(0, -2)--(0, -2)--(1, -1)--(1, 0);
+			\node at (.5, 1.5) {$\sigma_1$};
+			\node at (1.5, .5) {$\sigma_2$};
+			\node at (.5, -0.5) {$\sigma_3$};
+			\node at (-0.5, .5) {$\sigma_4$};
+		\end{tikzpicture}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{No-Open-Edge Conditions}
+	\begin{columns}
+		\column{.58\textwidth}
+		\begin{itemize}
+			\item We can define a boundary-transfer operation $\partial\omega$:
+			\[(\partial\hat\omega)(\tau)=\hat\omega(\sigma_1)
+			+\hat\omega(\sigma_2)+\hat\omega(\sigma_3)+\hat\omega(\sigma_4).\]
+			\item Cocycle equation: $\partial\omega\simeq0.$
+			\item Define $d_1: E^p_{p,1}\rightarrow E^p_{p-1,1}$:
+			\[d_1\hat\omega = \partial\hat\omega.\]
+			\item First-page no-open-edge condition:
+			\[d_1\hat\omega \simeq 0.\]
+			\item $E^{p+1}_{p,r}$: anomaly pattern.
+		\end{itemize}
+		\column{.42\textwidth}
+		\begin{tikzpicture}
+			\draw (0, 1)--(-1, 1)--(-2, 0)--(2, 0)--(3, 1)--(1, 1);
+			\draw [thick] (0, 0)--(1, 1);
+			\node at (.7, .7) [above] {$\tau$};
+			\draw (1, 1)--(1, 3)--(0, 2)--(0, -2)--(0, -2)--(1, -1)--(1, 0);
+			\draw [->] (1.3, .5)--(.6, .5);
+			\draw [->](.5, 1.3)--(.5, .6);
+			\draw [->](.5, -.3)--(.5, .4);
+			\draw [->](-.3, .5)--(.4, .5);
+			\node at (.5, 1.5) {$\sigma_1$};
+			\node at (1.5, .5) {$\sigma_2$};
+			\node at (.5, -0.5) {$\sigma_3$};
+			\node at (-0.5, .5) {$\sigma_4$};
+		\end{tikzpicture}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Bubbling Equivalence}
+\begin{columns}
+\column{.7\textwidth}
+\begin{itemize}
+\item Coboundaries: $\hat\omega\simeq0$.
+\item A coboundary: attaching the same SPT state to  $\partial \sigma$.
+\item The bubbling process can also expressed by $\partial$:
+\[\hat\omega = \partial\hat\mu\simeq0.\]
+\item We define $d_1:E^p_{p+1, 1}\rightarrow E^p_{p,1}$:
+\[d_1\hat\mu = \partial\hat\mu.\]
+\item The first-page bubbling equivalence:
+\[d_1\hat\mu\simeq0.\]
+\item $E^{p-1}_{p,r}$: Bubbling patterns.
+\end{itemize}
+\column{.3\textwidth}
+\begin{animateinline}{5}
+        \multiframe{12}{Ra=.3+.05}{
+\begin{tikzpicture}[scale=1]
+	\draw (0, 0)--(2, 0)--(2, 2)--(0, 2)--(0, 0);
+	\draw [dashed] (1, 2)--(1, 1)--(2, 1);
+	\draw (2, 1)--(3, 1)--(3, 3)--(1, 3)--(1, 2);
+	\draw [dashed] (0, 0)--(1, 1);
+	\draw (2, 0)--(3, 1);
+	\draw (0, 2)--(1, 3);
+	\draw (2, 2)--(3, 3);
+	\fill [blue!30,opacity=.5] (1.5-1.5*\Ra, 1.5-1.5*\Ra)--(1.5+0.5*\Ra, 1.5-1.5*\Ra)
+	--(1.5+1.5*\Ra, 1.5-0.5*\Ra)--(1.5+1.5*\Ra, 1.5+1.5*\Ra)
+	--(1.5-0.5*\Ra, 1.5+1.5*\Ra)--(1.5-1.5*\Ra, 1.5+0.5*\Ra)
+	--(1.5-1.5*\Ra, 1.5-1.5*\Ra);
+	\draw [blue,dashed] (1.5-1.5*\Ra, 1.5+0.5*\Ra)--(1.5+0.5*\Ra, 1.5+0.5*\Ra)--(1.5+1.5*\Ra,1.5+1.5*\Ra);
+	\draw [blue,dashed] (1.5+0.5*\Ra, 1.5-1.5*\Ra)--(1.5+0.5*\Ra, 1.5+0.5*\Ra);
+	\draw [->,thick] (1.5-0.5*\Ra, 1.5-0.5*\Ra)--(1.3-0.5*\Ra, 1.3-0.5*\Ra);
+	\draw [->,thick] (1.5, 1.5+\Ra)--(1.5, 1.78+\Ra);
+	\draw [->,thick] (1.5+\Ra, 1.5)--(1.78+\Ra, 1.5);
+	%\fill [green!30] (-\Ra,-\Ra)--(-\Ra,\Ra)--(\Ra,\Ra)--(\Ra,-\Ra)--(-\Ra,-\Ra);
+%\draw [blue,thick] (-\Ra,-\Ra)--(-\Ra,\Ra)--(\Ra,\Ra)--(\Ra,-\Ra)--(-\Ra,-\Ra);
+%\node at (0, 0) {$d\nu$};
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{2nd page: a homology-group calculation}
+\begin{itemize}
+\item No-open-edge conditions:
+\[d_1\hat\omega\simeq 0, \hat\omega\in E^p_{p,1}.\]
+\item Bubbling equivalence:
+\[d_1\hat\mu\simeq 0, \hat\mu\in E^p_{p+1,1}.\]
+\item A homology-group calculation:
+\[E^p_{p+1,1}\xrightarrow{d_1}E^p_{p,1}\xrightarrow{d_1}E^p_{p-1,1},\]
+\[E^p_{p,2}=\frac{\ker d^p_{p+1,1}}{\img d^p_{p,1}}.\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{High-Order No-Open-Edge Conditions}
+\begin{columns}
+\column{.6\textwidth}
+\begin{enumerate}
+\item<1-> Choose a cocycle for each 2-cell $\sigma$.\\ Check $\partial\hat\omega_2(\tau)\simeq0$ for each 1-cell $\tau$.\\
+\emph{1st-page no-open-edge condition.}
+\item<2-> Choose a cochain $\hat\omega_1$ for each $\tau$.\\
+Check $\partial\hat\omega_1(\lambda)\simeq0$ for each 0-cell $\lambda$.\\
+\emph{2nd-page no-open-edge condition.}
+\item<3> Choose a cochain $\hat\omega_0$ for each $\lambda$.
+\end{enumerate}
+\column{.4\textwidth}
+\begin{center}
+\begin{tikzpicture} [scale=3]
+\fill [blue!50] (0,0)--(1,0)--(1.5,.5)--(1.5,1.5)--(0.5,1.5)--(0,1)--(0,0);
+\draw<1> [thick,white] (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
+\draw<1> [thick,white] (1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
+\draw<1> [thick,white] (1.5,1.5)--(0.5,1.5)--(0,1);
+\draw<1> [thick,white] (0,0)--(.5,.5)--(.5,1.5);
+\draw<1> [thick,white](.5,.5)--(1.5,.5);
+\draw<2-> [thick,red] (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
+\draw<2-> [thick,red] (1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
+\draw<2-> [thick,red] (1.5,1.5)--(0.5,1.5)--(0,1);
+\draw<2-> [thick,red] (0,0)--(.5,.5)--(.5,1.5);
+\draw<2-> [thick,red](.5,.5)--(1.5,.5);
+\fill<1-2> [white] (0,0) circle (2pt);
+\fill<1-2> [white] (1,0) circle (2pt);
+\fill<1-2> [white] (0,1) circle (2pt);
+\fill<1-2> [white] (1,1) circle (2pt);
+\fill<1-2> [white] (0.5,0.5) circle (2pt);
+\fill<1-2> [white] (1.5,0.5) circle (2pt);
+\fill<1-2> [white] (0.5,1.5) circle (2pt);
+\fill<1-2> [white] (1.5,1.5) circle (2pt);
+\fill<3> [red] (0,0) circle (2pt);
+\fill<3> [red] (1,0) circle (2pt);
+\fill<3> [red] (0,1) circle (2pt);
+\fill<3> [red] (1,1) circle (2pt);
+\fill<3> [red] (0.5,0.5) circle (2pt);
+\fill<3> [red] (1.5,0.5) circle (2pt);
+\fill<3> [red] (0.5,1.5) circle (2pt);
+\fill<3> [red] (1.5,1.5) circle (2pt);
+\end{tikzpicture}
+\end{center}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{High-Order Bubbling Equivalences}
+\begin{itemize}
+\item There is a similar algorithm for the bubbling equivalence.
+\item Assign 1d SPT states ($d\hat\mu_1=0$) to 3-cells: $\partial\hat\mu_2$ trivializes $\hat\omega_1$ building blocks.
+\item If $\partial\hat\mu_2\simeq0$, choose $d\hat\mu_1+\partial\hat\mu_2=0$, then $\partial\hat\mu_1$ trivializes $\hat\omega_0$ building blocks.
+\item ......
+\end{itemize}
+\begin{center}
+\begin{animateinline}{5}
+        \multiframe{12}{Ra=.4+.05}{
+\begin{tikzpicture}
+	\draw (-2,-2)--(-2,2)--(2,2)--(2,-2)--(-2,-2);
+   \draw (-2,0)--(2,0);
+   \draw (0,-2)--(0,2);
+	%\fill [green!30] (-\Ra,-\Ra)--(-\Ra,\Ra)--(\Ra,\Ra)--(\Ra,-\Ra)--(-\Ra,-\Ra);
+\draw [blue,thick] (-\Ra+1,-\Ra+1)--(-\Ra+1,\Ra+1)--(\Ra+1,\Ra+1)--(\Ra+1,-\Ra+1)--(-\Ra+1,-\Ra+1);
+\draw [blue,thick] (-\Ra+1,-\Ra-1)--(-\Ra+1,\Ra-1)--(\Ra+1,\Ra-1)--(\Ra+1,-\Ra-1)--(-\Ra+1,-\Ra-1);
+\draw [blue,thick] (-\Ra-1,-\Ra+1)--(-\Ra-1,\Ra+1)--(\Ra-1,\Ra+1)--(\Ra-1,-\Ra+1)--(-\Ra-1,-\Ra+1);
+\draw [blue,thick] (-\Ra-1,-\Ra-1)--(-\Ra-1,\Ra-1)--(\Ra-1,\Ra-1)--(\Ra-1,-\Ra-1)--(-\Ra-1,-\Ra-1);
+%\node at (0, 0) {$d\nu$};
+%\node at (\Ra, 0) [left] {$\nu$};
+\end{tikzpicture}
+}
+\end{animateinline}
+~~~~
+\begin{animateinline}{5}
+        \multiframe{8}{Ra=.8+-.1}{
+\begin{tikzpicture}
+\draw (-2,0)--(2,0);
+\draw (0, -2)--(0, 2);
+\draw [blue,thick,double] (-\Ra, 0)--(\Ra,0);
+\draw [blue,thick,double] (2-\Ra,0)--(2,0);
+\draw [blue,thick,double] (-2+\Ra,0)--(-2,0);
+\draw [blue,thick,double] (0, -\Ra)--(0, \Ra);
+\draw [blue,thick,double] (0, 2-\Ra)--(0, 2);
+\draw [blue,thick,double] (0, -2+\Ra)--(0, -2);
+\fill [red] (-\Ra,0) circle (2pt);
+\fill [red] (\Ra,0) circle (2pt);
+\fill [red] (0,-\Ra) circle (2pt);
+\fill [red] (0,\Ra) circle (2pt);
+\fill [red] (2-\Ra,0) circle (2pt);
+\fill [red] (-2+\Ra,0) circle (2pt);
+\fill [red] (0,2-\Ra) circle (2pt);
+\fill [red] (0,-2+\Ra) circle (2pt);
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{center}
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{A building block}
+%	\begin{columns}
+%		\column{.4\textwidth}
+%		\begin{center}
+%			\includegraphics[width=\textwidth]{blocks}
+%		\end{center}
+%		\column{.6\textwidth}
+%		\begin{itemize}
+%			\item A building block $\hat\omega$ is a collection of cochains:
+%			\[\hat\omega(\sigma) \in C^{p+1}[G_\sigma, \uone_T].\]
+%			\item $\hat\omega$ needs to be symmetric under $SG$.
+%			\item $\hat\omega$ needs to satisfy the bulk-boundary relation:
+%			\[d\hat\omega(\tau) = \sum_{\sigma:\tau\in\partial\sigma}\hat\omega(\sigma).\]
+%			\item Need to find when two blocks can be deformed to each other: $\hat\omega\simeq\hat\omega^\prime$.
+%		\end{itemize}
+%	\end{columns}
+%\end{frame}
+
+\begin{frame}
+\frametitle{A spectral sequence}
+We compute in the following sequence:
+\begin{enumerate}
+\item 0st-page no-open-edge condition + 0st-page bubbling equivalence.
+\[E^p_{p,1}=\frac{\ker d_0}{\img d_0}.\]
+\item 1st-page no-open-edge condition + 1st-page bubbling equivalence.
+\[E^p_{p,2}=\frac{\ker d_1}{\img d_1}.\]
+\item 2nd-page no-open-edge condition + 2st-page bubbling equivalence.
+\[E^p_{p,3}=\frac{\ker d_2}{\img d_2}.\]
+\end{enumerate}
+
+\[E^p_{p,1}\supseteq E^p_{p,2}\supseteq E^p_{p,3}\supseteq\cdots=E^p_{p,\infty}.\]
+\end{frame}
+
+\begin{frame}
+\frametitle{Mathematical Proof: Real-Space Construction is Complete}
+\begin{itemize}
+\item Equivariant group cohomology:
+\[H^{d+1}[G, \uone_{PT}]]\simeq H^{d+1}_G[X, \uone_{PT}].\]
+Here $X\sim\text{pt}$ is a (non-free) $G$-complex. See Thorngren and Else, PRX (2018).
+\item There is a spectral sequence:
+\[E_1^{pq}=\bigoplus_{\sigma\in X_p/G}H^q[G_\sigma,\uone_T]\Rightarrow
+ H^{p+q}[G, \uone_{PT}]].\]
+See Kenneth S. Brown's book, Chapter VII.
+\item The topological space $Y$ we used is the Poincar\'e dual of $X$: $E^{pq}_r\simeq E^{q-1}_{d-p,r}$
+\end{itemize}
+\begin{center}
+	\includegraphics[height=2cm]{../spspt/brown_book}
+	\includegraphics[height=2cm]{../spspt/brown_ss}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{An example of a nontrivial building block}
+Consider $G=SG\times\mathbb Z_2$, $SG=P4_22_12$ (\#94 space group).
+\begin{center}
+\includegraphics[height=4cm]{../spspt/blocks}
+\end{center}
+Each colored 2-cell is decorated with a Levin-Gu or CZX state protected by the onsite $\mathbb Z_2$.
+
+\emph{\small Adapted from Z Song, Y Huang, YQ, C Fang and M Hermele, Sci Adv 2019.}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Results for all 230 space groups}
+	\begin{columns}
+		\column{.6\textwidth}
+		\includegraphics[height=8cm]{../spspt/bigtable}
+		\column{.4\textwidth}
+		\begin{itemize}
+			\item Classifications computed for all 230 space groups, paired with selected $G_0$.
+			\item Results computed by a fully automated python code.
+		\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{An example of 2nd order computation}
+\emph{\small Adapted from Xu Yang, Shenghan Jiang, Ashvin Vishwanath and Ying Ran, Ann Phys \textbf{413}, 168060 (2019)..}
+\begin{itemize}
+	\item Consider a magnetic translation symmetry $T_xT_yT_x^{-1}T_y^{-1} = X$, and $G_0=\mathbb Z_2^X\times\mathbb Z_2^T$.
+	\item $H^3[G_0,\uone_T]=\mathbb Z_2\oplus\mathbb Z_2$: the one protected by both $\mathbb Z_2^X$ and $\mathbb Z_2^T$ is \alert{not compatible} with the magnetic translation symmetry.
+	\item Try to decorate $\omega\in H^3[G_0,\uone_T]$ to all 2-cells: the 1-cells can be gapped out, but the 0-cells \alert{cannot}.
+	\item There must be a $T^2=-1$ Kramers doublet at each 0-cell.
+\end{itemize}
+\begin{center}
+\begin{tikzpicture}
+\draw (-1.2,0)--(1.2,0);
+\draw (-1.2,1)--(1.2,1);
+\draw (-1.2,-1)--(1.2,-1);
+\draw (-1,-1.2)--(-1,1.2);
+\draw (0,-1.2)--(0,1.2);
+\draw (1,-1.2)--(1,1.2);
+\fill [red] (-1,-1) circle (2pt);
+\fill [red] (-1,0) circle (2pt);
+\fill [red] (-1,1) circle (2pt);
+\fill [red] (0,-1) circle (2pt);
+\fill [red] (0,0) circle (2pt);
+\fill [red] (0,1) circle (2pt);
+\fill [red] (1,-1) circle (2pt);
+\fill [red] (1,0) circle (2pt);
+\fill [red] (1,1) circle (2pt);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Real-space construction of fSPTs}
+
+  \begin{itemize}
+  \item Jian-Hao Zhang, Shuo Yang, YQ and Zheng-Cheng Gu, arXiv:2012.15657
+  \item Need to decorate complex fermions, Kitaev chains, etc.
+  \item We computed fSPT classification protected by 17 wallpaper groups, and the two approaches agree.
+  %\item Still need automated programs for real-space construction of fSPTs.
+  \end{itemize}
+  \begin{center}
+    \includegraphics[height=4cm]{majorana_bubble}
+  \end{center}
 \end{frame}
 
 \section{Outlooks}
