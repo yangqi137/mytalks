@@ -365,7 +365,7 @@ Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
   \item Continuous input, 0/1 output.
   \end{itemize}
   \begin{center}
-    \includegraphics[viewport=0 270 1250 450,clip,width=12cm]{nn-model}    
+    \includegraphics[width=14cm]{nn-model1}
   \end{center}
 \end{frame}
 
@@ -392,14 +392,94 @@ Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
   \item No autocorrlation.
   \end{itemize}
   \begin{center}
-    \includegraphics{autocorr}
+    \includegraphics{autocorr-a}
   \end{center}
 \end{frame}
 
 \begin{frame}
+	\frametitle{Limitation of the generative model}
+	\begin{itemize}
+		\item The training sample is inaccurate: We do this because MCMC is not good enough...
+		\item The generative model learns all inaccurate details of the training sample.
+		\item The generative model cannot supercede the accuracy of the training sample.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
   \frametitle{Correcting the generative model with a short Markov chain}
+	\begin{itemize}
+		\item The generative model is close to the true distribution.
+		\item Start from the generative model, a few MCMC steps coverge to the true distribution.
+		\item A non-MC direct sampling:
+		\begin{center}
+			\begin{tikzpicture}
+				\draw (0,0) node (n1) [draw] {NN};
+				\draw (1.5,0) node (m11) [circle,draw] {MC};
+				\draw (3,0) node (m12) [circle,draw] {MC};
+				\draw [->] (n1) -- (m11);
+				\draw [->] (m11)--(m12);
+
+				\draw (4.5,0) node (n2) [draw] {NN};
+				\draw (6,0) node (m21) [circle,draw] {MC};
+				\draw (7.5,0) node (m22) [circle,draw] {MC};
+				\draw [->] (n2) -- (m21);
+				\draw [->] (m21)--(m22);
+
+				\draw (9,0) node (n2) [draw] {NN};
+				\draw (10.5,0) node (m21) [circle,draw] {MC};
+				\draw (12,0) node (m22) [circle,draw] {MC};
+				\draw [->] (n2) -- (m21);
+				\draw [->] (m21)--(m22);
+			\end{tikzpicture}
+		\end{center}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Correcting the generative model with a short Markov chain}
+	\begin{columns}
+		\column{.7\textwidth}
+		\begin{center}
+			\includegraphics[height=7cm]{hist-ising}
+		\end{center}
+		\column{.3\textwidth}
+		\begin{itemize}
+			\item Training data has a wrong distribution.
+			\item NN learns the wrong dist.
+			\item NN + short MC recovers the correct dist.
+		\end{itemize}
+	\end{columns}
 \end{frame}
 \section{Application to quantum fermionic systems}
+
+\begin{frame}
+	\frametitle{Converting fermionic quantum models to classical models}
+	\begin{itemize}
+		\item Auxiliary-field determinant quantum Monte Carlo (AFDQMC).
+		\item Configurations: space-time configuration of classical auxiliary fields.
+		\item Weights: $W[\{S_i\}] = \det (1 + B[\{S_i\}])$.
+		\item Effective bosonic model with nonlocal interactions: can a CNN model express this?
+	\end{itemize}
+	\begin{center}
+		\includegraphics[height=3cm]{nn-model2}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Results}
+	\begin{columns}
+		\column{.5\textwidth}
+		\begin{center}
+			Direct sampling
+			\includegraphics{autocorr-c}
+		\end{center}
+		\column{.5\textwidth}
+		\begin{center}
+			\includegraphics[width=7cm]{corr-2}
+		\end{center}
+
+	\end{columns}
+\end{frame}
 
 \section{Details and Conclusions}
 
