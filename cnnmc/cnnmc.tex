@@ -242,7 +242,7 @@ Hongyu Lu, Chuhao Li, Wei Li, YQ and Zi Yang Meng, arXiv:2106.00712
 \begin{frame}
   \frametitle{Autocorrelation time}
   \begin{itemize}
-    \item Autocorrelation time measures the efficiency of the update algorithm.
+    \item Autocorrelation time measures the efficiency of the sampling algorithm.
     \item ``time'' sequence:
     \[\cdots\rightarrow O(t-1)\rightarrow O(t)\rightarrow O(t+1)\rightarrow\cdots,
   \quad O(t) = O[\mathcal C(t)].\]
@@ -283,7 +283,6 @@ A statistically independent sample is generated in every $\tau$-steps.
       %\[\text{Cost} \propto \text{Cost of each step} \times \text{autocorrelation time}\]
     \end{columns}
 \vspace{.5cm}
-Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
 \end{frame}
 
 \begin{frame}
@@ -293,13 +292,16 @@ Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
       \draw plot[domain=0:9.52,smooth,samples=200] function {sin(x*2)};
       \draw<1> (2.356, -1) -- (2.8, -0.63127) [->, thick];
       \draw<2> (2.356, -1) -- (3.5, 0.65699) [->, thick];
-      \draw<3> (2.356, -1) -- (5.49779, -1) [->, thick];
+      % \draw<3> (2.356, -1) -- (5.49779, -1) [->, thick];
+      \draw<3> (2.356, -1) node [circle,fill] {};
+      \draw<3> (5.49779, -1) node [circle,fill] {};
     \end{tikzpicture}
   \end{center}
   \begin{itemize}
     \item A dilemma of local updates:
     \item<1-> Step is too small: high acceptance, small difference.
     \item<2-> Step is too big: low acceptance, big difference.
+    \item<3-> Directly sampling the low-energy states would be ideal...
   \end{itemize}
 \end{frame}
 
@@ -343,23 +345,77 @@ Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
   \begin{center}
     \includegraphics[width=8cm]{../slmctut/slowdown}
   \end{center}
-  There's a way around this: MCMC simulation does not have to mimic the real dynamics...
+\end{frame}
+
+\begin{frame}
+  \frametitle{We are not making the problem up: criticality is important}
+  \begin{itemize}
+  \item Critical point has universal properties:
+    \begin{itemize}
+    \item Determined by symmetry and dimensionality, rigid, independent of model/material details.
+    \item Connection b/w theory, experiment and numerics.
+    \end{itemize}
+    \begin{block}{Example: 3D Ising universality class}
+      \begin{itemize}
+      \item Experiment: liquid-gas critical point. PRL \textbf{37} 29 (1976). $\nu=$0.63-0.64.
+      \item Monte Carlo simulation: 3D Ising model. PRB \textbf{82} 174433 (2010). $\nu=0.63002(10)$.
+      \item CFT bootstrap: Nat. Phys. \textbf{12} 535 (2016). $\nu=0.629970(5)$.
+      \end{itemize}
+    \end{block}
+  \item More universality classes in quantum critical points:
+    \begin{itemize}
+    \item Fermions.
+    \item Dynamical exponent $z>1$: no conformal symmetry.
+    \end{itemize}
+  \item Needs Quantum Monte Carlo simulations: large system size, fast algorithm.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Challenge}
   \begin{itemize}
-    \item Local update is too slow for many models: critical slowing down, glassy behavior, separation of energy scales, etc.
+  \item Local update is too slow for many models
+    \begin{itemize}
+    \item critical slowing down;
+    \item configuration space w/ constraints;
+    \item separation of energy scales;
+    \item glassy behavior;
+    \item other unknown reasons...
+    \end{itemize}
     \item Global update is only available for certain models. Like Wolff algorithm for two-body interactions.
-    \item A good update algorithm for generic models?
+    \item Can we reduce the autocorrelation (maybe do direct sampling instead of MCMC)?
   \end{itemize}
 \end{frame}
 
 \section{Direct Sampling: Generative Model + a short Markov chain}
 
 \begin{frame}
+  \frametitle{Generative model and direct sampling}
+  \begin{center}
+    \begin{tikzpicture}
+      \draw (0, 0) node (in) [draw,circle] {iid variables};
+      \draw (3, 0) node (tr) [draw] {CNN};
+      \draw (6, 0) node (out) [draw,circle] {$\uparrow\uparrow\downarrow\uparrow$};
+      \draw [->] (in) -- (tr);
+      \draw [->] (tr) -- (out);
+    \end{tikzpicture}
+  \end{center}
+  \begin{itemize}
+  \item Model can be sampled directly: no autocorrelation.
+  \item Transformation is noninvertible
+    \begin{enumerate}
+    \item Needs training sample data.
+    \item Do not know the resulting distribution: cannot do reweighting/Metropolis-Hastings corrections etc.
+    \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
   \frametitle{Generative model}
   \begin{itemize}
+  \item 2D Ising model:
+    \[Z=\sum_{\{\sigma_i\}}e^{-\beta E[\{\sigma_i\}]},\quad
+      E[\{\sigma_i\}]=-J\sum_{\langle ij\rangle} \sigma_i\sigma_j.\]
   \item NN transforms Gaussian variables to target distribution.
   \item PBC padding before convolutional layers.
   \item Continuous input, 0/1 output.
@@ -397,12 +453,23 @@ Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
 \end{frame}
 
 \begin{frame}
-	\frametitle{Limitation of the generative model}
-	\begin{itemize}
-		\item The training sample is inaccurate: We do this because MCMC is not good enough...
-		\item The generative model learns all inaccurate details of the training sample.
-		\item The generative model cannot supercede the accuracy of the training sample.
-	\end{itemize}
+  \frametitle{Limitation of the generative model}
+  \begin{itemize}
+  \item The training sample is inaccurate: We do this because MCMC is not good enough...
+  \item The generative model learns all inaccurate details of the training sample.
+  \item The generative model cannot supercede the accuracy of the training sample.
+  \end{itemize}
+  \begin{center}
+    \begin{tikzpicture}
+      \draw (0, 0) node (model) [draw,align=center] {Model\\$Z=\sum e^{-\beta E}$};
+      \draw (3.5, 0) node (train) [circle,draw,align=center] {Training\\data};
+      \draw (7, 0) node (nn) [draw,align=center] {Generative\\model};
+      \draw (10.5, 0) node (data) [circle,draw,align=center] {More\\data};
+      \draw [->] (model) -- (train) node [midway,above] {MCMC};
+      \draw [->] (train) -- (nn) node [midway,above] {Training};
+      \draw [->] (nn) -- (data);
+    \end{tikzpicture}
+  \end{center}
 \end{frame}
 
 \begin{frame}
@@ -447,6 +514,7 @@ Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
 			\item Training data has a wrong distribution.
 			\item NN learns the wrong dist.
 			\item NN + short MC recovers the correct dist.
+                        \item 30 MC steps vs $\tau>300$.
 		\end{itemize}
 	\end{columns}
 \end{frame}
@@ -481,7 +549,16 @@ Most of our simulation is done on the Tianhe-1 supercomputer in Tianjin, China.
 	\end{columns}
 \end{frame}
 
-\section{Details and Conclusions}
+\section{Conclusions}
 
+\begin{frame}
+  \frametitle{Summary and Outlook}
+  \begin{itemize}
+  \item We trained a generative model to appproximate the Boltzmann distribution.
+  \item Direct sampling: no autocorrelation.
+  \item Use a short Markov chain to improve the outcome of the generative model.
+  \item Future works: apply this to spin-fermion models hosting fermionic QCPs.
+  \end{itemize}
+\end{frame}
 
 \end{document}
