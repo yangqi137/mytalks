@@ -12,8 +12,10 @@
 %\usepackage{mathtools}
 %\usepackage{ifthen}
 
-%\usepackage{xeCJK}
-%\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{fontspec}
+\newfontfamily\cjkfont{SimSun}
+\setCJKmainfont{SimSun}
 %\newfontfamily\cjkfont{PingFang SC}
 %\setCJKmainfont{PingFang SC}
 \newcolumntype{x}{>{\centering\arraybackslash}X}
@@ -164,14 +166,14 @@
 
 \begin{frame}{References}
 \begin{itemize}
-\item Zhi-Da Song: Peking University.
-\item Chen Fang: Institute of Physics, Beijing.
+\item Zhi-Da Song (宋志达): Peking University.
+\item Chen Fang (方辰): Institute of Physics, Beijing.
 %\item Jian-Hao Zhang: 
 \begin{center}
 	\includegraphics[height=3cm]{../people/zhidasong}
 	\includegraphics[height=3cm]{../people/chenfang}
 \end{center}
-\item Zhida Song, Chen Fang and Yang Qi, Nat. Commun. 11, ???? (2020).
+\item Zhida Song, Chen Fang and Yang Qi, Nat. Commun. 11, 4197 (2020).
 \end{itemize}
 \end{frame}
 
@@ -213,6 +215,18 @@
 			\item Xiao-Gang Wen, PRB 91, 205101 (2015).
 		\end{itemize}
 	\end{enumerate}
+	\begin{center}
+		\begin{tikzpicture}
+			\draw[fill=blue!40] (0, 0)--(4, 0)--(4, 2)--(0, 2)--(0, 0);
+			\fill[red] (1, 1) circle(5pt);
+			\fill[red] (3, 1) circle(5pt);
+		\end{tikzpicture}
+		\hspace{1cm}
+		\begin{tikzpicture}
+			\draw[fill=blue!40] (0, 0)--(4, 0)--(4, 2)--(0, 2)--(0, 0);
+			\draw[-latex=5pt](0, 0)--(2.1, 0);
+		\end{tikzpicture}
+	\end{center}
 \end{frame}
 
 \begin{frame}
@@ -224,8 +238,8 @@
 \end{itemize}
 \begin{enumerate}
 	\item Free-fermion states: topological insulators, topological superconductors; K-theory.
-	\item Bosonic SPTs: Haldane chain, CZX/Levin-Gu state, etc; group-cohomology theory.\\
-	\emph{Xie Chen, Zheng-Cheng Gu, Zheng-Xin Liu and Xiao-Gang Wen, Science 2012.}
+	\item Bosonic SPTs: Haldane chain, CZX/Levin-Gu state, etc; group-cohomology theory.
+	%\emph{Xie Chen, Zheng-Cheng Gu, Zheng-Xin Liu and Xiao-Gang Wen, Science 2012.}
       \item Interacting fermionic SPTs: a ``generalized'' cohomology theory.
 \end{enumerate}
 \end{frame}
@@ -500,7 +514,7 @@
       \[d_1\hat\mu = \partial\hat\mu.\]
     \item The first-page bubbling equivalence:
       \[d_1\hat\mu\simeq0.\]
-    \item $E^{p+1}_{p,r}$: Bubbling patterns.
+    \item $E^{p-1}_{p,r}$: Bubbling patterns.
     \end{itemize}
     \column{.4\textwidth}
     \begin{animateinline}{5}
@@ -526,7 +540,7 @@
     \[d_1\hat\mu\simeq 0, \hat\mu\in E^p_{p+1,1}.\]
   \item A homology-group calculation:
     \[E^p_{p+1,1}\xrightarrow{d_1}E^p_{p,1}\xrightarrow{d_1}E^p_{p-1,1},\]
-    \[E^p_{p,2}=\frac{\ker d^p_{p+1,1}}{\img d^p_{p,1}}.\]
+    \[E^p_{p,2}=\frac{\ker d^p_{p,1}}{\img d^p_{p+1,1}}.\]
   \end{itemize}
 \end{frame}
 
@@ -544,7 +558,7 @@
   \end{itemize}
 \end{frame}
 
-\section{Recipe II: higher pages}
+\section{Recipe: higher pages}
 
 \begin{frame}
 \frametitle{General construction: a ``perturbative'' approach}
@@ -997,8 +1011,8 @@ See Brown's book, Chapter VII.
 \begin{frame}
 \frametitle{Related works}
 \begin{itemize}
-\item Another work about spectral sequence: Ken Shiozaki, Masatoshi Sato and Kiyonori Gomi, arXiv:1802.06694 (momentum-space analysis).
-\item An independent work: Else and Thorngren, arXiv:1810.10539.
+\item Another work about spectral sequence: Ken Shiozaki, Masatoshi Sato and Kiyonori Gomi, PRB 106, 165103 (2022) (momentum-space analysis).
+\item An independent work: Else and Thorngren, PRB 99, 115116 (2019).
 \item Related work: K. Shiozaki, C. Zhaoxi Xiong, and K. Gomi,
 arXiv:1810.00801.
 \end{itemize}
@@ -1014,7 +1028,7 @@ Consider $G=SG\times\mathbb Z_2$, $SG=P4_22_12$ (\#94 space group).
 \end{center}
 Each colored 2-cell is decorated with a Levin-Gu or CZX state protected by the onsite $\mathbb Z_2$.
 
-\emph{\small Adapted from Z Song, Y Huang, YQ, C Fang and M Hermele, arXiv:1810.02330.}
+\emph{\small Adapted from Z Song, Y Huang, YQ, C Fang and M Hermele, Sci. Adv. 2019.}
 \end{frame}
 
 \begin{frame}
@@ -1026,7 +1040,7 @@ Each colored 2-cell is decorated with a Levin-Gu or CZX state protected by the o
 
 \begin{frame}
 \frametitle{An example of 2nd order computation}
-\emph{\small Adapted from Xu Yang, Shenghan Jiang, Ashvin Vishwanath and Ying Ran, arXiv:1705.09298.}
+\emph{\small Adapted from Xu Yang, Shenghan Jiang, Ashvin Vishwanath and Ying Ran, Ann. Phys. 413, 168060 (2020).}
 \begin{itemize}
 	\item Consider a magnetic translation symmetry $T_xT_yT_x^{-1}T_y^{-1} = X$, and $G_0=\mathbb Z_2^X\times\mathbb Z_2^T$.
 	\item $H^3[G_0,\uone_T]=\mathbb Z_2\oplus\mathbb Z_2$: the one protected by both $\mathbb Z_2^X$ and $\mathbb Z_2^T$ is \alert{not compatible} with the magnetic translation symmetry.
@@ -1058,7 +1072,9 @@ Each colored 2-cell is decorated with a Levin-Gu or CZX state protected by the o
   \frametitle{Real-space construction of fSPTs}
 
   \begin{itemize}
-  \item Jian-Hao Zhang, Shuo Yang, YQ and Zheng-Cheng Gu, arXiv:2012.15657
+		\item 2D point groups: Jian-Hao Zhang (张健豪), Qing-Rui Wang, Shuo Yang, YQ, and Zheng-Cheng Gu, PRB 101, 100501 (2020).
+  \item 2D wallpaper groups: J-H Zhang, S Yang, YQ and Z-C Gu, PR Research 4, 033081 (2022).
+  \item 3D point groups: J-H Zhang, YQ and Z-C Gu, arXiv:2204.13558.
   \item Results agrees with onsite-symmetry computations.
   \end{itemize}
   \begin{center}
@@ -1073,8 +1089,8 @@ Each colored 2-cell is decorated with a Levin-Gu or CZX state protected by the o
 \begin{itemize}
 \item Outlook: cut-and-glue other things:
 \begin{enumerate}
-\item Fermionic space-group SPTs.\\
-Jian-Hao Zhang et al, to appear.
+\item High-order topological bounary states: real-space construction w/ boundaries.\\
+YQ, Chen Fang, to appear.
 \item 2D space-group SETs.\\
 Mirror SET: YQ, Chao-Ming Jian and Chenjie Wang, PRB (2019).
 \item 3D space-group SETs: fracton models?
