@@ -1,0 +1,88 @@
+\documentclass[xcolor=table, 10pt, aspectratio=169, ignorenonframetext]{beamer}
+
+%\usepackage{arev}
+\usepackage{amsmath,amssymb,amscd}
+%\usepackage{dsfont}
+%\usepackage{mathrsfs}
+%\usepackage{yfonts}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{animate}
+%\usepackage{mathtools}
+%\usepackage{ifthen}
+
+%\usepackage{xeCJK}
+%\usepackage{fontspec}
+%\newfontfamily\cjkfont{PingFang SC}
+%\setCJKmainfont{PingFang SC}
+\newcolumntype{x}{>{\centering\arraybackslash}X}
+\renewcommand{\arraystretch}{1.5}
+
+
+\mode<presentation>
+{
+  %\usetheme{Warsaw}
+  % or ...
+  %\useoutertheme{rectangle}
+  \setbeamertemplate{frametitle}[default][center]
+  \defbeamertemplate{itemize item}{flat}{\begin{pgfpicture}{-1ex}{0ex}{1ex}{2ex}
+      \pgfpathcircle{\pgfpoint{0pt}{.6ex}}{0.6ex}
+      \pgfusepath{fill}
+    \end{pgfpicture}%
+  }
+  \defbeamertemplate{itemize subitem}{flat}{\footnotesize\raise0.5pt\hbox{\textbullet}}
+  \defbeamertemplate{itemize subsubitem}{flat}{\footnotesize\raise0.5pt\hbox{\textbullet}}
+
+  %\useinnertheme{circles}
+  \setbeamertemplate{items}[flat]
+  \setbeamertemplate{sections/subsections in toc}[circle]
+  \setbeamertemplate{blocks}[rounded]
+  \setbeamertemplate{title page}[default][colsep=-4bp,rounded=true]
+  \setbeamertemplate{part page}[default][colsep=-4bp,rounded=true]
+  \setbeamercovered{transparent}
+  %\usecolortheme{spruce}
+  %\definecolor{THU}{RGB}{116,61,130}
+  \definecolor{mbg}{RGB}{0,0,160}
+  \setbeamercolor*{palette primary}{fg=white,bg=mbg}
+  \setbeamercolor*{titlelike}{parent=palette primary}
+  \setbeamercolor*{structure}{fg=mbg}
+  \setbeamercolor{frametitle}{fg=white,bg=mbg}
+  % or whatever (possibly just delete it)
+  \setbeamercolor{block title}{bg=mbg,fg=white}
+  \setbeamercolor{block body}{bg=mbg!15}
+ 
+
+  \addtobeamertemplate{navigation symbols}{}{ \hspace{1em}%
+    \usebeamerfont{footline}%
+    \insertframenumber / \inserttotalframenumber }
+}
+
+\begin{document}
+\begin{frame}
+  \frametitle{Numerical bootstrap}
+  \begin{itemize}
+  \item Xizhi Han, Quantum Many-body Bootstrap, arXiv:2006.06002
+  \item Basic ideas:
+    \begin{enumerate}
+    \item Functional: $\langle\cdot\rangle$: maps operators to $\mathbb C$.
+    \item $\langle O^\dagger O\rangle\geq0$.
+    \item $\langle [O, H]\rangle=0$.
+    \item Find functionals satisfying all such constraints, and minimize $\langle H\rangle$.
+    \end{enumerate}
+  \item Gives lower bound of ground-state energy: complimentary to variational methods.
+  \item Jin-Yuan Wu tried to reproduce this result. (1d Hubbard model)
+  \end{itemize}
+
+  \begin{center}
+    \begin{tabular}{c|cccc}
+      \hline
+    $x=0.5$ & $U=4$ & $U=6$ & $U=8$ & $U=10$\\
+    \hline\hline
+    $K=12$ & -0.7830 & -0.7593 & -0.7444 & -0.7342\\
+    \hline
+    DMRG & -0.7534 & -0.7243 & -0.7059 & -0.6939
+  \end{tabular}    
+  \end{center}
+\end{frame}
+\end{document}

@@ -202,19 +202,213 @@ Chin. Phys. Lett. \textbf{38}, 127101 (2021).
 \end{frame}
 
 \begin{frame}[fragile]{Our solution: GAP}
+  \begin{itemize}
+  \item GAP = Group, Algorithm and Programming: \url{www.gap-system.org}.
+  \item Advantage: easy to input of symmetry group.
+    \begin{lstlisting}[basicstyle=\footnotesize]
+      gap> G := CyclicGroup(4);
+      pc group of size 4 with 2 generators>
+      gap> G := DihedralGroup(6);
+      pc group of size 4 with 2 generators>
+      gap> G := SpaceGroup(3, 105);
+      SpaceGroupOnRightBBNWZ( 3, 4, 5, 1, 2 )
+    \end{lstlisting}
+  \item Advantage: other algorithms related to group-cohomology calculation.			
+  \end{itemize}
+\end{frame}
+
+\section{Structure: fSPT and general invertible Topological Order classification}
+
+\begin{frame}[fragile]
+	\frametitle{Bosonic SPT: group cohomology and HAP}
 	\begin{itemize}
-		\item GAP = Group, Algorithm and Programming: \url{www.gap-system.org}.
-		\item Advantage: easy to input of symmetry group.
-		\begin{lstlisting}[basicstyle=\footnotesize]
-			gap> G := CyclicGroup(4);
-			pc group of size 4 with 2 generators>
-			gap> G := DihedralGroup(6);
-			pc group of size 4 with 2 generators>
-			gap> G := SpaceGroup(3, 105);
-			SpaceGroupOnRightBBNWZ( 3, 4, 5, 1, 2 )
-		\end{lstlisting}
-		\item Advantage: other algorithms related to group-cohomology calculation.			
+		\item bSPT: classified by $H^{d+1}[G,\uone]$.
+		\item $H^{d+1}[G,\uone]$ ``='' $H^{D+1}[G,\mathbb Z]$. \emph{See X-G Wen, PRB \textbf{91}, 205101 (2015)}
+                \item Can be calculated using the HAP package in GAP.
 	\end{itemize}
+	\begin{columns}
+		\column{.5\columnwidth}
+	\begin{lstlisting}[basicstyle=\footnotesize]
+gap> LoadPackage("HAP");
+gap> G := CyclicGroup(4);
+pc group of size 4 with 2 generators>
+gap> GroupCohomology(G, 2);
+[ 4 ]
+gap> GroupCohomology(G, 3);
+[  ]
+gap> GroupCohomology(G, 4);
+[ 4 ]
+gap> GroupCohomology(G, 5);
+[  ]
+\end{lstlisting}
+	\column{.5\columnwidth}
+	\[H^{2n+1}[\mathbb Z_4,\uone] = \mathbb Z_4\]
+	\[H^{2n}[\mathbb Z_4,\uone] = \mathbb Z_1\]
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fermionic SPT states}
+  \begin{itemize}
+  \item Atiyah–Hirzebruch Spectral Sequence for a generalized cohomology theory:
+    \[E_2^{pq} = H^p(G, \mathcal H^q(*)) \Rightarrow \mathcal H^{p+q}(G).\]
+    \begin{itemize}
+    \item $\mathcal H^q(*)$: $q$-dimensional invertible topological order (iTO).
+    \[\Omega^0=\uone_T,\quad\Omega^1=\mathbb Z_2,\quad\Omega^2=\mathbb Z_2,\quad\Omega^3=\mathbb Z_T.\]
+    \item Physical interpretation: Decorate codim-$p$ DW w/ $(q+1)$-d iTOs.
+    \end{itemize}
+  \item Wave function: $\psi\in \Psi^d(G)$: $\psi=\begin{pmatrix}\psi^0&\psi^1&\cdots&\psi^{d+1}\end{pmatrix}$.
+  \end{itemize}
+  \begin{center}
+    \includegraphics[height=3cm]{decoration}
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Symmetry group: $G$, $s$ and $\omega_2$}
+  \begin{itemize}
+  \item Symmetry is specified by three pieces of information:
+    \begin{enumerate}
+    \item (Bosonic) symmetry group $G$;
+    \item Unitary/antiunitary structure: $s:G\rightarrow \mathbb Z_2$;
+    \item $\omega_2\in H^2(G, \mathbb Z_2^f)$, classifying $1\rightarrow\mathbb Z_2^f\rightarrow G_f\rightarrow G\rightarrow1$.
+    \end{enumerate}
+  \item Crystalline-equivalence principle:
+    \[s(g) = \det g; \omega_2 = \omega_2' + \omega_2^{s=1/2}.\]
+  \item Battery included: construction of $\omega_2^{s=1/2}$ for 2d and 3d space groups:
+    \begin{lstlisting}[basicstyle=\footnotesize]
+      w2 := Spin12Factor(d, it);
+    \end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Coboundary operation}
+	\begin{itemize}
+		\item Consider the coboundary of a single-layer state
+		$\psi = \begin{pmatrix}0&\cdots&\psi^p&\cdots&0\end{pmatrix}$.
+		\item $\delta\psi$ only contains layers $p'<p$:
+		$\delta\psi=\begin{pmatrix}0&\cdots&d\psi^p&(\delta\psi)^{p+2}\cdots&(\delta\psi)^{d+2}\end{pmatrix}$.
+		\item We denote $(\delta\psi)^{p'}=\mathcal D^{p, d-p+1}_{p'-p}(\psi^p)$.
+		$D^{pq}_r:C^p(G_b,\Omega^q)\rightarrow C^{p+r}(G_b,\Omega^{q-r+1})$.
+		\item $d$ is like an upper-triangular matrix.
+		\item Examples: in 2d, $G=G_b\times\mathbb Z_2^f$
+		\begin{align*}
+			\mathcal D_2^{12} &= s\cup\psi^1\cup\psi^1,\\
+		  \mathcal D_2^{21} &= \frac12\psi^2\cup\psi^2
+		  +\frac12\psi^2\cup_1d\psi^2
+		  +\mathcal O_4'(d\psi^2).
+		\end{align*}
+		\[  O_4'(\psi^2)(01234)
+		  =\frac12d\psi^2(0124)d\psi^2(0234)
+		  -\frac14\{d\psi^2(0123)[1-d\psi^2(0124)] \mod 2\}.\]
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Stacking operation}
+	\begin{itemize}
+		\item Not a simple component-wise addition:
+		$\psi_1\boxplus\psi_2\neq (\psi_1^{d+1}+\psi_2^{d+1},\ldots,\psi_1^0+\psi_2^0)$.
+		\item Reason: reordering of fermionic degrees of freedom.
+		\item Result on the $p$-th layer will be twisted by higher layers.
+		\[(\psi_1\boxplus\psi_2)^p = \psi_1^p + \psi_2^p
+    + \mathcal A^{p,d-p+1}(\psi_1^{d+1},\psi_2^{d+1},\ldots,\psi_1^{p+1}, \psi_2^{p+1}),\]
+		\item Examples: in 2d, $G=G_b\times\mathbb Z_2^f$
+		\begin{align*}
+		  \mathcal A^{21} &= \psi^1_1\cup\psi^1_2;\\
+		  \mathcal A^{30} &= \frac12\psi^2_1\cup_1\psi^2_2 + \frac12 (\psi^1_1\cup\psi^1_2)\cup_1(\psi^2_1+\psi^2_2).
+		\end{align*}
+	\end{itemize}
+	\begin{center}
+		\includegraphics[height=2cm]{forder}
+	\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Input formulas into the SptSet package}
+	\begin{itemize}
+		\item The functions $\mathcal A^{pq}$ and $\mathcal D^{pq}_r$ needs to be inputed.
+		\item Example: $\mathcal D_2^{12} = s\cup\psi^1\cup\psi^1$.
+	\end{itemize}
+
+	\begin{block}{GAP realization}
+	\begin{lstlisting}[basicstyle=\footnotesize,morekeywords={function,return,local,if,fi,then,end},showspaces=false,showtabs=false, keywordstyle=\color{blue}]
+	SptSetInstallCoboundary(ss, 2, 1, 2,
+	function(n1, dn1)
+		return {g1, g2, g3} -> (s(g1) * n1(g2) * n1(g3));
+	end);
+	\end{lstlisting}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{SptSet: computing fSPT and beyond}
+	Consider 2D fSPT, $G=\mathbb Z_4$:
+\begin{lstlisting}[basicstyle=\footnotesize]
+gap> LoadPackage("SptSet");;
+gap> G := CyclicGroup(4);;
+gap> R := ResolutionFiniteGroup(G, 6);;
+gap> utAct := SptSetTrivialGroupAction(G);;
+gap> ss := FermionEZSPTSpecSeq(R, utAct);;
+gap> FermionSPTLayers(ss, 2);
+[ <ZL-Module with torsions [ 2 ]>, <ZL-Module with torsions [ 2 ]>,
+  <ZL-Module with torsions [ 4 ]> ]
+gap> z2tAct := GroupHomomorphismByImagesNC(G, GL(1, Integers),
+>   GeneratorsOfGroup(G), [ [[-1]], [[1]] ]);;
+gap> ss := FermionEZSPTSpecSeq(R, z2tAct);;
+gap> FermionSPTLayers(ss, 2);
+[ <ZL-Module with torsions [ 2 ]>, <ZL-Module []>, <ZL-Module []> ]
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Example: fSPT for 2D wallpaper groups}
+  \begin{itemize}
+  \item Crystalline equivalence principle (Thorngren \& Else, PRX 2018): calculate the equivalent problem.
+  \item Results consistent w/ real-space construction (Jian-Hao Zhang, et al).
+  \end{itemize}
+  \begin{lstlisting}[basicstyle=\footnotesize]
+    for it in [2..17] do
+      SG := SpaceGroupBBNWZ(2, it);
+      fSG := IsomorphismPcpGroup(SG);
+      SG1 := Image(fSG);
+      R := ResolutionAlmostCrystalGroup(SG1, 6);
+      gs := GeneratorsOfGroup(SG);
+      w := Spin12Factor(2, it);
+      ww := {g1, g2} -> w(PreImageElm(fSG, g1), PreImageElm(fSG, g2));
+      f := GroupHomomorphismByImagesNC(SG1, GL(1, Integers),
+        List(gs, x -> Image(fSG, x)),
+        List(gs, x -> [[DeterminantMat(x)]]));
+
+      SS := FermionSPTSpecSeq(R, f, ww);
+      FermionSPTLayersVerbose(SS, 2);
+    od;
+  \end{lstlisting}
+\end{frame}
+
+\section{Algorithm: simplified resolution and chain maps}
+
+\begin{frame}
+  \frametitle{Simplified resolution and chain maps}
+  \begin{itemize}
+  \item A problem: cochains $\alpha(g_0,\ldots,g_n)$ are too complicated to deal with.
+    \begin{itemize}
+    \item View cochain space as a ``linear space'': $N_n = (|G|-1)^n$;
+    \item Solving the cocycle equations: $O(N_n^3)\sim O((|G|-1)^{3n})$.
+    \item Impossible for infinite groups (such as the space groups).
+    \end{itemize}
+  \item Solution: A simplified resolution: a simplified basis replacing $[g_0,\ldots,g_n]$.
+    \begin{itemize}
+    \item Simple models of $BG$.
+    \item $\mathbb Z:$ $N_n=0$ for $n>1$; $\mathbb Z_n$: $N_n=1$.
+    \item $1\rightarrow N\rightarrow G\rightarrow Q\rightarrow1$: $N_n^G=\sum_{p+q=n}N_p^NN_q^Q.$ (a ``twisted'' tensor product).
+    \end{itemize}
+  \item Chain maps: a ``compiler'' converting formulas from the standard basis to the simplified basis.
+  \item Allows computation for infinite (discrete) groups.
+  \end{itemize}
 \end{frame}
 
 \end{document}
