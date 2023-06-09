@@ -22,6 +22,7 @@
 \renewcommand{\arraystretch}{1.5}
 \newcommand{\uone}{\mathrm U(1)}
 \DeclareMathOperator{\img}{img}
+\lstset{language=GAP}
 
 \usepackage{tikz}
 	\usetikzlibrary{calc}
@@ -489,27 +490,58 @@ Check $\partial\hat\omega_1(\lambda)\simeq0$ for each 0-cell $\lambda$.\\
 \end{tikzpicture}
 \end{center}
 \end{columns}
-Higher-page computations are organized as a spectral sequence.
 \end{frame}
 
-%\begin{frame}
-%	\frametitle{A building block}
-%	\begin{columns}
-%		\column{.4\textwidth}
-%		\begin{center}
-%			\includegraphics[width=\textwidth]{blocks}
-%		\end{center}
-%		\column{.6\textwidth}
-%		\begin{itemize}
-%			\item A building block $\hat\omega$ is a collection of cochains:
-%			\[\hat\omega(\sigma) \in C^{p+1}[G_\sigma, \uone_T].\]
-%			\item $\hat\omega$ needs to be symmetric under $SG$.
-%			\item $\hat\omega$ needs to satisfy the bulk-boundary relation:
-%			\[d\hat\omega(\tau) = \sum_{\sigma:\tau\in\partial\sigma}\hat\omega(\sigma).\]
-%			\item Need to find when two blocks can be deformed to each other: $\hat\omega\simeq\hat\omega^\prime$.
-%		\end{itemize}
-%	\end{columns}
-%\end{frame}
+\begin{frame}
+\frametitle{High-Order Bubbling Equivalences}
+\begin{itemize}
+\item Similarly, there are high-order bubbling equivalence.
+\item Assign 1d SPT states ($d\hat\mu_1=0$) to 2-cells: $\partial\hat\mu_2$ trivializes $\hat\omega_1$ building blocks.
+\item If $\partial\hat\mu_2\simeq0$, choose $d\hat\mu_1+\partial\hat\mu_2=0$, then $\partial\hat\mu_1$ trivializes $\hat\omega_0$ building blocks.
+\item High-order computations are organized as a \alert{spectral sequence}.
+\end{itemize}
+\begin{center}
+\begin{animateinline}{5}
+        \multiframe{12}{Ra=.4+.05}{
+\begin{tikzpicture}
+	\draw (-2,-2)--(-2,2)--(2,2)--(2,-2)--(-2,-2);
+   \draw (-2,0)--(2,0);
+   \draw (0,-2)--(0,2);
+	%\fill [green!30] (-\Ra,-\Ra)--(-\Ra,\Ra)--(\Ra,\Ra)--(\Ra,-\Ra)--(-\Ra,-\Ra);
+\draw [blue,thick] (-\Ra+1,-\Ra+1)--(-\Ra+1,\Ra+1)--(\Ra+1,\Ra+1)--(\Ra+1,-\Ra+1)--(-\Ra+1,-\Ra+1);
+\draw [blue,thick] (-\Ra+1,-\Ra-1)--(-\Ra+1,\Ra-1)--(\Ra+1,\Ra-1)--(\Ra+1,-\Ra-1)--(-\Ra+1,-\Ra-1);
+\draw [blue,thick] (-\Ra-1,-\Ra+1)--(-\Ra-1,\Ra+1)--(\Ra-1,\Ra+1)--(\Ra-1,-\Ra+1)--(-\Ra-1,-\Ra+1);
+\draw [blue,thick] (-\Ra-1,-\Ra-1)--(-\Ra-1,\Ra-1)--(\Ra-1,\Ra-1)--(\Ra-1,-\Ra-1)--(-\Ra-1,-\Ra-1);
+%\node at (0, 0) {$d\nu$};
+%\node at (\Ra, 0) [left] {$\nu$};
+\end{tikzpicture}
+}
+\end{animateinline}
+~~~~
+\begin{animateinline}{5}
+        \multiframe{8}{Ra=.8+-.1}{
+\begin{tikzpicture}
+\draw (-2,0)--(2,0);
+\draw (0, -2)--(0, 2);
+\draw [blue,thick,double] (-\Ra, 0)--(\Ra,0);
+\draw [blue,thick,double] (2-\Ra,0)--(2,0);
+\draw [blue,thick,double] (-2+\Ra,0)--(-2,0);
+\draw [blue,thick,double] (0, -\Ra)--(0, \Ra);
+\draw [blue,thick,double] (0, 2-\Ra)--(0, 2);
+\draw [blue,thick,double] (0, -2+\Ra)--(0, -2);
+\fill [red] (-\Ra,0) circle (2pt);
+\fill [red] (\Ra,0) circle (2pt);
+\fill [red] (0,-\Ra) circle (2pt);
+\fill [red] (0,\Ra) circle (2pt);
+\fill [red] (2-\Ra,0) circle (2pt);
+\fill [red] (-2+\Ra,0) circle (2pt);
+\fill [red] (0,2-\Ra) circle (2pt);
+\fill [red] (0,-2+\Ra) circle (2pt);
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{center}
+\end{frame}
 
 \begin{frame}
 \frametitle{Mathematical Proof for bosonic SPTs}
@@ -533,8 +565,16 @@ See Kenneth S. Brown's book, Chapter VII.
   \frametitle{Real-space construction of fSPTs}
 
   \begin{itemize}
-  \item Jian-Hao Zhang, Shuo Yang, YQ and Zheng-Cheng Gu, arXiv:2012.15657
-  \item Results agrees with onsite-symmetry computations.
+  \item Interacting fSPTs:
+    \begin{itemize}
+    \item 2D point groups: Jian-Hao Zhang, Qing-Rui Wang, Shuo Yang, YQ and Zheng-Cheng Gu,
+      PRB \textbf{101}, 100501(R) (2020).
+    \item 2D wallpaper groups: Jian-Hao Zhang, Shuo Yang, YQ and Zheng-Cheng Gu,
+      PR Research \textbf{4}, 033081 (2022).
+    \item 3D point groups: Jian-Hao Zhang, YQ and Zheng-Cheng Gu, arXiv:2204.13558.
+    \end{itemize}
+  \item Free-fermion high-order states:
+    Tian Yuan, Chen Fang and YQ, to appear.
   \end{itemize}
   \begin{center}
     \includegraphics[height=4cm]{majorana_bubble}    
@@ -574,142 +614,68 @@ See Kenneth S. Brown's book, Chapter VII.
   \end{center}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Bosonic SPT and group cohomology}
+\begin{frame}{SptSet: A GAP package for computing SPT classifications}
   \begin{itemize}
-  \item A brief intro from the computational point of view.
-  \item Cochain functions: $\alpha(g_1,\ldots,g_n)$. $\alpha \in C^n[G, U(1)]$ is a ``vector'' in a ``linear space''.
-  \item Coboundary operations: a ``linear map'' $d^n:C^n\rightarrow C^{n+1}$.
-  \item Computing the cohomology group:
-    \[\text{SPTs} = H^{d+1}[G, U(1) = \frac{\ker d^{d+1}}{\img d^d}.\]
-  \item ``Diagonalizing'' the coboundary matrix $d^n$: Smith Normal Form.
-  \item Complexity = $O(N^3)$, $N = (|G|-1)^n$.
-  \item Quite expensive for large $G$ ($|G| > 16$); infinite for $|G|=\infty$.
-  \item Solution: change of basis, $C^n\Rightarrow \tilde C^n;\,\, [g_1|\cdot|g_n]\Rightarrow [e^n_i]$.
-  \item Example: for $G=Z_n$, $\dim \tilde C^n=1$.
+  \item SPT classification: generalized cohomology theory of symmetry group $G$.
+  \item Atiyah–Hirzebruch Spectral Sequence: SPT of interacting fermions are described by combinations of cochains:
+    \[n_1(g_1); n_2(g_1, g_2); \nu_3(g_1,g_2,g_3).\]
+  \item A computational challenge:
+    \begin{itemize}
+    \item Complexity: $O(N^3)$;
+    \item Traditionally: $N=(|G|-1)^{d+1}$; very expensive if $d$ and $G$ is large.
+    \end{itemize}
+  \item Our method:
+    \begin{enumerate}
+    \item Choose a different \alert{resolution} such that $N$ is small. ($N<100$ for all space groups.)
+    \item Use chain maps to translate obstruction functions to new resolution.
+    \end{enumerate}
+  \item GAP = Group, Algorithm and Programming.
+  \item SptSet: A GAP package.
   \end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Fermionic SPT: a generalized cohomology theory}
-	\begin{itemize}
-        \item An Atiyah–Hirzebruch Spectral Sequence: an fSPT state is specified by several layers.
-          \[E^{pq}_2=H^p[G_b, \mathcal{H}_{\text{FSPT}}^q(\text{pt})]]\Rightarrow \mathcal{H}_{\text{FSPT}}^{p+q}(BG_b).\]
-        \item Example: 2D fSPT,
-          \begin{enumerate}
-          \item $n_1\in H^1[G, \mathbb Z_2]$: Majorana-chain decoration.
-          \item $n_2\in C^2[G, \mathbb Z_2]$: Complex-fermion decoration.
-          \item $\nu_3\in C^3[G, \uone]$: Bosonic phase factor.
-          \item A real-space construction: Q-R Wang and Z-C Gu, PRX 2020.
-          \end{enumerate}
-	\end{itemize}
 
-        \begin{center}
-          \includegraphics[height=3cm]{fspt_decor}
-        \end{center}
-\end{frame}
 
-\begin{frame}
-	\frametitle{Fermionic SPT: a generalized cohomology theory}
-	\begin{itemize}
-		\item Obstruction functions: higher-page derivatives of the spectral sequence.
-		\item Example: checking if $n_1\in H^1[G, \mathbb Z_2]$ is obstructed?
-		\begin{enumerate}
-			\item Check $\mathcal O_3[n_1] = \omega_2\cup n_1 + s_1\cup n_1\cup n_1$ vanishes.
-			\item Find $n_2$ such that $dn_2 = \mathcal O_3[n1]$.
-			\item Check $\mathcal O_4[n_2]$ vanishes.
-			\begin{align*}\mathcal O_4(01234) = \frac12\big[\omega_2\cup n_2 + n_2\cup n_2 + n_2 \cup_1 dn_2 + \omega_2(013)dn_2(1234)\\ + dn_2(0124)dn_2(0234)\big]
-			-\frac14\big\{dn_2(0123)[1-dn_2(0124)]\text{ (mod 2)}\big\}.
-		\end{align*}
-		\end{enumerate}
-		This defines a map between cohomology classes
-		$C^1\rightarrow C^4:n_1\mapsto \mathcal O_4$.
-		\item Acceleration: use basis transformation $\tilde C^1\rightarrow C^1\rightarrow C^4\rightarrow\tilde C^4$.
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{GAP, HAP and group cohomology}
-	\begin{itemize}
-		\item bSPT: $H^D[G,\uone]$ can be computed directly using HAP in GAP.
-		\item $H^D[G,\uone]$ ``='' $H^{D+1}[G,\mathbb Z]$. \emph{See X-G Wen, PRB \textbf{91}, 205101 (2015)}
-	\end{itemize}
-	\begin{columns}
-		\column{.5\columnwidth}
+\begin{frame}[fragile]{Example: fSPT for 2D wallpaper groups}
+	\url{SptSet/examples/fspt_2d_s12.g}
 	\begin{lstlisting}[basicstyle=\footnotesize]
-gap> LoadPackage("HAP");
-gap> G := CyclicGroup(4);
-pc group of size 4 with 2 generators>
-gap> GroupCohomology(G, 2);
-[ 4 ]
-gap> GroupCohomology(G, 3);
-[  ]
-gap> GroupCohomology(G, 4);
-[ 4 ]
-gap> GroupCohomology(G, 5);
-[  ]
-\end{lstlisting}
-	\column{.5\columnwidth}
-	\[H^{2n+1}[\mathbb Z_4,\uone] = \mathbb Z_4\]
-	\[H^{2n}[\mathbb Z_4,\uone] = \mathbb Z_1\]
-	\end{columns}
-\end{frame}
+    for it in [2..17] do
+      SG := SpaceGroupBBNWZ(2, it);
+      fSG := IsomorphismPcpGroup(SG);
+      SG1 := Image(fSG);
+      R := ResolutionAlmostCrystalGroup(SG1, 6);
+      gs := GeneratorsOfGroup(SG);
+      w := Spin12Factor(2, it);
+      ww := {g1, g2} -> w(PreImageElm(fSG, g1), PreImageElm(fSG, g2));
+      f := GroupHomomorphismByImagesNC(SG1, GL(1, Integers),
+        List(gs, x -> Image(fSG, x)),
+        List(gs, x -> [[DeterminantMat(x)]]));
 
-\begin{frame}[fragile]
-	\frametitle{Implimenting chain maps in GAP}
-	\begin{itemize}
-		\item We are working on a GAP package to impliment the chain maps and to compute fSPT classifications.
-		\item User only need to input the mappingin terms of inhomogeneous cocycles.
-		\item The package automatically computes the mapping using the simplified resolution.
-	\end{itemize}
-\begin{lstlisting}[basicstyle=\footnotesize,morekeywords={function,return,local,if,fi,then,end},showspaces=false,showtabs=false, keywordstyle=\color{blue}]
-SptSetInstallCoboundary(ss, 2, 2, 1,
-function(n2, dn2)
-  return function(g1, g2, g3, g4)
-    local val;
-    val := 1/2 * (n2(g1, g2) * n2(g3, g4) mod 2);
-    if dn2 <> ZeroCocycle@ then
-      val := val + 1/2 * ((n2(g1*g2*g3, g4) * dn2(g1, g2, g3)
-        + n2(g1, g2*g3*g4) * dn2(g2, g3, g4)) mod 2);
-      val := val + 1/2 * (dn2(g1, g2, g3*g4) * dn2(g1*g2, g3, g4) mod 2);
-      val := val - 1/4 * (dn2(g1, g2, g3) * (1 - dn2(g1, g2, g3*g4)) mod 2);
-    fi;
-    return val;
-  end;
-end);
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Example: computing fSPT}
-	Consider 2D fSPT, $G=\mathbb Z_4$:
-\begin{lstlisting}[basicstyle=\footnotesize]
-gap> LoadPackage("SptSet");;
-gap> G := CyclicGroup(4);;
-gap> R := ResolutionFiniteGroup(G, 6);;
-gap> utAct := SptSetTrivialGroupAction(G);;
-gap> ss := FermionEZSPTSpecSeq(R, utAct);;
-gap> FermionSPTLayers(ss, 2);
-[ <ZL-Module with torsions [ 2 ]>, <ZL-Module with torsions [ 2 ]>,
-  <ZL-Module with torsions [ 4 ]> ]
-gap> z2tAct := GroupHomomorphismByImagesNC(G, GL(1, Integers),
->   GeneratorsOfGroup(G), [ [[-1]], [[1]] ]);;
-gap> ss := FermionEZSPTSpecSeq(R, z2tAct);;
-gap> FermionSPTLayers(ss, 2);
-[ <ZL-Module with torsions [ 2 ]>, <ZL-Module []>, <ZL-Module []> ]
-\end{lstlisting}
-
-Example: compute fSPT for 2D wallpaper groups. (~10 min for all 17 groups.)
+      SS := FermionSPTSpecSeq(R, f, ww);
+      FermionSPTLayersVerbose(SS, 2);
+    od;
+  \end{lstlisting}
+  17 wallpaper groups in ~6 minutes.
 \end{frame}
 
 \section{Conclusion}
 
 \begin{frame}
-\frametitle{Summary: towards a complete classification of fSPTs}
+\frametitle{Summary: towards a complete classification of TCS}
 \begin{itemize}
-\item Onsite symmetry: 1D \ding{51}, 2D \ding{51}, 3D ??.
 \item Crystalline symmetry: treat as onsite symmetry / real-space construction.
-\item General rules of real-space construction for fSPTs?
+\item Real-space construction
+  \begin{itemize}
+  \item General rules are known.
+  \item Many examples are studied.
+  \item Automated computation for interacting-fermion systems?
+  \end{itemize}
+\item Treat as onsite symmetry:
+  \begin{itemize}
+  \item 1D \ding{51}, 2D \ding{51}, 3D ??
+  \item SptSet package: work in progress.
+  \end{itemize}
+\item Crosschecked results using the crystalline equivalence principle.
 \end{itemize}
 \end{frame}
 
