@@ -216,14 +216,18 @@
   \begin{itemize}
   \item Landau paragidm: phases are classified by symmetry breaking.
     \begin{center}
-      \includegraphics[height=2cm]{../resources/crystal}~~
-      \includegraphics[height=2cm]{../resources/magnet}~~
-      \includegraphics[height=2cm]{../resources/sc}
+      \includegraphics[height=1.5cm]{../resources/crystal}~~
+      \includegraphics[height=1.5cm]{../resources/magnet}~~
+      \includegraphics[height=1.5cm]{../resources/sc}
     \end{center}
   \item SPT: gapped topological phases beyond Landau paradiam.
   \item Gapped bulk : cannot be smoothly connected to a trivial state without closing gap or breaking symmetry.
   \item Symmetry-protected gapless surface states.
   \item Example: integer quantum Hall states; topological insulators.
+    \begin{center}
+      \includegraphics[height=2cm]{../resources/fqhe}~~
+      \includegraphics[height=2cm]{ti_surface}
+    \end{center}
   \end{itemize}
 \end{frame}
 
@@ -550,20 +554,37 @@ Check $\partial\hat\omega_1(\lambda)\simeq0$ for each 0-cell $\lambda$.\\
 \begin{frame}
 \frametitle{Mathematical Proof for bosonic SPTs}
 \begin{itemize}
-\item Equivariant group cohomology:
-\[H^{d+1}[G, \uone_{PT}]]\simeq H^{d+1}_G[X, \uone_{PT}].\]
-Here $X\sim\text{pt}$ is a (non-free) $G$-complex. See Thorngren and Else, PRX (2018).
+%\item Equivariant group cohomology:
+%\[H^{d+1}[G, \uone_{PT}]]\simeq H^{d+1}_G[X, \uone_{PT}].\]
+%Here $X\sim\text{pt}$ is a (non-free) $G$-complex. See Thorngren and Else, PRX (2018).
 \item There is a spectral sequence:
 \[E_1^{pq}=\bigoplus_{\sigma\in X_p/G}H^q[G_\sigma,\uone_T]\Rightarrow
  H^{p+q}[G, \uone_{PT}]].\]
 See Kenneth S. Brown's book, Chapter VII.
-\item The topological space $Y$ we used is the Poincar\'e dual of $X$: $E^{pq}_r\simeq E^{q-1}_{d-p,r}$
+\item The topological space $Y$ we used is the Poincar\'e dual of $X$: $E^{pq}_r\simeq E^{q-1}_{d-p,r}$ 
 \end{itemize}
 \begin{center}
 	\includegraphics[height=2cm]{brown_book}
 	\includegraphics[height=2cm]{brown_ss}
 \end{center}
+{\small Z. Song, F. Chen and YQ, Nat. Commun. \textbf{11}, 4197 (2020).}
 \end{frame}
+
+\begin{frame}
+  \frametitle{An example of a nontrivial building block}
+  \begin{columns}
+    \column{.7\textwidth}
+    \begin{itemize}
+      \item<1-> Consider $G=SG\times\mathbb Z_2$, $SG=P4_22_12$ (\#94 space group).
+      \item<2-> Each colored 2-cell is decorated with a Levin-Gu or CZX state protected by the onsite $\mathbb Z_2$.
+      \item<3-> Each edge borders two decorated 2-cells: edge states canceled out.
+      \item<4-> Forms a nontrivial TCS.
+    \end{itemize}
+    \column{.3\textwidth}
+    \includegraphics[height=4cm]{blocks}
+    \end{columns}
+  \end{frame}
+  
 
 \begin{frame}
   \frametitle{Real-space construction of fSPTs}
@@ -620,21 +641,22 @@ See Kenneth S. Brown's book, Chapter VII.
 
 \begin{frame}{SptSet: A GAP package for computing SPT classifications}
   \begin{itemize}
-  \item SPT classification: generalized cohomology theory of symmetry group $G$.
-  \item Atiyah–Hirzebruch Spectral Sequence: SPT of interacting fermions are described by combinations of cochains:
+  \item<1-> SPT classification: generalized cohomology theory of symmetry group $G$.
+  \item<1-> Atiyah–Hirzebruch Spectral Sequence: SPT of interacting fermions are described by combinations of cochains:
     \[n_1(g_1); n_2(g_1, g_2); \nu_3(g_1,g_2,g_3).\]
-  \item A computational challenge:
+  \item<2-> A computational challenge:
     \begin{itemize}
     \item Complexity: $O(N^3)$;
     \item Traditionally: $N=(|G|-1)^{d+1}$; very expensive if $d$ and $G$ is large.
     \end{itemize}
-  \item Our method:
+  \item<3-> Our method:
     \begin{enumerate}
     \item Choose a different \alert{resolution} such that $N$ is small. ($N<100$ for all space groups.)
     \item Use chain maps to translate obstruction functions to new resolution.
+    \item Y. Ouyang, et al, Chin. Phys. Lett. \textbf{38}, 127101 (2021).
     \end{enumerate}
-  \item GAP = Group, Algorithm and Programming.
-  \item SptSet: A GAP package.
+  \item<4-> GAP = Group, Algorithm and Programming.
+  \item<4-> SptSet: A GAP package.
   \end{itemize}
 \end{frame}
 
