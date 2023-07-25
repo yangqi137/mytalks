@@ -641,7 +641,7 @@ See Kenneth S. Brown's book, Chapter VII.
 \end{frame}
 
 \begin{frame}
-  \frametitle{fSPT classification with onsite symmetries}
+  \frametitle{fSPT w/ onsite symmetry: domain-wall decoration}
   \begin{itemize}
     \item Picture: domain-wall decoration.
     \item How to get a symmetric state?
@@ -654,13 +654,18 @@ See Kenneth S. Brown's book, Chapter VII.
     \item What can we decorate?\\
     invertible Topological Orders: complex fermion; Kitaev chain; (p+ip) SC; ...
   \end{itemize}
+  \begin{columns}
+    \column{.6\textwidth}
   \begin{center}
     \includegraphics[height=2.5cm]{../chainmap/decoration.png}
   \end{center}
+  \column{.4\textwidth}
+  \[\Psi\rangle=\sum_{\{g_i\}}\left|\includegraphics[height=1cm]{../chainmap/decoration.png}\right\rangle\]
+  \end{columns}
 \end{frame}
 
 \begin{frame}
-  \frametitle{fSPT classification with onsite symmetries}
+  \frametitle{fSPT: algebraic description}
   \begin{itemize}
     \item SPT classification: generalized cohomology theory of symmetry group $G$.
     \item Atiyah–Hirzebruch Spectral Sequence: SPT of interacting fermions are described by combinations of cochains:
@@ -682,27 +687,56 @@ See Kenneth S. Brown's book, Chapter VII.
     \item Example: constraints on $\nu_3$, frustration-free $\Rightarrow$ ``pentagon equation''.
     \begin{center}
       \includegraphics[height=2cm]{fmove2.pdf}\\
-      \includegraphics[height=3cm]{pentagon.pdf}        
+      \includegraphics[height=3cm]{pentagon}        
     \end{center}
     \item Bosonic SPT: $d\nu_3=0$;
     \item Fermionic SPT: $d\nu_3=O_4[n_2]=\frac12 n_2\cup n_2 + \cdots$
   \end{itemize}
 \end{frame}
 
+\begin{frame}{Construction of fSPT states}
+  \begin{enumerate}
+  \item Pick $n_1\in H^1(G, \mathbb Z_2)$.
+  \item Compute $O_3[n_1]\in H^3(G, \mathbb Z_2)$ and see if it is trivial.
+  \item Solve $dn_2 = O_3[n_1]$ (pick a $n_2$).
+  \item Compute $O_4[n_2]\in H^4[G, \mathrm U(1)_T]$ and see if it is trivial.
+  \item Solve $d\nu_3 = O_4[n_2]$.
+  \end{enumerate}
+\end{frame}
+
 \begin{frame}
-	\frametitle{Simplified resolution and chain maps}
-	\begin{itemize}
-		\item A problem: cochains $\alpha(g_1,\ldots,g_n)$ are too complicated to deal with.
-		\begin{itemize}
-      \item $\alpha: [g_1|\cdots|g_n]\rightarrow M$ is a ``linear map''.
-      \item Complexity: $O(N^3)$;
-      \item Traditionally: $N=(|G|-1)^{d+1}$; very expensive if $d$ and $G$ is large.
+  \frametitle{Stacking operation}
+  \begin{itemize}
+  \item Not a simple component-wise addition:
+    $(n_1,n_2,\nu_3)\boxplus(n_1',n_2',\nu_3')\neq (n_1+n_1',n_2+n_2',\nu_3+\nu_3')$.
+  \item Reason: reordering of fermionic degrees of freedom.
+  \item Result on the $p$-th layer will be twisted by higher layers.
+  \item Examples: in 2d, $G=G_b\times\mathbb Z_2^f$
+    \begin{align*}
+      \Delta n_2 &= n_1\cup n_1';\\
+      \Delta \nu_3 &= \frac12n_2\cup_1n_2' + \cdots.
+    \end{align*}
+  \end{itemize}
+  \begin{center}
+    \includegraphics[height=2cm]{../chainmap/forder}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Simplified resolution and chain maps}
+  \begin{itemize}
+  \item A problem: cochains $\alpha(g_1,\ldots,g_n)$ are too complicated to deal with.
+    \begin{itemize}
+    \item $\alpha: [g_1|\cdots|g_n]\rightarrow M$ is a ``linear map''.
+    \item $d\alpha = O_{n+1}$: like solving a ``linear equation''. 
+    \item Complexity: $O(N^3)$;
+    \item Traditionally: $N=(|G|-1)^{d+1}$; very expensive if $d$ and $G$ is large.
     \end{itemize}
-		\item A simplified resolution: a simplified basis replacing $[g_1|\cdots|g_n]$.
-		\item $N<100$ for all space groups.
-		\item Chain maps: a ``compiler'' converting formulas from the standard basis to the simplified basis.
-		\item Allows computation for infinite (discrete) groups.
-	\end{itemize}
+  \item A simplified resolution: a simplified basis replacing $[g_1|\cdots|g_n]$.
+  \item $N<100$ for all space groups.
+  \item Chain maps: a ``compiler'' converting formulas from the standard basis to the simplified basis.
+  \item Allows computation for infinite (discrete) groups.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{Example: fSPT for 2D wallpaper groups}
