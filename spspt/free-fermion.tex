@@ -368,7 +368,7 @@
     \begin{itemize}
       \item Why only TRS and PHS in 10-fold way?
       \item Free fermion + onsite unitary symmetry $G$: Hamiltonian is block-diagonalized into irreps of $G$:
-      \[H=\begin{pmatrix}
+      \[H=H_1\oplus H_2\oplus\cdots\begin{pmatrix}
         H_1 & 0 & 0\\
         0 & H_2 & 0\\
         0 & 0 & \cdots
@@ -390,18 +390,69 @@
     \end{itemize}
   \end{frame}
 
+  \begin{frame}{Anomaly Locations and Mass Fields}
+    \begin{itemize}
+      \item Example: $G=C_4$.
+      \item Mass field: $M(x)$, $x\in X\subset S^2/G$; gapless region: $\bar X=(S^2/G) - X$.
+      \item It is easier to study regions that can be gapped out.
+      \item Deformation: G-equivariant map $X\rightarrow X'$.
+      \begin{itemize}
+        \item Minimal $X$: easy to study theoretically;
+        \item Minimal $\bar X$: anomalous regions cannot be gapped out.
+      \end{itemize}
+      \item Results of $C_4$: three types of anomaly locations.
+      \item Pure geometry: applies to all free-fermion symmetry classes / interacting fSPT.
+    \end{itemize}
+    \begin{center}
+      \begin{tikzpicture}[scale=1.2]
+        \draw (0, 0) circle (1);
+        %\draw (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+        \filldraw [fill=black!30] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+        \fill [red] (0, 0.2) circle (0.3);
+      \end{tikzpicture}
+      \hspace{2em}
+      \begin{animateinline}{30}
+        \multiframe{100}{Ra=0.05+0.01}{
+          \begin{tikzpicture}[scale=1.2]
+            \draw (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+          \end{tikzpicture}
+        }
+      \end{animateinline}
+    \end{center}
+  \end{frame}
+
   \section{TCS with Space-Group Symmetries: Bulk Classification}
 
   \begin{frame}{Bulk Classification: Crystalline Equivalence Principle}
     \begin{itemize}
-      \item Apply the Crystalline Equivalence Principle and see what we get ...
-      \item $|SG|=\infty$: (unitary) irreps of space groups: labeled by momentum $\vec q$.\\
+      \item<1-> Apply the Crystalline Equivalence Principle and see what we get ...
+      \item<2-> $|SG|=\infty$: (unitary) irreps of space groups: labeled by momentum $\vec q$.\\
       \emph{$q^\ast$ + irreducible representation of the little group.}
-      \item Example: $G=\mathbb Z$, unitary irreps are $g\mapsto e^{iq}$, labeled by $q\in [0,2\pi)\simeq\mathbb R/\mathbb Z$.
-      \item Block-diagonalized Hamiltonian: $\hat H=\hat H_{q_1}\oplus\hat H_{q_2}\oplus\cdots$, \alert{finite} number of terms.
-      \item $\hat H_q(k)$: do not confuse $q$ with $k$.
-      \item Conjecture of equivalence mapping: $\hat H_{\vec q}(\vec k)=(k_i-q_i)\tilde\Gamma_i+iM$.
-      \item Smooth variation of $k_i$ does not change the topological classification.
+      \item<3-> Example: $G=\mathbb Z$, unitary irreps are $g\mapsto e^{iq}$, labeled by $q\in [0,2\pi)\simeq\mathbb R/\mathbb Z$.
+      \item<4-> Block-diagonalized Hamiltonian: $\hat H=\hat H_{q_1}\oplus\hat H_{q_2}\oplus\cdots$, \alert{finite} number of terms.
+      \item<5-> $\hat H_q(k)$: do not confuse $q$ with $k$.
+      \item<6-> Conjecture of equivalence mapping: $\hat H_{\vec q}(\vec k)=(k_i-q_i)\tilde\Gamma_i+iM$.
+      \item<7-> Smooth variation of $k_i$ does not change the topological classification.
+    \end{itemize}
+    \onslide<7->
+    \begin{center}
+    \begin{animateinline}{30}
+      \multiframe{100}{Ra=1.5+-0.01}{
+    %\begin{animateinline}{5}
+    %  \multiframe{10}{Ra=1.5+-0.1}{
+      \begin{tikzpicture}[scale=2]
+          \draw [->] (0, 0) -- (2, 0) node [right] {$k$};
+          \draw [blue] (\Ra-0.3, -0.5) -- (\Ra+0.3, 0.5);
+          \draw [blue] (\Ra+0.3, -0.5) -- (\Ra-0.3, 0.5);
+        \end{tikzpicture}
+      }
+    \end{animateinline}      
+    \end{center}
+  \end{frame}
+
+  \begin{frame}{Example: 1d, class D}
+    \begin{itemize}
+      \item $d=1$, class D ($\mathcal C^2=+1$), $G=\mathbb Z$.
     \end{itemize}
   \end{frame}
 
