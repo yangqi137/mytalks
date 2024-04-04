@@ -392,18 +392,19 @@
 
   \begin{frame}{Anomaly Locations and Mass Fields}
     \begin{itemize}
-      \item Example: $G=C_4$.
-      \item Mass field: $M(x)$, $x\in X\subset S^2/G$; gapless region: $\bar X=(S^2/G) - X$.
-      \item It is easier to study regions that can be gapped out.
-      \item Deformation: G-equivariant map $X\rightarrow X'$.
+      \item<1-> Example: $G=C_4$.
+      \item<2-> Mass field: $M(x)$, $x\in X\subset S^2/G$; gapless region: $\bar X=(S^2/G) - X$.
+      \item<2-> It is easier to study regions that can be gapped out.
+      \item<3-> Deformation: G-equivariant map $X\rightarrow X'$.
       \begin{itemize}
-        \item Minimal $X$: easy to study theoretically;
-        \item Minimal $\bar X$: anomalous regions cannot be gapped out.
+        \item<3-> Minimal $X$: easy to study theoretically;
+        \item<3-> Minimal $\bar X$: anomalous regions cannot be gapped out.
       \end{itemize}
-      \item Results of $C_4$: three types of anomaly locations.
-      \item Pure geometry: applies to all free-fermion symmetry classes / interacting fSPT.
+      \item<4-> Results of $C_4$: three types of anomaly locations.
+      \item<5-> Pure geometry: applies to all free-fermion symmetry classes / interacting fSPT.
     \end{itemize}
     \begin{center}
+      \onslide<2->
       \begin{tikzpicture}[scale=1.2]
         \draw (0, 0) circle (1);
         %\draw (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
@@ -411,13 +412,41 @@
         \fill [red] (0, 0.2) circle (0.3);
       \end{tikzpicture}
       \hspace{2em}
+      \onslide<3->
       \begin{animateinline}{30}
-        \multiframe{100}{Ra=0.05+0.01}{
+        \multiframe{85}{Ra=0.05+0.01}{
           \begin{tikzpicture}[scale=1.2]
-            \draw (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+            \begin{scope}
+            \path[draw, clip] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+            \fill[red] (-.6, -\Ra+0.1) to [out=-15, in=180+15] (.6, -\Ra+0.1) --
+              (.6, \Ra+0.1) to [out=180+15, in=-15] (-.6, \Ra+0.1);
+            \end{scope}
           \end{tikzpicture}
         }
       \end{animateinline}
+      \hspace{4em}
+      \onslide<4->
+      \begin{tikzpicture}[scale=1.2]
+        \fill [blue] (0, -1) circle (0.1);
+        \fill [blue] (0, 1) circle (0.1);
+        \path[draw, clip] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+        \draw[red, thick] (-.6, .05) to [out=-15, in=180+15] (.6, 0.05);
+      \end{tikzpicture}
+      \begin{tikzpicture}[scale=1.2]
+        \draw (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+        \draw [blue, thick] (0, -1) to [out=60, in=-60] (0, 1);
+        \fill [red] (-0.2, 0) circle (0.1);
+      \end{tikzpicture}
+      \begin{tikzpicture}[scale=1.2]
+        \fill [red] (0, 1) circle (0.1);
+        %\fill [red] (0, -1) circle (0.1);
+        \path[draw] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+      \end{tikzpicture}      
+      \begin{tikzpicture}[scale=1.2]
+        %\fill [red] (0, 1) circle (0.1);
+        %\fill [red] (0, -1) circle (0.1);
+        \path[draw, fill=blue] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+      \end{tikzpicture}
     \end{center}
   \end{frame}
 
