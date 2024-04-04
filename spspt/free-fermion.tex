@@ -450,6 +450,47 @@
     \end{center}
   \end{frame}
 
+  \begin{frame}{Classifying anomaly on the boundary}
+    \begin{center}
+      \begin{tikzpicture}[scale=1]
+        %\fill [red] (0, 1) circle (0.1);
+        %\fill [red] (0, -1) circle (0.1);
+        \node at (-1.1, 0) {$X_1=$};
+        \path[draw, fill=blue] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+      \end{tikzpicture}
+      \hspace{2em}
+      \begin{tikzpicture}[scale=1]
+        \node at (-1.1, 0) {$X_2=$};
+        \draw (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+        \draw [blue, thick] (0, -1) to [out=60, in=-60] (0, 1);
+        \fill [red] (-0.2, 0) circle (0.1);
+      \end{tikzpicture}
+      \hspace{2em}
+      \begin{tikzpicture}[scale=1]
+        \node at (-1.1, 0) {$X_3=$};
+        \fill [blue] (0, -1) circle (0.1);
+        \fill [blue] (0, 1) circle (0.1);
+        \path[draw, clip] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+        \draw[red, thick] (-.6, .05) to [out=-15, in=180+15] (.6, 0.05);
+      \end{tikzpicture}
+      \hspace{2em}
+      \begin{tikzpicture}[scale=1]
+        \node at (-1.1, 0) {$X_4=$};
+        \fill [red] (0, 1) circle (0.1);
+        %\fill [red] (0, -1) circle (0.1);
+        \path[draw] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+      \end{tikzpicture}      
+    \end{center}
+
+    \begin{itemize}
+    \item $K_{X_i} := \{\text{States can be gapped out on } X_i\}$; $K=K_{X_1}\supset K_{X_2}\supset K_{X_3}\supset K_{X_4}$.
+    \item $K_{X_1}/K_{X_2}$: strong TI; $K_{X_2}/K_{X_3}$: 1st-order; $K_{X_3}/K_{X_4}$: 2nd-order; $K_{X_4}$: atomic insulator.
+    \item $K_{X_2}=A(\mathrm{Cl}^{q+1,3}\otimes\mathbb R[C_4])/A(\mathrm{Cl}^{q+1,3})$
+    \item $K_{X_4}=A(\mathrm{Cl}^{q+1,3}\otimes\mathbb R[C_4])/A(\mathrm{Cl}^{q+1,3}\otimes\mathbb R[C_4])=0$. (No AI)
+    \item $K_{X_3}$: whether $M$ and $\tilde c_4M\tilde c_4^{-1}$ belong to the same conn. comp. in $R^{q+1, 3}$.
+    \end{itemize}
+  \end{frame}
+
   \section{TCS with Space-Group Symmetries: Bulk Classification}
 
   \begin{frame}{Bulk Classification: Crystalline Equivalence Principle}
