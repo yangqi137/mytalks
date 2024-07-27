@@ -126,7 +126,7 @@
 % - Keep it simple, no one is interested in your street address.
 
 %\date{2016 Annual Meeting of Fudan CFTPP} % (optional, should be abbreviation of conference name)
-\date{WENG, Xi'an, April 2024.}
+\date{Miniworkshop on Quantum Many-Body Physics, July 29, 2024.}
 % - Either use conference name or its abbreviation.
 % - Not really informative to the audience, more for people (including
 %   yourself) who are reading the slides online
@@ -221,6 +221,8 @@
 \begin{frame}{Topological Crystaline States = Space-group SPT}
   \begin{itemize}
     \item Example: Topological Crystalline Insulators.
+    \item High-order surface states.
+    \emph{TCS = high-order topological states.}
   \end{itemize}
   
 \end{frame}
@@ -236,7 +238,7 @@
         \emph{Examples: mirror SPT, weak SPT (translation symmetry).}
         %\emph{Patch construction: Zhida Song, Shengjie Huang, YQ, Chen Fang and Michael Hermele, Sci. Adv. 5, eaax2007 (2019).}
       \end{enumerate}
-    \item Application to free-fermion systems?
+    \item How to analyze high-order surface states?
     \end{itemize}
     \begin{center}
     \begin{tikzpicture}[scale=.9]
@@ -289,5 +291,149 @@
           \fill [red] (1.5,1.5) circle (2pt);
         \end{tikzpicture}      
       \end{center}
+    \end{frame}
+
+    \begin{frame}{Anomaly Pattern of Point-Group Symmetry}
+      \begin{itemize}
+        \item<1-> Example: $G=C_4$.
+        \item<2-> Gapped region: $X\subset S^2/G$; gapless region: $\bar X=(S^2/G) - X$.
+        \item<2-> It is easier to study regions that can be gapped out.
+        \item<3-> Deformation: G-equivariant map $X\rightarrow X'$.
+        \begin{itemize}
+          \item<4-> Minimal $X$: easy to study theoretically;
+          \item<5-> Minimal $\bar X$: anomalous regions cannot be gapped out.
+        \end{itemize}
+        \item<6-> Results of $C_4$: three types of anomaly locations.
+        \item<7-> Pure geometry: applies to all free-fermion symmetry classes / interacting fSPT.
+      \end{itemize}
+      \begin{center}
+        \onslide<2->
+        \begin{tikzpicture}[scale=1.2]
+          \draw (0, 0) circle (1);
+          %\draw (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+          \filldraw [fill=black!30] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+          \fill [red] (0, 0.2) circle (0.3);
+        \end{tikzpicture}
+        \hspace{2em}
+        \onslide<3->
+        \begin{animateinline}{30}
+          \multiframe{85}{Ra=0.05+0.01}{
+            \begin{tikzpicture}[scale=1.2]
+              \begin{scope}
+              \path[draw, clip] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+              \fill[red] (-.6, -\Ra+0.1) to [out=-15, in=180+15] (.6, -\Ra+0.1) --
+                (.6, \Ra+0.1) to [out=180+15, in=-15] (-.6, \Ra+0.1);
+              \end{scope}
+            \end{tikzpicture}
+          }
+        \end{animateinline}
+        \hspace{4em}
+        \onslide<6->
+        \begin{tikzpicture}[scale=1.2]
+          \fill [blue] (0, -1) circle (0.1);
+          \fill [blue] (0, 1) circle (0.1);
+          \path[draw, clip] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+          \draw[red, thick] (-.6, .05) to [out=-15, in=180+15] (.6, 0.05);
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=1.2]
+          \draw (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+          \draw [blue, thick] (0, -1) to [out=60, in=-60] (0, 1);
+          \fill [red] (-0.2, 0) circle (0.1);
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=1.2]
+          \fill [red] (0, 1) circle (0.1);
+          %\fill [red] (0, -1) circle (0.1);
+          \path[draw] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+        \end{tikzpicture}      
+        \begin{tikzpicture}[scale=1.2]
+          %\fill [red] (0, 1) circle (0.1);
+          %\fill [red] (0, -1) circle (0.1);
+          \path[draw, fill=blue] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+        \end{tikzpicture}
+      \end{center}
+    \end{frame}
+  
+    \begin{frame}{Classifying anomaly on the boundary}
+      \begin{center}
+        \begin{tikzpicture}[scale=1]
+          %\fill [red] (0, 1) circle (0.1);
+          %\fill [red] (0, -1) circle (0.1);
+          \node at (-1.1, 0) {$X_1=$};
+          \path[draw, fill=blue] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+        \end{tikzpicture}
+        \hspace{2em}
+        \begin{tikzpicture}[scale=1]
+          \node at (-1.1, 0) {$X_2=$};
+          \draw (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+          \draw [blue, thick] (0, -1) to [out=60, in=-60] (0, 1);
+          \fill [red] (-0.2, 0) circle (0.1);
+        \end{tikzpicture}
+        \hspace{2em}
+        \begin{tikzpicture}[scale=1]
+          \node at (-1.1, 0) {$X_3=$};
+          \fill [blue] (0, -1) circle (0.1);
+          \fill [blue] (0, 1) circle (0.1);
+          \path[draw, clip] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+          \draw[red, thick] (-.6, .05) to [out=-15, in=180+15] (.6, 0.05);
+        \end{tikzpicture}
+        \hspace{2em}
+        \begin{tikzpicture}[scale=1]
+          \node at (-1.1, 0) {$X_4=$};
+          \fill [red] (0, 1) circle (0.1);
+          %\fill [red] (0, -1) circle (0.1);
+          \path[draw] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+        \end{tikzpicture}      
+      \end{center}
+  
+      \begin{itemize}
+      \item $K_{X_i} := \{\text{States can be gapped out on } X_i\}$; $K=K_{X_1}\supset K_{X_2}\supset K_{X_3}\supset K_{X_4}$.
+      \item $K_{X_1}/K_{X_2}$: strong TI; $K_{X_2}/K_{X_3}$: 1st-order; $K_{X_3}/K_{X_4}$: 2nd-order; $K_{X_4}$: atomic insulator.
+      \item $K_{X_2}=A(\mathrm{Cl}^{q+1,3}\otimes\mathbb R[C_4])/A(\mathrm{Cl}^{q+1,3})$
+      \item $K_{X_4}=A(\mathrm{Cl}^{q+1,3}\otimes\mathbb R[C_4])/A(\mathrm{Cl}^{q+1,3}\otimes\mathbb R[C_4])=0$. (No AI)
+      \item $K_{X_3}$: whether $M$ and $c_4Mc_4^{-1}$ belong to the same conn. comp. in $R^{q+1, 3}$.
+      \end{itemize}
+    \end{frame}
+    
+    \begin{frame}{Example: class DIII}
+      \begin{center}
+        \begin{tikzpicture}[scale=1]
+          %\fill [red] (0, 1) circle (0.1);
+          %\fill [red] (0, -1) circle (0.1);
+          \node at (-1.1, 0) {$X_1=$};
+          \path[draw, fill=blue] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+        \end{tikzpicture}
+        \hspace{2em}
+        \begin{tikzpicture}[scale=1]
+          \node at (-1.1, 0) {$X_2=$};
+          \draw (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+          \draw [blue, thick] (0, -1) to [out=60, in=-60] (0, 1);
+          \fill [red] (-0.2, 0) circle (0.1);
+        \end{tikzpicture}
+        \hspace{2em}
+        \begin{tikzpicture}[scale=1]
+          \node at (-1.1, 0) {$X_3=$};
+          \fill [blue] (0, -1) circle (0.1);
+          \fill [blue] (0, 1) circle (0.1);
+          \path[draw, clip] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+          \draw[red, thick] (-.6, .05) to [out=-15, in=180+15] (.6, 0.05);
+        \end{tikzpicture}
+        \hspace{2em}
+        \begin{tikzpicture}[scale=1]
+          \node at (-1.1, 0) {$X_4=$};
+          \fill [red] (0, 1) circle (0.1);
+          %\fill [red] (0, -1) circle (0.1);
+          \path[draw] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+        \end{tikzpicture}      
+      \end{center}
+  
+      \begin{itemize}
+        \item Bulk classification: $\mathbb R[C_4]\simeq\mathbb R\oplus\mathbb R\oplus\mathbb C$;
+        $A(\mathrm{Cl}^{2,3}\otimes\mathbb R[C_4])=\mathbb Z\oplus\mathbb Z\oplus\mathbb Z$.
+        \item $K_{X_1}=\mathbb Z\oplus\mathbb Z\oplus\mathbb Z$.
+        \item $K_{X_2}=A(\mathrm{Cl}^{q+1,3}\otimes\mathbb R[C_4])/A(\mathrm{Cl}^{q+1,3})=\mathbb Z\oplus\mathbb Z$.
+        \item $K_{X_3}=2\mathbb Z\oplus\mathbb Z$.
+        \item $K_{X_4}=0$.
+        \item Strong TSC: $\mathbb Z$; 1st order: $\mathbb Z_2$; 2nd order: $2\mathbb Z\oplus\mathbb Z$; AI: 0.
+      \end{itemize}
     \end{frame}
   \end{document}
