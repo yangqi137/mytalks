@@ -495,6 +495,36 @@
     \end{frame}
 
     \section{Anomaly patterns for free-fermion SPTs}
+
+    \begin{frame}{Free-fermion classification: Ten-fold way.}
+      \begin{columns}
+        \column{.4\textwidth}
+        \begin{itemize}
+        \item 10-fold way and Bott periodicity.
+        \item TRS: $T^2=\pm1$;
+        \item PHS: $C^2=\pm1$;
+        \item Chiral symmetry: $S=TC$.
+        \end{itemize}
+        \column{.6\textwidth}{\small
+          \begin{tabular}{c|ccc|cc|cccc}
+            \hline
+            Class & $T^2$ & $C^2$ & $S$ & Type & q & 0d & 1d & 2d & 3d\\
+            \hline\hline
+            A & 0 & 0 & 0 & $\mathbb C$ & 0 & $\mathbb Z$ & 0 & $\mathbb Z$ & 0\\
+            AIII & 0&0&1 & $\mathbb C$&1 & 0 & $\mathbb Z$ & 0 & $\mathbb Z$\\
+            \hline
+            D & 0&+1&0 & $\mathbb R$&0 & $\mathbb Z_2$&$\mathbb Z_2$&$\mathbb Z$&0\\
+            DIII & $-1$&+1&1 & $\mathbb R$&1 & 0&$\mathbb Z_2$&$\mathbb Z_2$&$\mathbb Z$\\
+            AII & $-1$&0&0 & $\mathbb R$&2 & $\mathbb Z$&0&$\mathbb Z_2$&$\mathbb Z_2$\\
+            CII & $-1$&$-1$&1 & $\mathbb R$&3 & 0&$\mathbb Z$&0&$\mathbb Z_2$\\
+            C & 0&$-1$&0 & $\mathbb R$&4 & 0&0&$\mathbb Z$&0\\
+            CI & +1&$-1$&1 & $\mathbb R$&5 & 0&0&0&$\mathbb Z$\\
+            AI & +1&0&0 & $\mathbb R$&6 & $\mathbb Z$&0&0&0\\
+            BDI & +1&+1&1 & $\mathbb R$&7 & $\mathbb Z_2$&$\mathbb Z$&0&0\\
+            \hline
+        \end{tabular}}
+      \end{columns}
+    \end{frame}
     
     \begin{frame}{Example: class DIII}
       \begin{center}
@@ -540,6 +570,14 @@
     \end{frame}
 
     \section{Anomaly patterns for interacting-fermion SPTs}
+
+    \begin{frame}{Classification of interacting-fermion SPTs}
+      \begin{itemize}
+      \item Domain-wall decoration: Q.-R. Wang and Z.-C. Gu, PRX \textbf{10}, 031055 (2020).
+      \item GAP package computing the classification: \url{www.github.com/yangqi137/SptSet}.
+      \end{itemize}
+    \end{frame}
+    
     \begin{frame}{Example: class DIII}
       \begin{center}
         \begin{tikzpicture}[scale=1]
@@ -576,7 +614,7 @@
         \item Bulk classification: $\mathcal H^4(\mathbb C_4\times\mathbb Z_2^T)=\mathbb Z_2\oplus\mathbb Z_4\oplus\mathbb Z_{16}$.
         \item $K_{X_1}=\mathbb Z_2\oplus\mathbb Z_4\oplus\mathbb Z_{16}$.
         \item $K_{X_2}=\mathcal H^4(\mathbb C_4\times\mathbb Z_2^T)/\mathcal H^4(\mathbb Z_2^T)=\mathbb Z_2\oplus\mathbb Z_4$.
-        \item $K_{X_3}=\mathbb Z_4$.
+        \item $K_{X_3}=\mathbb Z_4$: For each $\alpha\in K_{X_2}$, solve $d\beta=\alpha$ and check $\beta-c_4\beta c_4^{-1}\in \mathcal H^3(\mathbb Z_2^T)=\mathbb Z_2$.
         \item Strong TSC: $\mathbb Z_{16}$; 1st order: $\mathbb Z_2$; 2nd order: $\mathbb Z_4$; AI: 0.
         \item $K_{X_4}=0$.
       \end{itemize}
