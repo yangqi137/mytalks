@@ -255,6 +255,32 @@
   \end{center}
 \end{frame}
 
+\begin{frame}{Why Topological Crystaline States?}
+  \begin{itemize}
+    \item Crystalline symmetries are present in all solid-state materials.
+    \item High-order boundary states: TCSs (excluding the Atomic Insulators) are a.k.a. High-Order Topological States.
+    May be useful for storing quantum information.
+  \end{itemize}
+  \begin{center}
+    \begin{tikzpicture} [scale=2]
+      \fill [blue!50] (0,0)--(1,0)--(1.5,.5)--(1.5,1.5)--(0.5,1.5)--(0,1)--(0,0);
+      \draw [thick,red] (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
+      \draw [thick,red] (1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
+      \draw [thick,red] (1.5,1.5)--(0.5,1.5)--(0,1);
+      \draw [thick,red] (0,0)--(.5,.5)--(.5,1.5);
+      \draw [thick,red](.5,.5)--(1.5,.5);
+      \fill [red] (0,0) circle (2pt);
+      \fill [red] (1,0) circle (2pt);
+      \fill [red] (0,1) circle (2pt);
+      \fill [red] (1,1) circle (2pt);
+      \fill [red] (0.5,0.5) circle (2pt);
+      \fill [red] (1.5,0.5) circle (2pt);
+      \fill [red] (0.5,1.5) circle (2pt);
+      \fill [red] (1.5,1.5) circle (2pt);
+    \end{tikzpicture}      
+  \end{center}
+\end{frame}
+
 \begin{frame}
     \frametitle{Classification of Topological Crystaline States}
     \begin{itemize}
@@ -266,7 +292,8 @@
         \emph{Examples: mirror SPT, weak SPT (translation symmetry).}
         %\emph{Patch construction: Zhida Song, Shengjie Huang, YQ, Chen Fang and Michael Hermele, Sci. Adv. 5, eaax2007 (2019).}
       \end{enumerate}
-    \item How to analyze high-order surface states?
+    \item How to analyze high-order surface states?\\
+      \emph{Case-by-case study of certain surface geometries?}
     \end{itemize}
     \begin{center}
     \begin{tikzpicture}[scale=.9]
@@ -295,32 +322,6 @@
     \end{center}
     \end{frame}
     
-    \begin{frame}{Why Topological Crystaline States?}
-      \begin{itemize}
-        \item Crystalline symmetries are present in all solid-state materials.
-        \item High-order boundary states: TCSs (excluding the Atomic Insulators) are a.k.a. High-Order Topological States.
-        May be useful for storing quantum information.
-      \end{itemize}
-      \begin{center}
-        \begin{tikzpicture} [scale=2]
-          \fill [blue!50] (0,0)--(1,0)--(1.5,.5)--(1.5,1.5)--(0.5,1.5)--(0,1)--(0,0);
-          \draw [thick,red] (0,0)--(1,0)--(1,1)--(0,1)--(0,0);
-          \draw [thick,red] (1,0)--(1.5,.5)--(1.5,1.5)--(1,1);
-          \draw [thick,red] (1.5,1.5)--(0.5,1.5)--(0,1);
-          \draw [thick,red] (0,0)--(.5,.5)--(.5,1.5);
-          \draw [thick,red](.5,.5)--(1.5,.5);
-          \fill [red] (0,0) circle (2pt);
-          \fill [red] (1,0) circle (2pt);
-          \fill [red] (0,1) circle (2pt);
-          \fill [red] (1,1) circle (2pt);
-          \fill [red] (0.5,0.5) circle (2pt);
-          \fill [red] (1.5,0.5) circle (2pt);
-          \fill [red] (0.5,1.5) circle (2pt);
-          \fill [red] (1.5,1.5) circle (2pt);
-        \end{tikzpicture}      
-      \end{center}
-    \end{frame}
-
     \section{Anomaly pattern: where does the surface state appear}
 
     \begin{frame}{Anomaly Pattern of Point-Group Symmetry}
@@ -422,6 +423,7 @@
       \item $K_{X_2}=\mathcal H^4(C_4\times G_0)/\mathcal H^4(G_0)$.
       \item $K_{X_4}=0$. (No AI)
       \item $K_{X_3}$: whether $M$ and $c_4Mc_4^{-1}$ can be smoothly connected.
+      \item Examples of hinge states: C Fang and L Fu, Sci. Adv. 2019.
       \end{itemize}
     \end{frame}
 
@@ -456,9 +458,11 @@
 
     \begin{frame}{Two tasks in computing the anomaly pattern}
       \begin{enumerate}
-        \item Check if a state can be gapped out when symmetry is reduced:
+        \item Reduction of symmetry:\\
+        \emph{Check if a state can be gapped out when symmetry is reduced:}
         $$\mathcal H^D(G')\subset \mathcal H^D(G) \text{ for } G'\subset G$$
-        \item Check if two gapped boundary states are connected:
+        \item Homotopy problem:\\
+        \emph{Check if two gapped boundary states are connected:}
         $$M-gMg^{-1}\simeq 0 \in \mathcal H^{D-1}(G)$$
       \end{enumerate}
       Anomaly patterns can be computed using these two steps.
@@ -525,7 +529,38 @@
         \end{tabular}}
       \end{columns}
     \end{frame}
-    
+
+    \begin{frame}{Adding an onsite unitary symmetry}
+      \begin{itemize}
+        \item<1-> Why only TRS and PHS in 10-fold way?
+        \item<2-> Free fermion + onsite unitary symmetry $G$: Hamiltonian is block-diagonalized into irreps of $G$:
+        \[H=H_1\oplus H_2\oplus\cdots\begin{pmatrix}
+          H_1 & 0 & 0\\
+          0 & H_2 & 0\\
+          0 & 0 & \cdots
+        \end{pmatrix}\]
+        \item<2-> Each block (each irrep) has a topological invariant.
+        \item<3-> Real irreps: $\mathbb R$, $\mathbb C$ and $\mathbb H$-types.
+        \item<3-> $\mathbb C$-type: $\mathrm{Cl}^{q+1,d}\rightarrow \mathbb{C}\mathrm{l}^{q+1+d}$;
+        $\mathbb H$-type: $\mathrm{Cl}^{q+1,d}\rightarrow \mathrm{Cl}^{q+5,d}$.
+        \item<4-> This solves the symmetry-reduction problem.
+      \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Homotopy problem: explicit form of Dirac mass terms}
+      \begin{itemize}
+        \item All free-fermion states can be constructed by Dirac Hamiltonians,
+        \[H(k)=iM+\left(\sum_{n=1}^d k_n^2\right)iM_0+\sum_{n=1}^d k_n\tilde{\Gamma}_n\]
+        \item $\tilde \Gamma_m^2$ and $M$ form a representation of a Clifford Algebra
+        \[-M^2=\tilde \Gamma_m^2=I; \{M,\tilde\Gamma_m\}=0;
+        \{\tilde\Gamma_m,\tilde\Gamma_n\}=2\delta_{mn}.\]
+        \item $R=$ Space of $M$: represents different free-fermion states.
+        \item $\pi_0(R)$ represents different phases.
+        \item Use topological invariants to check if two different mass terms belong to the same element of $\pi_0(R)$:\\
+        \emph{M Stone, C-K Chiu and A Roy, J. Phys. A: Math. Theor. 44 (2011) 045001.}
+      \end{itemize}
+    \end{frame}
+      
     \begin{frame}{Example: class DIII}
       \begin{center}
         \begin{tikzpicture}[scale=1]
@@ -576,6 +611,9 @@
       \item Domain-wall decoration: Q.-R. Wang and Z.-C. Gu, PRX \textbf{10}, 031055 (2020).
       \item GAP package computing the classification: \url{www.github.com/yangqi137/SptSet}.
       \end{itemize}
+      \begin{center}
+      \includegraphics[width=.4\textwidth]{../chainmap/decoration.png}
+      \end{center}
     \end{frame}
     
     \begin{frame}{Example: class DIII}

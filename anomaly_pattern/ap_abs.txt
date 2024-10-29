@@ -1,0 +1,8 @@
+Anomaly pattern of point groups and high-order topological states
+
+An essential feature of topological crystalline states (TCSs), which are short-range-entanged topological states protected by crystalline symmetries, is they generally have high-order gapless boundary states, such as one-dimensional hinge states and zero-dimensional corner states on a two-dimensional surface.
+Therefore, such TCSs are also called high-order topological states.
+In this work, we design a systematic method to compute possible high-order boundary states of a TCS for all possible surface geometries.
+We show that the location of surface gapless region, dubbed the anomaly pattern, can be symmetrically and continuously deformed without changing the topologically-protected gapless states, and such deformation defines a homotopy equivalence between anomaly patterns.
+The list of equivalent classes of anomaly patterns are completey determined by the point-group symmetry, and it is universal for all types of TCSs, including bosonic, free-fermion and interacting-fermion states.
+We also describe how to compute the anomaly pattern of a bulk topological state, for all types of TCSs.
