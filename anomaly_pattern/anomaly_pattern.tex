@@ -112,7 +112,7 @@
 % does not look nice, try deleting the line with the fontenc.
 
 \title[Space-group SPTs] % (optional, use only with long paper titles)
-{Classification of Topological Crystalline States}
+{Anomaly pattern of point groups and high-order topological states}
 
 \author[Y Qi] % (optional, use only with lots of authors)
 {Yang~Qi}
@@ -126,7 +126,8 @@
 % - Keep it simple, no one is interested in your street address.
 
 %\date{2016 Annual Meeting of Fudan CFTPP} % (optional, should be abbreviation of conference name)
-\date{Miniworkshop on Quantum Many-Body Physics, July 29, 2024.}
+%\date{Miniworkshop on Quantum Many-Body Physics, July 29, 2024.}
+\date{Hong Kong University, Oct. 30, 2024.}
 % - Either use conference name or its abbreviation.
 % - Not really informative to the audience, more for people (including
 %   yourself) who are reading the slides online
@@ -494,6 +495,107 @@
           \fill [red] (0, 1) circle (0.1);
           %\fill [red] (0, -1) circle (0.1);
           \path[draw] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+        \end{tikzpicture}      
+      \end{center}
+    \end{frame}
+
+    \begin{frame}
+      \frametitle{General theory of anomaly patterns}
+      \begin{itemize}
+      \item Gapped region $X$; gapless region $\bar X$: $K_X=\{\text{states can be gapped on } X\}$.
+      \item A partial order: $X\rightarrow Y$ implies $K_X\supseteq K_Y$: denoted by $X\preceq Y$.
+        \begin{center}
+          \begin{tikzpicture}[scale=1]
+            \draw (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+            \fill [red] (-0.2, 0) circle (0.2);
+          \end{tikzpicture}
+        \hspace{2em}
+          \begin{tikzpicture}[scale=1]
+            \draw (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+            \fill [red] (-0.1, 0) circle (0.3);
+          \end{tikzpicture}
+        \end{center}        
+      \item Equivalent classes: $X\preceq Y$ and $Y\preceq X$ means $X\sim Y$, implies $K_X = K_Y$;
+      \item Partial order b/w equivalent classes: $\tilde X\leq \tilde Y$ implies $K_X\supseteq K_Y$.
+      \end{itemize}
+      \begin{center}
+        \begin{tikzpicture}[scale=1]
+          %\fill [red] (0, 1) circle (0.1);
+          %\fill [red] (0, -1) circle (0.1);
+          \node at (-1.1, 0) {$X_1=$};
+          \path[draw, fill=blue] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+        \end{tikzpicture}
+        \hspace{2em}
+        \begin{tikzpicture}[scale=1]
+          \node at (-1.1, 0) {$<X_2=$};
+          \draw (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+          \draw [blue, thick] (0, -1) to [out=60, in=-60] (0, 1);
+          \fill [red] (-0.2, 0) circle (0.1);
+        \end{tikzpicture}
+        \hspace{2em}
+        \begin{tikzpicture}[scale=1]
+          \node at (-1.1, 0) {$<X_3=$};
+          \fill [blue] (0, -1) circle (0.1);
+          \fill [blue] (0, 1) circle (0.1);
+          \path[draw, clip] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+          \draw[red, thick] (-.6, .05) to [out=-15, in=180+15] (.6, 0.05);
+        \end{tikzpicture}
+        \hspace{2em}
+        \begin{tikzpicture}[scale=1]
+          \node at (-1.1, 0) {$<X_4=$};
+          \fill [red] (0, 1) circle (0.1);
+          %\fill [red] (0, -1) circle (0.1);
+          \path[draw] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+        \end{tikzpicture}      
+      \end{center}
+    \end{frame}
+
+    \begin{frame}
+      \frametitle{Only a partial order for complex point groups}
+      \begin{itemize}
+      \item Example: point group $S_4$.
+      \item Partial order: $X_1<X_2<X_3, X_4<X_5<X_6$.
+      \end{itemize}
+      \begin{center}
+        \begin{tikzpicture}[scale=.9]
+          %\fill [red] (0, 1) circle (0.1);
+          %\fill [red] (0, -1) circle (0.1);
+          \node at (-1.1, 0) {$X_1=$};
+          \path[draw, fill=blue] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+        \end{tikzpicture}
+        %\hspace{0.5em}
+        \begin{tikzpicture}[scale=.9]
+          \node at (-1.1, 0) {$X_2=$};
+          \draw (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+          \draw [blue, thick] (0, -1) to [out=60, in=-60] (0, 1);
+          \fill [red] (-0.2, 0) circle (0.1);
+        \end{tikzpicture}
+        %\hspace{0.5em}
+        \begin{tikzpicture}[scale=.9]
+          \node at (-1.1, 0) {$X_3=$};
+          \fill [blue] (0, -1) circle (0.1);
+          \fill [blue] (0, 1) circle (0.1);
+          \path[draw, clip] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+          \draw[red, thick] (-.6, .05) to [out=-15, in=180+15] (.6, 0.05);
+        \end{tikzpicture}
+        %\hspace{0.5em}
+        \begin{tikzpicture}[scale=.9]
+          \node at (-1.1, 0) {$X_4=$};
+          \fill [red] (0, 1) circle (0.1);
+          \fill [red] (0, -1) circle (0.1);
+          \path[draw, clip] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+          \draw[blue, thick] (-.6, .05) to [out=-15, in=180+15] (.6, 0.05);
+        \end{tikzpicture}
+        %\hspace{0.5em}
+        \begin{tikzpicture}[scale=.9]
+          \node at (-1.1, 0) {$X_5=$};
+          \fill [blue] (-0.2, 0) circle (0.1);
+          \path[draw, red, thick] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
+        \end{tikzpicture}      
+        %\hspace{0.5em}
+        \begin{tikzpicture}[scale=.9]
+          \node at (-1.1, 0) {$X_6=$};
+          \path[draw, fill=red] (0, -1) to [out=30, in=-30] (0, 1) to [out=210, in=150] (0, -1);
         \end{tikzpicture}      
       \end{center}
     \end{frame}
