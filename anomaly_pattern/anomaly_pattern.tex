@@ -708,14 +708,85 @@
 
     \section{Anomaly patterns for interacting-fermion SPTs}
 
-    \begin{frame}{Classification of interacting-fermion SPTs}
+    \begin{frame}
+      \frametitle{fSPT w/ onsite symmetry: domain-wall decoration}
       \begin{itemize}
-      \item Domain-wall decoration: Q.-R. Wang and Z.-C. Gu, PRX \textbf{10}, 031055 (2020).
-      \item GAP package computing the classification: \url{www.github.com/yangqi137/SptSet}.
+        \item Picture: domain-wall decoration.
+        \item How to get a symmetric state?
+        \begin{enumerate}
+          \item Start from a symmetry-breaking state.
+          \item Consider domain configurations.
+          \item \alert{Decorate domain walls with different topological states.}
+          \item Proliferate domains: construct a coherent superposition of different domain configurations.
+        \end{enumerate}
+        \item What can we decorate?\\
+        invertible Topological Orders: complex fermion; Kitaev chain; (p+ip) SC; ...
+      \end{itemize}
+      \begin{columns}
+        \column{.6\textwidth}
+      \begin{center}
+        \includegraphics[height=2.5cm]{../chainmap/decoration.png}
+      \end{center}
+      \column{.4\textwidth}
+      \[|\Psi\rangle=\sum_{\{g_i\}}\Bigg|\includegraphics[height=1cm]{../chainmap/decoration.png}\Bigg>\]
+      \end{columns}
+    \end{frame}
+    
+    \begin{frame}
+      \frametitle{fSPT: algebraic description}
+      \begin{itemize}
+        \item SPT classification: generalized cohomology theory of symmetry group $G$.
+        \item Atiyah–Hirzebruch Spectral Sequence: SPT of interacting fermions are described by combinations of cochains:
+          \[E^{pq}_2=H^p(G, \text{iTO}^q)\Rightarrow
+          \mathcal H^{p+q}(G).\]
+        \item Decorating domain walls and sum over all domain configurations.
+          \[(2+1)d: n_1(g_1); n_2(g_1, g_2); \nu_3(g_1,g_2,g_3).\]
+        \item $n_1$ and $n_2$: decoration of invertible topological states.
+        \item $\nu_3$: relative phase b/w different configurations.
       \end{itemize}
       \begin{center}
-      \includegraphics[width=.4\textwidth]{../chainmap/decoration.png}
+        \includegraphics[height=2.5cm]{../spspt/fspt_decor.jpg}
+        \includegraphics[height=2.5cm]{../spspt/fmove2.pdf}
       \end{center}
+    \end{frame}
+    
+    \begin{frame}{Obstruction functions}
+      \begin{itemize}
+        \item Example: constraints on $\nu_3$, frustration-free $\Rightarrow$ ``pentagon equation''.
+        \begin{center}
+          %\includegraphics[height=2cm]{fmove2.pdf}\\
+          \includegraphics[height=3cm]{../spspt/pentagon}        
+        \end{center}
+        \item Bosonic SPT: $d\nu_3=0$;
+        \item Fermionic SPT:
+        \[d\nu_3(g1, g2, g3, g4)=O_4[n_2](g1, g2, g3, g4)=\frac12 n_2(g1, g2) n_2(g3, g4) + \cdots\]
+      \end{itemize}
+    \end{frame}
+    
+    \begin{frame}{Construction of fSPT states}
+      \begin{enumerate}
+      \item Pick $n_1\in H^1(G, \mathbb Z_2)$.
+      \item Compute $O_3[n_1]\in H^3(G, \mathbb Z_2)$ and see if it is trivial.
+      \item Solve $dn_2 = O_3[n_1]$ (pick a $n_2$).
+      \item Compute $O_4[n_2]\in H^4[G, \mathrm U(1)_T]$ and see if it is trivial.
+      \item Solve $d\nu_3 = O_4[n_2]$.
+      \end{enumerate}
+    \end{frame}
+
+    \begin{frame}
+      \frametitle{Computing the anomaly pattern}
+      \begin{enumerate}
+        \item Reduction of symmetry: $f: H\hookrightarrow G$ gives $H^*(G)\mapsto H^*(H)$.
+        \[\alpha(gg_0, gg_1,\ldots, gg_n)\neq
+        g\cdot\alpha(g_0, g_1, \ldots, g_n).\]
+        \item Homotopy problem: given cochain $\alpha\in C^n(H)$ and $gH\in G/H$, compute $\alpha-g\cdot\alpha\in H^n(H)$.
+        \[(g\cdot\alpha)(g_0, g_1, \ldots, g_n)
+        =g\cdot\alpha(gg_0, gg_1,\ldots, gg_n).\]
+      \end{enumerate}
+      \begin{block}{SptSet package}
+        GAP package computing the classification: \url{www.github.com/yangqi137/SptSet}.
+      \end{block}
+
     \end{frame}
     
     \begin{frame}{Example: class DIII}
@@ -754,7 +825,7 @@
         \item Bulk classification: $\mathcal H^4(\mathbb C_4\times\mathbb Z_2^T)=\mathbb Z_2\oplus\mathbb Z_4\oplus\mathbb Z_{16}$.
         \item $K_{X_1}=\mathbb Z_2\oplus\mathbb Z_4\oplus\mathbb Z_{16}$.
         \item $K_{X_2}=\mathcal H^4(\mathbb C_4\times\mathbb Z_2^T)/\mathcal H^4(\mathbb Z_2^T)=\mathbb Z_2\oplus\mathbb Z_4$.
-        \item $K_{X_3}=\mathbb Z_4$: For each $\alpha\in K_{X_2}$, solve $d\beta=\alpha$ and check $\beta-c_4\beta c_4^{-1}\in \mathcal H^3(\mathbb Z_2^T)=\mathbb Z_2$.
+        \item $K_{X_3}=\mathbb Z_4$: For each $\alpha\in K_{X_2}$, solve $d\beta=\alpha$ and check $\beta-c_4\cdot\beta\in \mathcal H^3(\mathbb Z_2^T)=\mathbb Z_2$.
         \item Strong TSC: $\mathbb Z_{16}$; 1st order: $\mathbb Z_2$; 2nd order: $\mathbb Z_4$; AI: 0.
         \item $K_{X_4}=0$.
       \end{itemize}
