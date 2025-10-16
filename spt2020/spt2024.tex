@@ -164,8 +164,8 @@ Department of Physics, Fudan University.
         \includegraphics[height=2cm]{../people/qingrui}
         \includegraphics[height=2cm]{../people/zhengcheng}
 \end{center}
-\item Zhida Song, Chen Fang and Yang Qi, Nature Communications \textbf{11}, 4197 (2020).
 \item Yunqing Ouyang, Qing-Rui Wang, Zheng-Cheng Gu and Yang Qi, Chinese Physics Letters \textbf{38}, 127101 (2021).
+\item Zhida Song, Chen Fang and Yang Qi, Nature Communications \textbf{11}, 4197 (2020).
 \end{itemize}
 \end{frame}
 
@@ -794,6 +794,7 @@ gap> GroupCohomology(G, 5);
 	\frametitle{Implimenting chain maps in GAP}
 	\begin{itemize}
 		\item We are working on a GAP package to impliment the chain maps and to compute fSPT classifications.
+		\item Available at \url{https://github.com/yangqi137/SptSet}.
 		\item User only need to input the mappingin terms of inhomogeneous cocycles.
 		\item The package automatically computes the mapping using the simplified resolution.
 	\end{itemize}
@@ -834,21 +835,80 @@ gap> FermionSPTLayers(ss, 2);
 [ <ZL-Module with torsions [ 2 ]>, <ZL-Module []>, <ZL-Module []> ]
 \end{lstlisting}
 
-Example: compute fSPT for 2D wallpaper groups.
 \end{frame}
 
-\begin{frame}
-	\frametitle{Summary}
-	\begin{itemize}
-		\item Use a simplified free resolution to accelerate computation of group cohomology.
-		\item Use chain maps between resolutions to compute maps between cohomology groups.
-		\item We are working on a GAP package SptSet.
-		\item Takes 5min to compute 2D fSPTs for all 17 wallpaper groups.
-		\item Email me at \url{qiyang@fudan.edu.cn} for early access.
-		\item We also have a program written in python: faster but much harder to use.
-		\item Will add more functions (fSPT with nontrivial group extension, group structure, ...), tweak the performence, and publish.
-	\end{itemize}
+\begin{frame}[fragile]{Example: fSPT for 2D wallpaper groups}
+	\url{SptSet/examples/fspt_2d_s12.g}
+	\begin{lstlisting}[basicstyle=\footnotesize]
+    for it in [2..17] do
+      SG := SpaceGroupBBNWZ(2, it);
+      fSG := IsomorphismPcpGroup(SG);
+      SG1 := Image(fSG);
+      R := ResolutionAlmostCrystalGroup(SG1, 6);
+      gs := GeneratorsOfGroup(SG);
+      w := Spin12Factor(2, it);
+      ww := {g1, g2} -> w(PreImageElm(fSG, g1), PreImageElm(fSG, g2));
+      f := GroupHomomorphismByImagesNC(SG1, GL(1, Integers),
+        List(gs, x -> Image(fSG, x)),
+        List(gs, x -> [[DeterminantMat(x)]]));
+
+      SS := FermionSPTSpecSeq(R, f, ww);
+      FermionSPTLayersVerbose(SS, 2);
+    od;
+  \end{lstlisting}
+  17 wallpaper groups in ~6 minutes.
 \end{frame}
+
+\begin{frame}{Current status}
+  \begin{itemize}
+    \item 2d fSPT: all solved.
+    \begin{itemize}
+      \item Formulas for the obstruction functions: QR Wang and ZC Gu, PRX \textbf{10}, 031055 (2020).
+      \item Formulas for stacking: Xing-Yu Ren et al, PRB \textbf{110}, 235117 (2024)..
+      \item SptSet package can reproduce the results of real-space construction by JH Zhang, et al.
+    \end{itemize}
+    \item 3d fSPT: work in progress.
+    \begin{itemize}
+      \item Formulas for the obstruction functions: Shang-Qiang Ning, et al, to appear.
+      \item Stacking: Xing-Yu Ren et al, to appear.
+      \item SptSet package: work in progress.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Other tasks}
+	\begin{enumerate}
+		\item TIs: interacting fSPT with U(1) symmetry.
+		\begin{itemize}
+			\item Given $1\rightarrow U(1)_f\rightarrow G_f\rightarrow G\rightarrow 1$, we have
+			\[E_2^{pq}=H^p(G, \mathcal H^q(U(1)))\Rightarrow \mathcal H^{p+q}(G_f).\]
+      \item Decorating U(1)-SPTs: $\mathcal H^1(U(1))=\mathbb Z$ (charge);\\ $\mathcal H^2(U(1))=0$;
+        $\mathcal H^3((U(1)))=\mathbb Z$ (Chern insulator).
+			\item Jian-Hao Zhang, et al, PRResearch \textbf{4}, 033081 (2022).
+			\item Can be computed using the \lstinline|InsulatorSPTSpecSeq| function.
+		\end{itemize}
+
+		\item ASPTs:
+		\begin{itemize}
+			\item $G_b$ is averaged symmetry, $\mathbb Z_2^f$ is exact.
+			\item Remove the bSPT layer: $\mathcal H^0_A(*)=0$ in $E_2^{pq}=H^p(G_b, \mathcal H^q_A(*))$.
+			\item Can be computed using the \lstinline|AvgFermionSPTSpecSeq| function.
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+% \begin{frame}
+% 	\frametitle{Summary}
+% 	\begin{itemize}
+% 		\item Use a simplified free resolution to accelerate computation of group cohomology.
+% 		\item Use chain maps between resolutions to compute maps between cohomology groups.
+% 		\item We are working on a GAP package SptSet.
+% 		\item Takes 5min to compute 2D fSPTs for all 17 wallpaper groups.
+% 		\item Email me at \url{qiyang@fudan.edu.cn} for early access.
+% 		\item We also have a program written in python: faster but much harder to use.
+% 		\item Will add more functions (fSPT with nontrivial group extension, group structure, ...), tweak the performence, and publish.
+% 	\end{itemize}
+% \end{frame}
 
 \section{Spectral sequence of equivariant cohomology and real-space construction}
 
@@ -1317,16 +1377,21 @@ Each colored 2-cell is decorated with a Levin-Gu or CZX state protected by the o
   \frametitle{Real-space construction of fSPTs}
 
   \begin{itemize}
-  \item Jian-Hao Zhang, Shuo Yang, YQ and Zheng-Cheng Gu, arXiv:2012.15657
-  \item Need to decorate complex fermions, Kitaev chains, etc.
-  \item We computed fSPT classification protected by 17 wallpaper groups, and the two approaches agree.
-  %\item Still need automated programs for real-space construction of fSPTs.
+  \item Interacting fSPTs:
+    \begin{itemize}
+    \item 2D point groups: Jian-Hao Zhang, Qing-Rui Wang, Shuo Yang, YQ and Zheng-Cheng Gu,
+      PRB \textbf{101}, 100501(R) (2020).
+    \item 2D wallpaper groups: Jian-Hao Zhang, Shuo Yang, YQ and Zheng-Cheng Gu,
+      PR Research \textbf{4}, 033081 (2022).
+    \item 3D point groups: Jian-Hao Zhang, YQ and Zheng-Cheng Gu, arXiv:2204.13558.
+    \end{itemize}
+  \item Free-fermion high-order states:
+    Tian Yuan, Chen Fang and YQ, to appear.
   \end{itemize}
   \begin{center}
-    \includegraphics[height=4cm]{../spspt/majorana_bubble}
+    \includegraphics[height=4cm]{../spspt/majorana_bubble}    
   \end{center}
 \end{frame}
-
 \section{Outlooks}
 
 \begin{frame}
