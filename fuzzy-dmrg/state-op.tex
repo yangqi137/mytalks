@@ -1,107 +1,141 @@
-\documentclass[tikz, border=10pt]{standalone}
-\usepackage{amsmath, amssymb, physics}
-\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
+\documentclass[tikz, border=15pt]{standalone}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usetikzlibrary{arrows.meta, positioning, calc}
 
 \begin{document}
+\begin{tikzpicture}[>=Stealth, font=\sffamily]
 
-\begin{tikzpicture}[>=stealth, font=\sffamily]
+    % =========================================================
+    % DEFINITIONS & COLORS
+    % =========================================================
+    \colorlet{taucolor}{blue!60!black}  % Constant Time
+    \colorlet{sigmacolor}{red!60!black} % Constant Space
+    \colorlet{statecolor}{cyan!80!blue} % State Cross-section
+    \colorlet{opcolor}{orange!90!red}   % Operator/Vacuum
 
-    % -------------------------------------------------------------
-    % LEFT SIDE: THE CYLINDER (Spacetime R x S^{d-1})
-    % -------------------------------------------------------------
+    % Cylinder Parameters
+    \def\Rx{1.5}     % X Radius
+    \def\Ry{0.4}     % Y Radius (Perspective)
+    \def\H{5}        % Height of cylinder
+    \def\statetau{3} % Y-level (time) of the highlighted state
     
-    % Shaded background for cylinder
-    \shade[left color=blue!20, right color=blue!20, middle color=white, opacity=0.6] 
-        (-6, -3) rectangle (-2, 3);
-        
-    % Bottom Ellipse (Infinite Past)
-    \draw[thick, dashed, gray] (-2, -3) arc [start angle=0, end angle=180, x radius=2, y radius=0.6];
-    \draw[thick, gray] (-6, -3) arc [start angle=180, end angle=360, x radius=2, y radius=0.6];
-    \node[below, text=gray!80!black] at (-4, -3.6) {$\tau \to -\infty$ (Infinite Past)};
+    % Plane Parameters
+    \def\C{10}       % Center X of plane
+    \def\Cy{2.5}     % Center Y of plane
+    \def\Pr{3.2}     % Max radius on plane
 
-    % Top Ellipse (Infinite Future)
-    \fill[blue!10, opacity=0.5] (-4, 3) ellipse [x radius=2, y radius=0.6];
-    \draw[thick] (-4, 3) ellipse [x radius=2, y radius=0.6];
-    \node[above] at (-4, 3.6) {$\tau \to +\infty$ (Infinite Future)};
-    
-    % Cylinder sides
-    \draw[thick] (-6, -3) -- (-6, 3);
-    \draw[thick] (-2, -3) -- (-2, 3);
-
-    % Constant Time Slice (The State)
-    \draw[thick, dashed, red] (-2, -1) arc [start angle=0, end angle=180, x radius=2, y radius=0.6];
-    \draw[thick, red] (-6, -1) arc [start angle=180, end angle=360, x radius=2, y radius=0.6];
-    
-    % Labels for Cylinder
-    \node[red, left] at (-6, -1) {State $|\Psi\rangle$};
-    \node[black] at (-4, 4.5) {\Large \textbf{Cylinder $\mathbb{R} \times S^{d-1}$}};
-    
-    % Time and Space coordinates
-    \draw[->, thick] (-7, -3) -- (-7, 3) node[above] {Time $\tau$};
-    \draw[->, thick, blue] (-4, 3) ++(120:2 and 0.6) arc [start angle=120, end angle=60, x radius=2, y radius=0.6] node[midway, above=2pt] {Space $\Omega$};
-
-    % -------------------------------------------------------------
-    % MIDDLE: CONFORMAL MAP ARROW
-    % -------------------------------------------------------------
-    
-    \draw[->, ultra thick, draw=black!70] (-1, 0) to[bend left=15] 
-        node[midway, above=5pt] {\textbf{Conformal Map}}
-        node[midway, below=5pt] {$r = e^\tau$} (3.5, 0);
-
-    % -------------------------------------------------------------
-    % RIGHT SIDE: THE SPHERE (Mapped Spacetime / Radial Quantization)
-    % -------------------------------------------------------------
-    
-    \def\sphereradius{3}
-    \def\spherecenterX{7}
-    \def\spherecenterY{0}
-    
-    % Sphere Title
-    \node[black] at (\spherecenterX, 4.5) {\Large \textbf{Sphere / Radial Plane}};
-    
-    % 3D Sphere Shading
-    \shade[ball color=cyan!15, opacity=0.5] (\spherecenterX, \spherecenterY) circle (\sphereradius);
-    
-    % Sphere Outline
-    \draw[thick] (\spherecenterX, \spherecenterY) circle (\sphereradius);
-    
-    % Equator (for 3D perspective)
-    \draw[thick, dashed, gray!60] (\spherecenterX+\sphereradius, \spherecenterY) arc [start angle=0, end angle=180, x radius=\sphereradius, y radius=0.8];
-    \draw[thick, gray!60] (\spherecenterX-\sphereradius, \spherecenterY) arc [start angle=180, end angle=360, x radius=\sphereradius, y radius=0.8];
-    
-    % Mapped Time Slice (The State as a Latitude Line)
-    % Calculate radius of the slice at y = -1.2 to match tau = -1
-    \def\sliceY{-1.2}
-    \def\sliceR{2.749}
-    
-    % Mapped State Slice (Using robust key-value syntax)
-    \fill[red!10, opacity=0.5] (\spherecenterX, \sliceY) ellipse [x radius=\sliceR, y radius=0.7];
-    \draw[thick, dashed, red] (\spherecenterX+\sliceR, \sliceY) arc [start angle=0, end angle=180, x radius=\sliceR, y radius=0.7];
-    \draw[thick, red] (\spherecenterX-\sliceR, \sliceY) arc [start angle=180, end angle=360, x radius=\sliceR, y radius=0.7];
-    
-    % Labels for the Sphere
-    \node[red, right] at (\spherecenterX+\sliceR, \sliceY) {$|\Psi\rangle = \lim_{\tau \to -\infty} \mathcal{O}|0\rangle$};
-    
-    % Operator Insertion (South Pole)
-    \filldraw[red] (\spherecenterX, -\sphereradius) circle (3pt);
-    \node[below=4pt, text=red!80!black] at (\spherecenterX, -\sphereradius) {\textbf{Operator $\mathcal{O}(0)$ inserted at origin}};
-    
-    % North Pole
-    \filldraw[blue] (\spherecenterX, \sphereradius) circle (2pt);
-    \node[above=2pt, text=blue] at (\spherecenterX, \sphereradius) {$r \to \infty$};
-    
-    % Radial Arrow on the sphere surface
-    \draw[->, thick, dashed, red!80!black] (\spherecenterX, -\sphereradius) ++(45:0.5) arc [start angle=-90, end angle=0, x radius=1.5, y radius=2] node[midway, right] {Radial Time $r$};
-
-    % -------------------------------------------------------------
-    % EXPLANATORY TEXT BLOCK
-    % -------------------------------------------------------------
-    \node[align=center, text width=12cm, fill=blue!5, draw=blue!30, rounded corners, inner sep=10pt] 
-    at (1.5, -5.5) {
-        \textbf{State-Operator Correspondence}\\
-        Time translations ($\tau \to \tau + a$) on the cylinder map to scale transformations ($r \to e^a r$) on the sphere. The infinite past of the cylinder ($\tau \to -\infty$) shrinks to a single point (the South Pole or the origin). Inserting a local \textbf{operator} $\mathcal{O}$ at this point excites the vacuum $|0\rangle$, creating a \textbf{state} $|\Psi\rangle$ propagating outward on concentric spatial slices.
+    % =========================================================
+    % LEGEND
+    % =========================================================
+    \node[draw, rounded corners, fill=gray!5, inner sep=2ex, text=black] at (5, \H+1.5) {
+        \begin{tabular}{cl}
+        \tikz[baseline=-0.5ex]{\draw[taucolor, thick] (0,0) -- (0.5,0);} & Equal time $\tau$ / Constant radius $|z| = R$ \\[1ex]
+        \tikz[baseline=-0.5ex]{\draw[sigmacolor, thick] (0,0) -- (0.5,0);} & Equal space $\sigma$ / Constant angle $\theta$
+        \end{tabular}
     };
 
-\end{tikzpicture}
 
+    % =========================================================
+    % LEFT: CYLINDER (w = tau + i*sigma)
+    % =========================================================
+    
+    % Vacuum limit Arrow (Bottom Left)
+    \draw[-Stealth, thick, opcolor] (-\Rx-2.5, 0) node[left, align=center, text=black] {Infinite past $\tau \to -\infty$\\ (Vacuum $|0\rangle$)} to[out=0, in=180] (-\Rx-0.1, 0);
+
+    % Axis Titles
+    \node[align=center, font=\large] at (0, -1.8) {\textbf{Cylinder ($\mathbb{R} \times S^1$)}\\ $w = \tau + i\sigma$};
+
+    % --- Back Half of Cylinder ---
+    % Constant Time (Tau) Lines - Back
+    \foreach \y in {0, 1, 2, 4} {
+        \draw[taucolor, dashed, line width=0.6pt] (\Rx, \y) arc[start angle=0, end angle=180, x radius=\Rx, y radius=\Ry];
+    }
+    % Constant Space (Sigma) Lines - Back
+    \foreach \ang in {15, 45, 75, 105, 135, 165} {
+        \draw[sigmacolor, dashed, line width=0.6pt] ({\Rx*cos(\ang)}, {\Ry*sin(\ang)}) -- ({\Rx*cos(\ang)}, {\H+\Ry*sin(\ang)});
+    }
+    
+    % The State (Specific constant time slice) - Back
+    \draw[statecolor, dashed, line width=1.5pt] (\Rx, \statetau) arc[start angle=0, end angle=180, x radius=\Rx, y radius=\Ry];
+
+    % --- Cylinder Shading (Creates 3D Surface) ---
+    \shade[left color=gray!30, middle color=white, right color=gray!20, opacity=0.85] 
+        (-\Rx, 0) arc[start angle=180, end angle=360, x radius=\Rx, y radius=\Ry] -- 
+        (\Rx, \H) arc[start angle=360, end angle=180, x radius=\Rx, y radius=\Ry] -- cycle;
+
+    % --- Front Half of Cylinder ---
+    % Constant Space (Sigma) Lines - Front
+    \foreach \ang in {195, 225, 255, 285, 315, 345} {
+        \draw[sigmacolor, line width=0.6pt] ({\Rx*cos(\ang)}, {\Ry*sin(\ang)}) -- ({\Rx*cos(\ang)}, {\H+\Ry*sin(\ang)});
+    }
+    % Constant Time (Tau) Lines - Front
+    \foreach \y in {0, 1, 2, 4} {
+        \draw[taucolor, line width=0.6pt] (-\Rx, \y) arc[start angle=180, end angle=360, x radius=\Rx, y radius=\Ry];
+    }
+
+    % Top Surface Edge
+    \draw[taucolor, line width=0.6pt] (0, \H) ellipse[x radius=\Rx, y radius=\Ry];
+    % Side Edges
+    \draw[thick] (-\Rx, 0) -- (-\Rx, \H);
+    \draw[thick] (\Rx, 0) -- (\Rx, \H);
+
+    % The State (Specific constant time slice) - Front
+    \draw[statecolor, line width=4pt, opacity=0.3] (-\Rx, \statetau) arc[start angle=180, end angle=360, x radius=\Rx, y radius=\Ry];
+    \draw[statecolor, line width=1.5pt] (-\Rx, \statetau) arc[start angle=180, end angle=360, x radius=\Rx, y radius=\Ry];
+
+    % Coordinate Flow Arrows for Cylinder
+    \draw[-Stealth, thick] (-\Rx-0.5, 0) -- (-\Rx-0.5, \H) node[midway, left=2pt] {Euclidean time $\tau$};
+    \draw[-Stealth, thick] (0, \H+0.8) arc[start angle=90, end angle=-30, x radius=1.8, y radius=0.7] node[below right=-2pt] {Space $\sigma$};
+
+    % State Pointer (Top Left)
+    \draw[-Stealth, thick, statecolor] (-\Rx-2.5, \statetau) node[left, align=center, text=black] {State $|\Psi\rangle$\\at $\tau = \text{const}$} to[out=0, in=180] (-\Rx-0.1, \statetau);
+
+
+    % =========================================================
+    % CENTER: CONFORMAL MAP ARROW
+    % =========================================================
+    \draw[-{Stealth[length=4mm, width=3.5mm]}, line width=2pt, draw=black!70] 
+        (2.3, 2.5) to[out=15, in=165] 
+        node[midway, above=6pt, text=black] {\large \textbf{Conformal Map}} 
+        node[midway, below=4pt, text=black] {\large $z = e^{\tau + i\sigma}$} 
+        (7.0, 2.5);
+
+
+    % =========================================================
+    % RIGHT: COMPLEX PLANE (z = r * e^{i*theta})
+    % =========================================================
+    
+    % Axis Titles
+    \node[align=center, font=\large] at (\C, -1.8) {\textbf{Complex Plane ($\mathbb{C}$)}\\ $z = e^w$};
+
+    % Mapped Constant Space Lines (Radial rays)
+    % Exactly corresponding to the angles on the cylinder!
+    \foreach \ang in {15, 45, 75, 105, 135, 165, 195, 225, 255, 285, 315, 345} {
+        \draw[sigmacolor, line width=0.6pt] (\C, \Cy) -- ++(\ang:\Pr);
+    }
+
+    % Mapped Constant Time Lines (Concentric circles)
+    \foreach \r in {0.5, 1.2, 2.8} {
+        \draw[taucolor, line width=0.6pt] (\C, \Cy) circle (\r);
+    }
+
+    % The State (Mapped constant time slice)
+    \draw[statecolor, line width=4pt, opacity=0.3] (\C, \Cy) circle (2.0);
+    \draw[statecolor, line width=1.5pt] (\C, \Cy) circle (2.0);
+
+    % Operator / Vacuum Insertion (Origin)
+    \filldraw[fill=opcolor, draw=black, thick] (\C, \Cy) circle (3pt);
+
+    % Coordinate Flow Arrows for Plane
+    \draw[-Stealth, thick] (\C, \Cy) ++(30:0.4) -- ++(30:3) node[above right=-2pt, fill=white, inner sep=1pt] {Radial time $|z| = r$};
+    \draw[-Stealth, thick] (\C, \Cy) ++(0:1.4) arc[start angle=0, end angle=30, radius=1.4] node[midway, right=2pt] {Space $\sigma$};
+
+    % Operator Pointer (Bottom Right)
+    \draw[-Stealth, thick, opcolor] (\C+2.5, \Cy-2) node[right, align=center, text=black] {Local Operator\\$\mathcal{O}(0)$ at $z = 0$} to[out=180, in=315] (\C+0.1, \Cy-0.1);
+
+    % State Pointer (Top Right)
+    \draw[-Stealth, thick, statecolor] (\C+3.5, \Cy+2) node[right, align=center, text=black] {State $|\Psi\rangle$\\at circle $|z| = R$} to[out=180, in=45] (\C+1.414, \Cy+1.414);
+
+\end{tikzpicture}
 \end{document}
