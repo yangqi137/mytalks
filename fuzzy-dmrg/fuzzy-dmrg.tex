@@ -1,6 +1,6 @@
 \documentclass[xcolor=table, 11pt, aspectratio=169]{beamer}
 
-%\usepackage{arev}
+% \usepackage{arev}
 \usepackage{amsmath,amssymb,amscd,physics}
 \usepackage{dsfont}
 \usepackage{mathrsfs}
@@ -13,13 +13,14 @@
 \usepackage{pifont}
 \usepackage{booktabs}
 \usepackage{multirow}
+\usefonttheme[onlymath]{serif}
 
 %\usepackage{mathtools}
 %\usepackage{ifthen}
 
-%\usepackage{xeCJK}
+\usepackage{xeCJK}
 %\usepackage{fontspec}
-%\newfontfamily\cjkfont{PingFang SC}
+\newfontfamily\cjkfont{FZHei-B01}
 %\setCJKmainfont{PingFang SC}
 \newcolumntype{x}{>{\centering\arraybackslash}X}
 \renewcommand{\arraystretch}{1.5}
@@ -130,7 +131,7 @@
 
 %\date{2016 Annual Meeting of Fudan CFTPP} % (optional, should be abbreviation of conference name)
 %\date{Miniworkshop on Quantum Many-Body Physics, July 29, 2024.}
-\date{Chongqing, Apr. 18, 2026.}
+\date{全国理论物理前沿与交叉科学研讨会, 2026年4月18日.}
 % - Either use conference name or its abbreviation.
 % - Not really informative to the audience, more for people (including
 %   yourself) who are reading the slides online
@@ -176,14 +177,18 @@
 
 \begin{frame}{Collaborators}
   \begin{itemize}
-  \item Jin-Xiang Hao: Fudan University.
-  \item Zheng Zhu: Kavli Institute of Theoretical Sciences, UCAS.
+  \item Jin-Xiang Hao (郝进翔): Fudan University.
+  \item Zheng Zhu (朱征): Kavli Institute of Theoretical Sciences, UCAS.
 \end{itemize}
-\vspace{4em}
+%\vspace{4em}
 \begin{center}
-  %\includegraphics[height=3.5cm]{../people/tianyuan}~~~~
-  %    \includegraphics[height=3.5cm]{../people/chenfang}
+  \includegraphics[height=3.5cm]{../people/zhengzhu}~~~~
+  \includegraphics[height=3.5cm]{../people/jxhao}
 \end{center}
+\begin{enumerate}
+\item J-X Hao, Z Zhu and YQ, arXiv:2601.18648;
+\item J-X Hao and YQ, to appear.
+\end{enumerate}
 \end{frame}
 
 \begin{frame}{Outline}
@@ -222,13 +227,17 @@
         %where $s$ is the monopole strength and $L$ is the angular momentum.
   \item \textbf{Advantage:} This setup preserves the $SO(3)$ rotational symmetry of the sphere precisely. It is believed that this allows the system to flow to conformal fixed-point quickly.
   \item Accurate conformal weights from small system sizes: $N=16$ gives $\Delta(\epsilon)=1.414$ vs $1.413$ from bootstrap.
+  \item Wei Zhu, et al, PRX 2023.
   \end{itemize}
 \end{frame}
 
 \begin{frame}{State-Operator Correspondence}
+  \begin{center}
+    \includegraphics[width=\textwidth]{state-op}
+  \end{center}
   \begin{itemize}
-  \item Each eigenstate $|\psi\rangle$ corresponds to an operator $\psi$ in the CFT.
-  \item Ground state $|0\rangle$ maps to the identity $1$.
+  \item Each eigenstate $|\mathcal O\rangle$ corresponds to an operator $\mathcal O$ in the CFT.
+  %\item Ground state $|0\rangle$ maps to the identity $1$.
   \item Symmetry quantum number (angular momentum, global symmetry, etc) of $|\psi\rangle$ is the same as the operator $\psi$.
   \item Energy of $|\psi\rangle$ is proportional to the conformal weight of $\psi$, with an unknown factor.
   \end{itemize}
@@ -236,10 +245,14 @@
 
 % Slide 4: The Exponential Wall
 \begin{frame}{The Bottleneck: Exact Diagonalization (ED)}
+  \begin{center}
+    \includegraphics[width=.7\textwidth]{cf-tower}
+  \end{center}
   \begin{itemize}
   \item ED is suitable for the task because it can access excited states corresponding to different primary/decendent fields.
   \item \textbf{The Limitation:} ED is restricted by the \textit{exponential wall} of the Hilbert space.
-  \item Small system sizes (e.g., $N=16$ orbitals) lead to truncation errors and hinder the identification of higher-energy primary operators.
+  \item Finite-size effect hinders the identification of higher-energy primary operators.
+  %\item Can we do better?
   \end{itemize}
 \end{frame}
 
@@ -269,8 +282,8 @@
     \column{.4\textwidth}
     \begin{itemize}
     \item Abelian symmetries: $\mathrm{SO}(2)$ and $\mathbb Z_2$. This can be encoded into the MPS.
-    \item $\mathrm{SO}(3)$ symmetry: we target the sector of certain $L$ by adding $\vec L^2$ to the Hamiltonian
-      \[H = H_0 + \lambda \vec{L}^2.\]
+    \item $\mathrm{SO}(3)$ symmetry: we target the sector of certain $L$ by adding $\bm L^2$ to the Hamiltonian
+      \[H = H_0 + \lambda \bm{L}^2.\]
     \end{itemize}
     \column{.6\textwidth}
     \begin{tabular}{|c|c|c|c|c|c|}
@@ -279,54 +292,75 @@
       \cline{3-6}
                                      & & 0 & 1 & 2 & 3\\
       \hline
-      \multirow{3}{*}{1} & 0 & $I$ & $\epsilon$ & $\Box\epsilon$ & $\epsilon^\prime$ \\
+      \multirow{3}{*}{1} & 0 & $I$ & \alert{$\epsilon$} & $\Box\epsilon$ & \alert{$\epsilon^\prime$} \\
       \cline{2-6}               
                                      & 1 & $\partial_\mu\epsilon$ & $\partial_\mu\Box\epsilon$ & $\partial_\mu\epsilon^\prime$ & $\partial_\mu\Box^2\epsilon$ \\    
       \cline{2-6} 
-                                     & 2 & $T_{\mu\nu}$ & $\partial_\mu\partial_\nu\epsilon$ & $\epsilon_{\nu\rho\mu}\partial_\rho T_{\mu\nu}$ & $\Box T_{\mu\nu}$ \\                                                            
+                                     & 2 & \alert{$T_{\mu\nu}$} & $\partial_\mu\partial_\nu\epsilon$ & $\epsilon_{\nu\rho\mu}\partial_\rho T_{\mu\nu}$ & $\Box T_{\mu\nu}$ \\                                                            
       \hline
-      \multirow{3}{*}{-1} & 0 & $\sigma$ & $\Box\sigma$ & $\Box^2\sigma$ & $\sigma^\prime$ \\ 
+      \multirow{3}{*}{-1} & 0 & \alert{$\sigma$} & $\Box\sigma$ & $\Box^2\sigma$ & \alert{$\sigma^\prime$} \\ 
       \cline{2-6}
                                      & 1 & $\partial_\mu\sigma$ & $\partial_\mu\Box\sigma$ & $\partial_{\mu}\sigma_{\mu\nu}$ & $\partial_\mu\Box^2\sigma$ \\  
       \cline{2-6}
-                                     & 2 & $\partial_{\mu}\partial_{\nu}\sigma$ & $\sigma_{\mu\nu}$ & $\Box\partial_\mu\partial_\nu\sigma$ & $\epsilon_{\nu\rho\mu}\partial_\rho\sigma_{\mu\nu}$ \\ 
+                                     & 2 & $\partial_{\mu}\partial_{\nu}\sigma$ & \alert{$\sigma_{\mu\nu}$} & $\Box\partial_\mu\partial_\nu\sigma$ & $\epsilon_{\nu\rho\mu}\partial_\rho\sigma_{\mu\nu}$ \\ 
             \hline
         \end{tabular}
   \end{columns}
 \end{frame}
 % Slide 8: Advanced DMRG Techniques
 \begin{frame}{Advanced DMRG Techniques}
-    To extract accurate CFT spectra, we must calculate \textit{excited states}. Standard DMRG penalty methods are inefficient for multiple excitations.
+  \begin{block}{Challenges}
+    \begin{itemize}
+    \item To extract accurate CFT spectra, we must calculate \textit{excited states}.
+    \item Standard DMRG penalty methods are inefficient for multiple excitations.
+    \end{itemize}
+  \end{block}
+     
     
     \vspace{0.3cm}
-    \textbf{1. Multi-target DMRG with Block Lanczos (For Ising CFT)}
+    \textbf{Multi-target DMRG with Block Lanczos (For Ising CFT)}
     \begin{itemize}
-        \item Generalizes MPS to a \textit{bundled MPS} with an extra index for excitations.
-        \item Block Lanczos procedure updates the orthogonality center, accurately computing multiple low-lying states simultaneously.
+    \item Generalizes MPS to a \textit{bundled MPS} with an extra index for excitations.
+    \item Block Lanczos procedure updates the orthogonality center, accurately computing multiple low-lying states simultaneously.
     \end{itemize}
+    \begin{center}
+      \includegraphics[width=.6\textwidth]{mt-mps}
+    \end{center}
     
-    \textbf{2. Truncated DMRG Scheme (For GNY CFT)}
-    \begin{itemize}
-        \item Long-range interactions in fermionic models demand massive memory (Bond dimension $D \sim 20000$).
-        \item We truncate the bond dimension at high-energy Landau levels (where particle occupation is minimal) to drastically reduce computational cost while maintaining precision.
-    \end{itemize}
+   % \textbf{2. Truncated DMRG Scheme (For GNY CFT)}
+    %\begin{itemize}
+     %   \item Long-range interactions in fermionic models demand massive memory (Bond dimension $D \sim 20000$).
+     %   \item We truncate the bond dimension at high-energy Landau levels (where particle occupation is minimal) to drastically reduce computational cost while maintaining precision.
+    %\end{itemize}
 \end{frame}
 
 % Section 3: Application I - 3D Ising CFT
 \section{Application I: 3D Ising CFT}
 % Slide 9: 3D Ising Model on the Fuzzy Sphere
-\begin{frame}{Application I: 3D Ising CFT}
-    \begin{itemize}
-        \item \textbf{Model:} 3D Ising-type interaction projected onto the LLL.
-        \item \textbf{Hamiltonian:}
-        \begin{equation*}
-            H = H_0 + \lambda \vec{L}^2
-        \end{equation*}
-        \item The $\lambda \vec{L}^2$ term is added to penalize states with total angular momentum $l > m_z$, allowing us to isolate states with specific $l = m_z$.
-        \item \textbf{Simulation Details:} Multi-target DMRG up to size $s=15.5$ ($N=32$ orbitals), extracting the lowest 4 states in each $(z=\pm 1, m_z)$ symmetry sector.
-    \end{itemize}
-\end{frame}
+% \begin{frame}{Application I: 3D Ising CFT}
+%     \begin{itemize}
+%         \item \textbf{Model:} 3D Ising-type interaction projected onto the LLL.
+%         \item \textbf{Hamiltonian:}
+%         \begin{equation*}
+%             H = H_0 + \lambda \vec{L}^2
+%         \end{equation*}
+%         \item The $\lambda \vec{L}^2$ term is added to penalize states with total angular momentum $l > m_z$, allowing us to isolate states with specific $l = m_z$.
+%         \item \textbf{Simulation Details:} Multi-target DMRG up to size $s=15.5$ ($N=32$ orbitals), extracting the lowest 4 states in each $(z=\pm 1, m_z)$ symmetry sector.
+%     \end{itemize}
+% \end{frame}
 
+\begin{frame}{Results: Conformal Tower of 3D Ising CFT from DMRG}
+  \begin{columns}
+    \column{.45\textwidth}
+    \begin{itemize}
+    \item Multi-target DMRG up to size $s=15.5$ ($N=32$ orbitals), extracting the lowest 4 states in each $(z=\pm 1, m_z)$ symmetry sector.
+    \item Less tower states than ED, but enough to determine the conformal weights.
+    \item Relying on smaller-size ED to confirm CFT.
+    \end{itemize}
+    \column{.55\textwidth}
+    \includegraphics[width=.9\textwidth]{ising-tower}
+  \end{columns}
+\end{frame}
 % Slide 10: Results - 3D Ising CFT
 \begin{frame}{Results: 3D Ising CFT Scaling Dimensions}
     \begin{table}[]
@@ -344,10 +378,12 @@
         \bottomrule
         \end{tabular}}
     \end{table}
-    \vspace{0.3cm}
+    \vspace{0.2cm}
     \begin{itemize}
-        \item Scaling dimensions are linearly proportional to the rescaled energy gaps (normalized by setting energy of $T_{\mu\nu}$ to 3).
-        \item \textbf{Conclusion:} DMRG results show significantly reduced errors compared to ED, demonstrating excellent agreement with the conformal bootstrap.
+    %\item Multi-target DMRG up to size $s=15.5$ ($N=32$ orbitals), extracting the lowest 4 states in each $(z=\pm 1, m_z)$ symmetry sector.
+    %\item Fixing $\Delta(T_{\mu\nu})=3$, and locate the phase transition
+    \item Scaling dimensions are linearly proportional to the rescaled energy gaps (normalized by setting energy of $T_{\mu\nu}$ to 3).
+    \item \textbf{Conclusion:} DMRG results show significantly reduced errors compared to ED, demonstrating excellent agreement with the conformal bootstrap.
     \end{itemize}
 \end{frame}
 
@@ -356,59 +392,96 @@
 
 % Slide 6: Dirac Landau Levels (Fermionic Models)
 \begin{frame}{Extension to Dirac Landau Levels}
-    \begin{itemize}
-        \item To study the \textbf{Gross-Neveu-Yukawa (GNY)} theory, we extend the regularization to Dirac fermions.
-        \item Surface states of a 3D topological insulator are described by a 2D Dirac equation on a sphere:
-        \begin{equation*}
-            H = \frac{v}{R} (\sigma_x \Lambda_\theta + \sigma_y \Lambda_\phi)
-        \end{equation*}
-        \item Electrons move on a sphere with a monopole $2\pi$ for spin-up and $-2\pi$ for spin-down. 
-        \item The degeneracy of the $(n+1)$-th Landau level is $2(n+1)$.
-    \end{itemize}
+  \begin{columns}
+  \column{.6\textwidth}
+  \begin{itemize}
+  \item To study the \textbf{Gross-Neveu-Yukawa (GNY)} theory, we extend the regularization to Dirac fermions.
+  \item Surface states of a 3D topological insulator are described by a 2D Dirac equation on a sphere.
+  \item Electrons move on a sphere with a monopole $2\pi$ for spin-up and $-2\pi$ for spin-down. 
+  \item The degeneracy of the $(n+1)$-th Landau level is $2(n+1)$.
+  \item Difficult to scale up: need to include a full Landau level.
+  \end{itemize}
+  \column{.4\textwidth}
+  \begin{center}
+    \includegraphics[width=\textwidth]{dirac-energy}
+  \end{center}
+  \end{columns}
 \end{frame}
 
-% Slide 11: 3D Gross-Neveu-Yukawa Model
-\begin{frame}{Application II: 3D Gross-Neveu-Yukawa (GNY) CFT}
-    \begin{itemize}
-        \item GNY theory describes the topological phase transition in a Chern insulator with 2 fermion flavors.
-        \item \textbf{Interaction:}
-        \begin{equation*}
-            H = H_0 + \int d\Omega_1 d\Omega_2 U(\Omega_1, \Omega_2) \rho_{\uparrow}(\Omega_1)\rho_{\downarrow}(\Omega_2)
-        \end{equation*}
-        \item System undergoes a transition from a gapless phase to a ferromagnetic ordered phase as interaction strength $U$ increases.
-        \item Truncated DMRG is applied, projecting onto the $n_{max} = 3$ Dirac Landau levels to isolate the critical point.
-    \end{itemize}
-\end{frame}
+% % Slide 11: 3D Gross-Neveu-Yukawa Model
+% \begin{frame}{Application II: 3D Gross-Neveu-Yukawa (GNY) CFT}
+%     \begin{itemize}
+%         \item GNY theory describes the topological phase transition in a Chern insulator with 2 fermion flavors.
+%         \item \textbf{Interaction:}
+%         \begin{equation*}
+%             H = H_0 + \int d\Omega_1 d\Omega_2 U(\Omega_1, \Omega_2) \rho_{\uparrow}(\Omega_1)\rho_{\downarrow}(\Omega_2)
+%         \end{equation*}
+%         \item System undergoes a transition from a gapless phase to a ferromagnetic ordered phase as interaction strength $U$ increases.
+%         \item Truncated DMRG is applied, projecting onto the $n_{max} = 3$ Dirac Landau levels to isolate the critical point.
+%     \end{itemize}
+% \end{frame}
 
 % Slide 12: Results - GNY Phase Transition
-\begin{frame}{Results: Criticality in GNY CFT}
+% \begin{frame}{Results: Criticality in GNY CFT}
+%     \begin{itemize}
+%         \item Critical points cannot easily be located using standard Binder cumulant crossings due to size limitations.
+%         \item \textbf{Physical Insight:} We use the exact \textit{conformal tower structure} at criticality!
+%         \item The critical point $(U_{0c}, U_{1c})$ is determined by tuning parameters until the descendant operator energy $e_2$ strictly obeys $e_1 + 1 = e_2$ (where $e_1$ is the primary operator $\sigma$).
+%     \end{itemize}
+% \end{frame}
+
+% Slide 13: Results - New Operator Discovery
+% \begin{frame}{Results: Multiplets and a New Operator}
+%     \begin{block}{Discovery of $J'_\mu$}
+%         Analysis of the GNY conformal multiplet structure revealed a previously unreported primary operator $J'_\mu$.
+%     \end{block}
+%     \vspace{0.2cm}
+%     \begin{itemize}
+%         \item Unlike the conserved current $J_\mu$, $J'_\mu$ is a \textit{non-conserved} vector operator ($\partial^\mu J'_\mu \neq 0$).
+%         \item Scaling dimension analysis ($N=3$ truncation):
+%             \begin{itemize}
+%                 \item $\sigma$: DMRG $0.64$ (Bootstrap $0.66$)
+%                 \item $T_{\mu\nu}$: Fixed at $3.00$
+%                 \item $J'_\mu$: Measured at $\sim 2.49$ (Not previously predicted by bootstrap).
+%             \end{itemize}
+%         \item This highlights the power of numerical Hamiltonian methods to uncover \textit{new structural features} of CFTs missed by analytical methods.
+%     \end{itemize} % <--- 修正点：补上了这个闭合标签
+%   \end{frame}
+
+\begin{frame}{Inhomogeneous MPS}
+  The higher Landau levels are less occupied: not so entangled?
+  \begin{center}
+    \includegraphics[width=.7\textwidth]{truncateMPS}
+    \vspace{2cm}
+    \includegraphics[width=.6\textwidth]{occupy}
+  \end{center}
+\end{frame}
+
+\begin{frame}{DMRG Results}
+      \begin{tabular}{c|c|c|c|c|c|c}
+      \hline
+      \textbf{$\hat{O}_{primary}$} & $\sigma$ & $\epsilon$ & $J_{\mu}$ & $J_{\mu}^\prime$ & $T_{\mu\nu}$ & $\psi$\\
+      \hline
+      \textbf{$(q,p,l)$} & (0,-1,0) & (0,1,0) & (0,1,1) & (0,1,1) & (0,1,2) & (1,1,1/2)\\
+      \hline
+      \textbf{$\Delta_B$} & 0.66 & 1.74, 2.14 & 2.00 & / & 3.00 & 1.07\\
+      \hline
+      \textbf{$\Delta_{2}$} & 0.66 & 2.45 & 2.23 & 2.55 & 3.00 & 1.05\\
+      \hline
+      \textbf{Errors$_2$} & / & 40.80\%, 14.49\% & 11.50\% & / & / & 1.87\%\\
+      \hline
+      \textbf{$\Delta_{3}$} & 0.66 & 2.39 & 2.19 & 2.47 & 3.00 & 1.05\\
+      \hline
+      \textbf{Errors$_3$} & / & 37.36\%, 11.68\% & 9.50\% & / & / & 1.87\%\\
+      \hline
+    \end{tabular}
     \begin{itemize}
-        \item Critical points cannot easily be located using standard Binder cumulant crossings due to size limitations.
-        \item \textbf{Physical Insight:} We use the exact \textit{conformal tower structure} at criticality!
-        \item The critical point $(U_{0c}, U_{1c})$ is determined by tuning parameters until the descendant operator energy $e_2$ strictly obeys $e_1 + 1 = e_2$ (where $e_1$ is the primary operator $\sigma$).
+    \item ED results: Z-Q Gao, T. Wang and D-H Lee, arXiv:2504.15338.
     \end{itemize}
 \end{frame}
 
-% Slide 13: Results - New Operator Discovery
-\begin{frame}{Results: Multiplets and a New Operator}
-    \begin{block}{Discovery of $J'_\mu$}
-        Analysis of the GNY conformal multiplet structure revealed a previously unreported primary operator $J'_\mu$.
-    \end{block}
-    \vspace{0.2cm}
-    \begin{itemize}
-        \item Unlike the conserved current $J_\mu$, $J'_\mu$ is a \textit{non-conserved} vector operator ($\partial^\mu J'_\mu \neq 0$).
-        \item Scaling dimension analysis ($N=3$ truncation):
-            \begin{itemize}
-                \item $\sigma$: DMRG $0.64$ (Bootstrap $0.66$)
-                \item $T_{\mu\nu}$: Fixed at $3.00$
-                \item $J'_\mu$: Measured at $\sim 2.49$ (Not previously predicted by bootstrap).
-            \end{itemize}
-        \item This highlights the power of numerical Hamiltonian methods to uncover \textit{new structural features} of CFTs missed by analytical methods.
-    \end{itemize} % <--- 修正点：补上了这个闭合标签
-\end{frame}
-
-% Section 5: Computational Physics Analysis
-\section{Computational Analysis}
+% Section 6: Conclusion
+\section{Conclusion \& Outlook}
 % Slide 14: Entanglement & Complexity
 \begin{frame}{Computational Complexity \& Scaling}
     \begin{itemize}
@@ -424,8 +497,6 @@
     \end{itemize}
 \end{frame}
 
-% Section 6: Conclusion
-\section{Conclusion \& Outlook}
 % Slide 15: Conclusion
 \begin{frame}{Summary and Outlook}
     \begin{block}{Core Achievement}
@@ -440,15 +511,15 @@
     \end{itemize}
 \end{frame}
 
-% Slide 16: Q&A
-\begin{frame}
-    \begin{center}
-        \Huge \textbf{Thank You} \\
-        \vspace{0.5cm}
-        \Large Questions \& Scientific Discussion are Welcome.
-    \end{center}
-    \vspace{1cm}
-    \textit{"The pursuit of scientific truth requires us to constantly refine our experimental and mathematical tools to peer deeper into the underlying reality of nature."}
-\end{frame}
+% % Slide 16: Q&A
+% \begin{frame}
+%     \begin{center}
+%         \Huge \textbf{Thank You} \\
+%         \vspace{0.5cm}
+%         \Large Questions \& Scientific Discussion are Welcome.
+%     \end{center}
+%     \vspace{1cm}
+%     \textit{"The pursuit of scientific truth requires us to constantly refine our experimental and mathematical tools to peer deeper into the underlying reality of nature."}
+% \end{frame}
 
 \end{document}

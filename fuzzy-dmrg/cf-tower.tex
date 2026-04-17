@@ -1,52 +1,52 @@
-\documentclass[tikz, border=20pt]{standalone}
+\documentclass[tikz]{standalone}
 \usepackage{amsmath, amssymb}
 \usetikzlibrary{arrows.meta, positioning, shapes.geometric}
 
 \begin{document}
-\begin{tikzpicture}[x=1.6cm, y=1.6cm, >=Stealth, font=\sffamily]
+\begin{tikzpicture}[x=1.6cm, y=1.6cm, >=Stealth, font=\sffamily,scale=.8]
 
     % ==========================================
     % 1. BACKGROUND GRID & CONE
     % ==========================================
     % Grid
-    \draw[step=1.0, gray!20, thin, dashed] (-5.5, 0) grid (5.5, 6.5);
+    \draw[step=1.0, gray!20, thin, dashed] (-5.5, 0) grid (5.5, 4.5);
     
     % Cone Fill
-    \fill[yellow!10, opacity=0.7] (0,1) -- (5.5, 6.5) -- (-5.5, 6.5) -- cycle;
+    \fill[yellow!10, opacity=0.7] (0,1) -- (5.5, 4.5) -- (-5.5, 4.5) -- cycle;
     
     % Cone Boundaries (Unitarity-like bounds for this module)
-    \draw[thick, dashed, black!60] (0,1) -- (5.5, 6.5) node[midway, sloped, above] {$E = J + \Delta_0$};
-    \draw[thick, dashed, black!60] (0,1) -- (-5.5, 6.5) node[midway, sloped, above] {$E = -J + \Delta_0$};
+    \draw[thick, dashed, black!60] (0,1) -- (3.5, 4.5) node[midway, sloped, above] {$E = J + \Delta_0$};
+    \draw[thick, dashed, black!60] (0,1) -- (-3.5, 4.5) node[midway, sloped, above] {$E = -J + \Delta_0$};
 
     % ==========================================
     % 2. AXES
     % ==========================================
     % X-axis : Angular momentum
-    \draw[->, line width=1.2pt] (-5.8, 0) -- (6.2, 0) node[right, align=center] {\textbf{Angular Momentum $J$}\\ \small($s = h - \bar{h}$)};
+    \draw[->, line width=1.2pt] (-5.8, 0) -- (6.2, 0) node[right, align=center] {$s = h - \bar{h}$};
     
     % Y-axis : Energy / Scaling Dimension
-    \draw[->, line width=1.2pt] (0, -0.2) -- (0, 7) node[above, align=center] {\textbf{Scaling Dimension $\Delta$ (Energy)}\\ \small($E = h + \bar{h}$)};
+    \draw[->, line width=1.2pt] (0, -0.2) -- (0, 5) node[above, align=center] {$\Delta = h + \bar{h}$};
 
     % Axis Tick Marks
     \draw (5, 0.1) -- (5, -0.1) node[below=2pt] {$5$};
     \draw (-5, 0.1) -- (-5, -0.1) node[below=2pt] {$-5$};
     \node[below left=1pt] at (0,0) {$0$};
-    \draw (0.1, 5) -- (-0.1, 5) node[left=4pt] {$5$};
+    \draw (0.1, 4) -- (-0.1, 4) node[left=4pt] {$4$};
     \draw (0.1, 1) -- (-0.1, 1) node[left=4pt] {$\Delta_0 \to$}; % Mark the base energy level
 
     % Title
-    \node[font=\Large\bfseries] at (0, 7.8) {Conformal Tower (Verma Module) of a Primary State};
+    %\node[font=\Large\bfseries] at (0, 7.8) {Conformal Tower (Verma Module) of a Primary State};
     
     % ==========================================
     % 3. GENERATE NODES (LATTICE OF DESCENDANTS)
     % ==========================================
     
-    \foreach \na in {0,...,5}{
-        \foreach \nb in {0,...,5}{
+    \foreach \na in {0,...,3}{
+        \foreach \nb in {0,...,3}{
             
-            % Check condition na + nb <= 5
+            % Check condition na + nb <= 3
             \pgfmathtruncatemacro{\sumN}{\na + \nb}
-            \ifnum\sumN<6
+            \ifnum\sumN<4
                 
                 % Compute Spin (J) and Energy (E) coordinates
                 \pgfmathtruncatemacro{\J}{\na - \nb}
@@ -116,7 +116,7 @@
         node[midway, above right, fill=yellow!10, inner sep=1pt] {$\bar{L}_{-1}$};
 
     % Commutativity diamond label
-    \node[fill=yellow!10, font=\scriptsize, align=center] at (0, 2) {$[L_{-1}, \bar{L}_{-1}] = 0$};
+    %\node[fill=yellow!10, font=\scriptsize, align=center] at (0, 2) {$[L_{-1}, \bar{L}_{-1}] = 0$};
 
     % L_{-2} action (Skip a level)
     \draw[-Stealth, thick, dashdotted, blue!80!black] (N_0_0) to[bend right=25] 
@@ -131,26 +131,26 @@
     % ==========================================
     
     % Right Legend (State Classifications)
-    \node[draw=gray, rounded corners, fill=white, inner sep=10pt, align=left] at (4.2, 2.2) {
-        \textbf{State Classifications} \\[1.5ex]
-        \tikz{\node[draw=red!80!black, circle, thick, fill=red!20, minimum size=8pt] {};} \ Primary State $|h, \bar{h}\rangle$ \\[1ex]
-        \tikz{\node[draw=blue!80!black, circle, thick, fill=blue!20, minimum size=8pt] {};} \ Holomorphic ($L_{-n}$) \\[1ex]
-        \tikz{\node[draw=orange!80!black, circle, thick, fill=orange!20, minimum size=8pt] {};} \ Anti-Holomorphic ($\bar{L}_{-n}$) \\[1ex]
-        \tikz{\node[draw=violet!80!black, circle, thick, fill=violet!20, minimum size=8pt] {};} \ Mixed Descendants
-    };
+    % \node[draw=gray, rounded corners, fill=white, inner sep=10pt, align=left] at (4.2, 2.2) {
+    %     \textbf{State Classifications} \\[1.5ex]
+    %     \tikz{\node[draw=red!80!black, circle, thick, fill=red!20, minimum size=8pt] {};} \ Primary State $|h, \bar{h}\rangle$ \\[1ex]
+    %     \tikz{\node[draw=blue!80!black, circle, thick, fill=blue!20, minimum size=8pt] {};} \ Holomorphic ($L_{-n}$) \\[1ex]
+    %     \tikz{\node[draw=orange!80!black, circle, thick, fill=orange!20, minimum size=8pt] {};} \ Anti-Holomorphic ($\bar{L}_{-n}$) \\[1ex]
+    %     \tikz{\node[draw=violet!80!black, circle, thick, fill=violet!20, minimum size=8pt] {};} \ Mixed Descendants
+    % };
 
     % Left Annotation (Degeneracy Rule)
-    \node[draw=gray, rounded corners, fill=white, inner sep=8pt, align=left] at (-4.2, 2.2) {
-        \textbf{Multiplicity} \\[1ex]
-        Value inside node counts\\
-        degenerate states:\\
-        \textbf{\boldmath $P(n) \times P(\bar{n})$} \\[1ex]
-        where $P(k)$ is the integer\\
-        partition function.
-    };
+    % \node[draw=gray, rounded corners, fill=white, inner sep=8pt, align=left] at (-4.2, 2.2) {
+    %     \textbf{Multiplicity} \\[1ex]
+    %     Value inside node counts\\
+    %     degenerate states:\\
+    %     \textbf{\boldmath $P(n) \times P(\bar{n})$} \\[1ex]
+    %     where $P(k)$ is the integer\\
+    %     partition function.
+    % };
     
     % Add arrow explicitly showing origin of the cone
-    \draw[<-] (N_0_0) ++(-0.2, -0.3) to[bend right=20] (-1.5, -0.6) node[left] {Highest Weight State};
+    \draw[<-] (N_0_0) ++(-0.2, -0.2) to[bend right=10] (-1.5, 0.3) node[left] {Primary State};
 
 \end{tikzpicture}
 \end{document}

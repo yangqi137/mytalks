@@ -28,12 +28,12 @@
     % =========================================================
     % LEGEND
     % =========================================================
-    \node[draw, rounded corners, fill=gray!5, inner sep=2ex, text=black] at (5, \H+1.5) {
-        \begin{tabular}{cl}
-        \tikz[baseline=-0.5ex]{\draw[taucolor, thick] (0,0) -- (0.5,0);} & Equal time $\tau$ / Constant radius $|z| = R$ \\[1ex]
-        \tikz[baseline=-0.5ex]{\draw[sigmacolor, thick] (0,0) -- (0.5,0);} & Equal space $\sigma$ / Constant angle $\theta$
-        \end{tabular}
-    };
+    % \node[draw, rounded corners, fill=gray!5, inner sep=2ex, text=black] at (5, \H+1.5) {
+    %     \begin{tabular}{cl}
+    %     \tikz[baseline=-0.5ex]{\draw[taucolor, thick] (0,0) -- (0.5,0);} & Equal time $\tau$ / Constant radius $|z| = R$ \\[1ex]
+    %     \tikz[baseline=-0.5ex]{\draw[sigmacolor, thick] (0,0) -- (0.5,0);} & Equal space $\sigma$ / Constant angle $\theta$
+    %     \end{tabular}
+    % };
 
 
     % =========================================================
@@ -41,10 +41,10 @@
     % =========================================================
     
     % Vacuum limit Arrow (Bottom Left)
-    \draw[-Stealth, thick, opcolor] (-\Rx-2.5, 0) node[left, align=center, text=black] {Infinite past $\tau \to -\infty$\\ (Vacuum $|0\rangle$)} to[out=0, in=180] (-\Rx-0.1, 0);
+    \draw[-Stealth, thick, opcolor] (-\Rx-2.5, 0) node[left, align=center, text=black] {$\tau \to -\infty$\\ ($|\mathcal O\rangle$)} to[out=0, in=180] (-\Rx-0.1, 0);
 
     % Axis Titles
-    \node[align=center, font=\large] at (0, -1.8) {\textbf{Cylinder ($\mathbb{R} \times S^1$)}\\ $w = \tau + i\sigma$};
+    %\node[align=center, font=\large] at (0, -1.8) {\textbf{Cylinder ($\mathbb{R} \times S^1$)}\\ $w = \tau + i\sigma$};
 
     % --- Back Half of Cylinder ---
     % Constant Time (Tau) Lines - Back
@@ -57,7 +57,7 @@
     }
     
     % The State (Specific constant time slice) - Back
-    \draw[statecolor, dashed, line width=1.5pt] (\Rx, \statetau) arc[start angle=0, end angle=180, x radius=\Rx, y radius=\Ry];
+    %\draw[statecolor, dashed, line width=1.5pt] (\Rx, \statetau) arc[start angle=0, end angle=180, x radius=\Rx, y radius=\Ry];
 
     % --- Cylinder Shading (Creates 3D Surface) ---
     \shade[left color=gray!30, middle color=white, right color=gray!20, opacity=0.85] 
@@ -89,7 +89,7 @@
     \draw[-Stealth, thick] (0, \H+0.8) arc[start angle=90, end angle=-30, x radius=1.8, y radius=0.7] node[below right=-2pt] {Space $\sigma$};
 
     % State Pointer (Top Left)
-    \draw[-Stealth, thick, statecolor] (-\Rx-2.5, \statetau) node[left, align=center, text=black] {State $|\Psi\rangle$\\at $\tau = \text{const}$} to[out=0, in=180] (-\Rx-0.1, \statetau);
+    %\draw[-Stealth, thick, statecolor] (-\Rx-2.5, \statetau) node[left, align=center, text=black] {State $|\Psi\rangle$\\at $\tau = \text{const}$} to[out=0, in=180] (-\Rx-0.1, \statetau);
 
 
     % =========================================================
@@ -107,7 +107,7 @@
     % =========================================================
     
     % Axis Titles
-    \node[align=center, font=\large] at (\C, -1.8) {\textbf{Complex Plane ($\mathbb{C}$)}\\ $z = e^w$};
+    %\node[align=center, font=\large] at (\C, -1.8) {\textbf{Complex Plane ($\mathbb{C}$)}\\ $z = e^w$};
 
     % Mapped Constant Space Lines (Radial rays)
     % Exactly corresponding to the angles on the cylinder!
@@ -135,7 +135,7 @@
     \draw[-Stealth, thick, opcolor] (\C+2.5, \Cy-2) node[right, align=center, text=black] {Local Operator\\$\mathcal{O}(0)$ at $z = 0$} to[out=180, in=315] (\C+0.1, \Cy-0.1);
 
     % State Pointer (Top Right)
-    \draw[-Stealth, thick, statecolor] (\C+3.5, \Cy+2) node[right, align=center, text=black] {State $|\Psi\rangle$\\at circle $|z| = R$} to[out=180, in=45] (\C+1.414, \Cy+1.414);
+    %\draw[-Stealth, thick, statecolor] (\C+3.5, \Cy+2) node[right, align=center, text=black] {State $|\Psi\rangle$\\at circle $|z| = R$} to[out=180, in=45] (\C+1.414, \Cy+1.414);
 
 \end{tikzpicture}
 \end{document}
