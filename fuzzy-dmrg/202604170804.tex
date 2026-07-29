@@ -1,0 +1,238 @@
+\documentclass[aspectratio=169]{beamer}
+
+% Theme and Color
+\usetheme{Madrid}
+\usecolortheme{whale}
+
+% Packages
+\usepackage{amsmath, amssymb, physics}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+% Title Information
+\title[Fuzzy Sphere \& DMRG for 3D CFTs]{Advanced Numerical Methods for 3D CFTs: \\ Fuzzy Sphere Regularization and DMRG}
+\subtitle{Applications to 3D Ising and Gross-Neveu-Yukawa Criticality}
+\author{Theoretical Physics Seminar}
+\date{\today}
+
+\begin{document}
+
+% Slide 1: Title
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Slide 2: Outline
+\begin{frame}{Outline}
+    \tableofcontents
+\end{frame}
+
+% Section 1: Introduction
+\section{Introduction to 3D CFTs}
+% Slide 3: The Challenge of 3D CFTs
+\begin{frame}{The Challenge of 3D CFTs}
+    \begin{itemize}
+        \item \textbf{Conformal Field Theories (CFTs)} are fundamental to understanding continuous quantum phase transitions and quantum gravity.
+        \item While 2D CFTs are heavily constrained by the infinite-dimensional Virasoro algebra, 3D CFTs possess finite-dimensional global conformal symmetry.
+        \item \textbf{The Core Problem:} Extracting precise conformal data (e.g., scaling dimensions of primary operators) in 3D strongly interacting systems is highly challenging.
+        \item Traditional lattice models suffer from finite-size effects and loss of conformal symmetry at the lattice scale.
+    \end{itemize}
+\end{frame}
+
+% Slide 4: The Exponential Wall
+\begin{frame}{The Bottleneck: Exact Diagonalization (ED)}
+    \begin{block}{State-Operator Correspondence}
+        In radial quantization, the energy spectrum of a CFT on a sphere $S^2 \times \mathbb{R}$ is strictly proportional to the scaling dimensions of the operators: $\Delta \propto E$.
+    \end{block}
+    \vspace{0.5cm}
+    \begin{itemize}
+        \item Recent advancements utilize \textbf{Fuzzy Sphere Regularization} to project 3D models onto spherical Landau levels, allowing the extraction of CFT data via Exact Diagonalization (ED).
+        \item \textbf{The Limitation:} ED is restricted by the \textit{exponential wall} of the Hilbert space. 
+        \item Small system sizes (e.g., $N=16$ orbitals) lead to truncation errors and hinder the identification of higher-energy primary operators.
+    \end{itemize}
+\end{frame}
+
+% Section 2: Methodology
+\section{Methodology: Fuzzy Sphere \& DMRG}
+% Slide 5: Fuzzy Sphere Regularization
+\begin{frame}{Fuzzy Sphere Regularization}
+    \begin{itemize}
+        \item \textbf{Concept:} Construct a lattice model by projecting spatial degrees of freedom onto the Lowest Landau Level (LLL) of a spherical geometry with a magnetic monopole.
+        \item \textbf{Hamiltonian Structure:}
+        \begin{equation*}
+            H = \frac{1}{2m_e R^2} (L^2 - s^2)
+        \end{equation*}
+        where $s$ is the monopole strength and $L$ is the angular momentum.
+        \item This setup preserves the $SO(3)$ rotational symmetry of the sphere, which is crucial for identifying the angular momentum quantum numbers of CFT operators.
+    \end{itemize}
+\end{frame}
+
+% Slide 6: Dirac Landau Levels (Fermionic Models)
+\begin{frame}{Extension to Dirac Landau Levels}
+    \begin{itemize}
+        \item To study the \textbf{Gross-Neveu-Yukawa (GNY)} theory, we extend the regularization to Dirac fermions.
+        \item Surface states of a 3D topological insulator are described by a 2D Dirac equation on a sphere:
+        \begin{equation*}
+            H = \frac{v}{R} (\sigma_x \Lambda_\theta + \sigma_y \Lambda_\phi)
+        \end{equation*}
+        \item Electrons move on a sphere with a monopole $2\pi$ for spin-up and $-2\pi$ for spin-down. 
+        \item The degeneracy of the $(n+1)$-th Landau level is $2(n+1)$.
+    \end{itemize}
+\end{frame}
+
+% Slide 7: Density Matrix Renormalization Group (DMRG)
+\begin{frame}{Overcoming the Limit: DMRG}
+    \begin{block}{Why DMRG?}
+        The Density Matrix Renormalization Group (DMRG) operates on Matrix Product States (MPS), successfully compressing the exponential Hilbert space by focusing on states with relevant entanglement.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{For 3D CFTs:} DMRG allows us to access much larger system sizes (e.g., $N=32$ orbitals) compared to ED.
+        \item \textbf{Targeting Symmetries:} By utilizing Abelian $U(1)$ symmetry (conservation of $z$-component angular momentum $m_z$) and $\mathbb{Z}_2$ symmetry, we can independently target the lowest energy states in specific symmetry sectors.
+    \end{itemize}
+\end{frame}
+
+% Slide 8: Advanced DMRG Techniques
+\begin{frame}{Advanced DMRG Techniques}
+    To extract accurate CFT spectra, we must calculate \textit{excited states}. Standard DMRG penalty methods are inefficient for multiple excitations.
+    
+    \vspace{0.3cm}
+    \textbf{1. Multi-target DMRG with Block Lanczos (For Ising CFT)}
+    \begin{itemize}
+        \item Generalizes MPS to a \textit{bundled MPS} with an extra index for excitations.
+        \item Block Lanczos procedure updates the orthogonality center, accurately computing multiple low-lying states simultaneously.
+    \end{itemize}
+    
+    \textbf{2. Truncated DMRG Scheme (For GNY CFT)}
+    \begin{itemize}
+        \item Long-range interactions in fermionic models demand massive memory (Bond dimension $D \sim 20000$).
+        \item We truncate the bond dimension at high-energy Landau levels (where particle occupation is minimal) to drastically reduce computational cost while maintaining precision.
+    \end{itemize}
+\end{frame}
+
+% Section 3: Application I - 3D Ising CFT
+\section{Application I: 3D Ising CFT}
+% Slide 9: 3D Ising Model on the Fuzzy Sphere
+\begin{frame}{Application I: 3D Ising CFT}
+    \begin{itemize}
+        \item \textbf{Model:} 3D Ising-type interaction projected onto the LLL.
+        \item \textbf{Hamiltonian:}
+        \begin{equation*}
+            H = H_0 + \lambda \vec{L}^2
+        \end{equation*}
+        \item The $\lambda \vec{L}^2$ term is added to penalize states with total angular momentum $l > m_z$, allowing us to isolate states with specific $l = m_z$.
+        \item \textbf{Simulation Details:} Multi-target DMRG up to size $s=15.5$ ($N=32$ orbitals), extracting the lowest 4 states in each $(z=\pm 1, m_z)$ symmetry sector.
+    \end{itemize}
+\end{frame}
+
+% Slide 10: Results - 3D Ising CFT
+\begin{frame}{Results: 3D Ising CFT Scaling Dimensions}
+    \begin{table}[]
+        \centering
+        \resizebox{\textwidth}{!}{
+        \begin{tabular}{lcccccc}
+        \toprule
+        \textbf{Primary Operators} & $\sigma$ & $\epsilon$ & $\epsilon'$ & $\sigma'$ & $T_{\mu\nu}$ & $\sigma_{\mu\nu}$ \\
+        \midrule
+        Symmetry $(z, l)$ & $(-1, 0)$ & $(1, 0)$ & $(1, 0)$ & $(-1, 0)$ & $(1, 2)$ & $(-1, 2)$ \\
+        \midrule
+        \textbf{Bootstrap Benchmark} & 0.518 & 1.413 & 3.830 & 5.291 & 3.00 & 4.180 \\
+        \textbf{Fuzzy Sphere (ED, $N=16$)} & 0.524 & 1.414 & 3.838 & 5.303 & 3.00 & 4.214 \\
+        \textbf{Fuzzy Sphere (DMRG, $N=32$)} & \textbf{0.519} & \textbf{1.413} & \textbf{3.836} & \textbf{5.299} & \textbf{3.00} & \textbf{4.205} \\
+        \bottomrule
+        \end{tabular}}
+    \end{table}
+    \vspace{0.3cm}
+    \begin{itemize}
+        \item Scaling dimensions are linearly proportional to the rescaled energy gaps (normalized by setting energy of $T_{\mu\nu}$ to 3).
+        \item \textbf{Conclusion:} DMRG results show significantly reduced errors compared to ED, demonstrating excellent agreement with the conformal bootstrap.
+    \end{itemize}
+\end{frame}
+
+% Section 4: Application II - 3D GNY CFT
+\section{Application II: 3D GNY CFT}
+% Slide 11: 3D Gross-Neveu-Yukawa Model
+\begin{frame}{Application II: 3D Gross-Neveu-Yukawa (GNY) CFT}
+    \begin{itemize}
+        \item GNY theory describes the topological phase transition in a Chern insulator with 2 fermion flavors.
+        \item \textbf{Interaction:}
+        \begin{equation*}
+            H = H_0 + \int d\Omega_1 d\Omega_2 U(\Omega_1, \Omega_2) \rho_{\uparrow}(\Omega_1)\rho_{\downarrow}(\Omega_2)
+        \end{equation*}
+        \item System undergoes a transition from a gapless phase to a ferromagnetic ordered phase as interaction strength $U$ increases.
+        \item Truncated DMRG is applied, projecting onto the $n_{max} = 3$ Dirac Landau levels to isolate the critical point.
+    \end{itemize}
+\end{frame}
+
+% Slide 12: Results - GNY Phase Transition
+\begin{frame}{Results: Criticality in GNY CFT}
+    \begin{itemize}
+        \item Critical points cannot easily be located using standard Binder cumulant crossings due to size limitations.
+        \item \textbf{Physical Insight:} We use the exact \textit{conformal tower structure} at criticality!
+        \item The critical point $(U_{0c}, U_{1c})$ is determined by tuning parameters until the descendant operator energy $e_2$ strictly obeys $e_1 + 1 = e_2$ (where $e_1$ is the primary operator $\sigma$).
+    \end{itemize}
+\end{frame}
+
+% Slide 13: Results - New Operator Discovery
+\begin{frame}{Results: Multiplets and a New Operator}
+    \begin{block}{Discovery of $J'_\mu$}
+        Analysis of the GNY conformal multiplet structure revealed a previously unreported primary operator $J'_\mu$.
+    \end{block}
+    \vspace{0.2cm}
+    \begin{itemize}
+        \item Unlike the conserved current $J_\mu$, $J'_\mu$ is a \textit{non-conserved} vector operator ($\partial^\mu J'_\mu \neq 0$).
+        \item Scaling dimension analysis ($N=3$ truncation):
+            \begin{itemize}
+                \item $\sigma$: DMRG $0.64$ (Bootstrap $0.66$)
+                \item $T_{\mu\nu}$: Fixed at $3.00$
+                \item $J'_\mu$: Measured at $\sim 2.49$ (Not previously predicted by bootstrap).
+            \end{itemize}
+        \item This highlights the power of numerical Hamiltonian methods to uncover \textit{new structural features} of CFTs missed by analytical methods.
+    \end{itemize} % <--- 修正点：补上了这个闭合标签
+\end{frame}
+
+% Section 5: Computational Physics Analysis
+\section{Computational Analysis}
+% Slide 14: Entanglement & Complexity
+\begin{frame}{Computational Complexity \& Scaling}
+    \begin{itemize}
+        \item Why does DMRG work so well here, despite being natively a 1D tool?
+        \item \textbf{Entanglement Entropy Scaling:}
+        \begin{itemize}
+            \item Follows the area law: $S \propto \text{Boundary}$.
+            \item On the fuzzy sphere, the relevant boundary is the circumference $2\pi R$.
+            \item Since the number of orbitals $N \propto R^2$, we find $R \propto \sqrt{N}$.
+            \item Therefore, the entanglement entropy grows as $S \propto \sqrt{N}$.
+        \end{itemize}
+        \item This $\sqrt{N}$ scaling dictates the required DMRG bond dimension, explaining both its effectiveness for moderate sizes and its eventual limitations.
+    \end{itemize}
+\end{frame}
+
+% Section 6: Conclusion
+\section{Conclusion \& Outlook}
+% Slide 15: Conclusion
+\begin{frame}{Summary and Outlook}
+    \begin{block}{Core Achievement}
+        Combining Fuzzy Sphere Regularization with advanced DMRG provides a highly robust, scalable framework to extract 3D CFT data beyond the limits of Exact Diagonalization.
+    \end{block}
+    \vspace{0.3cm}
+    \textbf{Future Directions:}
+    \begin{itemize}
+        \item Implementation of full non-Abelian $SO(3)$ symmetries into tensor network algorithms to further compress the Hilbert space.
+        \item Application to multi-component strongly interacting models (orbital, layer, band, and spin).
+        \item Further investigation into the newly discovered $J'_\mu$ operator in GNY criticality.
+    \end{itemize}
+\end{frame}
+
+% Slide 16: Q&A
+\begin{frame}
+    \begin{center}
+        \Huge \textbf{Thank You} \\
+        \vspace{0.5cm}
+        \Large Questions \& Scientific Discussion are Welcome.
+    \end{center}
+    \vspace{1cm}
+    \textit{"The pursuit of scientific truth requires us to constantly refine our experimental and mathematical tools to peer deeper into the underlying reality of nature."}
+\end{frame}
+
+\end{document}
