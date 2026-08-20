@@ -19,7 +19,7 @@
 \usefonttheme[onlymath]{serif}
 %\newfontfamily\cjkfont{PingFang SC}
 \setCJKmainfont{Noto Sans CJK SC}
-%\setCJKmainfont{FZHTK.TTF}
+%\setCJKmainfont{FZXiHeiI-Z08}
 \newcolumntype{x}{>{\centering\arraybackslash}X}
 \renewcommand{\arraystretch}{1.5}
 %\newcommand{\uone}{\mathrm U(1)}
@@ -175,7 +175,22 @@
   % \[E=mc^2.\]
 \end{frame}
 
-\section{Motivation: the problem we try to solve.}
+\section{Introduction: Quantum Many-body Bootstrap}
+
+\begin{frame}{Example: SHO}
+  Consider a simple harmonic oscillator:
+  \[H=\frac12p^2+\frac12x^2.\]
+  \begin{itemize}
+  \item Classically: $\langle H\rangle\geq 0$, $\langle H\rangle=0$ when $\langle x\rangle=\langle p\rangle = 0$.
+  \item QM: $\Delta x\cdot \Delta p\geq\hbar$, $\langle H\rangle\geq \frac12\hbar$.
+  \end{itemize}
+\end{frame}
+
+\section{Method: Nullspace-Guided Adaptive (NGA) Bootstrap}
+
+\section{Results: Application to 1d Hubbard Model}
+
+\section{Conclusion and future directions}
 
 \end{document}
 
