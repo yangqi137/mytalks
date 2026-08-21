@@ -15,15 +15,14 @@
 \usepackage{xeCJK}
 \usepackage{fontspec}
 \usepackage{inter}
-%\renewcommand{\mathfamilydefault}{cmss}
+%\usepackage{unicode-math}
+\usefonttheme{professionalfonts}
 \usefonttheme[onlymath]{serif}
-%\newfontfamily\cjkfont{PingFang SC}
+%\setmathfont{Latin Modern Math}
 \setCJKmainfont{Noto Sans CJK SC}
 %\setCJKmainfont{FZXiHeiI-Z08}
 \newcolumntype{x}{>{\centering\arraybackslash}X}
 \renewcommand{\arraystretch}{1.5}
-%\newcommand{\uone}{\mathrm U(1)}
-\newcommand{\uone}{\mathbb R/\mathbb Z}
 \DeclareMathOperator{\img}{img}
 \DeclareMathOperator{\hhom}{Hom}
 \DeclareMathOperator{\id}{id}
@@ -108,7 +107,7 @@
 % Or whatever. Note that the encoding and the font should match. If T1
 % does not look nice, try deleting the line with the fontenc.
 
-\title[Computing fSPT with homology algebra] % (optional, use only with long paper titles)
+\title[NGA Bootstrap] % (optional, use only with long paper titles)
 {Nullspace-Guided Adaptive Bootstrap for \\Quantum Many-body Systems}
 
 \author[Y Qi] % (optional, use only with lots of authors)
@@ -122,9 +121,6 @@
 % - Use the \inst command only if there are several affiliations.
 % - Keep it simple, no one is interested in your street address.
 
-%\date{2016 Annual Meeting of Fudan CFTPP} % (optional, should be abbreviation of conference name)
-%{Fudan University, Oct 13 2015}
-%\date{Conference on Topological Quantum Computation, Shenzhen, Dec. 16-20, 2019.}
 \date{第六届量子物质新前沿会议, 昆明 2026}
 % - Either use conference name or its abbreviation.
 % - Not really informative to the audience, more for people (including
@@ -147,10 +143,7 @@
 \AtBeginSection[]
 {
   \begin{frame}<beamer>{Outline}
-			\tableofcontents[currentsection,currentsubsection]
-			%\begin{center}
-			%	\includegraphics[height=4cm]{toys}
-			%\end{center}
+    \tableofcontents[currentsection,currentsubsection]
   \end{frame}
 }
 
@@ -202,6 +195,32 @@
       \end{itemize}
     %\end{block}
   \end{columns}
+\end{frame}
+
+\begin{frame}{Bootstrap algorithm}
+
+  \begin{columns}
+    \column{.4\textwidth}
+    \begin{block}{Minimization problem}
+      \begin{align*}
+        E=\min_{f} \quad &\langle H\rangle,\\
+        \mathrm{s.t.} \quad &\langle O^\dagger O\rangle \geq 0.
+      \end{align*}
+      where $f: O\mapsto\langle O\rangle$.
+    \end{block}
+
+    % \begin{center}
+    \centering\includegraphics{relax-method}
+    %\end{center}
+    \column{.6\textwidth}
+    Bootstrap is a relaxation method:
+    \begin{itemize}
+    \item Givens \textbf{lower bound} of the ground-state energy.
+    \item \textbf{Compliments} instead of \textbf{competes} with variational method such as DMRG.
+    \item Together with DMRG, can give \textbf{rigorous bounds} to the ground-state energy and other observables.
+    \end{itemize}
+  \end{columns}
+  
 \end{frame}
 
 \begin{frame}{Bootstrap algorithm}
