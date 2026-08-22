@@ -19,7 +19,8 @@
 \usefonttheme{professionalfonts}
 \usefonttheme[onlymath]{serif}
 %\setmathfont{Latin Modern Math}
-\setCJKmainfont{Noto Sans CJK SC}
+%\setCJKmainfont{Noto Sans CJK SC}
+\setCJKsansfont{HarmonyOS Sans SC}
 %\setCJKmainfont{FZXiHeiI-Z08}
 \newcolumntype{x}{>{\centering\arraybackslash}X}
 \renewcommand{\arraystretch}{1.5}
@@ -90,7 +91,10 @@
   \setbeamercolor{block title}{bg=mbg,fg=white}
   \setbeamercolor{block body}{bg=mbg!15}
 
-
+  \setbeamerfont{author}{size=\Large}
+  \setbeamerfont{institute}{size=\large}
+  \setbeamerfont{date}{size=\small}
+  
   \addtobeamertemplate{navigation symbols}{}{ \hspace{1em}%
     \usebeamerfont{footline}%
     \insertframenumber / \inserttotalframenumber }
@@ -228,8 +232,9 @@
   \begin{block}{Truncation}
     \begin{itemize}
     \item \textbf{A set of basis:} $O_i, i=1,\ldots,N$; $\mathcal V=\sspan\{O_i\}$.
-    \item $\mathcal M:=\mathcal V^\dagger\mathcal V$.
-    \item $\bm x\in \mathcal M^\ast$: a functional $O\mapsto \langle O\rangle$.
+    \item Basis are strings of Majorana-fermion operators:
+      $O=\gamma_{i_1}\cdots\gamma_{i_n}$.
+    \item $\mathcal M:=\mathcal V^\dagger\mathcal V$. $\bm x\in \mathcal M^\ast$: a functional $O\mapsto \langle O\rangle$.
     \item $M(\bm x)$: a $N\times N$ matrix $M_{ij}:=\langle O_i^\dagger O_j\rangle.$
     \end{itemize}
   \end{block}
@@ -359,20 +364,63 @@
   \begin{center}
     \includegraphics[width=\textwidth]{hubbard}
 
-    {\tiny\renewcommand{\arraystretch}{1.3}
-    \begin{tabular}{cccccccc}
-        $n$ & $L$ & $\mathcal{B}^{(0)}_0$ & $|\mathcal{B}_0|$ & $E_\mathrm{SDP}$ & $E_\mathrm{ref}$ & $\Delta E$ & max step time\\
-        \midrule
-        1   & 10 & $\mathcal{S}^{0,0}_{5,2,5}$  & $211 \to 549$ & -1.58349690 & -1.583432263577  & $6.5\times 10^{-5}$ & $\sim 4\,\mathrm{h}$ \\
-        1   & 32 & $\mathcal{S}^{0,0}_{6,2,8}$  & $456 \to 645$ & -1.57554402 & -1.5743563(1)    & $1.2\times 10^{-3}$ & $\sim 66\,\mathrm{h}$\\
-        7/8 & 16 & $\mathcal{S}^{0,1}_{7,2,8}$  & $429 \to 638$ & -1.48039353 & -1.479826245187  & $5.7\times 10^{-4}$ & $\sim 30\,\mathrm{h}$\\
-        7/8 & 32 & $\mathcal{S}^{0,1}_{3,2,16}$ & $381 \to 516$ & -1.47621495 & -1.471331(1)     & $4.9\times 10^{-3}$ & $\sim 75\,\mathrm{h}$\\
-    \end{tabular}}
+    {\tiny\renewcommand{\arraystretch}{1.3}\rowcolors{2}{black!20}{}
+      \begin{tabular}{cccccccc}
+        \rowcolor{mbg}\textcolor{white}{$n$}
+        & \textcolor{white}{$L$}
+        & \textcolor{white}{$|\mathcal{B}_0|$}
+        & \textcolor{white}{$E_\mathrm{SDP}$}
+        & \textcolor{white}{$E_\mathrm{ref}$}
+        & \textcolor{white}{$\Delta E$}
+        & \textcolor{white}{max step time}\\
+        1   & 10 &  211 -> 549 & -1.5834\alert{9} & -1.58343  & 6.5 × 10${}^{\text{-5}}$ & 4h (4 cores)\\
+        1   & 32 &  456 -> 645 & -1.57\alert{554} & -1.57435    & 1.2 × 10${}^{\text{-3}}$ & 66h\\
+        7/8 & 16 & 429 -> 638 & -1.480\alert{39} & -1.47982  & 5.7 × 10${}^{\text{-4}}$ & 30h\\
+        7/8 & 32 & 381 -> 516 & -1.47\alert{621} & -1.47133     & 4.9 × 10${}^{\text{-3}}$ & 75h\\
+      \end{tabular}}
 
+    \vspace{1em}
+    {\small
+    Computation was run using 16 CPU cores on an Intel Xeon Gold 6448H node with up to 1.5 TB memory allocated.}
   \end{center}
 \end{frame}
 
+\begin{frame}{Certified observables}
+    \[\begin{aligned}
+        O_\mathrm{lb/ub} = \mathop{\mathrm{min/max}}_{\bm{x}} &\quad \bm{o}^T\bm{x} \\
+         \mathrm{s.t.} &\quad M(\bm{x}) \succeq 0,\; A\bm{x}=\bm{b},\; E_\mathrm{lb} \leq \bm{c}^T\bm{x} \leq E_\mathrm{ub},
+    \end{aligned}\]
+  \begin{columns}
+    \column{.4\textwidth}
+      \includegraphics[width=\columnwidth]{double_occ}
+    \column{.6\textwidth}
+    \begin{itemize}
+    \item Energy window + bootstrap => 2-sided bound for any observable.
+    \item Upper bound of energy given by DMRG.
+    \item $\langle n_\uparrow n_\downarrow\rangle$ as an example.
+    \item Uncertified value using $x^\ast$ is 0.104105;
+    \item Certicied bounds: [0.1039, 0.1042].
+    \end{itemize}
+  \end{columns}
+\end{frame}
+
 \section{Conclusion and future directions}
+
+\begin{frame}{Conclusion and future directions}
+  The current work:
+  \begin{itemize}
+  \item[\checkmark] Nullspace-Guided Adaptive (NGA) Bootstrap can sysmetically improve the lower bound.
+  \item[\checkmark] 2-3 orders of magnitude improvement comparing to previous works.
+  \item[\checkmark] Favorable scaling w/ the size of $\mathcal V$ and the associated SDP.
+  \end{itemize}
+  Future directions:
+  \begin{itemize}
+  \item[?] The bottleneck is now the SDP solving efficiency and memory consumption: better solver tailored to the Bootstrap problem?\\
+    {\small This work uses the MOSEK optimizer.}
+  \item[?] 2d problems, finite-T, dynamics, ...
+  \item[?] Use MPO or TPO to represent the operators in the null space?
+  \end{itemize}
+\end{frame}
 
 \end{document}
 
