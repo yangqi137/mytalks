@@ -7,7 +7,7 @@
 \usepackage{bm}
 \usepackage{graphicx}
 \usepackage{tabularx}
-\usepackage{animate}
+%\usepackage{animate}
 \usepackage{listings}
 %\usepackage{mathtools}
 %\usepackage{ifthen}
@@ -27,6 +27,7 @@
 \DeclareMathOperator{\hhom}{Hom}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\sspan}{span}
+\DeclareMathOperator{\rank}{rank}
 \usepackage{tikz}
 	\usetikzlibrary{calc}
 	\usetikzlibrary{arrows,shapes, positioning, matrix}
@@ -240,8 +241,7 @@
     \item Discrete symmetry: $\left< O^a\right>=0$ unless $a$ is a trivial irrep of $G$.
     \end{itemize}
   \end{block}
-  \[E=\min_{\bm x\in\mathcal M^\ast} \bm c^T\bm x,\quad \mathrm{s.t.} \quad M\succeq0; A\bm x=\bm b.\]
-\end{frame}
+  \[E=\min_{\bm x\in\mathcal M^\ast} \bm c^T\bm x,\quad \mathrm{s.t.} \quad M\succeq0; A\bm x=\bm b.\]\end{frame}
 
 \begin{frame}{Previous works and benchmarks}
   \begin{columns}
@@ -252,7 +252,8 @@
       M. G. Scheer, PRL \underline{136}, 246501 (2026).
     \item Finite-temperature algorithm:
       H. Fawzi, et al, Nat. Commun. \underline{15}, 7394 (2024).
-    \item Can we do better?
+    \item $\dim \mathcal V$ grows rapidly with operator size and range, and large $\dim\mathcal V$ exhausts memory and CPU time.
+    \item Can we do better by picking basis elements in $\mathcal V$?
     \end{itemize}
     \column{.5\textwidth}
     \begin{center}
@@ -269,7 +270,107 @@
 
 \section{Method: Nullspace-Guided Adaptive (NGA) Bootstrap}
 
+\begin{frame}{Motivation: null vector and annihilator of GS}
+  \begin{columns}
+    \column{.5\textwidth}
+    \begin{itemize}
+    \item Convex optimization: $\min \langle H\rangle$ must lie on the boundary of the feasible set.
+    \item On the boundary, $M$ has null vector(s): $P\in \mathcal V$ s. t. $\langle P^\dagger P\rangle_{\bm x^\ast}=0$.
+    \item $\langle \mathrm{GS}|P^\dagger P|\mathrm{GS}\rangle=0$ $\Rightarrow$ $P|\mathrm{GS}\rangle =0$.
+    \item $P$ annihilates $|\mathrm{GS}\rangle$.
+    \item Null vectors = GS annihilators, and they are essential to the bootstrap.
+    \end{itemize}
+    \column{.5\textwidth}
+    \begin{block}{Example: SHO}
+      \begin{itemize}
+      \item Bootstrap: $\langle(p+ix)(p-ix)\rangle\geq0 \Rightarrow \langle H\rangle\geq\frac{\hbar}2$.
+      \item Annihilator: $p-ix=a$, $a|0\rangle=0$.
+      \end{itemize}
+    \end{block}
+    \begin{center}
+      \includegraphics{psd-cone}
+    \end{center}
+  \end{columns}
+  
+\end{frame}
+
+\begin{frame}{Null-space guided bootstrap}
+  \begin{columns}
+    \column{.4\textwidth}
+        \begin{tikzpicture}[
+        node distance=0.45cm and 0.35cm,
+        box/.style={
+            draw,
+            rounded corners,
+            align=center,
+            font=\scriptsize,
+            inner sep=3pt,
+            minimum width=2.0cm,
+            minimum height=0.55cm
+        },
+        arrow/.style={-{Latex[length=1.6mm]}, semithick}
+    ]
+    \node[box] (init) {Initialize\\[1pt]$\mathcal{B}^{(0)}$};
+    \node[box, below=of init] (solve) {Solve SDP};
+    \node[box, below=of solve] (null) {Extract nullspace\\of $M(\bm{x}^\star)$};
+    \node[box, below left=0.4cm and -0.5cm of null] (prune) {Prune by $\ell_a$};
+    \node[box, below right=0.4cm and -0.5cm of null] (grow) {Grow by $s_\mu$};
+    \node[box, below=1.35cm of null] (update) {Update\\[1pt]$\mathcal{B}^{(n+1)}$};
+
+    \draw[arrow] (init) -- (solve);
+    \draw[arrow] (solve) -- (null);
+    \draw[arrow] (null) -- (prune);
+    \draw[arrow] (null) -- (grow);
+    \draw[arrow] (prune) -- (update);
+    \draw[arrow] (grow) -- (update);
+    \draw[arrow] (update.east) -- ++(1.85cm,0) |- (solve.east);
+    \end{tikzpicture}
+    \column{.6\textwidth}
+    \begin{itemize}
+    \item Operators in null-space are important.
+    \item Eliminate $O_i$ that has little overlap with null vectors.
+    \item Add $[H, P_\alpha]$ to $\mathcal V$.
+      \begin{itemize}
+      \item If $P_\alpha|\mathrm{GS}\rangle=0$, then $[H,P_\alpha]|\mathrm{GS}\rangle=0$ as well.
+      \item $[H, P_\alpha]$ is needed to describe the dynamics of $P_\alpha$.
+      \end{itemize}
+    \item Iterate and grow the size of $\mathcal V$.
+    \end{itemize}
+  \end{columns}
+\end{frame}
+
 \section{Results: Application to 1d Hubbard Model}
+
+\begin{frame}{Warmup: 1d Ising model}
+  \begin{columns}
+    \column{.6\textwidth}
+    \[H=-h\sum_iX_i-J\sum_iZ_iZ_{i+1}-h_z\sum_iZ_i.\]
+    \begin{itemize}
+    \item $N_{\mathrm{dof}}:=\dim\bm x-\rank A$.
+    \item $h_z=0$: error drops sharply when it ``discovers'' string operators: \textbf{Jordan-Wigner} fermion bilinears.
+    \item Improvement from previous works: $10^{-6}\rightarrow 10^{-9}$.
+    \end{itemize}
+    \column{.4\textwidth}
+    \includegraphics[width=\columnwidth]{ising}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Application to 1d Hubbard model}
+  \begin{center}
+    \includegraphics[width=\textwidth]{hubbard}
+
+    {\tiny\renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{cccccccc}
+        $n$ & $L$ & $\mathcal{B}^{(0)}_0$ & $|\mathcal{B}_0|$ & $E_\mathrm{SDP}$ & $E_\mathrm{ref}$ & $\Delta E$ & max step time\\
+        \midrule
+        1   & 10 & $\mathcal{S}^{0,0}_{5,2,5}$  & $211 \to 549$ & -1.58349690 & -1.583432263577  & $6.5\times 10^{-5}$ & $\sim 4\,\mathrm{h}$ \\
+        1   & 32 & $\mathcal{S}^{0,0}_{6,2,8}$  & $456 \to 645$ & -1.57554402 & -1.5743563(1)    & $1.2\times 10^{-3}$ & $\sim 66\,\mathrm{h}$\\
+        7/8 & 16 & $\mathcal{S}^{0,1}_{7,2,8}$  & $429 \to 638$ & -1.48039353 & -1.479826245187  & $5.7\times 10^{-4}$ & $\sim 30\,\mathrm{h}$\\
+        7/8 & 32 & $\mathcal{S}^{0,1}_{3,2,16}$ & $381 \to 516$ & -1.47621495 & -1.471331(1)     & $4.9\times 10^{-3}$ & $\sim 75\,\mathrm{h}$\\
+    \end{tabular}}
+
+  \end{center}
+\end{frame}
 
 \section{Conclusion and future directions}
 

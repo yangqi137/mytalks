@@ -1,0 +1,155 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{amsmath,amssymb,bm}
+\usepackage{xcolor}
+\definecolor{myred}{rgb}{0.8,0.1,0.2}
+\definecolor{myblue}{rgb}{0.1,0.2,0.6}
+\definecolor{relaxationblue}{RGB}{82,124,197}
+\definecolor{quantumblue}{RGB}{145,169,211}
+\definecolor{variationalblue}{RGB}{216,225,240}
+
+\begin{document}
+        \def\xScale{1.2}
+        \def\yScale{1.6}
+        \def\camAz{45} % counterclockwise azimuth, in degrees
+        \def\camEl{8}  % degrees above the u-v plane; larger -> more top-down
+        % Affine plane: t = t0 + a u + b v
+        \def\planeT{0.7}
+        \def\planeU{0.27}
+        \def\planeV{0.0}
+        \def\patchU{1.1}       % displayed plane half-width in u
+        \def\patchV{1.1}       % displayed plane half-width in v
+        \def\patchCenterU{0.1} % displayed plane center in u
+        \def\patchCenterV{0}   % displayed plane center in v
+        % Cone display cap
+        \def\capT{1.5}
+        % Rendering
+        \def\plotN{20}
+        \def\capN{20}
+        \def\planeOpacity{0.2}
+        \def\feasibleOpacity{0.8}
+        \def\coneOpacity{0.32}
+        \def\capOpacity{0}
+        \def\meshOpacity{0.2}
+        \def\backOpacity{0.45}
+        \def\frontOpacity{0.85}
+        \def\meshAngles{60,120,180,240,300,360}
+        % Labels and selected rank-one boundary point
+        \def\starAngle{-120}
+        \def\starDX{-0.35cm}
+        \def\starDY{0.3cm}
+        \def\capDX{0cm}
+        \def\capDY{0.4cm}
+        \def\planeDX{1.5cm}
+        \def\planeDY{0cm}
+
+        \begin{tikzpicture}[
+            xscale=\xScale,
+            yscale=\yScale,
+            every node/.style={font=\sffamily\scriptsize},
+            line join=round
+        ]
+            % M(t,u,v) = [[t+u,v],[v,t-u]], with M >= 0 iff t >= sqrt(u^2+v^2).
+            % Orthographic camera projection:
+            % (u,v,t) -> (X,Y) = (cos(a)u-sin(a)v, sin(e)[sin(a)u+cos(a)v]+cos(e)t).
+            \pgfmathsetmacro{\xU}{cos(\camAz)}
+            \pgfmathsetmacro{\xV}{-sin(\camAz)}
+            \pgfmathsetmacro{\yU}{sin(\camEl)*sin(\camAz)}
+            \pgfmathsetmacro{\yV}{sin(\camEl)*cos(\camAz)}
+            \pgfmathsetmacro{\yT}{cos(\camEl)}
+            \pgfmathsetmacro{\detXY}{\xU*\yV-\xV*\yU}
+            \pgfmathsetmacro{\xR}{sqrt(\xU*\xU+\xV*\xV)}
+            \pgfmathsetmacro{\xPhi}{atan(\xV/\xU)}
+            \pgfmathsetmacro{\thetaA}{\xPhi+asin(-\detXY/(\yT*\xR))}
+            \pgfmathsetmacro{\thetaB}{\xPhi+180-asin(-\detXY/(\yT*\xR))}
+            \pgfmathsetmacro{\thetaC}{\thetaA+360}
+            \pgfmathsetmacro{\starR}{\planeT/(1-\planeU*cos(\starAngle)-\planeV*sin(\starAngle))}
+
+            % Finite patch of the affine plane t=t0+a*u+b*v.
+            \path[fill=variationalblue, fill opacity=\planeOpacity,
+                draw=myblue!80!black, draw opacity=0.60, line width=0.45pt]
+                ({(\patchCenterU-\patchU)*\xU+(\patchCenterV-\patchV)*\xV},
+                 {\yT*\planeT+(\patchCenterU-\patchU)*(\yT*\planeU+\yU)+(\patchCenterV-\patchV)*(\yT*\planeV+\yV)}) --
+                ({(\patchCenterU+\patchU)*\xU+(\patchCenterV-\patchV)*\xV},
+                 {\yT*\planeT+(\patchCenterU+\patchU)*(\yT*\planeU+\yU)+(\patchCenterV-\patchV)*(\yT*\planeV+\yV)}) --
+                ({(\patchCenterU+\patchU)*\xU+(\patchCenterV+\patchV)*\xV},
+                 {\yT*\planeT+(\patchCenterU+\patchU)*(\yT*\planeU+\yU)+(\patchCenterV+\patchV)*(\yT*\planeV+\yV)}) --
+                ({(\patchCenterU-\patchU)*\xU+(\patchCenterV+\patchV)*\xV},
+                 {\yT*\planeT+(\patchCenterU-\patchU)*(\yT*\planeU+\yU)+(\patchCenterV+\patchV)*(\yT*\planeV+\yV)}) -- cycle;
+
+            % Feasible region: the affine slice inside the PSD cone.
+            \path[fill=quantumblue, fill opacity=\feasibleOpacity]
+                (0,{\planeT*\yT})
+                plot[smooth, domain=0:360, samples=\capN, variable=\plotAngle]
+                    ({\planeT*(\xU*cos(\plotAngle)+\xV*sin(\plotAngle))/(1-\planeU*cos(\plotAngle)-\planeV*sin(\plotAngle))},
+                     {\planeT*(\yT+\yU*cos(\plotAngle)+\yV*sin(\plotAngle))/(1-\planeU*cos(\plotAngle)-\planeV*sin(\plotAngle))})
+                -- cycle;
+
+            % Cone surface through the t=const display cap.
+            \path[fill=relaxationblue, fill opacity=\coneOpacity]
+                (0,0) --
+                plot[smooth, domain=\thetaA:\thetaB, samples=\plotN, variable=\plotAngle]
+                    ({\capT*(\xU*cos(\plotAngle)+\xV*sin(\plotAngle))},
+                     {\capT*(\yT+\yU*cos(\plotAngle)+\yV*sin(\plotAngle))})
+                -- cycle;
+            % Exact top interface: t=capT and u^2+v^2 <= capT^2.
+            \path[fill=quantumblue, fill opacity=\capOpacity]
+                plot[smooth, domain=0:360, samples=\capN, variable=\plotAngle]
+                    ({\capT*(\xU*cos(\plotAngle)+\xV*sin(\plotAngle))},
+                     {\capT*(\yT+\yU*cos(\plotAngle)+\yV*sin(\plotAngle))})
+                -- cycle;
+
+            % Generator rays and rim of the top interface.
+            \foreach \plotAngle in \meshAngles {
+                \draw[draw=myblue!80!black, draw opacity=\meshOpacity, line width=0.3pt]
+                    (0,0) --
+                    ({\capT*(\xU*cos(\plotAngle)+\xV*sin(\plotAngle))},
+                     {\capT*(\yT+\yU*cos(\plotAngle)+\yV*sin(\plotAngle))});
+            }
+            \draw[draw=myblue!80!black, line width=0.55pt]
+                (0,0) --
+                ({\capT*(\xU*cos(\thetaA)+\xV*sin(\thetaA))},
+                 {\capT*(\yT+\yU*cos(\thetaA)+\yV*sin(\thetaA))})
+                (0,0) --
+                ({\capT*(\xU*cos(\thetaB)+\xV*sin(\thetaB))},
+                 {\capT*(\yT+\yU*cos(\thetaB)+\yV*sin(\thetaB))});
+            \draw[draw=myblue!80!black, draw opacity=\backOpacity, line width=0.35pt]
+                plot[smooth, domain=\thetaA:\thetaB, samples=\plotN, variable=\plotAngle]
+                    ({\capT*(\xU*cos(\plotAngle)+\xV*sin(\plotAngle))},
+                     {\capT*(\yT+\yU*cos(\plotAngle)+\yV*sin(\plotAngle))});
+            \draw[draw=myblue!80!black, draw opacity=\frontOpacity, line width=0.35pt]
+                plot[smooth, domain=\thetaB:\thetaC, samples=\plotN, variable=\plotAngle]
+                    ({\capT*(\xU*cos(\plotAngle)+\xV*sin(\plotAngle))},
+                     {\capT*(\yT+\yU*cos(\plotAngle)+\yV*sin(\plotAngle))});
+
+            % Exact rank-deficient boundary det M=0 on the affine plane.
+            \draw[densely dashed, draw=black!70, draw opacity=\backOpacity, line width=0.8pt]
+                plot[smooth, domain=\thetaA:\thetaB, samples=\plotN, variable=\plotAngle]
+                    ({\planeT*(\xU*cos(\plotAngle)+\xV*sin(\plotAngle))/(1-\planeU*cos(\plotAngle)-\planeV*sin(\plotAngle))},
+                     {\planeT*(\yT+\yU*cos(\plotAngle)+\yV*sin(\plotAngle))/(1-\planeU*cos(\plotAngle)-\planeV*sin(\plotAngle))});
+            \draw[densely dashed, draw=black!70, draw opacity=\frontOpacity, line width=0.8pt]
+                plot[smooth, domain=\thetaB:\thetaC, samples=\plotN, variable=\plotAngle]
+                    ({\planeT*(\xU*cos(\plotAngle)+\xV*sin(\plotAngle))/(1-\planeU*cos(\plotAngle)-\planeV*sin(\plotAngle))},
+                     {\planeT*(\yT+\yU*cos(\plotAngle)+\yV*sin(\plotAngle))/(1-\planeU*cos(\plotAngle)-\planeV*sin(\plotAngle))});
+
+            \coordinate (capCenter) at (0,{\capT*\yT});
+            \coordinate (planeEdge) at
+                ({(\patchCenterU-\patchU)*\xU+\patchCenterV*\xV},
+                 {\yT*\planeT+(\patchCenterU-\patchU)*(\yT*\planeU+\yU)+\patchCenterV*(\yT*\planeV+\yV)});
+            \node[anchor=south, xshift=\capDX, yshift=\capDY,
+                text=black, font=\sffamily\footnotesize]
+                at (capCenter) {$\left\{\bm{x}\mid M(\bm{x})\succeq0\right\}$};
+            \node[anchor=west, xshift=\planeDX, yshift=\planeDY,
+                text=black, font=\sffamily\footnotesize]
+                at (planeEdge) {$A\bm{x}=\bm{b}$};
+            \coordinate (xstar) at
+                ({\starR*(\xU*cos(\starAngle)+\xV*sin(\starAngle))},
+                 {\starR*(\yT+\yU*cos(\starAngle)+\yV*sin(\starAngle))});
+            \fill[myred] (xstar) circle[radius=1.3pt];
+            \node[anchor=west, xshift=\starDX, yshift=\starDY,
+                text=myred!90!black, font=\sffamily\normalsize]
+                at (xstar) {$\bm{x}^\star$};
+        \end{tikzpicture}
+\end{document}
+
+
