@@ -223,55 +223,48 @@
   
 \end{frame}
 
-\begin{frame}{Bootstrap algorithm}
-
-  \begin{columns}
-    \column{.5\textwidth}
-    \begin{block}{Ideal minimization problem}
-      \begin{align*}
-        E=\min \quad &\langle H\rangle,\\
-        \mathrm{s.t.} \quad &\langle O^\dagger O\rangle \geq 0.
-      \end{align*}
-    \end{block}
-    \begin{block}{Truncation}
-      \begin{itemize}
-      \item A set of basis: $O_i, i=1,\ldots,N$; $\mathcal V=\sspan\{O_i\}$.
-      \item $\mathcal M:=\mathcal V^\dagger\mathcal V$.
-      \item $\bm x\in \mathcal M^\ast$: a functional $O\mapsto \langle O\rangle$.
-      \item $M(\bm x)$: a $N\times N$ matrix $M_{ij}:=\langle O_i^\dagger O_j\rangle.$
-      \end{itemize}
-    \end{block}
-    \column{.5\textwidth}
-
-  \end{columns}
-  
-\end{frame}
-
-\begin{frame}{Bootstrap algorithm}
-
-  \begin{columns}
-    \column{.5\textwidth}
-    Ideal minimization problem:
-    \begin{align*}
-      E=\min \quad &\langle H\rangle,\\
-      \mathrm{s.t.} \quad &\langle O^\dagger O\rangle \geq 0; \langle 1\rangle=1.
-    \end{align*}
-    Truncation:
+\begin{frame}{Truncation and Approximation}
+  \begin{block}{Truncation}
     \begin{itemize}
-    \item A set of basis: $O_i, i=1,\ldots,N$; $\mathcal V=\sspan\{O_i\}$.
+    \item \textbf{A set of basis:} $O_i, i=1,\ldots,N$; $\mathcal V=\sspan\{O_i\}$.
     \item $\mathcal M:=\mathcal V^\dagger\mathcal V$.
     \item $\bm x\in \mathcal M^\ast$: a functional $O\mapsto \langle O\rangle$.
     \item $M(\bm x)$: a $N\times N$ matrix $M_{ij}:=\langle O_i^\dagger O_j\rangle.$
     \end{itemize}
-    Truncated min problem:
-    \begin{align*}
-      E=\min \quad & \bm c^T\bm x,\\
-      \mathrm{s.t.}\quad & M \geq 0; A\bm x=\bm b.
-    \end{align*}
+  \end{block}
+
+  \begin{block}{Symmetry constraints}
+    \begin{itemize}
+    \item Continuous symmetry: $\left< [\mathcal Q, O]\right>=0$;
+      in particular, $\left<[H,O]\right>=0$.
+    \item Discrete symmetry: $\left< O^a\right>=0$ unless $a$ is a trivial irrep of $G$.
+    \end{itemize}
+  \end{block}
+  \[E=\min_{\bm x\in\mathcal M^\ast} \bm c^T\bm x,\quad \mathrm{s.t.} \quad M\succeq0; A\bm x=\bm b.\]
+\end{frame}
+
+\begin{frame}{Previous works and benchmarks}
+  \begin{columns}
     \column{.5\textwidth}
-    
+    \begin{itemize}
+    \item Application to 1d Hubbard model: $\Delta E \sim 10^{-2}$.
+    \item Adding symmetry constraints and symmetry blocks:
+      M. G. Scheer, PRL \underline{136}, 246501 (2026).
+    \item Finite-temperature algorithm:
+      H. Fawzi, et al, Nat. Commun. \underline{15}, 7394 (2024).
+    \item Can we do better?
+    \end{itemize}
+    \column{.5\textwidth}
+    \begin{center}
+      \includegraphics[width=\columnwidth]{XZHan-Hubbard-result.png}\\
+      {\tiny X. Han, arXiv:2006.06002.}\\
+      \vspace{2em}
+      
+      \includegraphics[width=.45\columnwidth]{Scheer2026a.png}~~~~
+      \includegraphics[width=.45\columnwidth]{Scheer2026b.png}\\
+      {\tiny M. G. Scheer, PRL 2026.}
+    \end{center}
   \end{columns}
-  
 \end{frame}
 
 \section{Method: Nullspace-Guided Adaptive (NGA) Bootstrap}
