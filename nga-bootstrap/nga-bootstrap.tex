@@ -4,7 +4,7 @@
 \usepackage{dsfont}
 \usepackage{mathrsfs}
 \usepackage{yfonts}
-\usepackage{bm}
+%\usepackage{bm}
 \usepackage{graphicx}
 \usepackage{tabularx}
 %\usepackage{animate}
@@ -15,9 +15,10 @@
 \usepackage{xeCJK}
 \usepackage{fontspec}
 \usepackage{inter}
-%\usepackage{unicode-math}
+\usepackage{unicode-math}
 \usefonttheme{professionalfonts}
-\usefonttheme[onlymath]{serif}
+\usepackage{lete-sans-math}
+% \usefonttheme[onlymath]{serif}
 %\setmathfont{Latin Modern Math}
 %\setCJKmainfont{Noto Sans CJK SC}
 \setCJKsansfont{HarmonyOS Sans SC}
@@ -234,8 +235,8 @@
     \item \textbf{A set of basis:} $O_i, i=1,\ldots,N$; $\mathcal V=\sspan\{O_i\}$.
     \item Basis are strings of Majorana-fermion operators:
       $O=\gamma_{i_1}\cdots\gamma_{i_n}$.
-    \item $\mathcal M:=\mathcal V^\dagger\mathcal V$. $\bm x\in \mathcal M^\ast$: a functional $O\mapsto \langle O\rangle$.
-    \item $M(\bm x)$: a $N\times N$ matrix $M_{ij}:=\langle O_i^\dagger O_j\rangle.$
+    \item $\mathcal M:=\mathcal V^\dagger\mathcal V$. $\symbfit x\in \mathcal M^\ast$: a functional $O\mapsto \langle O\rangle$.
+    \item $M(\symbfit x)$: a $N\times N$ matrix $M_{ij}:=\langle O_i^\dagger O_j\rangle.$
     \end{itemize}
   \end{block}
 
@@ -246,7 +247,7 @@
     \item Discrete symmetry: $\left< O^a\right>=0$ unless $a$ is a trivial irrep of $G$.
     \end{itemize}
   \end{block}
-  \[E=\min_{\bm x\in\mathcal M^\ast} \bm c^T\bm x,\quad \mathrm{s.t.} \quad M\succeq0; A\bm x=\bm b.\]\end{frame}
+  \[E=\min_{\symbfit x\in\mathcal M^\ast} \symbfit c^T\symbfit x,\quad \mathrm{s.t.} \quad M\succeq0; A\symbfit x=\symbfit b.\]\end{frame}
 
 \begin{frame}{Previous works and benchmarks}
   \begin{columns}
@@ -280,7 +281,7 @@
     \column{.5\textwidth}
     \begin{itemize}
     \item Convex optimization: $\min \langle H\rangle$ must lie on the boundary of the feasible set.
-    \item On the boundary, $M$ has null vector(s): $P\in \mathcal V$ s. t. $\langle P^\dagger P\rangle_{\bm x^\ast}=0$.
+    \item On the boundary, $M$ has null vector(s): $P\in \mathcal V$ s. t. $\langle P^\dagger P\rangle_{\symbfit x^\ast}=0$.
     \item $\langle \mathrm{GS}|P^\dagger P|\mathrm{GS}\rangle=0$ $\Rightarrow$ $P|\mathrm{GS}\rangle =0$.
     \item $P$ annihilates $|\mathrm{GS}\rangle$.
     \item Null vectors = GS annihilators, and they are essential to the bootstrap.
@@ -317,7 +318,7 @@
     ]
     \node[box] (init) {Initialize\\[1pt]$\mathcal{B}^{(0)}$};
     \node[box, below=of init] (solve) {Solve SDP};
-    \node[box, below=of solve] (null) {Extract nullspace\\of $M(\bm{x}^\star)$};
+    \node[box, below=of solve] (null) {Extract nullspace\\of $M(\symbfit{x}^\star)$};
     \node[box, below left=0.4cm and -0.5cm of null] (prune) {Prune by $\ell_a$};
     \node[box, below right=0.4cm and -0.5cm of null] (grow) {Grow by $s_\mu$};
     \node[box, below=1.35cm of null] (update) {Update\\[1pt]$\mathcal{B}^{(n+1)}$};
@@ -351,7 +352,7 @@
     \column{.6\textwidth}
     \[H=-h\sum_iX_i-J\sum_iZ_iZ_{i+1}-h_z\sum_iZ_i.\]
     \begin{itemize}
-    \item $N_{\mathrm{dof}}:=\dim\bm x-\rank A$.
+    \item $N_{\mathrm{dof}}:=\dim\symbfit x-\rank A$.
     \item $h_z=0$: error drops sharply when it ``discovers'' string operators: \textbf{Jordan-Wigner} fermion bilinears.
     \item Improvement from previous works: $10^{-6}\rightarrow 10^{-9}$.
     \end{itemize}
@@ -387,8 +388,8 @@
 
 \begin{frame}{Certified observables}
     \[\begin{aligned}
-        O_\mathrm{lb/ub} = \mathop{\mathrm{min/max}}_{\bm{x}} &\quad \bm{o}^T\bm{x} \\
-         \mathrm{s.t.} &\quad M(\bm{x}) \succeq 0,\; A\bm{x}=\bm{b},\; E_\mathrm{lb} \leq \bm{c}^T\bm{x} \leq E_\mathrm{ub},
+        O_\mathrm{lb/ub} = \mathop{\mathrm{min/max}}_{\symbfit{x}} &\quad \symbfit{o}^T\symbfit{x} \\
+         \mathrm{s.t.} &\quad M(\symbfit{x}) \succeq 0,\; A\symbfit{x}=\symbfit{b},\; E_\mathrm{lb} \leq \symbfit{c}^T\symbfit{x} \leq E_\mathrm{ub},
     \end{aligned}\]
   \begin{columns}
     \column{.4\textwidth}
