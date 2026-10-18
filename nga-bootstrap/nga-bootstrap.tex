@@ -22,8 +22,8 @@
 % \setmathfont{FiraMath-Regular.otf}
 % \usefonttheme[onlymath]{serif}
 %\setmathfont{Latin Modern Math}
-\setCJKmainfont{Noto Sans CJK SC}
-%\setCJKsansfont{HarmonyOS Sans SC}
+%\setCJKmainfont{Noto Sans CJK SC}
+\setCJKsansfont{HarmonyOS Sans SC}
 %\setCJKmainfont{FZXiHeiI-Z08}
 \newcolumntype{x}{>{\centering\arraybackslash}X}
 \renewcommand{\arraystretch}{1.5}
@@ -129,7 +129,8 @@
 % - Use the \inst command only if there are several affiliations.
 % - Keep it simple, no one is interested in your street address.
 
-\date{第六届量子物质新前沿会议, 昆明 2026}
+% \date{第六届量子物质新前沿会议, 昆明 2026}
+\date{物理所，2026年10月19日}
 % - Either use conference name or its abbreviation.
 % - Not really informative to the audience, more for people (including
 %   yourself) who are reading the slides online
@@ -421,6 +422,8 @@
   \item[?] The bottleneck is now the SDP solving efficiency and memory consumption: better solver tailored to the Bootstrap problem?\\
     {\small This work uses the MOSEK optimizer.}
   \item[?] 2d problems, finite-T, dynamics, ...
+  \item[?] Use the nullvectors/annihilators to study excited states?
+    $P|\psi\rangle=0\Rightarrow \langle\psi|P^\dagger|\psi\rangle=0$.
   \item[?] Use MPO or TPO to represent the operators in the null space?
   \end{itemize}
 \end{frame}
